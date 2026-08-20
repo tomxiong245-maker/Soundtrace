@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Soundtrace · 章鱼 AI 播客个性化剪辑助手</title>
+<meta name="viewport" content="width=1920, initial-scale=1">
+<style>
+/* ============== 全局 · SKILL Phase 5 typography ============== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+body {
+  font-family: -apple-system, "PingFang SC", "SF Pro Text", "Helvetica Neue", "Hiragino Sans GB", sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  color: #1c1917;
+  -webkit-font-smoothing: antialiased;
+}
+/* deck 采用 16:9 · 视口自适应 · 保证观众投影可读 */
+.deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+.slide {
+  position: absolute; inset: 0;
+  display: none;
+  background: #fafaf9;
+  padding: 60px 90px 70px;
+  flex-direction: column;
+}
+.slide.active { display: flex; }
+
+/* ============== 排版 · 严格按 SKILL Phase 5 · 16pt 是底限 ============== */
+h1 { font-size: 56px; font-weight: 700; letter-spacing: -0.5px; color: #0f172a; line-height: 1.15; }
+h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.3px; color: #0f172a; line-height: 1.2; margin-bottom: 32px; }
+h3 { font-size: 24px; font-weight: 600; color: #1c1917; }
+p, li { font-size: 22px; line-height: 1.55; color: #292524; }
+small { font-size: 16px; color: #78716c; }
+
+/* 段标签 · § chip */
+.sec-chip {
+  display: inline-block;
+  font-size: 15px; font-weight: 600; letter-spacing: 1.5px;
+  color: #dc2626; background: #fef2f2;
+  padding: 6px 12px; border-radius: 4px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* 页码 · 章节标 */
+.hud {
+  position: absolute; left: 90px; bottom: 32px;
+  font-size: 14px; color: #a8a29e; letter-spacing: 0.5px;
+}
+.hud .page-num { font-weight: 600; color: #57534e; }
+.hud-right {
+  position: absolute; right: 90px; bottom: 32px;
+  font-size: 14px; color: #a8a29e; letter-spacing: 0.5px;
+}
+
+/* ============== 封面 P01 ============== */
+.slide.cover { background: #0f172a; color: #f5f5f4; justify-content: center; }
+.slide.cover h1 { color: #f5f5f4; font-size: 72px; margin-bottom: 24px; }
+.slide.cover .subtitle { font-size: 26px; color: #94a3b8; line-height: 1.5; margin-bottom: 56px; max-width: 1000px; }
+.slide.cover .author { font-size: 22px; color: #cbd5e1; }
+.slide.cover .author strong { color: #f5f5f4; font-weight: 600; }
+.slide.cover .brand-line {
+  width: 120px; height: 4px; background: #dc2626;
+  margin-bottom: 40px;
+}
+
+/* ============== 议程 P02 ============== */
+.agenda-list { display: flex; flex-direction: column; gap: 24px; margin-top: 20px; }
+.agenda-item {
+  display: flex; align-items: baseline; gap: 24px;
+  padding: 20px 28px;
+  background: white;
+  border-left: 4px solid #dc2626;
+  border-radius: 4px;
+}
+.agenda-item .num {
+  font-size: 32px; font-weight: 700; color: #dc2626;
+  min-width: 60px;
+}
+.agenda-item .title { font-size: 26px; font-weight: 600; color: #0f172a; }
+.agenda-item .hint { font-size: 18px; color: #78716c; margin-left: auto; }
+
+/* ============== 三条难点标题页 P04 ============== */
+.pain-triple { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; flex: 1; }
+.pain-card {
+  background: white; border-top: 6px solid #dc2626;
+  padding: 40px 32px;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  border-radius: 4px;
+}
+.pain-card .idx { font-size: 18px; color: #dc2626; font-weight: 700; letter-spacing: 2px; margin-bottom: 20px; }
+.pain-card .lede { font-size: 28px; font-weight: 600; color: #0f172a; line-height: 1.35; margin-bottom: 16px; }
+.pain-card .sub { font-size: 20px; color: #57534e; line-height: 1.5; }
+
+/* ============== 难点子页 P05 P06 P07 ============== */
+.big-quote {
+  font-size: 44px; font-weight: 500; line-height: 1.4; color: #0f172a;
+  border-left: 5px solid #dc2626; padding-left: 32px;
+  max-width: 1400px; margin: auto 0;
+}
+.big-quote .em { color: #dc2626; }
+.quote-cite { font-size: 20px; color: #78716c; margin-top: 32px; padding-left: 37px; }
+
+/* 剪口示意图 · CSS 波形 */
+.splice-viz {
+  display: flex; gap: 40px; align-items: center; justify-content: center;
+  margin: 40px 0;
+}
+.splice-block {
+  flex: 1; max-width: 480px;
+  background: white; border: 1px solid #e7e5e4;
+  padding: 24px; border-radius: 4px;
+}
+.splice-block h4 { font-size: 20px; margin-bottom: 12px; color: #0f172a; }
+.splice-block .desc { font-size: 17px; color: #57534e; line-height: 1.5; }
+.splice-block.bad { border-color: #dc2626; border-width: 2px; }
+.splice-block.bad h4 { color: #dc2626; }
+.splice-block.good h4 { color: #059669; }
+
+/* 波形 SVG 容器 */
+.wave-svg { width: 100%; height: 80px; margin: 12px 0; }
+
+/* ============== 6 层框架俯视 P08 ============== */
+.layer-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; flex: 1; }
+.layer-row {
+  display: grid; grid-template-columns: 90px 220px 1fr;
+  align-items: center;
+  padding: 18px 24px;
+  background: white; border-radius: 4px;
+  border-left: 4px solid #94a3b8;
+}
+.layer-row.l0 { border-left-color: #059669; }
+.layer-row.l1 { border-left-color: #0891b2; }
+.layer-row.l2 { border-left-color: #7c3aed; }
+.layer-row.l3 { border-left-color: #c2410c; }
+.layer-row.l4 { border-left-color: #ca8a04; }
+.layer-row.l5 { border-left-color: #6b7280; }
+.layer-row .tag { font-size: 20px; font-weight: 700; color: #292524; }
+.layer-row .name { font-size: 18px; color: #57534e; font-family: "SF Mono", Menlo, monospace; }
+.layer-row .job { font-size: 19px; color: #1c1917; line-height: 1.5; }
+
+/* ============== 流程图 P09-P12 · 4 张 ============== */
+.slide.flow { padding: 40px 70px 70px; }
+.flow-title { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; }
+.flow-title h2 { margin: 0; }
+.flow-title .band {
+  font-size: 15px; font-weight: 700; letter-spacing: 2px;
+  padding: 6px 12px; color: white; border-radius: 3px;
+}
+.band.prep { background: #1e40af; }
+.band.pref { background: #7c3aed; }
+.band.param { background: #c2410c; }
+.band.qa { background: #166534; }
+
+/* stage 卡片 · 竖直流水 */
+.flow-canvas {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 4px; padding: 20px 0;
+  overflow: hidden;
+}
+.stage {
+  width: 100%; max-width: 1080px;
+  background: white; padding: 14px 24px;
+  border-radius: 6px;
+  border-left: 4px solid #94a3b8;
+  display: grid; grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: 20px;
+}
+.stage.prep { border-left-color: #1e40af; }
+.stage.pref { border-left-color: #7c3aed; }
+.stage.param { border-left-color: #c2410c; }
+.stage.qa { border-left-color: #166534; }
+.stage.main-decider {
+  background: #fef3c7; border: 2px solid #f59e0b; border-left: 4px solid #7c3aed;
+  padding: 18px 24px;
+}
+.stage.gate { background: #fafaf9; }
+.stage .stage-id {
+  font-size: 15px; font-weight: 700; letter-spacing: 1px;
+  color: #57534e; font-family: "SF Mono", Menlo, monospace;
+}
+.stage .stage-body { font-size: 18px; color: #1c1917; line-height: 1.45; }
+.stage .stage-body b { color: #0f172a; }
+.stage .stage-body .kv { font-size: 15px; color: #78716c; margin-left: 8px; }
+.arrow {
+  font-size: 22px; color: #a8a29e; line-height: 1; padding: 2px 0;
+}
+
+/* 多列内嵌 (loss 三项 / warm-start 两源) */
+.inline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 6px; }
+.inline-grid .box { padding: 8px 12px; background: #fef3c7; border-radius: 3px; font-size: 15px; color: #78350f; }
+.two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+.two-cols .box { padding: 8px 12px; background: #ede9fe; border-radius: 3px; font-size: 15px; color: #5b21b6; }
+
+/* ============== 元规则 P13 ============== */
+.rules-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; flex: 1; align-content: flex-start; }
+.rule-card {
+  background: white; border-top: 4px solid #dc2626;
+  padding: 20px 22px; border-radius: 4px;
+}
+.rule-card.m0 { border-top-color: #ca8a04; background: #fefce8; }
+.rule-card .rid { font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+.rule-card .rid small { font-size: 13px; color: #a8a29e; font-weight: 500; margin-left: 6px; }
+.rule-card .rtitle { font-size: 17px; font-weight: 600; color: #292524; margin-bottom: 8px; }
+.rule-card .rdesc { font-size: 15px; line-height: 1.5; color: #57534e; }
+.rule-card.m0 .rid { color: #a16207; }
+.rule-card.m0 .rtitle { color: #713f12; }
+
+/* ============== 踩坑页 · 单点强调 P14 P15 P17 P18 P19 P20 ============== */
+.point-page { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.point-lede {
+  font-size: 34px; font-weight: 600; color: #0f172a; line-height: 1.35;
+  margin-bottom: 32px; max-width: 1400px;
+}
+.point-lede .em { color: #dc2626; }
+.point-detail { font-size: 22px; color: #44403c; line-height: 1.6; max-width: 1200px; }
+
+/* 断链示意 P14 */
+.chain-viz { display: flex; align-items: center; gap: 16px; margin: 32px 0; font-family: "SF Mono", Menlo, monospace; }
+.chain-node {
+  background: white; border: 2px solid #292524; padding: 16px 24px;
+  border-radius: 4px; font-size: 20px; font-weight: 600;
+}
+.chain-node.dead { border-color: #dc2626; color: #dc2626; text-decoration: line-through; }
+.chain-node.live { border-color: #059669; color: #059669; }
+.chain-link { font-size: 32px; color: #a8a29e; }
+.chain-link.broken { color: #dc2626; text-decoration: line-through; }
+
+/* Optuna loss 三步 P17 */
+.loss-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+.loss-step {
+  background: white; padding: 32px; border-radius: 4px;
+  border-top: 5px solid #c2410c;
+}
+.loss-step .stepno { font-size: 15px; color: #c2410c; letter-spacing: 2px; font-weight: 700; margin-bottom: 12px; }
+.loss-step .steplede { font-size: 24px; font-weight: 600; color: #0f172a; margin-bottom: 12px; }
+.loss-step .stepdetail { font-size: 18px; color: #57534e; line-height: 1.55; }
+.loss-step .formula { font-family: "SF Mono", Menlo, monospace; font-size: 20px; color: #c2410c; margin-top: 12px; font-weight: 600; }
+
+/* warm-start 两源 P18 */
+.warm-viz { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; }
+.warm-source {
+  background: white; border-left: 5px solid #c2410c; padding: 28px 32px; border-radius: 4px;
+}
+.warm-source h4 { font-size: 22px; margin-bottom: 12px; color: #0f172a; }
+.warm-source p { font-size: 19px; color: #57534e; line-height: 1.55; }
+
+/* 候选转向 P19 */
+.compare-two { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 20px; align-items: center; margin-top: 40px; }
+.compare-side {
+  background: white; padding: 32px; border-radius: 4px;
+  border-top: 5px solid #94a3b8;
+}
+.compare-side.before { border-top-color: #dc2626; opacity: 0.85; }
+.compare-side.after { border-top-color: #059669; }
+.compare-side h4 { font-size: 20px; margin-bottom: 16px; }
+.compare-side.before h4 { color: #dc2626; }
+.compare-side.after h4 { color: #059669; }
+.compare-side ul { list-style: none; }
+.compare-side li { font-size: 19px; padding: 8px 0; color: #292524; }
+.compare-arrow { font-size: 48px; color: #78716c; text-align: center; }
+
+/* metric badge */
+.metric {
+  display: inline-block;
+  padding: 4px 12px; background: #dcfce7; color: #166534;
+  border-radius: 3px; font-size: 18px; font-weight: 600;
+  font-family: "SF Mono", Menlo, monospace;
+}
+
+/* pattern md 示例 P20 */
+.pattern-preview {
+  background: #292524; color: #e7e5e4;
+  padding: 32px 40px; border-radius: 6px;
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 17px; line-height: 1.7;
+  margin-top: 24px;
+  max-width: 1200px;
+}
+.pattern-preview .h { color: #fbbf24; }
+.pattern-preview .k { color: #93c5fd; }
+.pattern-preview .c { color: #94a3b8; }
+.pattern-preview .q { color: #fca5a5; }
+
+/* 未来 4 方向 P21 */
+.future-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 24px; flex: 1; }
+.future-card {
+  background: white; padding: 28px 32px; border-radius: 4px;
+  border-top: 4px solid #7c3aed;
+  display: flex; flex-direction: column;
+}
+.future-card .fno { font-size: 15px; color: #7c3aed; font-weight: 700; letter-spacing: 2px; margin-bottom: 12px; }
+.future-card .flede { font-size: 22px; font-weight: 600; color: #0f172a; margin-bottom: 12px; line-height: 1.35; }
+.future-card .fdesc { font-size: 17px; color: #57534e; line-height: 1.55; }
+
+/* ============== 收尾 P22 ============== */
+.slide.closing { background: #0f172a; color: #f5f5f4; justify-content: center; align-items: center; text-align: center; }
+.slide.closing .brand-line { width: 120px; height: 4px; background: #dc2626; margin: 0 auto 40px; }
+.slide.closing .closing-quote {
+  font-size: 42px; font-weight: 500; line-height: 1.5;
+  max-width: 1400px;
+  color: #f5f5f4;
+  margin-bottom: 60px;
+}
+.slide.closing .closing-quote .em { color: #fbbf24; }
+.slide.closing .thanks {
+  font-size: 32px; color: #cbd5e1; letter-spacing: 8px;
+}
+
+/* ============== 通用 · 章节标题上方引导词 ============== */
+.slide-title-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
+.slide-title-row .sec-chip { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- ============ P01 · 封面 ============ -->
+<section class="slide cover active">
+  <div style="max-width: 1400px;">
+    <div class="brand-line"></div>
+    <h1>Soundtrace</h1>
+    <div class="subtitle">章鱼 AI 播客个性化剪辑助手<br>本地跑 · 每一步可追溯 · 真人拍板</div>
+    <div class="author">熊镇正 · <strong>香港中文大学（深圳）</strong></div>
+  </div>
+</section>
+
+<!-- ============ P02 · 议程 ============ -->
+<section class="slide">
+  <div class="sec-chip">议程 · 20 分钟</div>
+  <h2>今天分五段讲</h2>
+  <div class="agenda-list">
+    <div class="agenda-item"><span class="num">01</span><span class="title">Demo · 听感对比</span><span class="hint">A/B 两段音频</span></div>
+    <div class="agenda-item"><span class="num">02</span><span class="title">背景 · 为什么这件事有价值</span><span class="hint">三条真正的难点</span></div>
+    <div class="agenda-item"><span class="num">03</span><span class="title">框架 · 从"能力封装"开始</span><span class="hint">6 层 skill · 4 张流程图</span></div>
+    <div class="agenda-item"><span class="num">04</span><span class="title">踩坑经验 · 一周实录</span><span class="hint">Optuna · LLM · 反思</span></div>
+    <div class="agenda-item"><span class="num">05</span><span class="title">未来 · 还能往哪里长</span><span class="hint">偏好积累的四个方向</span></div>
+  </div>
+</section>
+
+<!-- ============ P03 · Demo ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 1 · Demo</div>
+  <h2>先放两段音频 · 请对比</h2>
+  <div class="big-quote" style="margin-top: 60px;">
+    <span class="em">A</span> · 原始<br>
+    <span class="em">B</span> · Soundtrace 剪出来的
+  </div>
+  <div class="quote-cite">现场播放 · 无字幕 · 只听感觉</div>
+</section>
+
+<!-- ============ P04 · 三条难点标题 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 2 · 背景</div>
+  <h2>后期 ≠ 只剪 "呃" · 真难点有三条</h2>
+  <div class="pain-triple">
+    <div class="pain-card">
+      <div class="idx">难点 · 一</div>
+      <div class="lede">一刀一刀剪 · 每刀都要过渡</div>
+      <div class="sub">butt splice 会"咔"一下 · 每处都得 crossfade 糊过去 · 过渡长度还挑辅音</div>
+    </div>
+    <div class="pain-card">
+      <div class="idx">难点 · 二</div>
+      <div class="lede">公司音频不能上云</div>
+      <div class="sub">未发布对话属内部数据 · Descript / Adobe Podcast 都得上传 · 我们本地跑</div>
+    </div>
+    <div class="pain-card">
+      <div class="idx">难点 · 三</div>
+      <div class="lede">语义判断只有人能做</div>
+      <div class="sub">"废话还是伏笔？尴尬还是节奏？" · AI 只做手 · 不替代品味</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P05 · 难点 1 展开 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 2 · 难点一</div>
+  <h2>直拼会"咔"· 每刀都得 <span style="color: #dc2626;">crossfade</span> 糊过去</h2>
+  <div class="splice-viz">
+    <div class="splice-block bad">
+      <h4>butt splice (直拼)</h4>
+      <svg class="wave-svg" viewBox="0 0 400 80" preserveAspectRatio="none">
+        <path d="M0,40 Q20,10 40,40 T80,40 T120,40 T160,40" stroke="#292524" stroke-width="2" fill="none"/>
+        <line x1="160" y1="10" x2="160" y2="70" stroke="#dc2626" stroke-width="3" stroke-dasharray="4,3"/>
+        <path d="M160,40 T200,40 T240,40 T280,40 T320,40 T360,40 T400,40" stroke="#292524" stroke-width="2" fill="none" transform="translate(0,15)"/>
+      </svg>
+      <div class="desc">断口直接对接 · 十有八九听得出"咔"一下</div>
+    </div>
+    <div class="splice-block good">
+      <h4>crossfade (交叉淡化)</h4>
+      <svg class="wave-svg" viewBox="0 0 400 80" preserveAspectRatio="none">
+        <path d="M0,40 Q20,10 40,40 T80,40 T120,40 T160,40" stroke="#292524" stroke-width="2" fill="none"/>
+        <path d="M140,40 T180,40 T220,40 T260,40 T300,40 T340,40 T400,40" stroke="#059669" stroke-width="2" fill="none" transform="translate(0,15)"/>
+        <rect x="140" y="10" width="40" height="60" fill="#059669" opacity="0.15"/>
+      </svg>
+      <div class="desc">几十毫秒曲线 · 断口糊过去 · 听不出剪辑</div>
+    </div>
+  </div>
+  <div style="max-width: 1400px; font-size: 20px; color: #57534e; line-height: 1.55; margin-top: 20px;">
+    过渡长度还得看下一个词的声母 · 太长吃掉辅音（"确" → "ue 保"）· 太短糊不干净 · 一集要做几十上百次
+  </div>
+</section>
+
+<!-- ============ P06 · 难点 2 · 不上云 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 2 · 难点二</div>
+  <h2>公司音频 · 拔了网线也能跑完</h2>
+  <div style="display: grid; grid-template-columns: 1fr 100px 1fr; gap: 40px; align-items: center; margin-top: 60px; flex: 1;">
+    <div style="text-align: center;">
+      <div style="font-size: 22px; color: #dc2626; font-weight: 600; margin-bottom: 24px; letter-spacing: 2px;">云工具</div>
+      <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+        <div style="background: white; padding: 20px 40px; border-radius: 4px; font-size: 24px; text-decoration: line-through; color: #dc2626; border: 1px solid #fecaca;">Descript</div>
+        <div style="background: white; padding: 20px 40px; border-radius: 4px; font-size: 24px; text-decoration: line-through; color: #dc2626; border: 1px solid #fecaca;">Adobe Podcast</div>
+        <div style="background: white; padding: 20px 40px; border-radius: 4px; font-size: 24px; text-decoration: line-through; color: #dc2626; border: 1px solid #fecaca;">其它 SaaS</div>
+      </div>
+      <div style="font-size: 17px; color: #78716c; margin-top: 20px;">都要上传 · 数据出机器</div>
+    </div>
+    <div style="font-size: 48px; text-align: center; color: #78716c;">→</div>
+    <div style="text-align: center;">
+      <div style="font-size: 22px; color: #059669; font-weight: 600; margin-bottom: 24px; letter-spacing: 2px;">Soundtrace</div>
+      <div style="background: #dcfce7; padding: 40px 32px; border-radius: 4px; border: 2px solid #059669;">
+        <div style="font-size: 32px; color: #0f172a; font-weight: 700;">本地跑</div>
+        <div style="font-size: 20px; color: #166534; margin-top: 12px;">全流程离线</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P07 · 难点 3 · 只有人 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 2 · 难点三</div>
+  <div class="big-quote" style="margin-top: 100px;">
+    "这句话是废话还是伏笔？<br>这个停顿是尴尬还是节奏？"<br><br>
+    让 AI 做他的<span class="em">手</span> · 不是替代他的<span class="em">品味</span>
+  </div>
+  <div class="quote-cite" style="margin-top: 60px;">Mentor 艳馨姐的剪辑作 gold · 系统按人审结果学习</div>
+</section>
+
+<!-- ============ P08 · 6 层框架俯视 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 3 · 框架</div>
+  <h2>7 个 skill · 6 层 · 按<span style="color: #dc2626;">"边界不能跨"</span>分</h2>
+  <div class="layer-stack">
+    <div class="layer-row l0"><span class="tag">L0 · 门卫</span><span class="name">episode-triage</span><span class="job">规则冻结在 plan.json · 不在文档里 —— agent 干着干着会忘文档</span></div>
+    <div class="layer-row l1"><span class="tag">L1 · 记忆</span><span class="name">feedback-engine</span><span class="job">session_feedback 单一 SOT · 防"每一集都在重新教机器"</span></div>
+    <div class="layer-row l2"><span class="tag">L2 · 剪哪些</span><span class="name">PREFERENCE 层 × 3</span><span class="job">candidate-semantic-veto (LLM) 主决策 · gate 只兜结构硬约束</span></div>
+    <div class="layer-row l3"><span class="tag">L3 · 怎么剪</span><span class="name">PARAMETER 层 · Optuna</span><span class="job">NISQA discontinuity 作 loss · warm-start 从 mentor + YouTube 派生</span></div>
+    <div class="layer-row l4"><span class="tag">L4 · 学经验</span><span class="name">learning-and-experience</span><span class="job">跨 episode 沉淀 · 硬边界:学习层只能写数据源 · 不能改生产代码</span></div>
+    <div class="layer-row l5"><span class="tag">L5 · 治理</span><span class="name">governance-and-tool-registry</span><span class="job">未登记的 tool 一律 FAIL · M5 契约先行的执行者</span></div>
+  </div>
+</section>
+
+<!-- ============ P09 · 流程图 1 · 准备层 ============ -->
+<section class="slide flow">
+  <div class="flow-title">
+    <span class="band prep">流程图 · 1 / 4</span>
+    <h2>准备层 · Stage 1 – 3.5 · 数据准备</h2>
+  </div>
+  <div class="flow-canvas">
+    <div class="stage prep">
+      <div class="stage-id">INPUT</div>
+      <div class="stage-body"><b>原始三条对齐 mono 声音轨</b> <span class="kv">主持人 + 两位嘉宾 · 各一支话筒</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage prep">
+      <div class="stage-id">S1 · 降噪</div>
+      <div class="stage-body"><b>DeepFilterNet v0.5.6</b> · 48 kHz · 尾部 1440 samples 原始回填 <span class="kv">--compensate-delay · --atten-lim-db 12</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage prep">
+      <div class="stage-id">S1.5 · 合轨</div>
+      <div class="stage-body"><b>3 → 1 主导轨合并</b> <span class="kv">render_prep/speech.mono.wav</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage prep">
+      <div class="stage-id">S2 · ASR</div>
+      <div class="stage-body"><b>词级识别 · faster-whisper 1.2.1 · small · int8</b> <span class="kv">每词输出 text · start · end · probability</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage prep">
+      <div class="stage-id">S4 · 分句</div>
+      <div class="stage-body"><b>语义分句 · spaCy zh_core_web_sm</b></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage prep">
+      <div class="stage-id">S5 · 说话人</div>
+      <div class="stage-body"><b>pyannote-audio 4.0.7 · community-1</b> <span class="kv">RTTM · 每段谁在说</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage prep">
+      <div class="stage-id">S6 · 边界精修</div>
+      <div class="stage-body"><b>MFA (音素强制对齐) + librosa (onset detect)</b> <span class="kv">剪口精修到 sample 级</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P10 · 流程图 2 · PREFERENCE ============ -->
+<section class="slide flow">
+  <div class="flow-title">
+    <span class="band pref">流程图 · 2 / 4</span>
+    <h2>PREFERENCE 层 · 判"剪哪些"</h2>
+  </div>
+  <div class="flow-canvas">
+    <div class="stage pref">
+      <div class="stage-id">INPUT</div>
+      <div class="stage-body"><b>候选池 · 5 类问题</b> <span class="kv">语气词 / 重复 / 长停顿 / 自纠正 / 串音</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage main-decider">
+      <div class="stage-id">★ 3.5.5 主</div>
+      <div class="stage-body"><b>LLM 语义判决 · Claude Haiku 4.5</b><br>
+        <span style="font-size: 16px; color: #78350f;">输入 · 每条候选前后 5 秒原文</span><br>
+        <span style="font-size: 16px; color: #78350f;">输出 · KEEP_CUT / REJECT_KEEP / NEEDS_REVIEW</span>
+      </div>
+    </div>
+    <div class="arrow">↓ 只放 KEEP_CUT</div>
+    <div class="stage gate">
+      <div class="stage-id">3.6 · gate</div>
+      <div class="stage-body"><b>结构性硬约束兜底 · 5 门</b>
+        <div class="inline-grid" style="grid-template-columns: repeat(5, 1fr);">
+          <div class="box">说话人身份</div>
+          <div class="box">源轨判定</div>
+          <div class="box">单条时长</div>
+          <div class="box">片头片尾 6s</div>
+          <div class="box">never_cut</div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage pref">
+      <div class="stage-id">Stage 5</div>
+      <div class="stage-body"><b>EDL 生成 · 只装 verdict==KEEP_CUT</b> <span class="kv">整数 sample · 三轨同步 (M4 元规则)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P11 · 流程图 3 · PARAMETER ============ -->
+<section class="slide flow">
+  <div class="flow-title">
+    <span class="band param">流程图 · 3 / 4</span>
+    <h2>PARAMETER 层 · 判"怎么剪" · Optuna 独占</h2>
+  </div>
+  <div class="flow-canvas" style="gap: 8px;">
+    <div class="stage param">
+      <div class="stage-id">6.7 · 主</div>
+      <div class="stage-body">
+        <b>Optuna TPE 贝叶斯优化</b> · 每候选最多 10 次<br>
+        <span style="font-size: 15px; color: #78716c;">5 维搜索空间</span>
+        <div class="inline-grid" style="grid-template-columns: repeat(5, 1fr); background: transparent;">
+          <div class="box" style="background:#ffedd5;color:#7c2d12;">crossfade_ms</div>
+          <div class="box" style="background:#ffedd5;color:#7c2d12;">pause_ms</div>
+          <div class="box" style="background:#ffedd5;color:#7c2d12;">head_pad</div>
+          <div class="box" style="background:#ffedd5;color:#7c2d12;">boundary_offset</div>
+          <div class="box" style="background:#ffedd5;color:#7c2d12;">room_tone</div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage param" style="background: #fef3c7;">
+      <div class="stage-id">warm-start</div>
+      <div class="stage-body">
+        <b>热启动 · 先跑 2 次已知好起点再自由探索</b>
+        <div class="two-cols" style="margin-top: 6px;">
+          <div class="box" style="background:#fef3c7;color:#78350f;">A · mentor 59 条中位数</div>
+          <div class="box" style="background:#fef3c7;color:#78350f;">B · YouTube 6 条规则</div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage param">
+      <div class="stage-id">loss 三项</div>
+      <div class="stage-body">
+        <div class="inline-grid" style="background: transparent;">
+          <div class="box" style="background:#ffedd5;color:#7c2d12;"><b>signal</b> · 5.0 − discontinuity</div>
+          <div class="box" style="background:#ffedd5;color:#7c2d12;"><b>反作弊</b> · 漏词 +5.0</div>
+          <div class="box" style="background:#ffedd5;color:#7c2d12;"><b>兜底</b> · pre_check 挂 +2.0</div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage param">
+      <div class="stage-id">6.9 · 二轮</div>
+      <div class="stage-body">人审拒了才触发 · 不用 warm-start · 冷启动重学 10 次 · 补探第一轮没覆盖的区域</div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage param" style="background: #fef3c7; border: 2px solid #f59e0b;">
+      <div class="stage-id">6.10 · 交集门</div>
+      <div class="stage-body"><b>只有 (LLM 说"能剪") ∩ (Optuna 收敛) · 才真正 apply</b> <span class="kv">EP05 首跑实测交集为空 → 跳过 re-render · 门真挡住了</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P12 · 流程图 4 · QA + 学习层 ============ -->
+<section class="slide flow">
+  <div class="flow-title">
+    <span class="band qa">流程图 · 4 / 4</span>
+    <h2>QA + 学习层 · 出成品 · 沉淀经验</h2>
+  </div>
+  <div class="flow-canvas">
+    <div class="stage qa">
+      <div class="stage-id">Stage 7 · 混音</div>
+      <div class="stage-body"><b>三轨降噪音按 EDL 切好 · 叠成主导轨</b> <span class="kv">-22.2 LUFS 广播标准 · 双遍 loudnorm · 出 mp3</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage qa">
+      <div class="stage-id">Stage 7.1</div>
+      <div class="stage-body"><b>整片音质自动打分 · NISQA (德国研究所开源)</b> <span class="kv">达标 → 放行 · 未达 → 标"建议 mentor 重点听"</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage qa">
+      <div class="stage-id">打包送审</div>
+      <div class="stage-body"><b>mp3 + 每条决定理由 + 相似历史案例</b> <span class="kv">markdown 报告 + 待勾选判决表 · 标"机器初稿 · 非最终"</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="stage qa" style="background: #f0fdf4; border-left-width: 6px;">
+      <div class="stage-id">沉淀链路</div>
+      <div class="stage-body">
+        <b>越用越懂你 · 学习层闭环</b>
+        <div class="two-cols" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="box" style="background:#dcfce7;color:#14532d;">1 · mentor 判断存进经验库</div>
+          <div class="box" style="background:#dcfce7;color:#14532d;">2 · 立刻重跑候选看翻案</div>
+          <div class="box" style="background:#dcfce7;color:#14532d;">3 · 下一期开工自动带进</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P13 · 元规则 M0-M6 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 3 · 项目宪法</div>
+  <h2>六条元规则 · 每一条都是踩坑立的</h2>
+  <div class="rules-grid">
+    <div class="rule-card m0" style="grid-column: 1 / -1;">
+      <div class="rid">M0 <small>· 最高规则 · 开发者模式 · 覆盖 M1-M6</small></div>
+      <div class="rtitle">开发者可临时绕过 M1-M5 · 但 <span style="color:#dc2626;">"音频不出本地" 和 "原始素材只读" 永远不能碰</span></div>
+      <div class="rdesc">这次实操让我发现 · 做项目多数时候需要的是<b>修补思维</b>不是搭建思维 · 过多约束会阻碍推进</div>
+    </div>
+    <div class="rule-card">
+      <div class="rid">M1 <small>分层</small></div>
+      <div class="rtitle">生产 / 实验 / 每期 严格隔离</div>
+      <div class="rdesc">Champion 只读 · Challenger 隔离 · run-local 只写自己</div>
+    </div>
+    <div class="rule-card">
+      <div class="rid">M2 <small>只读</small></div>
+      <div class="rtitle">原始素材 · 公司音频不出机器</div>
+      <div class="rdesc">默认只读 · 不 curl|sh · 不覆盖系统 Python</div>
+    </div>
+    <div class="rule-card">
+      <div class="rid">M3 <small>人签字</small></div>
+      <div class="rtitle">语义删剪必须真人批准</div>
+      <div class="rdesc">禁自批准 · 禁超时批准 · 禁伪装成人审</div>
+    </div>
+    <div class="rule-card">
+      <div class="rid">M4 <small>整数采样</small></div>
+      <div class="rtitle">批准区间同步作用三轨</div>
+      <div class="rdesc">一个 sample 都不能偏 · 三轨同步整数点</div>
+    </div>
+    <div class="rule-card">
+      <div class="rid">M5 <small>契约先行</small></div>
+      <div class="rtitle">工具必须登记 + adapter</div>
+      <div class="rdesc">未登记 → verify.sh 直接 FAIL</div>
+    </div>
+    <div class="rule-card" style="grid-column: 2 / 4;">
+      <div class="rid">M6 <small>报告纪律</small></div>
+      <div class="rtitle">说话分三档 · 已验证事实 / 已决定方向 / 待验证假设</div>
+      <div class="rdesc">禁用"完成 / 已跑通 / 风险为零"这种没证据的词</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P14 · 踩坑 1 · 参数没人用 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 4 · 踩坑 一</div>
+  <h2>参数学出来了 · 但<span style="color:#dc2626;">没人用</span></h2>
+  <div class="point-page">
+    <div class="chain-viz">
+      <div class="chain-node">Optuna 学出参数</div>
+      <div class="chain-link">→</div>
+      <div class="chain-node">写入中间文件</div>
+      <div class="chain-link broken">✗ ✗ ✗</div>
+      <div class="chain-node dead">EDL 消费</div>
+      <div class="chain-link">→</div>
+      <div class="chain-node dead">渲染阶段</div>
+    </div>
+    <div class="point-detail">
+      "接口留着但没人吃"的死代码。听 A/B 不满意 · 让 AI 反复返工 · 逻辑看着都对 —— 实际是 <b>"学出来 → 用起来"这条链断了</b>。<br><br>
+      修法 · 加一个自动回写环节 · 参数一学出来就<b>强制生效</b> · 不再走"人审 apply"这一步。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P15 · 踩坑 2 · 案例只看词 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 4 · 踩坑 二</div>
+  <h2>案例检索只看词 · <span style="color:#dc2626;">场景全丢</span></h2>
+  <div class="point-page">
+    <div class="point-lede">
+      "呃"这个字 —— 在<span class="em">句首</span> · 在<span class="em">句中</span> · 在<span class="em">紧张停顿之后</span> · 在<span class="em">流利叙述当中</span> —— 是<u>完全不同</u>的场景 · 但文字上一模一样
+    </div>
+    <div class="point-detail">
+      文字匹配的话 · 60 分钟节目里能查到 20 个"呃" · 但它不知道哪 20 个真的可比。<br><br>
+      08-19 加了<b>案例向量检索</b> · 用"听起来像"的方式匹配 —— Whisper encoder 把音频压成向量 · FAISS 找最像的几条。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P16 · mentor 采访插曲 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 4 · 转折点</div>
+  <h2>mentor 采访 · 两个问题</h2>
+  <div class="point-page" style="justify-content: center;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px;">
+      <div style="background: white; padding: 32px; border-left: 5px solid #78716c; border-radius: 4px;">
+        <div style="font-size: 16px; color: #78716c; letter-spacing: 2px; margin-bottom: 12px;">问 一</div>
+        <div style="font-size: 26px; font-weight: 600; color: #0f172a; line-height: 1.4;">碰到 AI 无法解决的问题怎么办？</div>
+        <div style="font-size: 19px; color: #57534e; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e7e5e4;">我答：不断调试 · 检查 · 给反馈</div>
+      </div>
+      <div style="background: white; padding: 32px; border-left: 5px solid #dc2626; border-radius: 4px;">
+        <div style="font-size: 16px; color: #dc2626; letter-spacing: 2px; margin-bottom: 12px;">问 二</div>
+        <div style="font-size: 26px; font-weight: 600; color: #0f172a; line-height: 1.4;">经过这个 Ainol · 你有什么思考？</div>
+        <div style="font-size: 19px; color: #57534e; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e7e5e4;">我答：思考问题的<b>底层原理</b>是什么 · 而不是被表象所困扰</div>
+      </div>
+    </div>
+    <div class="big-quote" style="margin-top: 60px; font-size: 32px; border-left-color: #dc2626;">
+      回到工位 · 我想通了：<br>
+      我想让 AI 学的是<span class="em">模式</span> · skill 能做到 ——<br>
+      但剪辑的具体<span class="em">时间点、crossfade 值</span> · 根本不是模式
+    </div>
+  </div>
+</section>
+
+<!-- ============ P17 · Optuna 三步 loss ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 4 · 突围 一 · PARAMETER</div>
+  <h2>Optuna 引入 · loss 是<span style="color:#c2410c;">三步</span>推出来的</h2>
+  <div class="point-page" style="justify-content: flex-start;">
+    <div style="font-size: 20px; color: #57534e; margin-bottom: 16px; max-width: 1200px;">
+      起点 · <b>以 NISQA discontinuity 作 benchmark</b> · 5 维打分里的"不连续性" · 满分 5.0 · 越高越干净
+    </div>
+    <div class="loss-steps">
+      <div class="loss-step">
+        <div class="stepno">STEP 1</div>
+        <div class="steplede">镜像</div>
+        <div class="stepdetail">Optuna 默认最小化目标 · 把 discontinuity 反过来</div>
+        <div class="formula">loss = 5.0 − discontinuity</div>
+      </div>
+      <div class="loss-step">
+        <div class="stepno">STEP 2</div>
+        <div class="steplede">反作弊</div>
+        <div class="stepdetail">发现走捷径 —— 不剪就没剪口 · 天然满分。<br>加惩罚让"必须真剪"</div>
+        <div class="formula">+ 5.0 × 每漏一个目标词</div>
+      </div>
+      <div class="loss-step">
+        <div class="stepno">STEP 3</div>
+        <div class="steplede">兜底</div>
+        <div class="stepdetail">基础检查（静音位置）挂了再加一个较轻的惩罚 · 挡明显破坏</div>
+        <div class="formula">+ 2.0 (若 pre_check FAIL)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P18 · warm-start ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 4 · 突围 二 · warm-start</div>
+  <h2>10 个案例 · 7 个卡在局部最小 · <span style="color:#c2410c;">热启动破局</span></h2>
+  <div class="point-page">
+    <div class="point-detail" style="max-width: 1500px;">
+      想到之前打数学建模美赛也碰过局部最小的问题 —— 让 AI 把"相似情况下 <b>mentor 的参数</b>"和"<b>YouTube 上的经验</b>"作为搜索起点 · 先跑 2 次已知好点 · 再自由探索。
+    </div>
+    <div class="warm-viz">
+      <div class="warm-source">
+        <h4>来源 A · mentor 手工剪</h4>
+        <p><b>59 条参数的中位数</b> · 从 EP03 + EP04 反向提取<br>
+        <span style="color:#a8a29e;font-size:16px;">crossfade / boundary_offset 每类 kind 独立</span></p>
+      </div>
+      <div class="warm-source">
+        <h4>来源 B · YouTube 6 条规则</h4>
+        <p><b>专业剪辑视频里派生的经验</b><br>
+        <span style="color:#a8a29e;font-size:16px;">目前只接了 crossfade + room_tone · 其它 3 维仍从零学</span></p>
+      </div>
+    </div>
+    <div style="font-size: 22px; color: #059669; margin-top: 40px; font-weight: 600;">结果 · 收敛率大幅提升 · 我很满意</div>
+  </div>
+</section>
+
+<!-- ============ P19 · 候选层 · 规则派 → LLM ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 4 · 突围 三 · PREFERENCE</div>
+  <h2>候选层从<span style="color:#dc2626;">规则派</span>转向<span style="color:#059669;">LLM 主决策</span></h2>
+  <div class="point-page">
+    <div class="point-lede">
+      失忆症 —— EP04 说"一些"不许剪 · EP05 又剪了一次 · 每期都在重新教
+    </div>
+    <div class="compare-two">
+      <div class="compare-side before">
+        <h4>之前 · 规则派</h4>
+        <ul>
+          <li>5 类候选族</li>
+          <li>8 道 gate</li>
+          <li>整齐 · 但离用户实际差太远</li>
+          <li>规则永远追不上语义</li>
+        </ul>
+      </div>
+      <div class="compare-arrow">→</div>
+      <div class="compare-side after">
+        <h4>现在 · LLM 主 · gate 兜</h4>
+        <ul>
+          <li>Claude Haiku 4.5 subagent 直接读原文</li>
+          <li>判 KEEP_CUT / REJECT_KEEP / NEEDS_REVIEW</li>
+          <li>gate 从 8 门砍到 <b>5 门</b> · 只留结构红线</li>
+          <li>never_cut 是硬 override · Haiku 也推不翻</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top: 32px; padding: 24px 32px; background: white; border-left: 5px solid #059669; border-radius: 4px; max-width: 1400px;">
+      <span style="font-size: 20px; color: #57534e;">EP05 前五分钟 ·</span>
+      <span style="font-size: 24px; color: #0f172a; font-weight: 600;">37 候选 · 33 自动剪 · 4 交人审</span>
+      <span class="metric" style="margin-left: 20px;">自动率 89.2%</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P20 · learning-pattern-from-case-v1 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 4 · 新起 skill</div>
+  <h2>learning-pattern-from-case-v1 · 让 LLM 读<span style="color:#7c3aed;">自然语言</span> · 不读统计</h2>
+  <div class="point-page" style="justify-content: flex-start;">
+    <div style="font-size: 22px; color: #44403c; line-height: 1.55; max-width: 1500px;">
+      经验卡按 reason_key 分桶 · 每桶按 accept/reject 分 · 挑 3-5 个代表 case · 把 deleted_text 和 evidence 一起喂 LLM · 让它归纳<b>共同语义模式</b>
+    </div>
+    <div class="pattern-preview">
+<span class="h">## reason_key: filler_hesitation</span>
+
+<span class="k">### decision: reject</span> <span class="c">(mentor 剪掉)</span>
+- 模式: 短促无信息 filler · 单独出现在句间
+- 例子: <span class="q">[EP03-C007]</span> "然后<u>呃</u>我们..."
+        <span class="q">[EP03-C014]</span> "所以<u>嗯</u>就是..."
+
+<span class="k">### decision: accept</span> <span class="c">(mentor 保留)</span>
+- 模式: 情绪 filler 或语气强调
+- 例子: <span class="q">[EP03-C023]</span> "<u>呃</u> 这个真的很难说"
+    </div>
+    <div style="font-size: 18px; color: #57534e; margin-top: 20px; max-width: 1500px;">
+      严格<b>无数字</b> · 只出自然语言 pattern · 每条挂 case_id 能追溯 · mentor 一眼核对。<br>
+      硬 checklist 8 条 · 只学 PREFERENCE (剪哪些) · 绝不碰 PARAMETER (怎么剪)
+    </div>
+  </div>
+</section>
+
+<!-- ============ P21 · 未来 4 方向 ============ -->
+<section class="slide">
+  <div class="sec-chip">§ 5 · 未来</div>
+  <h2>基础技术层收敛 · 重心转向<span style="color:#7c3aed;">偏好积累</span></h2>
+  <div class="future-grid">
+    <div class="future-card">
+      <div class="fno">方向 · 一</div>
+      <div class="flede">案例记忆持续积累</div>
+      <div class="fdesc">65 条历史案例 + 33 条人审 + 42 条 YouTube = <b>140 项历史知识</b>被消费。gate 第 5 关和 6.8 步向量检索两条通路同时消费。<br><br>期数越多 · 记忆越贴合偏好 —— 这套是<b>章鱼 AI 独有的</b> · 通用模型给不了</div>
+    </div>
+    <div class="future-card">
+      <div class="fno">方向 · 二</div>
+      <div class="flede">learning-pattern-from-case-v1 激活</div>
+      <div class="fdesc">开出第三条通路 · 把历史案例蒸馏成 LLM 可读的自然语言模式 · 让主流水线判决直接引用"上一期 mentor 是怎么处理类似情况" —— 而不只是相似度打分</div>
+    </div>
+    <div class="future-card">
+      <div class="fno">方向 · 三</div>
+      <div class="flede">向量数据库 · 已下载在试验区</div>
+      <div class="fdesc">Whisper encoder 压成 512 维向量 · FAISS 找最像 · 只出相似度分数 · 不下判决。<br><br>目前没投入是因为<b>案例量还不够验证</b> —— 等更多期数积累后启用</div>
+    </div>
+    <div class="future-card">
+      <div class="fno">方向 · 四</div>
+      <div class="flede">Optuna 搜索空间扩展</div>
+      <div class="fdesc">现在只对"剪的干不干净"做参数级迭代 · 未来把响度阈值、闪避深度、音乐过渡曲线也纳进来 · 让参数学习覆盖整条流水线</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P22 · 收尾 ============ -->
+<section class="slide closing">
+  <div>
+    <div class="brand-line"></div>
+    <div class="closing-quote">
+      我们没有把播客后期变成一个<span class="em">"魔法按钮"</span>。<br><br>
+      我们做的是 —— 让<b>每一次剪、每一次批准、每一次学习</b><br>都留下痕迹、可以回放、可以被下一期节目用上。<br><br>
+      <span class="em">人还在决策的中心 · 机器在旁边帮忙</span>
+    </div>
+    <div class="thanks">谢 谢 大 家</div>
+  </div>
+</section>
+
+</div><!-- /deck -->
+
+<!-- HUD · 页码 -->
+<div class="hud"><span class="page-num" id="pn">1</span> / <span id="pt">22</span></div>
+<div class="hud-right">Soundtrace · 2026-08-21 · 熊镇正</div>
+
+<script>
+// ========== 极简翻页 · ← → 空格 · F 全屏 ==========
+const slides = document.querySelectorAll('.slide');
+const pn = document.getElementById('pn');
+const pt = document.getElementById('pt');
+pt.textContent = slides.length;
+let idx = 0;
+
+function show(i) {
+  idx = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+  pn.textContent = idx + 1;
+  // deep bg for cover/closing · 反色 HUD
+  const isDark = slides[idx].classList.contains('cover') || slides[idx].classList.contains('closing');
+  document.querySelectorAll('.hud, .hud-right').forEach(h => h.style.color = isDark ? '#94a3b8' : '');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(idx + 1); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); show(idx - 1); }
+  else if (e.key === 'Home') show(0);
+  else if (e.key === 'End') show(slides.length - 1);
+  else if (e.key === 'f' || e.key === 'F') {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+  else if (/^[0-9]$/.test(e.key)) show(parseInt(e.key, 10) - 1);
+});
+
+// 触屏 · 左右滑
+let touchX = 0;
+document.addEventListener('touchstart', (e) => touchX = e.touches[0].clientX);
+document.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 60) show(idx + (dx < 0 ? 1 : -1));
+});
+
+show(0);
+</script>
+</body>
+</html>

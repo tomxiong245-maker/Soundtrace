@@ -614,11 +614,22 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out", type=Path, default=None)
     ap.add_argument("--use-optuna", action="store_true",
                     help="opt-in · 用 Optuna TPE 替换 rule-based delta · 官方 Bayesian 数据驱动 · KDD 2019 · MIT · 用户 2026-08-19 明确 '不要用我自己搞的' 后引入")
+    ap.add_argument("--mentor-gold-warmstart-json", type=Path, default=None,
+                    help="Warm-start 挖掘的 mentor gold 参数 · None → optuna_refine.DEFAULT_MENTOR_GOLD_PATH · 与 --cut-params-json 概念分离 (后者是运行时参数, 前者是 warm-start 挖掘源)")
+    ap.add_argument("--youtube-feedback-jsonl", type=Path, default=None,
+                    help="Warm-start 用 YouTube learning session_feedback jsonl · None → optuna_refine.DEFAULT_YOUTUBE_FEEDBACK_PATH")
+    ap.add_argument("--disable-warm-start-file", action="store_true",
+                    help="强制走硬编码 warm start · 回归测试与 A/B 用 · 2026-08-20 加")
     args = ap.parse_args(argv)
 
     args.tmp_dir.mkdir(parents=True, exist_ok=True)
     raw_track_map = json.loads(args.raw_track_map)
     policy = load_policy(args.policy_json)
+    policy["warm_start_sources"] = {
+        "mentor_gold_json": str(args.mentor_gold_warmstart_json) if args.mentor_gold_warmstart_json else None,
+        "youtube_feedback_jsonl": str(args.youtube_feedback_jsonl) if args.youtube_feedback_jsonl else None,
+        "disable_warm_start_file": bool(args.disable_warm_start_file),
+    }
     initial_params = load_initial_params(args.cut_params_json)
 
     ctx = {

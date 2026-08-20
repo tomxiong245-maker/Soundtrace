@@ -1,6 +1,48 @@
+# === M2 硬红线 · 音频不出本地 ===
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.aac
+*.ogg
+*.wma
+*.opus
+
+# === 系统 ===
 .DS_Store
+Thumbs.db
+*.swp
+*~
+
+# === Python ===
 *.pyc
 __pycache__/
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# === 环境 · 虚拟环境 ===
 .env
 .venv/
+venv/
+**/environment/venv/
+**/environment/miniforge3/
+**/environment/**/*.dylib
+**/environment/**/*.so
+
+# === 大型模型权重（若日后本地存了） ===
+*.pth
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+*.onnx
+*.h5
+
+# === 日志 · run 产物（若不小心 rsync 进来） ===
 *.log
+run_manifest.json.bak
+
+# === 本地 IDE / preview 配置（含本机路径） ===
+.claude/
