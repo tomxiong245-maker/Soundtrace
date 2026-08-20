@@ -2217,36 +2217,6 @@
     },
     {
       "contract": {
-        "adapter_id": "extract-gold-cut-features-v2",
-        "tool_name": "extract_gold_cut_features",
-        "adapter_version": "v1",
-        "wraps_script": "代码/main/orchestrator/extract_gold_cut_features.py",
-        "reads_only": true,
-        "inputs_schema": {
-          "required": []
-        },
-        "outputs_schema": {
-          "required": [
-            "gold_features"
-          ]
-        },
-        "provenance_fields": [
-          "exit_code",
-          "duration_seconds"
-        ],
-        "timeout_seconds": 300,
-        "notes": "EP03/EP04 hardcoded input · 输出路径由脚本 default 决定 · 未来解耦时再泛化"
-      },
-      "command_template": [
-        "python3",
-        "{script}"
-      ],
-      "outputs_template": {
-        "gold_features": "{run_dir}/gold_cut_features.jsonl"
-      }
-    },
-    {
-      "contract": {
         "adapter_id": "build-case-embeddings-v2",
         "tool_name": "build_case_embeddings",
         "adapter_version": "v1-skeleton",

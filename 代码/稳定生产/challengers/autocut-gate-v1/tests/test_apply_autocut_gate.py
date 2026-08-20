@@ -74,29 +74,33 @@ class AutocutGateTests(unittest.TestCase):
             min_hist_accept=overrides.get("min_hist_accept", 1),
         )
 
-    # G1 · whitelist ---------------------------------------------------------
+    # G1 · whitelist [DISABLED 2026-08-20 · Optuna 参数层] --------------------
 
-    def test_g1_denylist_kind_fails(self) -> None:
+    def test_g1_disabled_denylist_passes_through(self) -> None:
+        """2026-08-20 · G1 参数层已彻底关闭 · denylist kind 不再拒判 · 直接放行。"""
         r = self._run([_cand("D1", "semantic_duplicate")])
-        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 0)
+        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 1)
 
-    def test_g1_unknown_kind_fails(self) -> None:
+    def test_g1_disabled_unknown_kind_passes_through(self) -> None:
+        """2026-08-20 · G1 参数层已彻底关闭 · unknown kind 不再拒判 · 直接放行。"""
         r = self._run([_cand("U1", "some_unknown_kind")])
-        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 0)
+        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 1)
 
     def test_g1_whitelist_kind_passes(self) -> None:
         r = self._run([_cand("W1", "filler_hesitation")])
         self.assertEqual(r["summary"]["auto_cut_eligible_count"], 1)
 
-    # G2 · high confidence --------------------------------------------------
+    # G2 · high confidence [DISABLED 2026-08-20 · Optuna 参数层] ---------------
 
-    def test_g2_mid_tier_fails(self) -> None:
+    def test_g2_disabled_mid_tier_passes_through(self) -> None:
+        """2026-08-20 · G2 参数层已彻底关闭 · tier=mid 不再拒判。"""
         r = self._run([_cand("M1", "filler_hesitation", tier="mid")])
-        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 0)
+        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 1)
 
-    def test_g2_low_tier_fails(self) -> None:
+    def test_g2_disabled_low_tier_passes_through(self) -> None:
+        """2026-08-20 · G2 参数层已彻底关闭 · tier=low 不再拒判。"""
         r = self._run([_cand("L1", "filler_hesitation", tier="low")])
-        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 0)
+        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 1)
 
     # G5 · history ---------------------------------------------------------
 
@@ -141,16 +145,18 @@ class AutocutGateTests(unittest.TestCase):
     # Composite -----------------------------------------------------------
 
     def test_multiple_candidates_partition_correctly(self) -> None:
+        """2026-08-20 · G1/G2 参数层禁用 · 之前的 A3 (mid tier) / A4 (denylist) 现在都通过。
+        只有 A2 (G5 hr=1 硬拒) 走人审."""
         r = self._run([
             _cand("A1", "filler_hesitation", ha=1, hr=0),  # pass
             _cand("A2", "filler_hesitation", ha=0, hr=1),  # G5 fail
-            _cand("A3", "filler_hesitation", tier="mid"),  # G2 fail
-            _cand("A4", "semantic_duplicate", ha=1, hr=0),  # G1 fail
+            _cand("A3", "filler_hesitation", tier="mid"),  # G2 disabled · now pass
+            _cand("A4", "semantic_duplicate", ha=1, hr=0),  # G1 disabled · now pass
         ])
         self.assertEqual(r["summary"]["total_candidates"], 4)
-        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 1)
-        self.assertEqual(r["summary"]["human_review_required_count"], 3)
-        self.assertEqual(r["auto_cut_candidate_ids"], ["A1"])
+        self.assertEqual(r["summary"]["auto_cut_eligible_count"], 3)
+        self.assertEqual(r["summary"]["human_review_required_count"], 1)
+        self.assertEqual(r["auto_cut_candidate_ids"], ["A1", "A3", "A4"])
 
     def test_precision_first_denies_reject_history(self) -> None:
         """A candidate whose feature-family has any historical reject is

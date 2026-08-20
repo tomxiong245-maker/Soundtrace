@@ -1,27 +1,21 @@
 #!/usr/bin/env python3
-"""PARTIALLY FROZEN 2026-08-19 · LLM Takeover
+"""SIMPLIFIED 2026-08-20 · Diagnostic-only gates removed
 
-用户 2026-08-19 evening 明确: LLM 完全主导 candidate 生成 + 判决 (Stage 3.5.5).
-本文件**部分冻结** · 分两类 gate 处理:
+2026-08-20 用户明确要求彻底关闭 diagnostic-only 分支 · 消除"看起来还在把关但其实
+不 REJECT"的雷. G1/G2 参数层彻底禁用 · G3/G5/G7_session_non_never_cut/G7_protection
+均严格保留 · LLM takeover 让位机制已删除. 见下方 GATES_ACTIVE 常量.
 
-** 结构性门 · 保留严格 (未冻结) **:
-- G4  speaker_role       (角色声明门 · fail-closed)
-- G4b source_track       (源轨归属门)
-- G6  duration           (max_duration_seconds 长度上限)
-- 以及 review_budget     (审核预算控制)
-这些是结构约束 · 与 LLM 判决正交 · 继续硬执行.
+结构性门 (严格 REJECT · 逻辑不动):
+- speaker_role / source_track (前置 Stage 3 · 不在本文件)
+- G6_duration (>0.8s 拒 · 防误剪长语义)
+- G7_protection (片头/片尾保护区)
+- G7_session_feedback never_cut (session_feedback SOT 的硬 override)
+- G8_case_embedding (mentor case-memory · silent_skip fallback)
+- review_budget (审核预算控制 · 调度层)
 
-** 语义门 · 冻结 diagnostic_only (LLM 接管) **:
-- G1  candidate_kind whitelist
-- G2  confidence_tier == 'high'
-- G3  policy_application route (auto_preserve 冲突)
-- G5  historical_accept/reject count
-- G7  opening/closing 保护区
-- G8  mentor case-memory 判决
-这些语义信号仍计算 · 但只作 diagnostic · 不再决定 auto_cut_eligible.
-最终 auto_cut vs human_review 判决由 LLM (Stage 3.5.5) 给出.
-
-详见: 交付/最终交付文档/统筹全局/DEPRECATED_LLM_TAKEOVER_2026-08-19.md
+已彻底关闭 (从 2026-08-20 起不再运行 · 见 GATES_INACTIVE):
+- G1_whitelist / G2_high_confidence (参数层 · Optuna Stage 6.7 学阈值)
+- G3_no_preserve / G5_history / G7_session_feedback (non-never_cut) (语义 · LLM 独占)
 
 ---
 
@@ -30,13 +24,13 @@ apply_autocut_gate — 多重 gate 决定单个候选是否 auto-cut 合格。
 每一条候选必须**全部通过**下列 gate 才归为 `auto_cut_eligible`；任一失败则
 降级为 `human_review_required`（不是拒绝，只是让人来看）。
 
-    G1  candidate_kind ∈ policy_v2 whitelist                (类型准入)
-    G2  confidence_tier == "high"                           (机器自信度)
     G3  policy_application.route != auto_preserve           (无保护规则冲突)
-    G5  historical_accept_count ≥ 1 AND reject_count == 0   (无历史反例)
+    G5  historical_accept_count / reject_count 综合评估      (无历史反例)
     G6  duration ≤ max_duration_seconds                     (防误删长语义)
-    G7  不在 opening/closing 保护区                          (防切开场/收尾)
+    G7  不在 opening/closing 保护区 · session_feedback       (never_cut hard override)
     G8  mentor case-memory 相似案历判决 (case_embedding)     (跨 episode 案例记忆)
+
+(G1/G2 从 2026-08-20 起不再运行 · Optuna Stage 6.7 学参数层阈值)
 
 **G4 跨轨投票**：候选生成时若走了 cross_mic_event_merge（cross-mic sync），
 本身已经含跨轨证据；本 gate 阶段不再重复投票（避免因 candidate 已合并
@@ -62,23 +56,28 @@ from pathlib import Path
 from typing import Any
 
 
+# ============================================================
+# 架构简化 · 2026-08-20 · 用户明确要求彻底关闭 diagnostic-only gates
+# ============================================================
+# 历史: 原设计 8 门 gate (G1-G8) 分两层 · 参数层 (G1/G2) + 候选层 (G3-G8).
+#       当 LLM 语义 veto 启用后 (08-19 默认开) · G1/G2/G3/G5/G7 语义门变成
+#       "让位 diagnostic-only" · 只记录不阻挡. G6_duration 干脆不跑.
+#       这些 diagnostic 分支 = 未来接手者的雷 · 让人误以为 gate 还在起作用.
+#
+# 2026-08-20 用户 (原话 "没有用了的全都关掉 · 我不希望今后拿到我项目的人还被误导")
+# 决定彻底删掉 diagnostic-only 分支 · 只保留真结构性 gate.
+#
+# 剩下的 GATES_ACTIVE 见下方常量列表.
+# 前后行为兼容性: auto_cut.json / review_required.json / summary.json 顶层结构不变.
+# ============================================================
+
+
 # ---------------------------------------------------------------------------
-# 2026-08-19 · 候选 / 参数分层 (user directive)
+# 参数层 gate 兼容性开关 (2026-08-20)
 #
-# 候选层 gate (哪一段该剪): speaker_role / source_track / duration / review_budget
-#   → 保留严格 · 挂即 REJECT (人审预算 / 时长范围 / 角色 / 源轨等)
-#
-# 参数层 gate (怎么剪的默认参数好不好): risk_tier / policy_authorization / calibration
-#   → 默认关掉 (交给 Stage 6.7 Optuna 学) · 挂只 warning · 候选依然进 EDL
-#
-# 在本文件中，参数层对应:
-#   - G1_whitelist               → policy_authorization (autocut_policy 白名单授权)
-#   - G2_high_confidence         → risk_tier (confidence tier 判定)
-#   - calibration_source merge   → calibration (校准 tier / repetition_signature)
-#
-# 环境变量 MINGLUE_PARAM_GATES_OFF (default "1" = TRUE):
-#   "1"/"true"/"yes"  → 参数层降级 warning · 候选依然 pass
-#   其他             → 参数层保持严格 REJECT (原行为)
+# MINGLUE_PARAM_GATES_OFF 环境变量本体保留 · 默认 "1" · 兼容旧调用签名.
+# 但 G1/G2 参数层从 2026-08-20 起已彻底不再运行 (无论开关值是什么) ·
+# Optuna Stage 6.7 学阈值 · warning-only 分支已删除.
 # ---------------------------------------------------------------------------
 _PARAM_GATES_OFF = os.environ.get("MINGLUE_PARAM_GATES_OFF", "1").strip().lower() in (
     "1", "true", "yes", "on",
@@ -86,95 +85,35 @@ _PARAM_GATES_OFF = os.environ.get("MINGLUE_PARAM_GATES_OFF", "1").strip().lower(
 
 
 # ---------------------------------------------------------------------------
-# 2026-08-19 · LLM 语义门 takeover (user directive · 只用 LLM 负责 candidate)
+# 2026-08-20 · LLM 语义门 takeover 让位机制已删除
 #
-# autocut_gate 分两类门:
-#   1) 结构性门 (物理约束 · 不是"该不该剪") · 严格保留:
-#        speaker_role · source_track · G6_duration (>0.8s 拒) · review_budget
-#   2) 语义门 (LLM 该管的) · 让位 LLM:
-#        G3_no_preserve · G5_history · G7_session_feedback · G7_protection
+# 历史 (2026-08-19): G3 / G5 / G7_session_non_never_cut / G7_protection 曾"让位"
+# LLM · 记为 diagnostic_only. 该机制在 2026-08-20 被移除 · 上述语义门恢复严格
+# REJECT 或彻底不跑 (见 GATES_INACTIVE). LLM 语义 veto 由独立的 llm_filter
+# 阶段处理 · 与 autocut_gate 正交.
 #
-# G1_whitelist / G2_high_confidence 已由 MINGLUE_PARAM_GATES_OFF 让位 (参数层)。
-#
-# 环境变量 MINGLUE_LLM_TAKEOVER (default "auto"):
-#   "auto" → 检测 target_dir/llm_verdicts.json · 存在则让位
-#   "off"  → 强制不让位 (老 pipeline behavior)
-#   "on"   → 强制让位 (即使 llm_verdicts.json 缺失 · test/debug 用)
-#
-# 遗留别名 MINGLUE_G5_DISABLED_WHEN_LLM:
-#   若显式设置 (非空) · 与 MINGLUE_LLM_TAKEOVER 语义等价 · 后者优先。
-#
-# session_feedback verdict=never_cut 是全局强规则 · hard override · 即使 LLM
-# 让位也不能覆盖 (只在明确 never_cut 时 REJECT)。
+# session_feedback verdict=never_cut 仍是全局硬 override · 独立保留.
 # ---------------------------------------------------------------------------
 
 
-def _llm_takeover_mode() -> str:
-    """Read the LLM takeover mode env var · 兼容遗留 MINGLUE_G5_DISABLED_WHEN_LLM."""
-    mode = os.environ.get("MINGLUE_LLM_TAKEOVER", "").strip().lower()
-    if mode:
-        return mode
-    legacy = os.environ.get("MINGLUE_G5_DISABLED_WHEN_LLM", "").strip().lower()
-    if legacy:
-        return legacy
-    return "auto"
+GATES_ACTIVE = [
+    "speaker_role",       # 说话人身份匹配 · 结构性硬约束
+    "source_track",       # 源轨判定 · 结构性硬约束
+    "G6_duration",        # 时长上限 (>0.8s 拒) · 结构性硬约束 · CLAUDE.md §12
+    "G7_protection",      # 片头片尾保护 (opening/closing seconds) · 结构性硬约束
+    "G7_never_cut",       # session_feedback never_cut token 保护 · 硬约束
+    "G8_case_embedding",  # top-K 相似历史片段检索 · 参考不阻挡
+    "review_budget",      # 人审预算限制 · 结构性
+]
 
-
-def _llm_verdicts_present(target_dir: Path) -> bool:
-    """检测 LLM verdicts.json 是否存在 · 若存在 · 语义门让位.
-
-    "off" → False · "on" → True (强制) · "auto" (default) → file existence.
-    """
-    mode = _llm_takeover_mode()
-    if mode == "off":
-        return False
-    if mode == "on":
-        return True
-    llm_verdicts = target_dir / "llm_verdicts.json"
-    return llm_verdicts.is_file()
-
-
-def _read_llm_verdict_for(target_dir: Path, candidate_id: str) -> dict | None:
-    """读 LLM verdict for specific candidate · 返回 dict or None."""
-    llm_verdicts = target_dir / "llm_verdicts.json"
-    if not llm_verdicts.is_file():
-        return None
-    try:
-        vd = json.loads(llm_verdicts.read_text(encoding="utf-8"))
-    except Exception:
-        return None
-    for v in vd.get("verdicts", []):
-        if str(v.get("candidate_id")) == str(candidate_id):
-            return v
-    return None
-
-
-def _llm_deferred_entry(gate_name: str, llm_v: dict | None) -> dict:
-    """Build a diagnostic report entry for a semantic gate that让位 LLM."""
-    if not llm_v:
-        return {
-            "gate": gate_name, "pass": True,
-            "note": "LLM 已接管 · 语义门让位 · diagnostic only (no per-cid verdict)",
-        }
-    return {
-        "gate": gate_name, "pass": True,
-        "note": "LLM 已接管 · 语义门让位 · diagnostic only",
-        "llm_verdict": llm_v.get("verdict"),
-        "llm_reason": llm_v.get("reason"),
-    }
-
-
-# Backward-compat alias · 老代码可能 import 这个名字
-def _check_g5_llm_takeover(run_dir: Path | None) -> bool:
-    """Legacy wrapper · use _llm_verdicts_present directly for new code."""
-    if run_dir is None:
-        mode = _llm_takeover_mode()
-        return mode == "on"
-    # try both classic locations
-    for d in (run_dir, run_dir / "llm_filter"):
-        if _llm_verdicts_present(d):
-            return True
-    return False
+GATES_INACTIVE = [
+    "G1_whitelist",                       # 参数层 · MINGLUE_PARAM_GATES_OFF=1 · Optuna 处理
+    "G2_high_confidence",                 # 参数层 · 同上
+    "G3_no_preserve",                     # 语义 · LLM 语义 veto 独占
+    "G5_history",                         # 语义 · LLM 独占
+    "G7_session_feedback_non_never_cut",  # 语义 · LLM 独占 (never_cut 硬 override 独立保留)
+]
+# 若未来 LLM 不启用 · 需要 fallback · 请从 git log 找回 2026-08-20 之前版本作参考.
 
 
 DEFAULT_MAX_DURATION_S = 0.8
@@ -328,8 +267,6 @@ def apply_gates(
     case_embeddings_by_cid: dict[str, list[dict]] | None = None,
     case_embedding_top_k: int = DEFAULT_G8_TOP_K,
     case_embedding_min_score: float = DEFAULT_G8_MIN_SCORE,
-    g5_llm_takeover: bool = False,
-    llm_verdicts_by_cid: dict[str, dict] | None = None,
 ) -> tuple[bool, list[dict]]:
     """Return (all_gates_passed, per_gate_report)."""
     cid = candidate.get("candidate_id") or "?"
@@ -337,113 +274,26 @@ def apply_gates(
 
     report: list[dict] = []
 
-    # 2026-08-19 · LLM 语义门 takeover 状态
-    # llm_verdicts_by_cid 存在 (即使某 cid 无 verdict) → 语义门 (G3/G7_session
-    # non-never_cut/G7_protection) 让位 diagnostic-only.
-    # g5_llm_takeover 是 G5 的等价开关 (向后兼容)。
-    _llm_takeover_active = bool(llm_verdicts_by_cid is not None) or bool(g5_llm_takeover)
-    llm_v = None
-    if llm_verdicts_by_cid:
-        llm_v = llm_verdicts_by_cid.get(str(cid))
-    # G5 内部沿用 g5_llm_takeover 名 · 统一从 _llm_takeover_active 派生
-    g5_llm_takeover = _llm_takeover_active
+    # G1 (whitelist) / G2 (high_confidence) 从 2026-08-20 起彻底不再运行 ·
+    # 参数层由 Optuna Stage 6.7 处理 · 见文件顶部 GATES_INACTIVE.
+    # kind 变量仅供下游 signals 和 report 记录使用.
+    _ = kind  # kept for future diagnostics · 无侧作用
 
-    # 2026-08-19 · LLM REJECT hard short-circuit
-    # 若 LLM 明确 REJECT_KEEP (保留 · 不剪) · autocut_gate 也 REJECT · 走人审.
-    # 记为 LLM_reject entry · 结构性门 (G6_duration 等) 不再运行。
-    if llm_v:
-        _llm_verdict_str = str(llm_v.get("verdict", "")).strip().upper()
-        if _llm_verdict_str in ("REJECT_KEEP", "REJECT", "KEEP", "DO_NOT_CUT", "NEVER_CUT"):
-            report.append({
-                "gate": "LLM_reject",
-                "pass": False,
-                "reason": "LLM_REJECT_KEEP: " + str(llm_v.get("reason", "")),
-                "llm_verdict": llm_v.get("verdict"),
-                "llm_reason": llm_v.get("reason"),
-            })
-            return False, report
+    # G3 · policy_application not auto_preserve  [STRICT · 2026-08-20 恢复]
+    route = policy_route_by_cid.get(str(cid))
+    if route in preserve_routes:
+        report.append({"gate": "G3_no_preserve", "pass": False, "reason": f"policy_route={route}"})
+        return False, report
+    report.append({"gate": "G3_no_preserve", "pass": True, "policy_route": route})
 
-    # G1 · kind whitelist  [PARAM LAYER: policy_authorization]
-    # 参数层门：autocut_policy 签字授权哪些 candidate_kind 默认剪。
-    # PARAM_GATES_OFF 时降级 warning · 候选依然进 EDL · Optuna Stage 6.7 优化。
-    if kind in denylist_kinds:
-        if _PARAM_GATES_OFF:
-            report.append({
-                "gate": "G1_whitelist", "pass": True,
-                "param_gate_note": "waived_policy_authorization_denylist · Optuna will handle",
-                "kind": kind,
-                "note": "MINGLUE_PARAM_GATES_OFF=1 · would have REJECTED",
-            })
-        else:
-            report.append({"gate": "G1_whitelist", "pass": False, "reason": f"kind={kind} in denylist"})
-            return False, report
-    elif kind not in whitelist_kinds:
-        if _PARAM_GATES_OFF:
-            report.append({
-                "gate": "G1_whitelist", "pass": True,
-                "param_gate_note": "waived_policy_authorization_not_whitelisted · Optuna will handle",
-                "kind": kind,
-                "note": "MINGLUE_PARAM_GATES_OFF=1 · would have REJECTED",
-            })
-        else:
-            report.append({"gate": "G1_whitelist", "pass": False, "reason": f"kind={kind} not in whitelist"})
-            return False, report
-    else:
-        report.append({"gate": "G1_whitelist", "pass": True})
-
-    # G2 · high confidence  (boosted by strong wordlevel or three-track signals)
-    # [PARAM LAYER: risk_tier]
-    # 参数层门：confidence_tier 是候选默认参数好不好剪的估计 (风险分级)。
-    # tier=high 或 wordlevel edit_ratio≥0.75 或 three-track sync≥3 通过。
-    # PARAM_GATES_OFF 时降级 warning · 候选依然进 EDL · Optuna Stage 6.7 优化。
-    tier = _infer_confidence_tier(candidate)
-    edit_ratio_g2 = float(candidate.get("edit_ratio", 0.0))
-    cross_track_g2 = int(candidate.get("cross_track_hit_count", 0))
-    tier_ok = (
-        tier == "high"
-        or edit_ratio_g2 >= 0.75           # strong wordlevel signal
-        or cross_track_g2 >= 3             # three-track sync = independent evidence
-    )
-    if not tier_ok:
-        if _PARAM_GATES_OFF:
-            report.append({
-                "gate": "G2_high_confidence", "pass": True,
-                "param_gate_note": "waived_risk_tier · Optuna will handle",
-                "tier": tier, "edit_ratio": edit_ratio_g2, "cross_track_hits": cross_track_g2,
-                "note": "MINGLUE_PARAM_GATES_OFF=1 · would have REJECTED (tier not high)",
-            })
-        else:
-            report.append({
-                "gate": "G2_high_confidence", "pass": False,
-                "reason": f"tier={tier} edit_ratio={edit_ratio_g2} cross_track={cross_track_g2}",
-            })
-            return False, report
-    else:
-        report.append({
-            "gate": "G2_high_confidence", "pass": True,
-            "tier": tier, "edit_ratio": edit_ratio_g2, "cross_track_hits": cross_track_g2,
-        })
-
-    # G3 · policy_application not auto_preserve  [SEMANTIC · LLM takeover eligible]
-    if _llm_takeover_active:
-        report.append(_llm_deferred_entry("G3_no_preserve", llm_v))
-    else:
-        route = policy_route_by_cid.get(str(cid))
-        if route in preserve_routes:
-            report.append({"gate": "G3_no_preserve", "pass": False, "reason": f"policy_route={route}"})
-            return False, report
-        report.append({"gate": "G3_no_preserve", "pass": True, "policy_route": route})
-
-    # v20.6 · G7 · session_feedback [SEMANTIC · LLM takeover eligible]
-    # 若候选之前被用户反馈 verdict=never_cut → hard reject (走人审)
-    # 2026-08-19 · session_feedback 是全局强规则 · hard override · 即使 LLM 让位
-    # 也保留 never_cut 为 REJECT (只在明确 never_cut 时 REJECT)
+    # v20.6 · G7 · session_feedback  [never_cut = HARD override · 全局强规则]
+    # 2026-08-20: LLM takeover 让位机制删除后 · non-never_cut 分支不再记
+    # diagnostic entry · 直接沉默通过 (等价于旧的 diagnostic-only note).
     prev_fb = candidate.get("previous_user_feedback") or []
     never_cut_notes = [
         fb for fb in prev_fb if str(fb.get("verdict")) == "never_cut"
     ]
     if never_cut_notes:
-        # HARD override · 不让位
         report.append({
             "gate": "G7_session_feedback", "pass": False,
             "reason": "user_feedback_never_cut (HARD override · 全局强规则)",
@@ -452,9 +302,7 @@ def apply_gates(
             "n_hits": len(never_cut_notes),
         })
         return False, report
-    if _llm_takeover_active:
-        report.append(_llm_deferred_entry("G7_session_feedback", llm_v))
-    elif prev_fb:
+    if prev_fb:
         report.append({
             "gate": "G7_session_feedback", "pass": True,
             "n_previous_feedback": len(prev_fb),
@@ -518,45 +366,24 @@ def apply_gates(
             if filler_token in tokens:
                 lake_token_reject += int(tokens[filler_token].get("reject", 0))
     if lake_token_reject > 0:
-        if g5_llm_takeover:
-            report.append({
-                "gate": "G5_history", "pass": True,
-                "note": "LLM 已接管候选决定 · G5 让位 · diagnostic only",
-                "would_have_been": "REJECT",
-                "diagnostic_reason": (
-                    f"lake token='{filler_token}' 里 reject={lake_token_reject} "
-                    f"→ token-level historical rejection"
-                ),
-                "lake_token_reject": lake_token_reject,
-            })
-        else:
-            report.append({
-                "gate": "G5_history", "pass": False,
-                "reason": (
-                    f"lake token='{filler_token}' 里 reject={lake_token_reject} "
-                    f"→ token-level historical rejection"
-                ),
-                "lake_token_reject": lake_token_reject,
-            })
-            return False, report
+        report.append({
+            "gate": "G5_history", "pass": False,
+            "reason": (
+                f"lake token='{filler_token}' 里 reject={lake_token_reject} "
+                f"→ token-level historical rejection"
+            ),
+            "lake_token_reject": lake_token_reject,
+        })
+        return False, report
 
     # a) Hard reject: any individual historical reject in this event's family
     if hr > 0:
-        if g5_llm_takeover:
-            report.append({
-                "gate": "G5_history", "pass": True,
-                "note": "LLM 已接管候选决定 · G5 让位 · diagnostic only",
-                "would_have_been": "REJECT",
-                "diagnostic_reason": f"individual hr={hr} > 0 → historical rejection precedent",
-                "ha": ha, "hr": hr, "lake": lake_info,
-            })
-        else:
-            report.append({
-                "gate": "G5_history", "pass": False,
-                "reason": f"individual hr={hr} > 0 → historical rejection precedent",
-                "ha": ha, "hr": hr, "lake": lake_info,
-            })
-            return False, report
+        report.append({
+            "gate": "G5_history", "pass": False,
+            "reason": f"individual hr={hr} > 0 → historical rejection precedent",
+            "ha": ha, "hr": hr, "lake": lake_info,
+        })
+        return False, report
 
     # v20.1 feedback correction (2026-08-17): user clarified "全或无" means
     # both-span-cut (剪 pre + retry both), NOT reject-to-human-review.
@@ -628,25 +455,22 @@ def apply_gates(
         return False, report
     report.append({"gate": "G6_duration", "pass": True, "duration_s": round(duration_s, 3)})
 
-    # G7 · not in opening/closing protection  [SEMANTIC · LLM takeover eligible]
-    if _llm_takeover_active:
-        report.append(_llm_deferred_entry("G7_protection", llm_v))
-    else:
-        if float(start_s) < opening_s:
-            report.append({
-                "gate": "G7_protection",
-                "pass": False,
-                "reason": f"start={start_s:.2f}s < opening_protection={opening_s}s",
-            })
-            return False, report
-        if float(end_s) > episode_duration_s - closing_s:
-            report.append({
-                "gate": "G7_protection",
-                "pass": False,
-                "reason": f"end={end_s:.2f}s > episode-{closing_s}s",
-            })
-            return False, report
-        report.append({"gate": "G7_protection", "pass": True})
+    # G7 · not in opening/closing protection  [STRICT · 2026-08-20 恢复]
+    if float(start_s) < opening_s:
+        report.append({
+            "gate": "G7_protection",
+            "pass": False,
+            "reason": f"start={start_s:.2f}s < opening_protection={opening_s}s",
+        })
+        return False, report
+    if float(end_s) > episode_duration_s - closing_s:
+        report.append({
+            "gate": "G7_protection",
+            "pass": False,
+            "reason": f"end={end_s:.2f}s > episode-{closing_s}s",
+        })
+        return False, report
+    report.append({"gate": "G7_protection", "pass": True})
 
     # G8 · mentor case-memory similarity (challenger case-memory-embedding-v1)
     # 消费 Stage 3.9 / 6.8 生成的 case_embedding_retrieval.json (cid → top_k list).
@@ -746,11 +570,9 @@ def run(
     # Merge auxiliary confidence_tier and repetition_signature from
     # calibration_source.json — orchestrator's canonical location for these
     # fields when all_candidates.json omits them.
-    # [PARAM LAYER: calibration]
-    # 参数层：calibration_source 校准 tier / repetition_signature 等**参数**。
-    # 本身只做字段填充 · 不 REJECT 候选 · 但下游 G2 (risk_tier) 依赖它。
-    # PARAM_GATES_OFF 时: 填充依然做 (advisory) · 缺 tier 也不影响候选进 EDL
-    # (因为 G2 已降级 warning) · Optuna Stage 6.7 学 tier 阈值。
+    # [ADVISORY · 2026-08-20]
+    # 只做字段填充 · 不 REJECT 候选 · G2 (risk_tier) 已关闭 (见 GATES_INACTIVE) ·
+    # 下游 EDL 生成 / rules layer 若读 confidence_tier 等字段仍可从此拿到。
     calibration_used = False
     calibration_filled_count = 0
     if calibration_source_json and calibration_source_json.is_file():
@@ -767,17 +589,15 @@ def run(
     elif not _PARAM_GATES_OFF and calibration_source_json:
         # 参数门开时 · 若指定但缺文件 · 保留原静默降级行为 (不 raise)。
         pass
-    # 记录 calibration 状态到 candidates 首个 candidate 的 gate_notes 以便 audit。
-    # (per-candidate note 里也会有 "waived_risk_tier" 表明 tier 未强制)
+    # 记录 calibration 状态到 summary.calibration_source_merge 以便 audit。
+    # 2026-08-20: G2 已彻底关闭 · calibration 只做字段填充 (advisory) · 不再驱动
+    # gate REJECT · 下游 EDL 生成 / rules layer 仍会读 confidence_tier 等字段。
     _calibration_status = {
         "calibration_source_provided": bool(calibration_source_json),
         "calibration_source_exists": bool(calibration_source_json and calibration_source_json.is_file()),
         "calibration_used": calibration_used,
         "calibration_filled_fields": calibration_filled_count,
-        "param_gate_note": (
-            "advisory_only · MINGLUE_PARAM_GATES_OFF=1 · Optuna will handle"
-            if _PARAM_GATES_OFF else "strict · calibration feeds G2"
-        ),
+        "param_gate_note": "advisory_only · G1/G2 参数层已关闭 · Optuna will handle",
     }
 
     # Load labels lake
@@ -844,42 +664,6 @@ def run(
     review: list[dict] = []
     per_candidate_reports: list[dict] = []
 
-    # 2026-08-19 · LLM 语义门 takeover · out_dir 是 <run_dir>/autocut_gate/
-    # 所以 run_dir = out_dir.parent. 尝试两个 canonical 位置:
-    #   <run_dir>/llm_verdicts.json
-    #   <run_dir>/llm_filter/llm_verdicts.json
-    _run_dir = out_dir.parent if out_dir else None
-    llm_verdicts_dir: Path | None = None
-    if _run_dir is not None:
-        for _d in (_run_dir / "llm_filter", _run_dir):
-            if _llm_verdicts_present(_d):
-                llm_verdicts_dir = _d
-                break
-    # "on" 模式即使无 file 也 takeover (但 dict 为空 · 全走 fallback)
-    if llm_verdicts_dir is None and _llm_takeover_mode() == "on":
-        llm_verdicts_dir = _run_dir  # 无实际文件 · 仅激活标志
-
-    _llm_takeover_active = llm_verdicts_dir is not None
-    llm_verdicts_by_cid: dict[str, dict] = {}
-    if llm_verdicts_dir is not None:
-        vpath = llm_verdicts_dir / "llm_verdicts.json"
-        if vpath.is_file():
-            try:
-                _lv = _load_json(vpath)
-                for v in _lv.get("verdicts", []):
-                    cid_v = str(v.get("candidate_id") or "")
-                    if cid_v:
-                        llm_verdicts_by_cid[cid_v] = v
-            except Exception:
-                pass
-
-    # 传给 apply_gates 的 dict (None 表示不激活 · 传空 dict 也算激活)
-    _llm_dict_to_pass: dict[str, dict] | None = (
-        llm_verdicts_by_cid if _llm_takeover_active else None
-    )
-    # 兼容遗留 g5_llm_takeover 参数
-    _g5_llm_takeover = _llm_takeover_active
-
     for c in cands:
         passed, report = apply_gates(
             c,
@@ -898,8 +682,6 @@ def run(
             case_embeddings_by_cid=case_embeddings_by_cid,
             case_embedding_top_k=case_embedding_top_k,
             case_embedding_min_score=case_embedding_min_score,
-            g5_llm_takeover=_g5_llm_takeover,
-            llm_verdicts_by_cid=_llm_dict_to_pass,
         )
         per_candidate_reports.append({
             "candidate_id": c.get("candidate_id"),
@@ -920,55 +702,22 @@ def run(
         "episode_duration_seconds": episode_duration_s,
         "param_gates_off": _PARAM_GATES_OFF,
         "param_gates_off_env": os.environ.get("MINGLUE_PARAM_GATES_OFF", "(unset · default=1)"),
-        "param_layer_gates": {
-            "policy_authorization_G1_whitelist": (
-                "waived · warning-only" if _PARAM_GATES_OFF else "strict"
-            ),
-            "risk_tier_G2_high_confidence": (
-                "waived · warning-only" if _PARAM_GATES_OFF else "strict"
-            ),
-            "calibration_source_merge": _calibration_status,
-        },
+        "gates_active": list(GATES_ACTIVE),
+        "gates_removed_2026_08_20": list(GATES_INACTIVE),
+        "calibration_source_merge": _calibration_status,
         "candidate_layer_gates": {
-            "G3_no_preserve": (
-                "diagnostic_only · LLM 已接管 · 语义门让位" if _llm_takeover_active
-                else "strict"
-            ),
-            "G5_history": (
-                "diagnostic_only · LLM 已接管候选终审 · G5 REJECT 让位" if _g5_llm_takeover
-                else "strict (candidate-level historical evidence)"
-            ),
+            "G3_no_preserve": "strict",
+            "G5_history": "strict (candidate-level historical evidence)",
             "G6_duration": "strict",
-            "G7_protection": (
-                "diagnostic_only · LLM 已接管 · 语义门让位 · never_cut 保留 hard override"
-                if _llm_takeover_active
-                else "strict (opening / closing / session_feedback never_cut)"
-            ),
+            "G7_protection": "strict (opening / closing / session_feedback never_cut)",
             "G8_case_embedding": (
                 "strict (mentor case-memory similarity) · loaded" if case_embeddings_by_cid
                 else "silent_skip (index not built / no data)"
             ),
         },
-        "llm_takeover": {
-            "llm_takeover_active": _llm_takeover_active,
-            "llm_takeover_env": os.environ.get(
-                "MINGLUE_LLM_TAKEOVER",
-                os.environ.get("MINGLUE_G5_DISABLED_WHEN_LLM", "(unset · default=auto)"),
-            ),
-            "llm_takeover_mode": _llm_takeover_mode(),
-            "llm_verdicts_dir": str(llm_verdicts_dir) if llm_verdicts_dir else None,
-            "llm_verdicts_count": len(llm_verdicts_by_cid),
-            "gates_deferred_to_llm": (
-                ["G3_no_preserve", "G5_history", "G7_session_feedback", "G7_protection"]
-                if _llm_takeover_active else []
-            ),
-            "gates_still_active": [
-                "speaker_role", "source_track", "G6_duration", "review_budget",
-            ],
-            "never_cut_hard_override": (
-                "G7_session_feedback verdict=never_cut 保留 hard REJECT · 即使 LLM 让位也不能覆盖"
-            ),
-        },
+        "never_cut_hard_override": (
+            "G7_session_feedback verdict=never_cut 保留 hard REJECT · 独立于 LLM 语义 veto"
+        ),
         "case_embedding_gate": {
             "source": case_embedding_source,
             "top_k": case_embedding_top_k,

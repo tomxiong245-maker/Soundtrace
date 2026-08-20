@@ -702,6 +702,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--auto-llm-full-pipeline", action="store_true", default=True,
                     help="Stage 3.5.5 · LLM 完全主导 · 从 transcript 一步扫出候选 · 默认开 (回忆 wpl29rgl6 成功版 · 绕过 rules candidate)")
     ap.add_argument("--no-auto-llm-full-pipeline", dest="auto_llm_full_pipeline", action="store_false")
+    ap.add_argument("--auto-asr-prob-gate", action="store_true", default=True,
+                    help="Stage 3.5.6 · ASR probability 硬约束 · <0.60 for filler/rep · 默认开")
+    ap.add_argument("--no-auto-asr-prob-gate", dest="auto_asr_prob_gate", action="store_false")
     ap.add_argument("--review-budget", type=int, default=None,
                     help="传给 delivery_orchestrator.py 的 --review-budget · 默认由 orchestrator 用 20. 用户 2026-08-19 EP05 5min 候选多 · 需要放宽.")
     args = ap.parse_args(argv)
@@ -1349,6 +1352,77 @@ def _run_downstream_stages(args, target, ep_dur, transcript_dir, wordlevel_json)
             print(f"[mfa] warn: {exc}; continuing with ASR boundaries")
     else:
         print(f"[mfa] skipped: mfa_bin={mfa_bin.exists()} transcript_dir={transcript_dir}")
+
+    # Stage 3.5.6 · ASR probability 硬约束 (用户 2026-08-19 明确)
+    # · 唯一硬约束: word.probability < 0.60 for filler/rep kind → REJECT · 不塞 LLM
+    # · 出处: EP04 实测 (正常词 >=0.75 · 幻觉词 <=0.49) + silvacarl2 社区共识 (github/whisper#679)
+    # · 只对 filler_hesitation / immediate_repetition · 避免误伤专名/生僻词
+    if getattr(args, "auto_asr_prob_gate", True):
+        try:
+            all_cands = target / "all_candidates.json"
+            if all_cands.is_file() and transcript_dir and transcript_dir.is_dir():
+                print(f"\n[stage 3.5.6 · ASR probability gate · 唯一硬约束 · < 0.60 for filler/rep]")
+
+                # Load transcripts
+                transcripts = {}
+                for tf in transcript_dir.glob("track_*.transcript.json"):
+                    tid = tf.stem.replace(".transcript", "")
+                    transcripts[tid] = _load_json(tf)
+
+                # Load candidates
+                cd = _load_json(all_cands)
+                cands = cd.get("candidates", cd if isinstance(cd, list) else [])
+
+                # Filter
+                filtered = []
+                rejected_by_prob = []
+                TARGET_KINDS = {"filler_hesitation", "immediate_repetition"}
+                MIN_PROB = 0.60
+
+                for c in cands:
+                    kind = c.get("candidate_kind") or c.get("kind")
+                    if kind not in TARGET_KINDS:
+                        filtered.append(c)
+                        continue
+                    tid = c.get("source_track_id", "track_01")
+                    start, end = c.get("start_seconds", 0), c.get("end_seconds", 0)
+                    words = transcripts.get(tid, {}).get("words", [])
+                    # 收集候选区间内 word probability
+                    probs = [w.get("probability", 1.0) for w in words
+                             if start <= w.get("start_seconds", 0) < end
+                             and w.get("probability") is not None]
+                    if probs:
+                        avg_prob = sum(probs) / len(probs)
+                        if avg_prob < MIN_PROB:
+                            rejected_by_prob.append({
+                                **c,
+                                "rejected_reason": f"ASR 硬约束 · avg prob {avg_prob:.3f} < 0.60 · 疑似幻听",
+                                "avg_prob": avg_prob,
+                            })
+                            continue
+                    filtered.append(c)
+
+                # 覆盖 all_candidates.json · 保留原 backup
+                _write_json(target / "all_candidates.pre_asr_gate.json", cd)
+                if isinstance(cd, dict):
+                    cd["candidates"] = filtered
+                    _write_json(all_cands, cd)
+                else:
+                    _write_json(all_cands, filtered)
+
+                # 保留 rejected 侧车 (审计)
+                _write_json(target / "asr_prob_rejected.json", {
+                    "schema": "asr-prob-hard-gate-v1",
+                    "min_prob": MIN_PROB,
+                    "target_kinds": list(TARGET_KINDS),
+                    "rejected_count": len(rejected_by_prob),
+                    "rejected": rejected_by_prob,
+                    "source": "EP04 实测 + silvacarl2 社区共识 (github/whisper#679)",
+                    "computed_at_utc": _utc_now(),
+                })
+                print(f"[stage 3.5.6] filtered · 原 {len(cands)} -> 过 {len(filtered)} · rejected {len(rejected_by_prob)}")
+        except Exception as exc:
+            print(f"[stage 3.5.6] ASR prob gate failed: {exc}; continuing")
 
     # ---- Stage 3.5.5 · LLM 全流程主导 (用户 2026-08-19 · 回忆 wpl29rgl6 成功版) ----
     # · LLM 完全主导 · 不管 rules 出的 all_candidates.json · **完全绕过 rules candidate**

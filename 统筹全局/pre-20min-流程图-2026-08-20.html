@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>Soundtrace · LLM-First Golden Path · 2026-08-20</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --panel: #171b23;
+    --panel-2: #1f2530;
+    --line: #2b3140;
+    --text: #e7ecf3;
+    --text-dim: #9aa4b2;
+    --muted: #6a7382;
+    --accent: #b98bff;    /* LLM · 紫 */
+    --accent-2: #7ee0c1;  /* Optuna/NISQA · 绿 */
+    --accent-3: #ffd66b;  /* 交付 · 金 */
+    --accent-4: #79b8ff;  /* Human · 蓝 */
+    --danger:  #ff8b8b;   /* 让位 · 淡红 */
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--text); margin: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", Segoe UI, Arial, sans-serif;
+    padding: 32px 48px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    margin: 0 0 4px;
+  }
+  .sub {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .sub .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    margin-right: 6px;
+    color: var(--text-dim);
+    font-size: 11px;
+  }
+  .canvas {
+    position: relative;
+    display: grid;
+    grid-template-columns: 260px 1fr 260px;
+    gap: 24px;
+    align-items: start;
+  }
+  .col-title {
+    text-transform: uppercase;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin: 4px 0 12px;
+  }
+  .box {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .box .h {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    font-size: 13.5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .box .h .stage {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .box .d {
+    color: var(--text-dim);
+    font-size: 12.5px;
+  }
+  .box.dim { opacity: 0.55; }
+  .box.dim .h { color: var(--text-dim); }
+
+  /* strip layout */
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+  .arrow {
+    align-self: center;
+    width: 2px;
+    height: 18px;
+    background: var(--line);
+    position: relative;
+  }
+  .arrow::after {
+    content: "";
+    position: absolute;
+    left: -4px;
+    bottom: -1px;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--line);
+    border-bottom: 2px solid var(--line);
+    transform: rotate(45deg);
+  }
+  .arrow.hot { background: var(--accent); }
+  .arrow.hot::after { border-color: var(--accent); }
+
+  /* LLM 中心节点 */
+  .llm {
+    background: linear-gradient(180deg, rgba(185,139,255,0.14) 0%, rgba(185,139,255,0.06) 100%);
+    border: 1px solid rgba(185,139,255,0.55);
+    box-shadow: 0 0 0 1px rgba(185,139,255,0.14), 0 8px 30px rgba(185,139,255,0.08);
+  }
+  .llm .h { color: var(--accent); font-weight: 700; }
+  .llm .h .stage { color: var(--accent); }
+  .llm .d { color: #d3c4ff; }
+  .llm .kv { color: var(--text); font-size: 12px; margin-top: 6px; }
+  .llm .kv b { color: var(--accent); }
+
+  /* rules 让位 · dim + strike-through */
+  .yielded {
+    border: 1px dashed var(--line);
+    background: transparent;
+    color: var(--muted);
+  }
+  .yielded .h { color: var(--muted); }
+  .yielded .d { color: var(--muted); }
+  .yielded .badge {
+    display: inline-block;
+    color: var(--danger);
+    border: 1px solid rgba(255,139,139,0.4);
+    border-radius: 4px;
+    padding: 0 6px;
+    font-size: 11px;
+    margin-left: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Optuna / NISQA */
+  .obj {
+    border: 1px solid rgba(126,224,193,0.4);
+    background: linear-gradient(180deg, rgba(126,224,193,0.08) 0%, rgba(126,224,193,0.02) 100%);
+  }
+  .obj .h { color: var(--accent-2); }
+
+  /* 交付 */
+  .deliver {
+    border: 1px solid rgba(255,214,107,0.42);
+    background: linear-gradient(180deg, rgba(255,214,107,0.08) 0%, rgba(255,214,107,0.02) 100%);
+  }
+  .deliver .h { color: var(--accent-3); }
+
+  /* human loop */
+  .human {
+    border: 1px solid rgba(121,184,255,0.4);
+    background: linear-gradient(180deg, rgba(121,184,255,0.08) 0%, rgba(121,184,255,0.02) 100%);
+  }
+  .human .h { color: var(--accent-4); }
+
+  /* side columns */
+  .side .box { font-size: 12.5px; }
+  .side .box .d { font-size: 12px; }
+
+  .legend {
+    margin-top: 28px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: var(--text-dim);
+    font-size: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .dot {
+    width: 10px; height: 10px; border-radius: 3px;
+    display: inline-block;
+  }
+  .dot.llm  { background: var(--accent); }
+  .dot.obj  { background: var(--accent-2); }
+  .dot.del  { background: var(--accent-3); }
+  .dot.hum  { background: var(--accent-4); }
+  .dot.yl   { background: transparent; border: 1px dashed var(--muted); }
+
+  .foot {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 12px;
+  }
+  .tt {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    color: #cfd6df;
+  }
+</style>
+</head>
+<body>
+  <h1>Soundtrace · LLM-First Golden Path</h1>
+  <div class="sub">
+    <span class="tag">frozen 2026-08-19 evening</span>
+    <span class="tag">EP05-GOLDEN-PATH-20260819-1900</span>
+    <span class="tag">rules 不死 · 语义判决全归 LLM</span>
+  </div>
+
+  <div class="canvas">
+
+    <!-- 左列 · 输入与规则召回 -->
+    <div class="side">
+      <div class="col-title">Input · 输入与规则召回</div>
+
+      <div class="box">
+        <div class="h">3 轨对齐 mono WAV<span class="stage">raw</span></div>
+        <div class="d">主持人 + 嘉宾 A + 嘉宾 B · 44.1/48 kHz · 60–90 min</div>
+      </div>
+
+      <div class="box">
+        <div class="h">降噪 · 词级 ASR<span class="stage">S1–2</span></div>
+        <div class="d">DeepFilterNet · faster-whisper small int8 · 每词带 probability</div>
+      </div>
+
+      <div class="box">
+        <div class="h">候选生成 · 3 detector<span class="stage">S3</span></div>
+        <div class="d">filler-global-pause · self-correction · transient-events<br/>
+          <span class="tt">cough_like disable</span>（33/36 误报）· long_pause 1.5 s
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="h">说话人分离<span class="stage">S3.4</span></div>
+        <div class="d">pyannote-audio 4.0.7 · community-1 · RTTM · 供 speaker_role_gate 消费</div>
+      </div>
+
+      <div class="box">
+        <div class="h">边界精修<span class="stage">S3.5</span></div>
+        <div class="d">MFA 3.4.1 音素级 ±30 ms · librosa 辅音起音保护 · zh + en 分派</div>
+      </div>
+    </div>
+
+    <!-- 中列 · 主链 -->
+    <div class="main">
+      <div class="col-title">Pipeline · LLM-First Golden Path · 8 Stage</div>
+
+      <div class="box">
+        <div class="h">autocut_gate · 4 结构性门<span class="stage">S3.6</span></div>
+        <div class="d">
+          <b>speaker_role</b> · <b>source_track</b> · <b>G6_duration</b>(&gt;0.8 s) · <b>review_budget</b><br/>
+          物理约束 · 不判语义 · 不 hit 结构错误的候选一律进 LLM
+        </div>
+      </div>
+      <div class="arrow hot"></div>
+
+      <div class="box llm">
+        <div class="h">Stage 3.7 · LLM 语义 filter ⭐<span class="stage">唯一判决</span></div>
+        <div class="d">Claude subagent · 3 mode 优先级 · 首选 <span class="tt">claude CLI</span> · 无 API key · 无 SDK</div>
+        <div class="kv">
+          prompt = 前 5 s + 剪的词 + 后 5 s + kind<br/>
+          输出 <b>verdict</b> ∈ {KEEP_CUT · REJECT_KEEP · NEEDS_REVIEW} · <b>confidence</b> · <b>reason</b>
+        </div>
+      </div>
+      <div class="arrow hot"></div>
+
+      <div class="box">
+        <div class="h">Stage 5 · EDL（只用 LLM KEEP_CUT）<span class="stage">S5</span></div>
+        <div class="d">整数 sample · 同步作用 3 轨 · <span class="tt">machine_assisted_draft.edl.json</span></div>
+      </div>
+      <div class="arrow"></div>
+
+      <div class="box">
+        <div class="h">Automix · Loudnorm<span class="stage">S6</span></div>
+        <div class="d">RMS 主导 + duck + crossfade · 双遍 loudnorm 到 −22.2 LUFS · TP −0.1 · mp3 192 kbps</div>
+      </div>
+      <div class="arrow"></div>
+
+      <div class="box obj">
+        <div class="h">Stage 6.7 · Optuna TPE 参数级<span class="stage">S6.7</span></div>
+        <div class="d">
+          <b>探索池</b> = 所有 verdict ≠ REJECT 的候选（含 REJECT_KEEP / NEEDS_REVIEW · side-write 沉淀）<br/>
+          5 iter · warm-start = mentor gold + YouTube learning · 目标 = NISQA discontinuity ↓<br/>
+          <span class="tt">Optuna 不判语义 · 只找参数</span>
+        </div>
+      </div>
+      <div class="arrow"></div>
+
+      <div class="box obj">
+        <div class="h">Stage 6.5 · NISQA 客观 benchmark<span class="stage">S6.5</span></div>
+        <div class="d">Fraunhofer NISQA v2.0 · MOS 5 维 · <b>整片</b> + <b>每刀前后 1.5 s clip</b></div>
+      </div>
+      <div class="arrow"></div>
+
+      <div class="box">
+        <div class="h">Stage 6.10 · re-render · apply 门（防呆）<span class="stage">S6.10</span></div>
+        <div class="d">
+          <b>只写回 LLM KEEP_CUT ∩ Optuna converged</b><br/>
+          Optuna 是纯数值优化 · 不懂语义 · 交集把语义判决权还给 LLM<br/>
+          空交集则 skip · 成品用 default（EP05 就发生了 · 符合设计）
+        </div>
+      </div>
+      <div class="arrow"></div>
+
+      <div class="box deliver">
+        <div class="h">交付母带<span class="stage">deliver</span></div>
+        <div class="d">mp3 + wav + audit_report.md + verified_edl.json + 完整 provenance（run + SHA + 版本 + stdout/stderr）</div>
+      </div>
+      <div class="arrow"></div>
+
+      <div class="box human">
+        <div class="h">人审 accept / reject（M3 元规则）<span class="stage">gate</span></div>
+        <div class="d">审核前端 index.html · 双击 <span class="tt">启动审核.command</span> · 每一刀都必须真人签字才发布</div>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="box obj">
+        <div class="h">Stage 6.9 · 二轮 Optuna（人审 REJECTED 才触发）<span class="stage">S6.9</span></div>
+        <div class="d">
+          <span class="tt">re_iterate_from_audit.py</span> · 10 iter · seed 43 · skip warm-start<br/>
+          探索一轮 warm-start 未采样区 · 二轮仍逃逸 → SECOND_ROUND_ESCAPED → 人审
+        </div>
+      </div>
+    </div>
+
+    <!-- 右列 · 让位的规则 + 学习闭环 + case memory -->
+    <div class="side">
+      <div class="col-title">Yielded / Sidecar · 让位与旁挂</div>
+
+      <div class="box yielded">
+        <div class="h">让位给 LLM 的规则 <span class="badge">DIAGNOSTIC ONLY</span></div>
+        <div class="d">
+          G3 no_preserve · G5 history · G7 session_feedback · G7 protection<br/>
+          cut-verify Check 1-4 verdict · <b>Check 5 NISQA gate 关</b>（只做 benchmark）<br/>
+          <span class="tt">MINGLUE_G5_DISABLED_WHEN_LLM=auto</span>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="h">Case Embedding · sidecar<span class="stage">S6.8</span></div>
+        <div class="d">Whisper base encoder 512-d + FAISS IndexFlat · 27 mentor case · EP05 24 windows top-1 0.87–0.92 · 暂未接 G8 gate</div>
+      </div>
+
+      <div class="box human">
+        <div class="h">Feedback Engine · 决策前后<span class="stage">L1</span></div>
+        <div class="d">retrieve_before_decision · analyze_feedback · 每次人审 save → online refresh_lake_and_regate</div>
+      </div>
+
+      <div class="box">
+        <div class="h">Learning · 三合一<span class="stage">L3</span></div>
+        <div class="d">单期偏好 + online refresh + 多期离线蒸馏 · session_feedback.jsonl 单 SOT · G5 让位 LLM 后 · 案例改喂 embedding + prompt few-shot</div>
+      </div>
+
+      <div class="box">
+        <div class="h">Governance · 契约先行<span class="stage">L4</span></div>
+        <div class="d">tools.json 56 项 · v2 adapter 44/56 · verify.sh 21 层 · 未登记即 FAIL</div>
+      </div>
+
+      <div class="box deliver">
+        <div class="h">六条元规则（CLAUDE.md）<span class="stage">canonical</span></div>
+        <div class="d">M1 分层 · M2 只读 · M3 人签字 · M4 EDL 整数 sample · M5 契约先行 · M6 报告纪律</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i class="dot llm"></i>LLM · 唯一"该不该剪"判决</span>
+    <span><i class="dot obj"></i>Optuna / NISQA · 客观参数与打分</span>
+    <span><i class="dot del"></i>交付 / 元规则</span>
+    <span><i class="dot hum"></i>Human · 人审与反馈</span>
+    <span><i class="dot yl"></i>Yielded · 让位规则（诊断保留）</span>
+  </div>
+
+  <div class="foot">
+    Champion 冻结证据 · main/runs/EP05-GOLDEN-PATH-20260819-1900 · 8 stage 全绿 · 从 rules pipeline 36 候选到 LLM-first 2 候选 1 cut · 规则不死 · 让位而已
+  </div>
+</body>
+</html>

@@ -1,8 +1,41 @@
 {
-  "schema_version": "music-template-definitions-v1",
+  "schema_version": "music-template-definitions-v2",
+  "_param_docs": {
+    "voice_start_seconds": "语音在成片中的起始时间(秒) · 语音之前是片头曲",
+    "intro_fade_in_duration_seconds": "片头曲从静音淡入的时长(秒) · 0 = 立即满音量",
+    "intro_music_only_end_seconds": "片头曲纯乐段结束时间(秒) · 语音尚未进入 · 该字段仅作展示归档 · 实际时序以 fade_in / fade_out 参数为准",
+    "intro_fade_out_start_seconds": "片头曲开始淡出的绝对时间(秒) · 通常 = voice_start_seconds",
+    "intro_fade_out_end_seconds": "片头曲淡出结束(片头曲轨道结束)的绝对时间(秒) · 达到 music_gain_db 背景残留电平",
+    "intro_music_gain_db": "片头曲峰值电平(dB) · 默认 0 = 满音量",
+    "music_gain_db": "语音段背景音乐残留电平(dB) · 片头曲淡出目标 · 越负越安静",
+    "outro_fade_in_before_speech_end_seconds": "从人说完最后一句的位置往前 X 秒开始淡入片尾曲 · 让人说最后一句时片尾曲已在淡入 · 与 EP03 硬拼贴不同",
+    "outro_fade_in_duration_seconds": "片尾曲从静音淡入到 outro_music_gain_db 的时长(秒) · 0 = 硬进",
+    "outro_music_gain_db": "片尾曲峰值电平(dB) · 默认 0 = 满音量",
+    "outro_music_tail_seconds": "人说完最后一句之后片尾曲继续播放的时长(秒)",
+    "outro_fade_out_duration_seconds": "成片末尾片尾曲淡出到静音的时长(秒) · 0 = 硬结束",
+    "outro_fade_in_lead_seconds": "[DEPRECATED · 仅在未声明 outro_fade_in_before_speech_end_seconds 时 fallback 生效] 语音结束前 X 秒硬进入片尾曲(常量音量 · 无淡入)"
+  },
   "templates": {
     "reference-linear-v1": {
       "role": "current_default",
+      "timing_authority": "USER_EP03_STUDY_2026-08-20 · voice-earlier + outro-fade-in-during-last-word",
+      "voice_start_seconds": 3.0,
+      "intro_fade_in_duration_seconds": 1.5,
+      "intro_music_only_end_seconds": 3.0,
+      "intro_fade_out_start_seconds": 3.0,
+      "intro_fade_out_end_seconds": 10.0,
+      "intro_music_gain_db": 0.0,
+      "music_gain_db": -60.0,
+      "outro_fade_in_before_speech_end_seconds": 3.0,
+      "outro_fade_in_duration_seconds": 6.0,
+      "outro_music_gain_db": 0.0,
+      "outro_music_tail_seconds": 37.976,
+      "outro_fade_out_duration_seconds": 5.0,
+      "ducking": "none",
+      "release_parameter_status": "AUDITION_DEFAULTS_ONLY"
+    },
+    "reference-linear-v1-legacy": {
+      "role": "backward_compat_baseline",
       "timing_authority": "USER_HARD_REQUIREMENT_2026-08-14",
       "voice_start_seconds": 5.0,
       "intro_music_only_end_seconds": 5.0,

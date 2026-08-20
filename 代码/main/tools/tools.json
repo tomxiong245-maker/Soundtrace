@@ -693,29 +693,6 @@
       "v2_status": "adapter_registered"
     },
     {
-      "name": "extract_gold_cut_features",
-      "description": "从人工 gold EDL 反向提取每条剪切的 WHERE/HOW 特征 (crossfade_ms, RMS envelope, librosa onset, silence gaps, prev/next word gap, cross-track speaking, deleted_text) 为 jsonl. 支撑 CLAUDE.md §21 PARAMETER/PREFERENCE 分家学习流. 触发词: gold cut 特征, mentor 剪切特征, PARAMETER 提取, PREFERENCE 提取, where how 分析.",
-      "params": [
-        "episode_id",
-        "gold_edl_path",
-        "candidate_package_path",
-        "asr_dir",
-        "raw_wav_dir",
-        "output_jsonl"
-      ],
-      "full_path": "main/orchestrator/extract_gold_cut_features.py",
-      "reads_only": true,
-      "runtime_dependencies": [
-        "python>=3.10",
-        "numpy",
-        "librosa==1.0.0",
-        "scipy",
-        "soundfile"
-      ],
-      "audit_reference": "main/tools/audits/extract_gold_cut_features-20260818.md",
-      "v2_status": "adapter_registered"
-    },
-    {
       "name": "check_hallucination",
       "description": "cut-verify skill · 点 1 · 用 faster-whisper word.probability 检测 filler_hesitation/immediate_repetition 候选是否 ASR 幻觉. prob<0.6 → REJECT_LOW_PROB_HALLUCINATION. EP04 C007 呃 prob=0.488 实证.",
       "params": [
