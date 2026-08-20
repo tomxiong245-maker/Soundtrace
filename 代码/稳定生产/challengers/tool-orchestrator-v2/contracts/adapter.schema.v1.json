@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "adapter.schema.v1.json",
+  "title": "ToolAdapter contract v1",
+  "description": "每个 v2 adapter 必须提供的四段能力：validate_inputs / dry_run_plan / invoke / verify_outputs，以及最终写入 run 目录的 provenance。此 schema 描述 adapter 的 self-declaration；单次调用的 IO 由 adapter 自身的 inputs_schema / outputs_schema 描述。",
+  "type": "object",
+  "required": [
+    "adapter_id",
+    "tool_name",
+    "adapter_version",
+    "wraps_script",
+    "reads_only",
+    "inputs_schema",
+    "outputs_schema",
+    "provenance_fields",
+    "timeout_seconds"
+  ],
+  "properties": {
+    "adapter_id": {
+      "type": "string",
+      "description": "adapter 唯一 ID，kebab-case，例如 inspect-audio-adapter-v1",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "tool_name": {
+      "type": "string",
+      "description": "对应 main/tools/tools.json 中 tools[].name",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "adapter_version": {
+      "type": "string",
+      "description": "SemVer 或 v1/v2 短标签",
+      "pattern": "^v?[0-9]+(\\.[0-9]+)*$"
+    },
+    "wraps_script": {
+      "type": "string",
+      "description": "被包裹的 tool 脚本，项目根相对路径，例如 端到端学习剪辑/代码/inspect_audio.py"
+    },
+    "wraps_script_sha256": {
+      "type": "string",
+      "description": "被包裹脚本的 SHA-256，写入 provenance 用于漂移检测；构建 plan 时可选，invoke 前必校验",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reads_only": {
+      "type": "boolean",
+      "description": "true 时 runner 走只读通道；false 时必须在调用中传 writes_policy_id + writes_scope_hash"
+    },
+    "inputs_schema": {
+      "type": "object",
+      "description": "JSON Schema for single-invocation inputs; validate_inputs 会用它做校验"
+    },
+    "outputs_schema": {
+      "type": "object",
+      "description": "JSON Schema for expected outputs manifest; verify_outputs 会用它做校验"
+    },
+    "provenance_fields": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "invoke 后 provenance 必须包含的字段名，最少包含 tool_name / adapter_id / wraps_script_sha256 / input_sha_map / output_sha_map / exit_code / duration_seconds / timestamp_utc / runner_version"
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 7200,
+      "description": "adapter 单次 invoke 的超时上限；超时被视为失败并写入 provenance"
+    },
+    "retryable": {
+      "type": "boolean",
+      "default": false,
+      "description": "true 时 executor 遇到失败可精准重试单步；false 时失败即停"
+    },
+    "write_policy": {
+      "type": "object",
+      "description": "reads_only=false 时必须填",
+      "properties": {
+        "policy_id": {
+          "type": "string",
+          "description": "允许写入的政策 ID，例如 deepfilternet-denoise-v0.5.6-signed"
+        },
+        "allowed_output_roots": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "允许写入的路径前缀（相对项目根），任何超出前缀的写入必须失败"
+        },
+        "requires_run_dir": {
+          "type": "boolean",
+          "default": true,
+          "description": "true 时必须写入 current run_dir 下；不允许写 Champion 或其它 run"
+        }
+      },
+      "required": ["policy_id", "allowed_output_roots"]
+    },
+    "audit_reference": {
+      "type": "string",
+      "description": "对应外部工具/依赖审计文件路径（若适用），例如 main/tools/audits/ffmpeg-homebrew-9.0.1.md"
+    },
+    "skeleton": {
+      "type": "boolean",
+      "default": false,
+      "description": "true 时表示 wraps_script 尚未实现（仅契约声明，例如权重/依赖未安装）；dry_run 会通过，invoke 时仍 fail closed。用于让 planner 在能力清单里保留占位契约而不硬编码 exclusion。"
+    },
+    "notes": {
+      "type": "string",
+      "description": "自由文字备注；对 skeleton 或有环境依赖的 adapter 说明部署条件"
+    }
+  },
+  "additionalProperties": false
+}

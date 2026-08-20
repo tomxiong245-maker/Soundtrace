@@ -1,0 +1,37 @@
+{
+  "$schema_version": "release-spec-definitions-v1",
+  "purpose": "音乐 timing 之外的发布规格（LUFS/TP/LRA/容器/码率）。与 music_templates.json 分离，避免污染 canonical timing dict 并破坏已存在 run 的 requirements_checkpoint 严格比较。",
+  "coupling_rule": "每条 release spec 通过 template_id 与 music_templates.json 的模板绑定；delivery_orchestrator 读取 checkpoint 时必须校验双方 SHA。",
+  "specs": {
+    "reference-linear-v1": {
+      "template_id": "reference-linear-v1",
+      "status": "FROZEN_FROM_EP03_MENTOR_REFERENCE",
+      "frozen_at": "2026-08-17",
+      "frozen_by": "user_directive__ep03_mentor_master_is_the_example",
+      "target_integrated_lufs": -22.2,
+      "target_integrated_lufs_tolerance_lu": 1.0,
+      "target_true_peak_dbfs": -0.1,
+      "target_true_peak_dbfs_safety_floor": -1.0,
+      "target_lra_lu": 7.9,
+      "music_integrated_lufs": -14.8,
+      "music_voice_gap_lu": 7.4,
+      "container": "mp3",
+      "bit_rate_bps": 192000,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "reference_master_relpath": "音频参考库/成品/EP03.mp3",
+      "reference_master_sha256": "8dd95ac34a784c6e0e198805d9ca246843c296d967d4a257c41b231d141353f4",
+      "reference_music_relpath": "音频参考库/raw material/第三集/片头片尾music.mp3",
+      "reference_music_sha256": "3f3a7150c43c21fe5709a8a7b7152590a77579bd4ce87d3ad0e15ed1bb81ed83",
+      "evidence_run_relpath": "main/runs/RELEASE-SPEC-FROM-EP03-20260817-1204",
+      "evidence_relpath": "main/runs/RELEASE-SPEC-FROM-EP03-20260817-1204/release_spec_evidence.json",
+      "safety_notes": [
+        "true_peak -0.1 dBFS 是 EP03 mentor mp3 编码后 intersample peak，已触及削波线。发布层若追求安全应主动下推到 <= -1.0 dBFS。",
+        "integrated -22.2 LUFS 比常规播客 -16 LUFS 目标低约 6 LU。这是 EP03 mentor 的实际口径，用户 2026-08-17 明确指令'EP03 就是例子'。",
+        "music_gain_db -12.0（在 music_templates.json 里）是渲染时对音乐轨的衰减参数，与 music_voice_gap_lu 7.4（本文件）是两回事：前者是渲染参数、后者是 mentor 成片观察到的最终响度差。渲染实现落地时必须验证两者是否需要对齐。",
+        "本值来自单期 EP03 mentor 成片实测；用户口径为 example，不要求跨期泛化。若未来引入新 mentor 参考，必须建立独立 audit，不可静默替换。",
+        "写入 requirements_checkpoint.json 时必须放在独立字段 release_spec，不得合并进 music.timing dict——delivery_orchestrator.resolve_run_music_timing 会严格比较 timing dict，改动它会破坏已有 run 的 resume。"
+      ]
+    }
+  }
+}

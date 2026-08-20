@@ -1,0 +1,47 @@
+{
+  "schema_version": "music-template-definitions-v1",
+  "supersedes": "main/orchestrator/music_templates.json",
+  "supersedes_note": "本文件是 challenger 版本；不覆盖 champion 里的 music_templates.json（那里的 reference-linear-v1 是 FROZEN，改会破坏历史 run resume）。orchestrator 新 run 显式指向本文件的 template_id 才生效。",
+  "templates": {
+    "reference-linear-v2": {
+      "role": "current_challenger",
+      "supersedes": "reference-linear-v1",
+      "timing_authority": "USER_DIRECTIVE_2026-08-17__OUTRO_STARTS_AT_GUEST_LAST_LINE",
+      "voice_start_seconds": 5.0,
+      "intro_music_only_end_seconds": 5.0,
+      "intro_fade_out_start_seconds": 5.0,
+      "intro_fade_out_end_seconds": 16.0,
+      "outro_fade_in_lead_seconds": 37.617,
+      "outro_music_tail_seconds": 37.976,
+      "music_gain_db": -12.0,
+      "ducking": "none",
+      "release_parameter_status": "AUDITION_DEFAULTS_ONLY",
+      "provenance": {
+        "user_feedback": "'片尾曲进的有点晚，最好在嘉宾说最后一句话的时候就开始进' (2026-08-17)",
+        "user_marked_position": "在 EP04 修正版 mp3 末尾 90 秒 fixture 里，嘉宾说最后一句话大约在第 15 秒",
+        "reference_mp3_relpath": "main/runs/EP04-DELIVERY-20260817-1427/render/EP04_codex_loudnorm_corrected.mp3",
+        "reference_mp3_duration_seconds": 3313.593,
+        "reference_mp3_sha256": "35adf2f2f4945f4079c404c9d565ed4b71cf828e7a530972c580d96a6b2df254",
+        "fixture_relpath": "main/runs/EP04-DELIVERY-20260817-1427/tmp/EP04_tail_last90s.mp3",
+        "fixture_start_in_full_mp3_seconds": 3223.0,
+        "user_marked_second_in_fixture": 15.0,
+        "computed_guest_last_line_start_in_full_mp3_seconds": 3238.0,
+        "computed_speech_end_in_full_mp3_seconds": 3275.617,
+        "computed_outro_lead_seconds": 37.617,
+        "diff_from_v1_seconds": 15.617
+      },
+      "diff_from_v1": {
+        "outro_fade_in_lead_seconds": {
+          "v1": 22.0,
+          "v2": 37.617,
+          "delta": 15.617
+        },
+        "note": "只调 outro_fade_in_lead_seconds；voice_start/intro_fade/outro_tail 沿用 v1 冻结值"
+      },
+      "legacy_alias": "reference-linear-v2-guest-cued-outro"
+    }
+  },
+  "reference_only_do_not_edit_champion": [
+    "main/orchestrator/music_templates.json 里的 reference-linear-v1 保持只读；本 challenger 提供 v2 备选，晋升需独立复核"
+  ]
+}

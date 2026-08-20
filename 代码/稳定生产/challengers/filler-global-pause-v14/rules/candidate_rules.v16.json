@@ -1,0 +1,129 @@
+{
+  "rules_version": "filler-global-pause-v16",
+  "supersedes": "filler-global-pause-v15",
+  "policy": "review_only_no_automatic_accept",
+  "profile_note": "V16 implements the 2026-08-14 Round 1+2 mentor feedback in an executable review-only rule set. It is deliberately conservative: sentence-internal filler is preserved, all acknowledgement-style 嗯 is preserved without reliable speaker attribution, exact immediate content repetition is a separate candidate family, and no rule can automatically approve a cut.",
+  "provenance": {
+    "iteration_source_runs": [
+      "main/runs/EP04/EP04-review-mixed-14-20260814-043428",
+      "main/runs/EP04/EP04-review-round2-20260814-1355"
+    ],
+    "reviewer": "熊镇正",
+    "reviewed_candidate_count": 32,
+    "decision_totals": {"accept": 8, "reject": 24},
+    "evidence": {
+      "D3_rendering": [
+        "R-E306: 剪辑痕迹明显（剪辑的不够干净，而且这个其实可以不用剪）",
+        "M001: 还是剪辑痕迹明显",
+        "N002: 剪辑痕迹明显",
+        "R-S032 and R-E304: short pause-boundary reaudits accepted after repair"
+      ],
+      "D5_acknowledgement": [
+        "N007: 保留一些活人感（而且这是对别人的认可，表示自己在听，让播客更有活人感，不是废话）",
+        "N008: 这也是表示对别人的认可"
+      ],
+      "D6_D8_sentence_and_repeat": [
+        "N003: 不要剪（要保证完整性，这个是在句中）",
+        "N012: 这个/这个, clause-mid, accept 很好",
+        "N014: 一些/一些, clause-mid, accept 很好"
+      ],
+      "D9_default_preserve": [
+        "R-S038: 不剪",
+        "N009: 不剪，剪辑痕迹很重，而且句中不大需要",
+        "N011: 不剪",
+        "N013: 不减不减"
+      ]
+    },
+    "date": "2026-08-14"
+  },
+  "context_seconds": 5.0,
+  "min_candidate_seconds": 0.1,
+  "opening_protection_seconds": 8.0,
+  "closing_protection_seconds": 8.0,
+  "filler_hesitation": {
+    "enabled": true,
+    "strong_tokens": ["呃", "额", "唔", "唉", "哎", "哦", "uh", "um", "er", "erm"],
+    "acknowledgement_tokens": ["嗯"],
+    "acknowledgement_handling": "auto_preserve_without_reliable_speaker_attribution",
+    "acknowledgement_single_min_seconds": null,
+    "acknowledgement_dense_window_seconds": null,
+    "acknowledgement_dense_min_count": null,
+    "weak_tokens": ["啊", "那个", "这个", "就是", "然后", "对", "那個", "這個", "然後", "對", "就是說", "这据", "這据", "這據"],
+    "strong_min_consecutive": 1,
+    "weak_min_consecutive": 2,
+    "max_gap_seconds": 0.45,
+    "weak_max_gap_seconds": 0.3,
+    "weak_min_duration_seconds": 0.1,
+    "weak_max_duration_seconds": 0.4,
+    "weak_density_window_seconds": 5.0,
+    "weak_max_candidates_per_window": 2,
+    "cross_mic_event_merge_gap_seconds": 0.25,
+    "same_token_boundary_jitter_seconds": 0.08,
+    "note": "完整句子内的弱口语词、单个或密集的 acknowledgement 嗯 默认保留。仅短促连续弱词和明显犹豫音可提名，且仍须经句中保护、跨轨安全和真人审核。"
+  },
+  "immediate_repetition": {
+    "enabled": true,
+    "candidate_kind": "immediate_repetition",
+    "min_phrase_chars": 2,
+    "max_phrase_chars": 4,
+    "max_gap_seconds": 0.3,
+    "exclude_tokens": ["嗯"],
+    "stutter_signature": {
+      "duration_asymmetry_ratio": 0.3,
+      "very_tight_gap_seconds": 0.15,
+      "markers": ["呃", "额", "嗯", "uh", "um"]
+    },
+    "stutter_signature_role": "confidence_boost_only_not_nomination_gate",
+    "note": "D8/D7: exact neighboring content repetition may be nominated even inside a clause. A stutter signature raises confidence, but symmetric repetition remains reviewable rather than being silently dropped. The first occurrence is proposed for removal and the second is retained."
+  },
+  "sentence_position_gate": {
+    "enabled": true,
+    "d6_id": "D6",
+    "applies_to_candidate_kinds": ["filler_hesitation"],
+    "block_positions": ["clause-mid", "cross-clause", "unknown"],
+    "allow_positions": ["clause-boundary", "clause-head", "clause-tail", "clause-tail-or-head"],
+    "head_tail_word_window": 1,
+    "missing_semantic_context": "block_and_preserve",
+    "note": "D6 protects sentence completeness for filler only. D8 explicitly exempts immediate_repetition from this gate."
+  },
+  "confidence_policy": {
+    "enabled": true,
+    "tiers": ["high", "mid", "low"],
+    "review_tiers": ["high", "mid"],
+    "low_tier_action": "auto_preserve_not_sent_to_review",
+    "never_auto_cut": true,
+    "strong_hesitation_sound": "high",
+    "repeated_weak_filler": "mid",
+    "immediate_repetition_with_stutter_signature": "high",
+    "immediate_repetition_without_stutter_signature": "mid",
+    "global_long_pause": "high"
+  },
+  "global_long_pause": {
+    "enabled": true,
+    "detection_hint_seconds": 0.6,
+    "min_silence_seconds": 1.5,
+    "max_silence_seconds": 12.0,
+    "retention_by_original_silence": [
+      {"max_silence_seconds": 1.0, "head_tail_seconds": 0.1},
+      {"max_silence_seconds": 2.0, "head_tail_seconds": 0.2},
+      {"max_silence_seconds": 3.0, "head_tail_seconds": 0.3},
+      {"max_silence_seconds": null, "head_tail_seconds": 0.4}
+    ],
+    "activity_merge_gap_seconds": 0.05,
+    "acoustic_frame_seconds": 0.05,
+    "max_frame_rms_dbfs": -38.0,
+    "max_frame_peak_dbfs": -20.0,
+    "note": "所有轨共同安静时才提名；只压缩中段，保留自然呼吸；必须人工听原版与拟压缩版 A/B。"
+  },
+  "cross_track_guard": {
+    "conflicting_word_overlap_seconds": 0.05,
+    "note": "其他轨只有重叠的同一证据词才可被视为串音；任何不同文字、跨边界同词或不确定活动都会阻断全局删剪。"
+  },
+  "rendering_gate": {
+    "speech_cut_crossfade_ms": 100,
+    "pause_boundary_crossfade_ms": 50,
+    "curve": "qsin",
+    "fallback_curve": "tri",
+    "note": "D3: 语音内剪口默认 100 ms，长停顿的安静边界可用 50 ms。所有值只用于试听 A/B，仍需真人判断是否存在剪辑痕迹。"
+  }
+}

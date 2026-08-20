@@ -1,0 +1,268 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://minglue.local/review-product-v1/review_package.schema.json",
+  "title": "Review Package · review-product-v1",
+  "description": "P1 审核产品 Challenger 的审核包契约。所有字段哈希绑定，缺任一字段或哈希不符时 validator 必须 fail closed。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "package_id",
+    "created_at",
+    "sample_rate",
+    "master_time_base",
+    "source_audio",
+    "input_provenance",
+    "candidates",
+    "preview_assets",
+    "static_assets",
+    "review_config",
+    "review_manifest_sha256"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["review-product-v1"]
+    },
+    "package_id": {
+      "type": "string",
+      "pattern": "^EP[0-9]{2,}-review-product-v1-[0-9]{8}-[0-9]{4}$",
+      "description": "唯一包 ID，例：EP03-review-product-v1-20260811-1500"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sample_rate": {
+      "type": "integer",
+      "enum": [48000],
+      "description": "主时间基采样率。前端禁止硬编码；必须从 manifest 读取。"
+    },
+    "master_time_base": {
+      "type": "string",
+      "enum": ["EP03-freshrun-20260810-1730-master"]
+    },
+    "source_audio": {
+      "type": "object",
+      "required": ["female_path", "female_sha256", "male_path", "male_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "female_path": { "type": "string" },
+        "female_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "male_path": { "type": "string" },
+        "male_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "input_provenance": {
+      "type": "object",
+      "required": [
+        "female_classified_path",
+        "female_classified_sha256",
+        "male_classified_path",
+        "male_classified_sha256",
+        "candidates_source_path",
+        "candidates_source_sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "female_classified_path": { "type": "string" },
+        "female_classified_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "male_classified_path": { "type": "string" },
+        "male_classified_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "candidates_source_path": { "type": "string" },
+        "candidates_source_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/candidate" }
+    },
+    "preview_assets": {
+      "type": "object",
+      "description": "candidate_id → preview asset SHA-256",
+      "patternProperties": {
+        "^C[0-9]+\\.(original|proposed-cut)\\.mp3$": {
+          "type": "object",
+          "required": ["path", "sha256", "generated_at"],
+          "properties": {
+            "path": { "type": "string" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "generated_at": { "type": "string", "format": "date-time" }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "static_assets": {
+      "type": "object",
+      "description": "页面静态资源哈希（wavesurfer/js/css/peaks）",
+      "required": ["files"],
+      "properties": {
+        "files": {
+          "type": "object",
+          "patternProperties": {
+            "^.+$": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        }
+      }
+    },
+    "review_config": {
+      "type": "object",
+      "required": ["context_seconds", "crossfade_ms_default"],
+      "additionalProperties": false,
+      "properties": {
+        "context_seconds": {
+          "type": "number",
+          "minimum": 3.0,
+          "maximum": 15.0,
+          "description": "候选前后上下文窗口（秒）；默认 5.0"
+        },
+        "crossfade_ms_default": {
+          "type": "integer",
+          "minimum": 20,
+          "maximum": 80
+        }
+      }
+    },
+    "review_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "对本文件除本字段外全部键的 canonical JSON 计算的 SHA-256"
+    }
+  },
+  "definitions": {
+    "candidate": {
+      "type": "object",
+      "required": [
+        "candidate_id",
+        "reason_key",
+        "source_track",
+        "start_sample",
+        "end_sample",
+        "start_seconds",
+        "end_seconds",
+        "duration_seconds",
+        "safety_status",
+        "reason_codes",
+        "evidence_words",
+        "text_tracks",
+        "global_cut",
+        "previews",
+        "risk_notes",
+        "provenance",
+        "semantic_sha256"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "candidate_id": { "type": "string", "pattern": "^C[0-9]+$" },
+        "reason_key": {
+          "type": "string",
+          "enum": ["filler_hesitation", "immediate_repetition"]
+        },
+        "source_track": {
+          "type": "string",
+          "enum": ["female", "male"],
+          "description": "候选来源轨；标签而非删除范围。cut 对所有轨生效。"
+        },
+        "start_sample": { "type": "integer", "minimum": 0 },
+        "end_sample": { "type": "integer", "minimum": 1 },
+        "start_seconds": { "type": "number", "minimum": 0 },
+        "end_seconds": { "type": "number", "minimum": 0 },
+        "duration_seconds": { "type": "number", "minimum": 0 },
+        "safety_status": {
+          "type": "string",
+          "enum": ["SAFE", "BLOCKED", "NEEDS_HUMAN_REVIEW"]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "evidence_words": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["text", "s", "e", "cls"],
+            "properties": {
+              "text": { "type": "string" },
+              "s": { "type": "number" },
+              "e": { "type": "number" },
+              "cls": { "enum": ["primary", "bleed", "ambiguous", "unknown"] }
+            }
+          }
+        },
+        "text_tracks": {
+          "type": "object",
+          "description": "±context_seconds 上下文的双轨词流",
+          "required": ["female", "male"],
+          "properties": {
+            "female": { "$ref": "#/definitions/track_context" },
+            "male":   { "$ref": "#/definitions/track_context" }
+          }
+        },
+        "global_cut": {
+          "type": "object",
+          "required": ["start_sample", "end_sample", "applies_to_tracks"],
+          "properties": {
+            "start_sample": { "type": "integer", "minimum": 0 },
+            "end_sample": { "type": "integer", "minimum": 1 },
+            "applies_to_tracks": {
+              "type": "array",
+              "items": { "enum": ["female", "male"] },
+              "minItems": 2,
+              "description": "必须同时含 female 和 male；提醒审核者：全轨同步删除。"
+            }
+          }
+        },
+        "previews": {
+          "type": "object",
+          "required": ["original_sha256", "proposed_sha256"],
+          "properties": {
+            "original_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "proposed_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        },
+        "risk_notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "provenance": {
+          "type": "object",
+          "required": [
+            "female_transcript_sha256",
+            "male_transcript_sha256",
+            "rules_sha256"
+          ]
+        },
+        "semantic_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "对候选除本字段外全部键计算的 canonical JSON SHA-256"
+        }
+      }
+    },
+    "track_context": {
+      "type": "object",
+      "required": ["track", "window_start_seconds", "window_end_seconds", "words"],
+      "properties": {
+        "track": { "enum": ["female", "male"] },
+        "window_start_seconds": { "type": "number", "minimum": 0 },
+        "window_end_seconds": { "type": "number", "minimum": 0 },
+        "words": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["text", "s", "e", "cls", "in_cut"],
+            "properties": {
+              "text": { "type": "string" },
+              "s": { "type": "number" },
+              "e": { "type": "number" },
+              "cls": { "enum": ["primary", "bleed", "ambiguous", "unknown"] },
+              "in_cut": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

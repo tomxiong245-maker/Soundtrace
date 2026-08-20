@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "rules_version": "safety-v1-2026-08-11",
+  "based_on": "稳定生产/rules/candidate-generation.v1.json (sha256 a1c43c544a1b5c836c0b6990e080637e3ac5fe2d2400845c1dd53a4bd3fdf8a1)",
+  "purpose": "Challenger cross-track-safety-v1 使用的候选生成规则。相比 Champion 的 v1，本文件明确关闭 long_pause——长静音候选留给未来的跨轨感知规则，本 Challenger 不出。",
+
+  "filler_hesitation": {
+    "enabled": true,
+    "source": "甲 (与 champion v1 一致)",
+    "tokens": ["呃", "嗯", "啊", "哦", "那个", "这个", "就是", "然后", "对", "嗯对", "嗯嗯"],
+    "min_consecutive": 2
+  },
+  "long_pause": {
+    "enabled": false,
+    "disabled_reason": "long_pause 需要跨轨判定另一轨是否 primary 讲话；纯 ASR 规则误伤率 ≥50%。Challenger 不生成此类。"
+  },
+  "immediate_repetition": {
+    "enabled": true,
+    "source": "甲 (与 champion v1 一致)",
+    "min_phrase_chars": 2,
+    "max_phrase_chars": 4
+  },
+  "guards": {
+    "opening_seconds": 20.0,
+    "closing_seconds": 20.0,
+    "protected_phrases_substrings": [
+      "哈喽哈喽", "大家好", "欢迎来到", "章鱼AI", "章鱼ai", "章鱼",
+      "再见", "拜拜", "感谢", "谢谢"
+    ]
+  },
+  "boundary_padding": {"padding_ms": 40},
+  "crossfade_ms": {"default_ms": 50, "min_ms": 20, "max_ms": 80},
+  "min_candidate_seconds": {"value_seconds": 0.15},
+  "min_gap_between_candidates_seconds": {"value_seconds": 0.05},
+
+  "cross_track_safety": {
+    "context_seconds": 5.0,
+    "source_must_be_primary_dominant": {
+      "rule": "在候选窗口内，源轨 primary 词数必须 > 0，且 primary 词数 ≥ bleed 词数",
+      "violation_reason_code": "SOURCE_NOT_PRIMARY"
+    },
+    "other_track_must_be_silent_in_cut": {
+      "rule": "在候选窗口内（不含 context），另一轨 primary 词数必须为 0",
+      "violation_reason_code": "OTHER_TRACK_PRIMARY_SPEECH"
+    },
+    "ambiguous_gate": {
+      "rule": "候选窗口内，任一轨 ambiguous 词数 / 词总数 > 0.5 时判 NEEDS_HUMAN_REVIEW",
+      "violation_reason_code": "AMBIGUOUS_ACTIVITY"
+    },
+    "empty_source_gate": {
+      "rule": "候选窗口内，源轨词总数 = 0 时判 BLOCK",
+      "violation_reason_code": "SOURCE_HAS_NO_WORDS"
+    },
+    "missing_activity_gate": {
+      "rule": "任一词缺 activity.classification 时判 FAIL_CLOSED",
+      "violation_reason_code": "MISSING_ACTIVITY_DATA"
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "schema_version": "user-authorized-machine-draft-v1",
+  "scope": "EP04_RUN_LOCAL_MACHINE_ASSISTED_AUDITION_ONLY",
+  "episode_id": "EP04",
+  "recorded_at": "2026-08-17",
+  "user_authorization": "项目负责人明确授权：本次不要因历史标签的 source identity 不完整而阻断；直接用已审核标签和已学到的偏好剪出 EP04。本授权只用于一份 machine_assisted_draft，本次不伪造 human_approved。",
+  "prohibited": [
+    "human_decision",
+    "human_approved_edl",
+    "autocut_policy_change",
+    "champion_change",
+    "external_publish"
+  ],
+  "selections": [
+    {
+      "candidate_id": "C006",
+      "decision": "machine_proposed_reject",
+      "reason": "“对”处于回应/认可语境；已有偏好明确要求保留这类活人感，不能按字面删。",
+      "evidence": [
+        {
+          "type": "semantic_keep",
+          "source": "EP04-review-round2-20260814-1355::N007",
+          "note": "认可型嗯/回应应保留"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C007",
+      "decision": "machine_proposed_accept",
+      "boundary_mode": "current_snapped_boundary",
+      "reason": "同一“呃”事件此前在 EP04 v20 已经由真人听 A/B 后明确接受；当前精修边界仍为 OK。",
+      "evidence": [
+        {
+          "type": "same_event_human_accept",
+          "source_run": "main/runs/EP04/EP04-v20-20260814-1617",
+          "candidate_id": "C003",
+          "decision": "human_accept",
+          "feedback": "很好"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C009",
+      "decision": "machine_proposed_reject",
+      "reason": "“额/er”存在完整词或 ASR 词边界误报风险；当前保护规则和历史反例均要求保留。",
+      "evidence": [
+        {
+          "type": "false_positive",
+          "source_policy": "POL-009-false_positive-ada507645c",
+          "note": "额/er 不可按字面当作口癖自动删"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C014",
+      "decision": "machine_proposed_reject",
+      "reason": "GoGoFlow 是中英混说产品名/完整词风险，不能把 ASR 拆分误判成重复。",
+      "evidence": [
+        {
+          "type": "asr_or_term_protection",
+          "note": "完整词和中英术语优先保留，等待专门 ASR 术语验证"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C023",
+      "decision": "human_review_required",
+      "reason": "同一事件虽有历史接受，但当前边界的剪口质量被判为 BLOCK；本次机器草稿不覆盖声学风险。",
+      "evidence": [
+        {
+          "type": "same_event_human_accept_but_current_execution_risk",
+          "source_run": "main/runs/EP04/EP04-v20-20260814-1617",
+          "candidate_id": "C012",
+          "decision": "human_accept"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C034",
+      "decision": "machine_proposed_accept",
+      "boundary_mode": "historical_human_accepted_boundary",
+      "historical_candidate_source_relpath": "main/runs/EP04/EP04-v23b-20260815-1510/all_candidates.json",
+      "historical_candidate_source_sha256": "4017ffd87dfe6a61e11c0cd7b95a717a37e734734e5f0eda100a604ba32094ab",
+      "historical_candidate_id": "C034",
+      "reason": "同一“我们/我们”重复在 EP04 v20 已由真人接受；后续 C034 的历史已审边界仍通过 OK 剪口质量检查，因此复用该已验证边界而不采用后来被判 BLOCK 的偏移边界。",
+      "evidence": [
+        {
+          "type": "same_event_human_accept",
+          "source_run": "main/runs/EP04/EP04-v20-20260814-1617",
+          "candidate_id": "C019",
+          "decision": "human_accept"
+        },
+        {
+          "type": "historic_boundary_execution_check",
+          "source_run": "main/runs/EP04/EP04-v23b-20260815-1510",
+          "candidate_id": "C034",
+          "artifact_verdict": "OK"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C035",
+      "decision": "human_review_required",
+      "reason": "它位于相邻的多重重复候选簇中，且同一簇其它边界存在 BLOCK；不在本次窄授权中擅自删。",
+      "evidence": [
+        {
+          "type": "cluster_execution_risk",
+          "note": "邻接 C036/C037 需要人耳确认"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C036",
+      "decision": "human_review_required",
+      "reason": "当前剪口质量为 BLOCK。",
+      "evidence": [
+        {
+          "type": "artifact_risk",
+          "verdict": "BLOCK"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C037",
+      "decision": "human_review_required",
+      "reason": "当前剪口质量为 BLOCK。",
+      "evidence": [
+        {
+          "type": "artifact_risk",
+          "verdict": "BLOCK"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C039",
+      "decision": "human_review_required",
+      "reason": "重复“一些”有语义可剪先例，但本次只在当前边界为 OK 时才可进入；当前冻结 run 的边界风险需由执行器二次守住。",
+      "evidence": [
+        {
+          "type": "semantic_cut",
+          "source": "EP04-review-round2-20260814-1355::N014",
+          "note": "一些/一些曾被接受，但不能覆盖当前剪口风险"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C042",
+      "decision": "human_review_required",
+      "reason": "同一“也是”历史反馈是剪辑后音量异常，当前剪口仍为 BLOCK。",
+      "evidence": [
+        {
+          "type": "execution_issue",
+          "source_run": "main/runs/EP04/EP04-v20-20260814-1617",
+          "candidate_id": "C026",
+          "feedback": "剪辑的时候声音明显小了"
+        }
+      ]
+    },
+    {
+      "candidate_id": "C044",
+      "decision": "machine_proposed_accept",
+      "boundary_mode": "current_snapped_boundary",
+      "reason": "同一“因为”重复的历史拒绝只指出剪辑痕迹，不是语义应保留；本轮精修后当前边界为 OK，因此作为机器试听草稿纳入，保留执行修复依据。",
+      "evidence": [
+        {
+          "type": "execution_issue_fixed_candidate",
+          "source_run": "main/runs/EP04/EP04-v20-20260814-1617",
+          "candidate_id": "C028",
+          "decision": "human_reject",
+          "feedback": "剪辑痕迹很重"
+        },
+        {
+          "type": "current_boundary_requirement",
+          "verdict": "OK"
+        }
+      ]
+    }
+  ]
+}

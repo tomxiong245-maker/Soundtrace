@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "asr-speaker-v1/word_record",
+  "title": "Normalized word record",
+  "type": "object",
+  "required": [
+    "word_id",
+    "text",
+    "raw_text",
+    "start_seconds",
+    "end_seconds",
+    "start_sample",
+    "end_sample",
+    "source_track",
+    "source_audio_sha256",
+    "model_id",
+    "model_revision",
+    "confidence",
+    "confidence_semantics",
+    "timestamp_origin",
+    "timestamp_mapping"
+  ],
+  "properties": {
+    "word_id": {
+      "type": "string",
+      "description": "Stable id, {engine}:{segment_id}:{track}:w{index:06d}."
+    },
+    "text": {
+      "type": "string",
+      "description": "Normalized surface form (Chinese char / token). Never LLM-cleaned."
+    },
+    "raw_text": {
+      "type": "string",
+      "description": "Original token as emitted by the tool; no whitespace stripping beyond leading/trailing."
+    },
+    "start_seconds": {"type": "number", "minimum": 0},
+    "end_seconds": {"type": "number", "exclusiveMinimum": 0},
+    "start_sample": {"type": "integer", "minimum": 0},
+    "end_sample": {"type": "integer", "minimum": 1},
+    "sample_rate_hz": {"type": "integer", "enum": [16000, 48000]},
+    "source_track": {
+      "type": "string",
+      "pattern": "^(female|male|speech_mix|track_[0-9]{2,})$"
+    },
+    "source_audio_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "model_id": {"type": "string"},
+    "model_revision": {"type": ["string", "null"]},
+    "confidence": {
+      "anyOf": [
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "null"}
+      ]
+    },
+    "confidence_semantics": {
+      "type": "string",
+      "description": "One of: 'word_probability_softmax','token_avg_logprob_exp','not_provided'."
+    },
+    "timestamp_origin": {
+      "type": "string",
+      "description": "Which subsystem produced the timestamps. E.g. 'faster_whisper_word_ts','funasr_paraformer_timestamp','mlx_whisper_word_ts'."
+    },
+    "timestamp_mapping": {
+      "type": "object",
+      "required": ["from_sample_rate_hz", "to_sample_rate_hz", "segment_start_offset_seconds_in_ep03"],
+      "properties": {
+        "from_sample_rate_hz": {"type": "integer"},
+        "to_sample_rate_hz": {"type": "integer"},
+        "segment_start_offset_seconds_in_ep03": {"type": "number"},
+        "note": {"type": "string"}
+      }
+    },
+    "speaker_id_hint": {
+      "type": ["string", "null"],
+      "description": "Optional speaker cluster id if the ASR tool provided one. NEVER female/male unless a speaker profile confirmed it."
+    }
+  },
+  "additionalProperties": false
+}

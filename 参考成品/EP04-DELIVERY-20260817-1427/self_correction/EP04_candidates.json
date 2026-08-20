@@ -1,0 +1,26 @@
+{
+  "schema_version": "self-correction-run-v1",
+  "rules_path": "稳定生产/challengers/self-correction-v1/rules/self-correction.v1.json",
+  "rules_sha256": "46b926ad0cd6e428f1b36e32acb589ff9aec789a3c4cd3dd687e20a2bfabc479",
+  "sample_rate_hz": 48000,
+  "tracks": [
+    {
+      "label": "track_01",
+      "transcript_path": "main/runs/EP04/EP04-v13-20260813-2002/analysis/track_01.transcript.json",
+      "candidate_count": 0,
+      "candidates": []
+    },
+    {
+      "label": "track_02",
+      "transcript_path": "main/runs/EP04/EP04-v13-20260813-2002/analysis/track_02.transcript.json",
+      "candidate_count": 0,
+      "candidates": []
+    },
+    {
+      "label": "track_03",
+      "transcript_path": "main/runs/EP04/EP04-v13-20260813-2002/analysis/track_03.transcript.json",
+      "candidate_count": 0,
+      "candidates": []
+    }
+  ]
+}

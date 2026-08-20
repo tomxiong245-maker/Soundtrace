@@ -1,0 +1,13 @@
+{
+  "name": "review-product-v1-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "P1 review-product-v1 · Playwright E2E runtime (isolated in Challenger dir)",
+  "scripts": {
+    "test": "playwright test -c playwright.config.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.47.0"
+  }
+}

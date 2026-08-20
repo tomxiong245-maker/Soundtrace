@@ -1,0 +1,44 @@
+{
+  "schema_version": "event-identity-regression-expectations-v1",
+  "purpose": "Metadata-only regression evidence for reviewed-event de-duplication. No audio, decisions, or run artifacts are modified.",
+  "thresholds": {
+    "overlap_coefficient_minimum": 0.8,
+    "exact_boundary_drift_max_ms": 50
+  },
+  "historical_run": "main/runs/EP04/EP04-v20-20260814-1617",
+  "current_run": "main/runs/EP04/EP04-label-loop-v1-20260815-1805",
+  "expected_matches": [
+    {
+      "current_candidate_id": "C007",
+      "historical_candidate_id": "C003",
+      "route": "semantic_reuse_boundary_review",
+      "historical_decision": "human_accept"
+    },
+    {
+      "current_candidate_id": "C023",
+      "historical_candidate_id": "C012",
+      "route": "semantic_reuse_boundary_review",
+      "historical_decision": "human_accept"
+    },
+    {
+      "current_candidate_id": "C034",
+      "historical_candidate_id": "C019",
+      "route": "semantic_reuse_boundary_review",
+      "historical_decision": "human_accept"
+    },
+    {
+      "current_candidate_id": "C042",
+      "historical_candidate_id": "C026",
+      "route": "rejected_execution_issue",
+      "historical_decision": "human_reject",
+      "feedback_class": "execution_issue"
+    },
+    {
+      "current_candidate_id": "C044",
+      "historical_candidate_id": "C028",
+      "route": "rejected_execution_issue",
+      "historical_decision": "human_reject",
+      "feedback_class": "execution_issue"
+    }
+  ]
+}

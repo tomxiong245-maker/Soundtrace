@@ -1,0 +1,14 @@
+{
+  "rules_version": "crosstalk-candidate-v1",
+  "policy": "review_only_no_automatic_accept",
+  "applies_to_source_track_only": true,
+  "window_seconds": 2.0,
+  "step_seconds": 0.5,
+  "min_bleed_words_per_window": 3,
+  "min_bleed_ratio_per_window": 0.7,
+  "require_other_primary_in_window": true,
+  "min_other_primary_words_per_window": 2,
+  "merge_gap_seconds": 0.5,
+  "downgrade_when_source_has_primary": true,
+  "notes": "只标记源轨在此段应做 gate/duck；不产生全轨同步删除；不改 activity 数据。"
+}

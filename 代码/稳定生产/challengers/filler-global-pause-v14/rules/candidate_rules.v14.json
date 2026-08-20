@@ -1,0 +1,120 @@
+{
+  "rules_version": "filler-global-pause-v14",
+  "supersedes": "filler-global-pause-v13",
+  "policy": "review_only_no_automatic_accept",
+  "profile_note": "V14 relative to v13: (D1) removes cough_like/mic_bump_like candidate families; (D2) adds strong_next_char_blocklist and english_filler_chinese_context to eliminate ASR word-boundary false positives; (D3) enforces rendering-quality gate on all proposed-cut previews and final EDL renders; (D4) splits weak_tokens into three sub-dictionaries (backchannel / topic_connective / pure filler) with next-token context rule; (D5) long_pause and immediate_repetition thresholds unchanged.",
+  "provenance": {
+    "iteration_source_run": "main/runs/EP04/EP04-review-mixed-14-20260814-043428",
+    "mentor_review_snapshot": "human_decisions_and_feedback__20260814-052319.json",
+    "reviewer": "熊镇正",
+    "sample_size": 14,
+    "accept_count": 4,
+    "reject_count": 10,
+    "date": "2026-08-14"
+  },
+  "context_seconds": 5.0,
+  "min_candidate_seconds": 0.1,
+  "opening_protection_seconds": 8.0,
+  "closing_protection_seconds": 8.0,
+
+  "disabled_candidate_families": [
+    {
+      "kind": "cough_like",
+      "reason": "3/3 mentor reject in EP04 review-mixed-14 with feedback 没有咳嗽/根本没有/声音很轻; detector严重误报",
+      "action": "generator MUST NOT emit; detector code retained read-only for future diagnosis; recovery requires frozen benchmark + independent review"
+    },
+    {
+      "kind": "mic_bump_like",
+      "reason": "1/1 mentor reject with feedback 根本没有; low sample but same failure mode as cough_like",
+      "action": "same as cough_like"
+    }
+  ],
+
+  "filler_hesitation": {
+    "enabled": true,
+    "strong_tokens": ["呃", "额", "唔", "唉", "哎", "哦", "uh", "um", "er", "erm"],
+    "strong_next_char_blocklist": {
+      "额": ["度", "外", "头", "定", "角", "上", "面"],
+      "唔": [],
+      "哦": ["豁"],
+      "呃": [],
+      "唉": [],
+      "哎": []
+    },
+    "strong_next_char_blocklist_note": "当命中 strong_token 的下一 token 首字落在 blocklist 时，不生成候选；这消除 EP03 中 '额度' 被拆成 '额'+'度' 后误报的问题（E301/E303 evidence）",
+    "english_filler_tokens": ["uh", "um", "er", "erm"],
+    "english_filler_min_chinese_ratio": 0.5,
+    "english_filler_min_chinese_ratio_note": "候选周围 ±context_seconds 窗口内的 token 至少 50% 为中文才生成；否则视为 ASR 误识别（E302 'er' 因'一个完整的单词' evidence）",
+    "english_filler_adjacent_english_blocks": true,
+    "english_filler_adjacent_english_blocks_note": "若 english filler 的前一或后一 token 也是英文/字母片段（首字符为 a-z/A-Z），视为 ASR 切碎的英文长词片段，不生成候选（E302 'er' 落在 'ild|er|对' 上下文，'ild' 是 ASR 切出的英文尾片段）",
+    "acknowledgement_tokens": ["嗯"],
+    "acknowledgement_single_min_seconds": 0.8,
+    "acknowledgement_dense_window_seconds": 5.0,
+    "acknowledgement_dense_min_count": 3,
+    "weak_backchannel_tokens": ["嗯嗯", "嗯对", "哦"],
+    "weak_backchannel_note": "纯应答型 backchannel；即使单独出现也可提名（受 weak_min_duration_seconds 限制）",
+    "weak_topic_connective_tokens": ["对", "然后", "这个", "那个"],
+    "weak_topic_connective_nominate_rule": {
+      "然后": "next in (weak_filler_tokens | weak_backchannel_tokens | weak_topic_connective_tokens) within max_gap → nominate",
+      "这个": "next in (weak_filler_tokens | weak_backchannel_tokens | weak_topic_connective_tokens) within max_gap → nominate",
+      "那个": "next in (weak_filler_tokens | weak_backchannel_tokens | weak_topic_connective_tokens) within max_gap → nominate",
+      "对": "next MUST be in weak_backchannel_tokens (e.g. 对嗯/对啊) → nominate; else PROTECT (E305 evidence: 对+这个是话题标记, not filler)"
+    },
+    "weak_topic_connective_next_gap_seconds": 0.3,
+    "weak_topic_connective_note": "E304 '然后这个' accept 与 E305 '对这个' reject 的差异被规则显式建模：'对' 有特别严格的下一 token 要求；其他 topic_connective 与任意 weak token 相连都可提名。仍保留 mentor review 作为最终裁决。",
+    "weak_filler_tokens": ["啊", "就是", "那個", "這個", "然後", "對", "就是說", "这据", "這据", "這據"],
+    "weak_filler_note": "纯口癖列表；繁体和 ASR 常错字保留",
+    "strong_min_consecutive": 1,
+    "weak_min_consecutive": 2,
+    "max_gap_seconds": 0.45,
+    "weak_max_gap_seconds": 0.3,
+    "weak_min_duration_seconds": 0.1,
+    "weak_max_duration_seconds": 0.4,
+    "weak_density_window_seconds": 5.0,
+    "weak_max_candidates_per_window": 2,
+    "cross_mic_event_merge_gap_seconds": 0.25,
+    "same_token_boundary_jitter_seconds": 0.08
+  },
+
+  "immediate_repetition": {
+    "enabled": true,
+    "min_phrase_chars": 2,
+    "max_phrase_chars": 4,
+    "max_gap_seconds": 0.3,
+    "note": "v13 阈值维持不变；EP04-review-v2 历史 accept 与本轮 reject 冲突未定论，先看 rendering gate 修复后 mentor 复听结论"
+  },
+
+  "global_long_pause": {
+    "enabled": true,
+    "detection_hint_seconds": 0.6,
+    "min_silence_seconds": 1.5,
+    "max_silence_seconds": 12.0,
+    "retention_by_original_silence": [
+      {"max_silence_seconds": 1.0, "head_tail_seconds": 0.1},
+      {"max_silence_seconds": 2.0, "head_tail_seconds": 0.2},
+      {"max_silence_seconds": 3.0, "head_tail_seconds": 0.3},
+      {"max_silence_seconds": null, "head_tail_seconds": 0.4}
+    ],
+    "activity_merge_gap_seconds": 0.05,
+    "acoustic_frame_seconds": 0.05,
+    "max_frame_rms_dbfs": -38.0,
+    "max_frame_peak_dbfs": -20.0,
+    "note": "v13 阈值维持不变；本轮 S022(0.71s) / S047(6.58s) accept 与 S032(0.61s) reject 差异归因于剪辑痕迹，非时长阈值"
+  },
+
+  "cross_track_guard": {
+    "conflicting_word_overlap_seconds": 0.05,
+    "note": "口癖候选中，其他轨只有重叠的同一证据词才可视为串音；任何不同文字都阻断。长停顿必须全轨共同空白。"
+  },
+
+  "rendering_gate": {
+    "min_crossfade_ms": 50,
+    "preferred_crossfade_ms": 80,
+    "fallback_crossfade_ms": 120,
+    "curve": "equal_power_sin_cos",
+    "backup_curve": "tanh_s_curve",
+    "block_condition": "候选不在 autocut_policy 白名单中",
+    "require_ab_confirm": true,
+    "note": "v14 强制项。本轮 mentor 有 4 条 feedback '剪辑痕迹明显'（S038/S032/E304/E306），已升级 butt-splice → 50ms equal-power sin/cos。若 mentor 复听仍不满意，逐级升级到 80ms → 120ms → tanh S 曲线。GPT 渲染完整版时必须应用本 gate。"
+  }
+}

@@ -1,0 +1,2546 @@
+{
+  "schema_version": "tool-orchestrator-v2.registry.v1",
+  "description": "44 项 v2 adapter · 混合 Champion 与 pipeline-critical Challenger tool · 每个 adapter 通过 GenericScriptAdapter 加载；wraps_script 只读，不改脚本本身。command_template 里 {script} 是 wraps_script 绝对路径，其它 {name} 从 invocation inputs 里取，{name*} 表示 list-of-str 展开。reads_only=false 的 adapter 必须传 writes_policy_id + writes_scope_hash 才能 invoke。",
+  "adapters": [
+    {
+      "contract": {
+        "adapter_id": "inspect-audio-v2",
+        "tool_name": "inspect_audio",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/inspect_audio.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "input_wav",
+            "output_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "inspection"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 60
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{input_wav}",
+        "{output_json}"
+      ],
+      "outputs_template": {
+        "inspection": "{output_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "measure-loudness-v2",
+        "tool_name": "measure_loudness",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/measure_loudness.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "input_audio",
+            "output_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "loudness"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 120,
+        "audit_reference": "main/tools/audits/ffmpeg-homebrew-9.0.1.md"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{input_audio}",
+        "{output_json}"
+      ],
+      "outputs_template": {
+        "loudness": "{output_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "analyze-reference-timeline-v2",
+        "tool_name": "analyze_reference_timeline",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/analyze_reference_timeline.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "reference_audio",
+            "denoised_tracks",
+            "output_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "timeline"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 300
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{reference_audio}",
+        "{denoised_tracks}",
+        "{output_json}"
+      ],
+      "outputs_template": {
+        "timeline": "{output_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "estimate-sync-v2",
+        "tool_name": "estimate_sync",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/estimate_sync.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "track_a",
+            "track_b",
+            "output_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "sync"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 120
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{track_a}",
+        "{track_b}",
+        "{output_json}"
+      ],
+      "outputs_template": {
+        "sync": "{output_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "correct-clock-drift-v2",
+        "tool_name": "correct_clock_drift",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/correct_clock_drift.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "input_wav",
+            "drift_ppm",
+            "output_wav"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "corrected"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 300,
+        "write_policy": {
+          "policy_id": "audio-normalize-clock-drift-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{input_wav}",
+        "{drift_ppm}",
+        "{output_wav}"
+      ],
+      "outputs_template": {
+        "corrected": "{output_wav}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "create-clock-drift-fixture-v2",
+        "tool_name": "create_clock_drift_fixture",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/create_clock_drift_fixture.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "output_dir",
+            "offset_ms",
+            "drift_ppm"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "fixture_dir"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 120,
+        "write_policy": {
+          "policy_id": "fixture-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{output_dir}",
+        "{offset_ms}",
+        "{drift_ppm}"
+      ],
+      "outputs_template": {
+        "fixture_dir": "{output_dir}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "denoise-tracks-v2",
+        "tool_name": "denoise_tracks",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/deepfilternet_denoise_tracks.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "tracks",
+            "output_dir",
+            "atten_lim_db"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "denoised_dir"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 3600,
+        "write_policy": {
+          "policy_id": "deepfilternet-denoise-v0.5.6-signed",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        },
+        "audit_reference": "稳定生产/challengers/denoise-ab-v1/README.md"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{tracks}",
+        "{output_dir}",
+        "{atten_lim_db}"
+      ],
+      "outputs_template": {
+        "denoised_dir": "{output_dir}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "analyze-denoise-previews-v2",
+        "tool_name": "analyze_denoise_previews",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/analyze_denoise_previews.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "raw_wav",
+            "denoised_wav",
+            "segments",
+            "output_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "previews_dir"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 600,
+        "write_policy": {
+          "policy_id": "audio-preview-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{raw_wav}",
+        "{denoised_wav}",
+        "{segments}",
+        "{output_dir}"
+      ],
+      "outputs_template": {
+        "previews_dir": "{output_dir}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "transcribe-tracks-v2",
+        "tool_name": "transcribe_tracks",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/transcribe_tracks.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "input_wav",
+            "model",
+            "output_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "transcript"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 7200,
+        "write_policy": {
+          "policy_id": "asr-transcript-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{input_wav}",
+        "{model}",
+        "{output_json}"
+      ],
+      "outputs_template": {
+        "transcript": "{output_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "classify-track-activity-v2",
+        "tool_name": "classify_track_activity",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/classify_track_activity.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "track_a_wav",
+            "track_b_wav",
+            "output_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "activity"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 600,
+        "write_policy": {
+          "policy_id": "activity-heuristic-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{track_a_wav}",
+        "{track_b_wav}",
+        "{output_json}"
+      ],
+      "outputs_template": {
+        "activity": "{output_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "build-review-package-v2",
+        "tool_name": "build_review_package",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/build_review_package.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "transcripts",
+            "activity",
+            "sources",
+            "output_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "review_dir"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 600,
+        "write_policy": {
+          "policy_id": "review-package-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{transcripts}",
+        "{activity}",
+        "{sources}",
+        "{output_dir}"
+      ],
+      "outputs_template": {
+        "review_dir": "{output_dir}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "build-priority-review-page-v2",
+        "tool_name": "build_priority_review_page",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/build_priority_review_page.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "edit_candidates",
+            "output_html"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "review_html"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 120,
+        "write_policy": {
+          "policy_id": "review-page-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{edit_candidates}",
+        "{output_html}"
+      ],
+      "outputs_template": {
+        "review_html": "{output_html}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "create-aligned-ab-previews-v2",
+        "tool_name": "create_aligned_ab_previews",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/create_aligned_ab_previews.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "edit_candidates",
+            "denoised_tracks",
+            "output_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "previews_dir"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 1800,
+        "write_policy": {
+          "policy_id": "ab-preview-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{edit_candidates}",
+        "{denoised_tracks}",
+        "{output_dir}"
+      ],
+      "outputs_template": {
+        "previews_dir": "{output_dir}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "approve-review-candidates-v2",
+        "tool_name": "approve_review_candidates",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/approve_review_candidates.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "review_manifest",
+            "human_decisions",
+            "output_edl"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "approved_edl"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 120,
+        "write_policy": {
+          "policy_id": "edl-approve-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{review_manifest}",
+        "{human_decisions}",
+        "{output_edl}"
+      ],
+      "outputs_template": {
+        "approved_edl": "{output_edl}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "analyze-cut-transitions-v2",
+        "tool_name": "analyze_cut_transitions",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/analyze_cut_transitions.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "edl",
+            "denoised_tracks",
+            "output_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "transitions"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 600
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{edl}",
+        "{denoised_tracks}",
+        "{output_json}"
+      ],
+      "outputs_template": {
+        "transitions": "{output_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "render-approved-edl-v2",
+        "tool_name": "render_approved_edl",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/render_approved_edl.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "edl",
+            "denoised_tracks",
+            "output_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "rendered_dir"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 3600,
+        "write_policy": {
+          "policy_id": "edl-render-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{edl}",
+        "{denoised_tracks}",
+        "{output_dir}"
+      ],
+      "outputs_template": {
+        "rendered_dir": "{output_dir}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "assemble-program-v2",
+        "tool_name": "assemble_program",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/assemble_program.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "cut_tracks",
+            "mix_spec",
+            "intro",
+            "outro",
+            "output_wav"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "program_wav"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 3600,
+        "write_policy": {
+          "policy_id": "assemble-program-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{cut_tracks}",
+        "{mix_spec}",
+        "{intro}",
+        "{outro}",
+        "{output_wav}"
+      ],
+      "outputs_template": {
+        "program_wav": "{output_wav}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "finish-approved-project-v2",
+        "tool_name": "finish_approved_project",
+        "adapter_version": "v2",
+        "wraps_script": "代码/端到端学习剪辑/代码/finish_approved_project.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "edl",
+            "denoised_tracks",
+            "mix_spec",
+            "output_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "delivery_dir"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code"
+        ],
+        "timeout_seconds": 7200,
+        "write_policy": {
+          "policy_id": "finish-project-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "{edl}",
+        "{denoised_tracks}",
+        "{mix_spec}",
+        "{output_dir}"
+      ],
+      "outputs_template": {
+        "delivery_dir": "{output_dir}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "automix-2track-v1",
+        "tool_name": "automix_2track",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/automix-v1/scripts/automix_v1.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "track_a",
+            "track_b",
+            "music",
+            "release_spec",
+            "music_template",
+            "template_id",
+            "output",
+            "tmp_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "mp3"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 3600,
+        "write_policy": {
+          "policy_id": "automix-2track-render-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        },
+        "audit_reference": "稳定生产/challengers/automix-v1/README.md"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--tracks",
+        "{track_a}",
+        "{track_b}",
+        "--music",
+        "{music}",
+        "--release-spec",
+        "{release_spec}",
+        "--music-template",
+        "{music_template}",
+        "--template-id",
+        "{template_id}",
+        "--output",
+        "{output}",
+        "--tmp-dir",
+        "{tmp_dir}"
+      ],
+      "outputs_template": {
+        "mp3": "{output}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "run-diarization-v1",
+        "tool_name": "run_diarization",
+        "adapter_version": "v1-skeleton",
+        "wraps_script": "代码/稳定生产/challengers/speaker-diarization-v1/scripts/run_diarization.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "input_wav",
+            "output_rttm",
+            "models_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "rttm"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 7200,
+        "write_policy": {
+          "policy_id": "speaker-diarize-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        },
+        "audit_reference": "稳定生产/challengers/speaker-diarization-v1/audits/pyannote-audio-3.4.0.md",
+        "notes": "SKELETON — run_diarization.py 尚未实现，等 pyannote-audio 3.4.0 装入本 Challenger venv 后填充。当前 adapter 只做契约声明，dry_run 会通过但 invoke 会因缺 script fail closed。",
+        "skeleton": true
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--input",
+        "{input_wav}",
+        "--output-rttm",
+        "{output_rttm}",
+        "--models-dir",
+        "{models_dir}"
+      ],
+      "outputs_template": {
+        "rttm": "{output_rttm}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "analyze-transition-qc-v2",
+        "tool_name": "analyze_transition_qc",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/transition_qc.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "run_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "transition_qc"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--run-dir",
+        "{run_dir}"
+      ],
+      "outputs_template": {
+        "transition_qc": "{run_dir}/transition_qc.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "apply-autocut-gate-v2",
+        "tool_name": "apply_autocut_gate",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/autocut-gate-v1/scripts/apply_autocut_gate.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "candidates",
+            "policy",
+            "out",
+            "episode_duration_seconds"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "gate"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 900,
+        "write_policy": {
+          "policy_id": "autocut-gate-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--candidates",
+        "{candidates}",
+        "--policy",
+        "{policy}",
+        "--out",
+        "{out}",
+        "--episode-duration-seconds",
+        "{episode_duration_seconds}"
+      ],
+      "outputs_template": {
+        "gate": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "apply-preference-snapshot-v2",
+        "tool_name": "apply_preference_snapshot",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/experience-ingestion-v1/scripts/apply_preference_snapshot.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "snapshot_dir",
+            "run_dir",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "snapshot_applied"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "write_policy": {
+          "policy_id": "preference-snapshot-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--snapshot-dir",
+        "{snapshot_dir}",
+        "--run-dir",
+        "{run_dir}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "snapshot_applied": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "auto-speaker-role-v2",
+        "tool_name": "auto_speaker_role",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/auto_speaker_role.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "episode_id",
+            "analysis_dir",
+            "episode_duration_seconds",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "speaker_map_auto"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--episode-id",
+        "{episode_id}",
+        "--analysis-dir",
+        "{analysis_dir}",
+        "--episode-duration-seconds",
+        "{episode_duration_seconds}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "speaker_map_auto": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "build-candidate-family-bundle-v2",
+        "tool_name": "build_candidate_family_bundle",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/candidate_family_adapter.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "base_source",
+            "out",
+            "detector_out_dir",
+            "sample_rate_hz"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "bundle"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 900,
+        "write_policy": {
+          "policy_id": "candidate-family-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--base-source",
+        "{base_source}",
+        "--out",
+        "{out}",
+        "--detector-out-dir",
+        "{detector_out_dir}",
+        "--sample-rate-hz",
+        "{sample_rate_hz}"
+      ],
+      "outputs_template": {
+        "bundle": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "build-case-memory-v2",
+        "tool_name": "build_case_memory",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/case_memory.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "snapshot_dir",
+            "candidate_source",
+            "target_run_dir",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "case_memory"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 600,
+        "write_policy": {
+          "policy_id": "case-memory-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--snapshot-dir",
+        "{snapshot_dir}",
+        "--candidate-source",
+        "{candidate_source}",
+        "--target-run-dir",
+        "{target_run_dir}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "case_memory": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "build-filler-global-pause-candidates-v2",
+        "tool_name": "build_filler_global_pause_candidates",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/filler-global-pause-v1/scripts/build_filler_global_pause_review_source.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "p0_report",
+            "out",
+            "episode_id",
+            "created_at"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "candidates"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 900,
+        "write_policy": {
+          "policy_id": "filler-global-pause-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--p0-report",
+        "{p0_report}",
+        "--out",
+        "{out}",
+        "--episode-id",
+        "{episode_id}",
+        "--created-at",
+        "{created_at}"
+      ],
+      "outputs_template": {
+        "candidates": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "build-labels-lake-v2",
+        "tool_name": "build_labels_lake",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/build_labels_lake.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "labels_lake"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "labels_lake": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "build-semantic-transcript-v2",
+        "tool_name": "build_semantic_transcript",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/semantic-transcript-v1/scripts/build_semantic_transcript.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "input_report",
+            "episode_id",
+            "source_run_id",
+            "run_id",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "semantic_transcript"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 600,
+        "write_policy": {
+          "policy_id": "semantic-transcript-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--input-report",
+        "{input_report}",
+        "--episode-id",
+        "{episode_id}",
+        "--source-run-id",
+        "{source_run_id}",
+        "--run-id",
+        "{run_id}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "semantic_transcript": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "label-learning-driver-v2",
+        "tool_name": "label_learning_driver",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/label_learning_driver.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "snapshot_dir",
+            "candidate_source",
+            "target_run_dir",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "predictions"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 900,
+        "write_policy": {
+          "policy_id": "label-learning-driver-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--snapshot-dir",
+        "{snapshot_dir}",
+        "--candidate-source",
+        "{candidate_source}",
+        "--target-run-dir",
+        "{target_run_dir}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "predictions": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "mfa-align-and-extract-boundaries-v2",
+        "tool_name": "mfa_align_and_extract_boundaries",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/mfa-alignment-v1/scripts/mfa_align_and_extract_boundaries.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "candidates",
+            "tracks",
+            "asr_transcript_dir",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "mfa_boundaries"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 1800
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--candidates",
+        "{candidates}",
+        "--tracks",
+        "{tracks*}",
+        "--asr-transcript-dir",
+        "{asr_transcript_dir}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "mfa_boundaries": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "predict-cut-artifact-v2",
+        "tool_name": "predict_cut_artifact",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/predict_cut_artifact.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "run_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "prediction"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "write_policy": {
+          "policy_id": "predict-cut-artifact-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--run-dir",
+        "{run_dir}"
+      ],
+      "outputs_template": {
+        "prediction": "{run_dir}/predict_cut_artifact.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "review-event-routes-v2",
+        "tool_name": "review_event_routes",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/review_event_routes.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "run_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "routes"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "write_policy": {
+          "policy_id": "review-event-routes-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--run-dir",
+        "{run_dir}"
+      ],
+      "outputs_template": {
+        "routes": "{run_dir}/review_event_routes.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "run-development-benchmark-v2",
+        "tool_name": "run_development_benchmark",
+        "adapter_version": "v1",
+        "wraps_script": "benchmark/editing-e2e-v1/run_development_benchmark.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "run_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "benchmark"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 1800
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--run-dir",
+        "{run_dir}"
+      ],
+      "outputs_template": {
+        "benchmark": "{run_dir}/development_benchmark.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "run-end-to-end-v2",
+        "tool_name": "run_end_to_end",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/e2e-auto-runner-v1/scripts/run_end_to_end.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "episode_id",
+            "out_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "run_dir"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 7200,
+        "write_policy": {
+          "policy_id": "run-end-to-end-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        },
+        "notes": "顶层编排 · Session 3 v2 顶替 v1 时可能拆分为独立 step；当前 adapter 仅供 registry 完整性和 dry_run 校验。"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--episode-id",
+        "{episode_id}",
+        "--out-dir",
+        "{out_dir}"
+      ],
+      "outputs_template": {
+        "run_dir": "{out_dir}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "serve-review-ui-v2",
+        "tool_name": "serve_review_ui",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/review-product-v1/scripts/server_episode.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "config"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "server_pid_hint"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 7200,
+        "write_policy": {
+          "policy_id": "serve-review-ui-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        },
+        "notes": "HTTP 服务器 · 长期驻留 · outputs.server_pid_hint 是可选侧车提示，实际由 server 自维护。"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--config",
+        "{config}"
+      ],
+      "outputs_template": {
+        "server_pid_hint": "{run_dir}/serve_review_ui.pid"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "snap-candidate-boundaries-v2",
+        "tool_name": "snap_candidate_boundaries",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/snap_candidate_boundaries.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "run_dir"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "snapped"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "write_policy": {
+          "policy_id": "snap-boundaries-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--run-dir",
+        "{run_dir}"
+      ],
+      "outputs_template": {
+        "snapped": "{run_dir}/snapped_candidate_boundaries.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "spacy-semantic-transcript-v2",
+        "tool_name": "spacy_semantic_transcript",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/semantic-transcript-v1/scripts/spacy_semantic_transcript.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "transcript",
+            "output"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "spacy_semantic"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 600
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--transcript",
+        "{transcript}",
+        "--output",
+        "{output}"
+      ],
+      "outputs_template": {
+        "spacy_semantic": "{output}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "verify-cut-plan-v2",
+        "tool_name": "verify_cut_plan",
+        "adapter_version": "v1",
+        "wraps_script": "新skill/cut-verify/scripts/verify_cut_plan.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "candidate_json",
+            "transcript_dir",
+            "raw_track_map"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "verified_edl"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 600,
+        "notes": "cut-verify domain · adapter 只声明契约 · 脚本内容一字不动（§22）。"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--candidate-json",
+        "{candidate_json}",
+        "--transcript-dir",
+        "{transcript_dir}",
+        "--raw-track-map",
+        "{raw_track_map}"
+      ],
+      "outputs_template": {
+        "verified_edl": "{run_dir}/verified_edl.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "check-hallucination-v2",
+        "tool_name": "check_hallucination",
+        "adapter_version": "v1",
+        "wraps_script": "新skill/cut-verify/scripts/check_hallucination.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "candidate_json",
+            "transcript"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "hallucination_check"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "notes": "cut-verify · Check 1 · 只声明契约 · 脚本内容 unchanged (§22)"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--candidate-json",
+        "{candidate_json}",
+        "--transcript",
+        "{transcript}"
+      ],
+      "outputs_template": {
+        "hallucination_check": "{run_dir}/check_hallucination.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "check-silence-location-v2",
+        "tool_name": "check_silence_location",
+        "adapter_version": "v1",
+        "wraps_script": "新skill/cut-verify/scripts/check_silence_location.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "candidate_json",
+            "raw_wav"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "silence_check"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "notes": "cut-verify · Check 2 · 只声明契约 · 脚本内容 unchanged (§22)"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--candidate-json",
+        "{candidate_json}",
+        "--raw-wav",
+        "{raw_wav}"
+      ],
+      "outputs_template": {
+        "silence_check": "{run_dir}/check_silence_location.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "check-rhythm-gap-v2",
+        "tool_name": "check_rhythm_gap",
+        "adapter_version": "v1",
+        "wraps_script": "新skill/cut-verify/scripts/check_rhythm_gap.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "candidate_json",
+            "transcript"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "rhythm_check"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 180,
+        "notes": "cut-verify · Check 3 · 只声明契约 · 脚本内容 unchanged (§22)"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--candidate-json",
+        "{candidate_json}",
+        "--transcript",
+        "{transcript}"
+      ],
+      "outputs_template": {
+        "rhythm_check": "{run_dir}/check_rhythm_gap.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "route-crossfade-strategy-v2",
+        "tool_name": "route_crossfade_strategy",
+        "adapter_version": "v1",
+        "wraps_script": "新skill/cut-verify/scripts/route_crossfade_strategy.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "hallucination_json",
+            "silence_json",
+            "rhythm_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "strategy"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 180,
+        "notes": "cut-verify · Check 4 · 只声明契约 · 脚本内容 unchanged (§22)"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--hallucination-json",
+        "{hallucination_json}",
+        "--silence-json",
+        "{silence_json}",
+        "--rhythm-json",
+        "{rhythm_json}"
+      ],
+      "outputs_template": {
+        "strategy": "{run_dir}/route_crossfade_strategy.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "expand-to-asr-word-boundary-v2",
+        "tool_name": "expand_to_asr_word_boundary",
+        "adapter_version": "v1",
+        "wraps_script": "新skill/cut-verify/scripts/expand_to_asr_word_boundary.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "candidate_json",
+            "transcript"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "expanded"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 180,
+        "notes": "cut-verify · ASR word 扩展 · 只声明契约 · 脚本内容 unchanged (§22)"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--candidate-json",
+        "{candidate_json}",
+        "--transcript",
+        "{transcript}"
+      ],
+      "outputs_template": {
+        "expanded": "{run_dir}/expanded_to_asr_word_boundary.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "p0-transcribe-mvp-v2",
+        "tool_name": "p0_transcribe_mvp",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/asr-speaker-v1/scripts/p0_mvp.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "out",
+            "audio_paths"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "transcript"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 3600,
+        "write_policy": {
+          "policy_id": "p0-transcribe-mvp-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        },
+        "notes": "legacy_pending_deprecation · audio_paths 是 positional nargs='*'"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--out",
+        "{out}",
+        "{audio_paths*}"
+      ],
+      "outputs_template": {
+        "transcript": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "validate-integration-governance-v2",
+        "tool_name": "validate_integration_governance",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/integration_governance.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "registry"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "governance"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 120,
+        "write_policy": {
+          "policy_id": "integration-governance-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--registry",
+        "{registry}"
+      ],
+      "outputs_template": {
+        "governance": "{registry}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "automix-render-speech-v2",
+        "tool_name": "automix_render_speech",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/automix_adapter.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "tracks",
+            "output",
+            "tmp_dir",
+            "run_id",
+            "run_identity_sha256",
+            "variant",
+            "edl"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "speech_mix"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 1800,
+        "write_policy": {
+          "policy_id": "automix-render-speech-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--tracks",
+        "{tracks*}",
+        "--output",
+        "{output}",
+        "--tmp-dir",
+        "{tmp_dir}",
+        "--run-id",
+        "{run_id}",
+        "--run-identity-sha256",
+        "{run_identity_sha256}",
+        "--variant",
+        "{variant}",
+        "--edl",
+        "{edl}"
+      ],
+      "outputs_template": {
+        "speech_mix": "{output}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "experience-consumer-adapter-v2",
+        "tool_name": "experience_consumer_adapter",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/experience-ingestion-v1/scripts/experience_consumer_adapter.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "case_store"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "experience_context"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 120
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--case-store",
+        "{case_store}"
+      ],
+      "outputs_template": {
+        "experience_context": "{run_dir}/experience_context.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "detect-self-correction-wordlevel-v2",
+        "tool_name": "detect_self_correction_wordlevel",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/self-correction-v1/scripts/detect_self_correction_wordlevel.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "transcript",
+            "rules",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "self_correction_wordlevel"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "notes": "v2 wordlevel · run_end_to_end.py 里 stage_wordlevel_selfcorrection 通过 --transcript LABEL=PATH 传入（append）"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--transcript",
+        "{transcript}",
+        "--rules",
+        "{rules}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "self_correction_wordlevel": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "detect-transient-events-v2",
+        "tool_name": "detect_transient_events",
+        "adapter_version": "v1",
+        "wraps_script": "代码/稳定生产/challengers/transient-events-v1/scripts/detect_transient_events.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "wav",
+            "rules",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "transient_events"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 600,
+        "write_policy": {
+          "policy_id": "transient-events-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        },
+        "notes": "cough_like 家族 · cut_scope=source_track_gate_only（§13）· 只 mute 单轨不进全轨 EDL"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--wav",
+        "{wav}",
+        "--rules",
+        "{rules}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "transient_events": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "refresh-lake-and-regate-v2",
+        "tool_name": "refresh_lake_and_regate",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/refresh_lake_and_regate.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "run"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "regated"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 900,
+        "write_policy": {
+          "policy_id": "refresh-lake-regate-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        },
+        "notes": "feedback domain · online 学习闭环（§10）· 用户 save 后触发"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--run",
+        "{run}"
+      ],
+      "outputs_template": {
+        "regated": "{run}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "write-delivery-report-v2",
+        "tool_name": "write_delivery_report",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/write_delivery_report.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "run_dir",
+            "final_status"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "delivery_report"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 120,
+        "write_policy": {
+          "policy_id": "delivery-report-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--run-dir",
+        "{run_dir}",
+        "--final-status",
+        "{final_status}"
+      ],
+      "outputs_template": {
+        "delivery_report": "{run_dir}/DELIVERY_REPORT.md"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "feedback-engine-v2",
+        "tool_name": "feedback_engine",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/feedback_engine.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "candidate_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "feedback_matches"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 60,
+        "notes": "feedback domain · §18 决策前 retrieve 主入口 · analyze 模式（写）通过脚本 CLI 'analyze' 子命令直调，暂不 registry"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "retrieve",
+        "--candidate-json",
+        "{candidate_json}"
+      ],
+      "outputs_template": {
+        "feedback_matches": "{run_dir}/feedback_engine_retrieve.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "extract-gold-cut-features-v2",
+        "tool_name": "extract_gold_cut_features",
+        "adapter_version": "v1",
+        "wraps_script": "代码/main/orchestrator/extract_gold_cut_features.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": []
+        },
+        "outputs_schema": {
+          "required": [
+            "gold_features"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "notes": "EP03/EP04 hardcoded input · 输出路径由脚本 default 决定 · 未来解耦时再泛化"
+      },
+      "command_template": [
+        "python3",
+        "{script}"
+      ],
+      "outputs_template": {
+        "gold_features": "{run_dir}/gold_cut_features.jsonl"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "build-case-embeddings-v2",
+        "tool_name": "build_case_embeddings",
+        "adapter_version": "v1-skeleton",
+        "wraps_script": "代码/稳定生产/challengers/case-memory-embedding-v1/scripts/build_case_embeddings.py",
+        "reads_only": false,
+        "inputs_schema": {
+          "required": [
+            "case_memory",
+            "audio_root",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "embeddings_index"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 3600,
+        "skeleton": true,
+        "notes": "Challenger A skeleton · 待 EP05 实现",
+        "write_policy": {
+          "policy_id": "build-case-embeddings-write-v1",
+          "allowed_output_roots": [
+            "main/runs"
+          ],
+          "requires_run_dir": true
+        }
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--case-memory",
+        "{case_memory}",
+        "--audio-root",
+        "{audio_root}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "embeddings_index": "{out}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "embed-candidate-v2",
+        "tool_name": "embed_candidate",
+        "adapter_version": "v1-skeleton",
+        "wraps_script": "代码/稳定生产/challengers/case-memory-embedding-v1/scripts/embed_candidate.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "wav",
+            "start",
+            "end"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "embedding"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 60,
+        "skeleton": true,
+        "notes": "Challenger A skeleton"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--wav",
+        "{wav}",
+        "--start",
+        "{start}",
+        "--end",
+        "{end}"
+      ],
+      "outputs_template": {
+        "embedding": "{run_dir}/candidate_embedding.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "retrieve-similar-cases-v2",
+        "tool_name": "retrieve_similar_cases",
+        "adapter_version": "v1-skeleton",
+        "wraps_script": "代码/稳定生产/challengers/case-memory-embedding-v1/scripts/retrieve_similar_cases.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "index",
+            "meta",
+            "query_wav",
+            "start",
+            "end"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "similar_cases"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 60,
+        "skeleton": true,
+        "notes": "Challenger A skeleton"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--index",
+        "{index}",
+        "--meta",
+        "{meta}",
+        "--query-wav",
+        "{query_wav}",
+        "--start",
+        "{start}",
+        "--end",
+        "{end}"
+      ],
+      "outputs_template": {
+        "similar_cases": "{run_dir}/similar_cases.json"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "check-nisqa-mos-v2",
+        "tool_name": "check_nisqa_mos",
+        "adapter_version": "v1-skeleton",
+        "wraps_script": "代码/稳定生产/challengers/nisqa-cutverify-v1/scripts/check_nisqa_mos.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "clip_path",
+            "out_json",
+            "mode"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "mos_scores"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 120,
+        "skeleton": true,
+        "notes": "Challenger B skeleton · cut-verify Check 5"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--clip-path",
+        "{clip_path}",
+        "--out-json",
+        "{out_json}",
+        "--mode",
+        "{mode}"
+      ],
+      "outputs_template": {
+        "mos_scores": "{out_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "compute-mos-delta-v2",
+        "tool_name": "compute_mos_delta",
+        "adapter_version": "v1-skeleton",
+        "wraps_script": "代码/稳定生产/challengers/nisqa-cutverify-v1/scripts/compute_mos_delta.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "before_clip",
+            "after_clip",
+            "out_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "mos_delta"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 180,
+        "skeleton": true,
+        "notes": "Challenger B skeleton · 剪前剪后 MOS delta"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--before-clip",
+        "{before_clip}",
+        "--after-clip",
+        "{after_clip}",
+        "--out-json",
+        "{out_json}"
+      ],
+      "outputs_template": {
+        "mos_delta": "{out_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "route-by-mos-v2",
+        "tool_name": "route_by_mos",
+        "adapter_version": "v1-skeleton",
+        "wraps_script": "代码/稳定生产/challengers/nisqa-cutverify-v1/scripts/route_by_mos.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "mos_json",
+            "out_json"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "verdict"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 30,
+        "skeleton": true,
+        "notes": "Challenger B skeleton · MOS 判决路由"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--mos-json",
+        "{mos_json}",
+        "--out-json",
+        "{out_json}"
+      ],
+      "outputs_template": {
+        "verdict": "{out_json}"
+      }
+    },
+    {
+      "contract": {
+        "adapter_id": "assign-word-speakers-v2",
+        "tool_name": "assign_word_speakers",
+        "adapter_version": "v1-skeleton",
+        "wraps_script": "代码/稳定生产/challengers/speaker-diarization-v1/scripts/assign_word_speakers.py",
+        "reads_only": true,
+        "inputs_schema": {
+          "required": [
+            "rttm",
+            "words",
+            "out"
+          ]
+        },
+        "outputs_schema": {
+          "required": [
+            "words_with_speaker"
+          ]
+        },
+        "provenance_fields": [
+          "exit_code",
+          "duration_seconds"
+        ],
+        "timeout_seconds": 300,
+        "skeleton": true,
+        "notes": "Challenger C · WhisperX 归属逻辑骨架"
+      },
+      "command_template": [
+        "python3",
+        "{script}",
+        "--rttm",
+        "{rttm}",
+        "--words",
+        "{words}",
+        "--out",
+        "{out}"
+      ],
+      "outputs_template": {
+        "words_with_speaker": "{out}"
+      }
+    }
+  ]
+}

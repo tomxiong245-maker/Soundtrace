@@ -1,0 +1,162 @@
+{
+  "rules_version": "filler-global-pause-v19",
+  "supersedes": "filler-global-pause-v18",
+  "supersedes_source": "稳定生产/challengers/filler-global-pause-v14/rules/candidate_rules.v18.json",
+  "supersedes_source_sha256_note": "v18 全文 fork；只加 boundary_strategy 与 policy 一个字段，其它数值/门禁沿用 v18",
+  "policy": "review_only_no_automatic_accept",
+  "policy_note": "本 rules 层仍不自主决定 auto-cut；auto-cut 允否由 editing_policy.guards-v2::G-007-whitelist-autocut-eligible + label_learning_driver + delivery_orchestrator 三方 gate 联合决定。",
+  "profile_note": "V19 patches vs V18: (a) 明确 boundary_strategy：filler_hesitation 用完整词 ASR 边界（v18 未定义时的隐式 stable_middle 导致 EP04 C007 '呃' 词全长 680ms 只被切 386ms，词头尾各留 150ms 明显可听）；(b) immediate_repetition 用 extend_to_last_repeat_occurrence（EP04 C044 两个连续'因为'只切了第一个，第二个残留）。数值门禁 & 词表完全沿用 v18。",
+  "provenance": {
+    "user_feedback_2026_08_17": [
+      "'c007 的呃也没剪干净，而且后面有两个就是也可以剪辑掉'",
+      "'co44 的两个因为你想剪辑一个，但是没有剪辑干净'"
+    ],
+    "asr_diagnosis": {
+      "C007_word": "呃 (354.080 -> 354.760s, duration 680ms)",
+      "C007_candidate_range": "354.230 -> 354.616s (386ms; head 150ms + tail 144ms retained)",
+      "C007_diagnosis": "boundary_strategy=stable_middle 未包住完整词",
+      "C044_words": "因为 (2268.210 -> 2268.930) + 因为 (2268.930 -> 2269.130)",
+      "C044_candidate_range": "2268.36 -> 2268.79s (只覆盖第 1 个'因为'中间部分)",
+      "C044_diagnosis": "boundary 未扩展到最后一个连续重复词的结尾",
+      "C007_after_missed": "两次'就是' (354.760->355.240 + 355.960->356.100) 之间有'你要是'插入 → v18 weak_min_consecutive=2 要求紧邻，同一子句内不紧邻的 2 次 weak filler 目前不进候选池。**V19 不改此 gate**，待更多人工审核数据后再考虑放宽。"
+    },
+    "iteration_source_runs_from_v18": [
+      "main/runs/EP04/EP04-review-mixed-14-20260814-043428",
+      "main/runs/EP04/EP04-review-round2-20260814-1355",
+      "main/runs/EP04/EP04-v20-20260814-1617",
+      "main/runs/EP04/EP04-machine-assisted-draft-20260817-002"
+    ],
+    "reviewer": "熊镇正",
+    "date": "2026-08-17"
+  },
+  "context_seconds": 5.0,
+  "min_candidate_seconds": 0.1,
+  "opening_protection_seconds": 6.0,
+  "closing_protection_seconds": 6.0,
+
+  "boundary_strategy": {
+    "schema_version": "candidate-boundary-strategy-v1",
+    "note": "V19 新增字段：明确各 candidate_kind 的 boundary 提取策略。V18 及以前隐式行为参见 delivery_orchestrator.snap_candidate_boundaries；本字段将成为下游 orchestrator 的显式契约参数。",
+    "filler_hesitation": {
+      "mode": "entire_word_asr_bounds",
+      "start_pad_seconds": 0.0,
+      "end_pad_seconds": 0.0,
+      "snap_to_activity_edges": true,
+      "snap_max_widen_seconds": 0.05,
+      "note": "取词的 ASR start_seconds/end_seconds 全长；两侧最多向外扩 50ms snap 到能量活动边缘避免半字残留；下游 rendering_gate crossfade 消爆音"
+    },
+    "immediate_repetition": {
+      "mode": "extend_to_last_repeat_occurrence",
+      "start_source": "first_repeat_word_asr_start",
+      "end_source": "last_repeat_word_asr_end",
+      "start_pad_seconds": 0.0,
+      "end_pad_seconds": 0.0,
+      "keep_semantics": "cut_all_but_one_of_the_repeat_chain",
+      "which_to_keep": "last",
+      "note": "V18 只覆盖第一个词的中间部分 → V19 扩到整个连续重复链；剪掉除最后一次外的全部同词重复。'因为因为' 剪第 1 个保第 2 个。"
+    },
+    "global_long_pause": {
+      "mode": "silence_span_with_head_tail_ladder",
+      "head_tail_ladder_ref": "global_long_pause.retention_by_original_silence",
+      "note": "保留 v18 的分级 head_tail 保留策略；boundary 由该 ladder 决定"
+    },
+    "self_correction": {
+      "mode": "corrected_span_bounds",
+      "note": "占位：self_correction 类型的 candidate 尚未在 v18/v19 rules 里生成；说错重来的具体 boundary 需要新一版 rules 添加 detection；本字段先声明契约，未来实施用"
+    }
+  },
+
+  "filler_hesitation": {
+    "enabled": true,
+    "strong_tokens": ["呃", "额", "唔", "唉", "哎", "哦", "uh", "um", "er", "erm"],
+    "acknowledgement_tokens": ["嗯"],
+    "acknowledgement_handling": "auto_preserve_without_reliable_speaker_attribution",
+    "acknowledgement_single_min_seconds": null,
+    "acknowledgement_dense_window_seconds": null,
+    "acknowledgement_dense_min_count": null,
+    "weak_tokens": ["啊", "那个", "这个", "就是", "然后", "对", "那個", "這個", "然後", "對", "就是說", "这据", "這据", "這據"],
+    "strong_min_consecutive": 1,
+    "weak_min_consecutive": 2,
+    "max_gap_seconds": 0.6,
+    "weak_max_gap_seconds": 0.6,
+    "weak_min_duration_seconds": 0.1,
+    "weak_max_duration_seconds": 0.6,
+    "weak_density_window_seconds": 5.0,
+    "weak_max_candidates_per_window": 5,
+    "cross_mic_event_merge_gap_seconds": 0.25,
+    "same_token_boundary_jitter_seconds": 0.08,
+    "note": "词表 & 门禁沿用 v18；V19 只加 boundary_strategy.filler_hesitation.mode=entire_word_asr_bounds"
+  },
+
+  "immediate_repetition": {
+    "enabled": true,
+    "candidate_kind": "immediate_repetition",
+    "min_phrase_chars": 2,
+    "max_phrase_chars": 6,
+    "max_gap_seconds": 0.6,
+    "exclude_tokens": ["嗯"],
+    "stutter_signature": {
+      "duration_asymmetry_ratio": 0.3,
+      "very_tight_gap_seconds": 0.15,
+      "markers": ["呃", "额", "嗯", "uh", "um"]
+    },
+    "stutter_signature_role": "confidence_boost_only_not_nomination_gate",
+    "note": "词表 & 门禁沿用 v18；V19 只加 boundary_strategy.immediate_repetition.mode=extend_to_last_repeat_occurrence"
+  },
+
+  "sentence_position_gate": {
+    "enabled": true,
+    "d6_id": "D6",
+    "applies_to_candidate_kinds": ["filler_hesitation"],
+    "block_positions": ["clause-mid", "cross-clause", "unknown"],
+    "allow_positions": ["clause-boundary", "clause-head", "clause-tail", "clause-tail-or-head"],
+    "head_tail_word_window": 1,
+    "missing_semantic_context": "block_and_preserve",
+    "note": "沿用 v18"
+  },
+
+  "confidence_policy": {
+    "enabled": true,
+    "tiers": ["high", "mid", "low"],
+    "review_tiers": ["high", "mid"],
+    "low_tier_action": "auto_preserve_not_sent_to_review",
+    "never_auto_cut": true,
+    "strong_hesitation_sound": "high",
+    "repeated_weak_filler": "mid",
+    "immediate_repetition_with_stutter_signature": "high",
+    "immediate_repetition_without_stutter_signature": "mid",
+    "global_long_pause": "high",
+    "note": "V19: confidence_policy.never_auto_cut 仍然是 true 在 rules 层。auto-cut 是否发生由 policy_v2 里 G-007 whitelist + label_learning_driver 决定，rules 只提供 nomination + boundary"
+  },
+
+  "global_long_pause": {
+    "enabled": true,
+    "detection_hint_seconds": 0.6,
+    "min_silence_seconds": 1.1,
+    "max_silence_seconds": 12.0,
+    "retention_by_original_silence": [
+      {"max_silence_seconds": 1.0, "head_tail_seconds": 0.1},
+      {"max_silence_seconds": 2.0, "head_tail_seconds": 0.2},
+      {"max_silence_seconds": 3.0, "head_tail_seconds": 0.3},
+      {"max_silence_seconds": null, "head_tail_seconds": 0.4}
+    ],
+    "activity_merge_gap_seconds": 0.05,
+    "acoustic_frame_seconds": 0.05,
+    "max_frame_rms_dbfs": -38.0,
+    "max_frame_peak_dbfs": -20.0,
+    "note": "沿用 v18；V19 boundary_strategy.global_long_pause 引用本节 retention_by_original_silence 作为 head_tail ladder"
+  },
+
+  "cross_track_guard": {
+    "conflicting_word_overlap_seconds": 0.15,
+    "note": "沿用 v18"
+  },
+
+  "rendering_gate": {
+    "speech_cut_crossfade_ms": 100,
+    "pause_boundary_crossfade_ms": 50,
+    "curve": "qsin",
+    "fallback_curve": "tri",
+    "note": "沿用 v18"
+  }
+}

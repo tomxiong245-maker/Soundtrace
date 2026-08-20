@@ -1,0 +1,126 @@
+{
+  "schema_version": "cut-parameters-v1",
+  "generated_at": "2026-08-18T08:12:54.496644Z",
+  "source": "mentor gold edl reverse (EP03 56 + EP04 3) + workflow gold-cut-mining",
+  "run_id": "EP04-GOLD-EDL-20260818-1548",
+  "workflow_id": "wf_3d971f6f-975",
+  "how_to_cut_defaults": {
+    "crossfade_ms": {
+      "default": 50,
+      "override_by_semantic_class": {
+        "long_pause": 200,
+        "semantic_boundary": 50,
+        "immediate_rep": 50,
+        "self_correction": 50,
+        "filler_hesitation": 50
+      },
+      "override_by_episode_profile": {
+        "EP03_style_dialog": 50,
+        "EP04_style_long_pause": 200
+      },
+      "clamp": "min(target_samples, cut_duration_samples - 128 safety)",
+      "reject_modulators": [
+        "duration_ms",
+        "cut_lands_in_silence_gap",
+        "cross_track_speaking",
+        "abs(rms_before-rms_after)"
+      ]
+    },
+    "gap_before_ms": {
+      "target_range": [
+        120,
+        300
+      ],
+      "hard_reject_below_and_not_in_silence": 50,
+      "median_observed": 180,
+      "p25": 120,
+      "p75": 260
+    },
+    "gap_after_ms": {
+      "target_range": [
+        120,
+        450
+      ],
+      "median_observed": 280,
+      "p25": 120,
+      "p75": 440,
+      "prefer_tail_heavier_ratio": 0.9
+    },
+    "boundary_offset_from_silence_edge_ms": {
+      "prefer_min": 76,
+      "target": 300,
+      "cap": 300,
+      "observed_14_of_27_at_cap": true
+    },
+    "rms_diff_soft_db": 15,
+    "rms_diff_hard_db": 25,
+    "rms_middle_hump_ok_if_not_in_silence": true,
+    "pause_ms_after_cut": 0,
+    "asymmetric_head_pad_by_class": {
+      "filler_hesitation": {
+        "gap_before": 210,
+        "gap_after": 110
+      },
+      "pause": {
+        "gap_before": 100,
+        "gap_after": 120
+      },
+      "boundary_review": {
+        "gap_before": 180,
+        "gap_after": 300
+      }
+    }
+  },
+  "cut_verify_thresholds": {
+    "_authoritative_source": "skills/cut-verify/2026-08-19-0040-cut-verify-landing-and-EP04-delivery.md",
+    "_note": "本段所有数值以落地报告为唯一权威。数值任何差异以落地报告为准修正本段。变更需以新一份落地报告为凭据（含 run 目录 + SHA + A/B 用户 accept 证据）。",
+    "check1_hallucination": {
+      "prob_threshold": 0.6,
+      "applies_to_kinds": ["filler_hesitation", "immediate_repetition"],
+      "evidence": "EP04 C007 呃 prob=0.4876 · C014 go prob=0.460 · 正常词>0.75"
+    },
+    "check2_silence_location": {
+      "silence_thresh_db": -40.0,
+      "min_silence_len_ms": 100,
+      "context_window_s": 1.5,
+      "evidence": "EP04 7 候选实测 · pydub.silence.detect_silence 参数"
+    },
+    "check4_route_crossfade_strategy": {
+      "butt_splice_crossfade_ms": 0,
+      "butt_splice_room_tone_pad_ms": 10,
+      "boundary_crossfade_ms": 50,
+      "content_zone_human_review_crossfade_ms": 100,
+      "priority_levels": {
+        "P1": "REJECT_LOW_PROB_HALLUCINATION -> REMOVE_FROM_EDL",
+        "P2": "RHYTHM_INVALID_NEGATIVE_GAP -> REMOVE_FROM_EDL",
+        "P3": "RHYTHM_TOO_TIGHT -> NEEDS_HUMAN_REVIEW",
+        "P4": "CUT_IN_SILENCE_BUTT_SPLICE_OK -> BUTT_SPLICE",
+        "P5": "CUT_SPANS_BOUNDARY -> CROSSFADE_50MS",
+        "P6": "CUT_IN_CONTENT_ZONE -> CROSSFADE_100MS_HUMAN_REVIEW",
+        "P7": "fallback -> CROSSFADE_50MS"
+      }
+    },
+    "filler_asr_word_expansion": {
+      "enabled_for_kinds": ["filler_hesitation", "immediate_repetition"],
+      "post_expansion_crossfade_ms": 50,
+      "evidence": "C007 385->680ms · C044 426->720ms · EP04 v04 用户 accept · session_feedback rule filler_cut_use_full_asr_word_range_plus_50ms_xfade"
+    }
+  },
+  "num_gold_cuts_analyzed": 59,
+  "episode_split": {
+    "EP03": 56,
+    "EP04": 3
+  },
+  "provenance_notes": [
+    "参数值来自 mentor gold cut 分布 (workflow synthesis top_findings + lens key_statistics)",
+    "样本量小 · 尤其 EP04 只 3 条 · 需要 >=3 集额外 gold 数据 (challenger 建议)",
+    "cross_track_speaking 目前定义有 bleed 假阳 · 需 speaker_map 差异化重定义"
+  ],
+  "next_calibration": [
+    "拉取 >=3 集额外 gold 数据（尤其含 intra-episode xfade 变化的集），验证 xfade 是 per-episode constant 还是 per-project constant——目前 EP03/EP04 各自恒定，无法区分。",
+    "构造 cross_track_speaking=false 的样本切片（单轨或明确单人段），验证重定义后的 flag 是否恢复信号；并检测重定义后 EP04 C034/C044 是否翻转为 False。",
+    "扩大 self_correction 样本至 n>=10（当前仅 2 例 GOLD_C027/C044+EP04_C034），验证 '全或无 & duration>=4000ms' 规则；引入自纠正 marker 词表在 EP01/EP02 反向标注。",
+    "在 EP04 之外寻找 host+guest 真重叠（非双麦 bleed）的 gold cut，确认 host-silent gate 是硬规则还是 soft prior，并测量 host 允许的最小 gap 阈值。",
+    "跑一次 challenger：用当前 generate_comprehensive_cut.py 生成候选 vs Mentor gold 做混淆矩阵，特别检查 pure_filler/rhetorical 假阳率与 semantic_boundary 假阴率，量化 '砍 filler 直觉' 造成的偏移。"
+  ]
+}

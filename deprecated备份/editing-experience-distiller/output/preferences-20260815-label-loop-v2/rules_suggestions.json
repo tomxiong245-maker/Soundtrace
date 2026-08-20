@@ -1,0 +1,249 @@
+{
+  "schema_version": "preference-rules-suggestions-v1",
+  "snapshot_id": "preferences-20260815-label-loop-v2",
+  "rules": [
+    {
+      "rule_id": "H-001",
+      "reason_key": "filler_hesitation",
+      "proposed_text_normalized": "对",
+      "clause_position": null,
+      "accept_count": 0,
+      "reject_count": 2,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP04-filler-global-pause-v1-r2-20260812::C001::8f89a8b8563d",
+        "EP04::EP04-review-3cadf0f352f2::C001"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-002",
+      "reason_key": "filler_hesitation",
+      "proposed_text_normalized": "对对",
+      "clause_position": null,
+      "accept_count": 2,
+      "reject_count": 1,
+      "signal": "historical_accept",
+      "case_ids": [
+        "EP04-filler-global-pause-v1-r2-20260812::C010::8f89a8b8563d",
+        "EP03::EP03-review-00cc8692b46c::C001",
+        "EP04::EP04-review-3cadf0f352f2::C010"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-003",
+      "reason_key": "filler_hesitation",
+      "proposed_text_normalized": "对这个",
+      "clause_position": null,
+      "accept_count": 1,
+      "reject_count": 1,
+      "signal": "mixed",
+      "case_ids": [
+        "EP03::EP03-review-00cc8692b46c::C011",
+        "EP03::EP03-review-00cc8692b46c::C024"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-004",
+      "reason_key": "filler_hesitation",
+      "proposed_text_normalized": "额",
+      "clause_position": null,
+      "accept_count": 0,
+      "reject_count": 2,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP04-review-mixed-14-20260814-043428::E301::df94c9a6ff0f",
+        "EP04-review-mixed-14-20260814-043428::E303::df94c9a6ff0f"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-005",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "hello",
+      "clause_position": null,
+      "accept_count": 0,
+      "reject_count": 2,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP04-review-product-v2::C001::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C001"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-006",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "一条",
+      "clause_position": null,
+      "accept_count": 1,
+      "reject_count": 2,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP04-review-product-v2::C017::8c90d8262c85",
+        "EP03::EP03-review-00cc8692b46c::C009",
+        "EP04::EP04-review-294a5930b8a9::C017"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-007",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "一步",
+      "clause_position": null,
+      "accept_count": 0,
+      "reject_count": 2,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP04-review-product-v2::C015::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C015"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-008",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "什么",
+      "clause_position": null,
+      "accept_count": 0,
+      "reject_count": 4,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP04-review-product-v2::C039::8c90d8262c85",
+        "EP04-review-product-v2::C040::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C039",
+        "EP04::EP04-review-294a5930b8a9::C040"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-009",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "会比",
+      "clause_position": null,
+      "accept_count": 2,
+      "reject_count": 0,
+      "signal": "historical_accept",
+      "case_ids": [
+        "EP04-review-product-v2::C047::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C047"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-010",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "呵呵",
+      "clause_position": null,
+      "accept_count": 0,
+      "reject_count": 2,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP04-review-product-v2::C014::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C014"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-011",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "在上面",
+      "clause_position": null,
+      "accept_count": 2,
+      "reject_count": 0,
+      "signal": "historical_accept",
+      "case_ids": [
+        "EP04-review-product-v2::C005::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C005"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-012",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "工具",
+      "clause_position": null,
+      "accept_count": 0,
+      "reject_count": 2,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP04-review-product-v2::C041::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C041"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-013",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "我们",
+      "clause_position": null,
+      "accept_count": 2,
+      "reject_count": 0,
+      "signal": "historical_accept",
+      "case_ids": [
+        "EP04-review-product-v2::C035::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C035"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-014",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "我自己",
+      "clause_position": null,
+      "accept_count": 2,
+      "reject_count": 0,
+      "signal": "historical_accept",
+      "case_ids": [
+        "EP04-review-product-v2::C053::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C053"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-015",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "所以",
+      "clause_position": null,
+      "accept_count": 2,
+      "reject_count": 0,
+      "signal": "historical_accept",
+      "case_ids": [
+        "EP04-review-product-v2::C049::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C049"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-016",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "拿了",
+      "clause_position": null,
+      "accept_count": 2,
+      "reject_count": 0,
+      "signal": "historical_accept",
+      "case_ids": [
+        "EP04-review-product-v2::C043::8c90d8262c85",
+        "EP04::EP04-review-294a5930b8a9::C043"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    },
+    {
+      "rule_id": "H-017",
+      "reason_key": "immediate_repetition",
+      "proposed_text_normalized": "特别",
+      "clause_position": null,
+      "accept_count": 0,
+      "reject_count": 2,
+      "signal": "historical_reject",
+      "case_ids": [
+        "EP03::EP03-review-00cc8692b46c::C021",
+        "EP03::EP03-review-00cc8692b46c::C022"
+      ],
+      "policy": "review_priority_only; never creates human_accept or autocut permission"
+    }
+  ],
+  "policy": "review_priority_only"
+}

@@ -1,0 +1,122 @@
+# A/B Clip 生成 SOP · v1（2026-08-18）
+
+> **状态**：Draft · 待用户 confirm 后写入 CLAUDE.md §17 硬规则
+> **来源**：融合 18 条 session_feedback + YouTube § 2 § 5 学习经验
+> **修的问题**：v208/v209/v210 剪辑痕迹明显 · 用户"一塌糊涂"
+
+## 0. 数据源（必须）
+
+- **主源** · `automix speech.mono.wav`（automix_v1 处理后的语义并轨）
+- **Room tone 源** · **raw 三轨**（同一录制条件）· 不能用 automix 后（那里 duck 混了其他人）
+
+## 1. 候选筛选（生成候选前）
+
+按 CLAUDE.md §14 · 加载 `session_feedback.jsonl` 挡：
+- **never_cut** verdict 一票否决（代词 / GoGoFlow / 主持人 backchannel / 跨轨附和 / 长停顿全轨未静默 / ASR 幻觉）
+- **代词永远不剪**（无 chain 限制 · 用户第 3 次强调）
+- **英文碎片邻居**（GoGoFlow.go）
+- **ASR probability < 0.6**（"额"类）
+
+## 2. 边界确定（YouTube § 2）
+
+**不在 ASR 词 boundary 硬切**，要：
+1. **MFA 音素级 alignment** 精确到词起止
+2. **切点向前扩 30-50ms** 保留辅音起音 → 放进后段 crossfade
+3. **切点向后扩 30-50ms** 保留元音尾音 → 放进前段 crossfade
+4. **不"挤"相邻词** —— 剪辑区间必须**给后段起音留呼吸**
+
+## 3. Room tone 提取（YouTube § 5）
+
+**必须从原始录音（raw 三轨）** · 不用 automix：
+
+```
+for each raw track:
+    找 5+ 个 500ms 段, 满足:
+      - RMS < -40 dBFS (真安静)
+      - 无 ASR word overlap
+      - 距离剪切点 < 30s (同一录制条件)
+    挑最长最安静那段作 room tone
+```
+
+**禁止**：
+- 用 pydub.silence 从 automix 提（混了别的声）
+- 用 `anullsrc` 纯静音（数字零 · 无底噪）
+- 循环 aloop（周期性 · 人耳识破）
+
+**允许**：
+- 同段 room tone **反向拼接**（避免循环节奏）
+- **noisereduce spectral profile match** 让 room tone 频谱匹配剪口两侧
+
+## 4. 拼接（YouTube § 2 · pydub 装了必用）
+
+**方法（按优先级）**：
+
+**A · pydub crossfade + 起音保留 + 真 room tone**（推荐）：
+```python
+front = automix[ctx_start : cut_start_ext]  # cut_start_ext = MFA start + 30ms 保留辅音
+room = raw_track[quietest_500ms_near_cut]  # 反向拼接不循环
+back = automix[cut_end_ext : ctx_end]  # cut_end_ext = MFA end - 30ms 保留起音
+crossfade_len = 100ms  # 中文长辅音
+
+merged = front.append(room, crossfade=crossfade_len)
+                .append(back, crossfade=crossfade_len)
+```
+
+**B · ffmpeg acrossfade + room tone**（fallback）
+**禁止 · concat + anullsrc + afade 20ms**（v208 bug）
+
+## 5. Pause 长度（v20.7 校准 + 上下文自适应）
+
+| 上下文 | Pause |
+|---|---|
+| immediate_repetition + 附近有 segment_separator（然后 / 第X）| **300-400ms** |
+| immediate_repetition + 句中 | **150-200ms** |
+| filler 单字（呃 / 嗯）+ 句中 | **40-80ms** |
+| self_correction paraphrase | **200-300ms**（both_spans）|
+| **代词重复** | **never_cut**（不产生候选）|
+| 全轨静默的长停顿 | **500ms**（保头尾 300ms room tone）|
+
+## 6. 音量 & 响度
+
+- 剪 clip 最终 loudnorm 到 -22.2 LUFS（与成品一致）
+- 前段 / room / 后段的 RMS 匹配（差 > 3dB 时用 pydub.normalize 或 gain）
+
+## 7. 生成后自检（禁止直接送用户）
+
+**每对 A/B 必须过 4 层自检**（自动跑 · 不通过重做）：
+1. `silencedetect` 检查剪 clip 里**无 pause_ms 以外的静音段** → 有 = 剪口漏
+2. `astats` 比较前段/后段 RMS · 差 > 5dB 报 warn
+3. **Waveform diff** 剪口前 100ms / 后 100ms 频谱差 < 20 dB
+4. 时长检查 · 剪 clip = 原 clip - (cut_range) + pause_ms（误差 < 20ms）
+
+## 8. 违反 SOP 的后果
+
+- 剪辑痕迹明显 · 用户 reject
+- 候选级问题（代词 / backchannel）→ 生成前**应该已被 session_feedback G7 挡**
+- 方法级问题（concat 硬拼 · anullsrc 静音 · raw amix 现场）→ **破坏 CLAUDE.md §9/§15/§16**
+
+## 9. 一次 A/B 生成流程（工程化）
+
+```
+1. 加载 session_feedback.jsonl → 挡 never_cut
+2. 加载 automix speech.mono.wav (源)
+3. 加载 raw 三轨 (room tone 源)
+4. 对每候选:
+    a. MFA 精确边界
+    b. 保留起音扩 30ms → cut_start_ext, cut_end_ext
+    c. Raw track 找最安静 500ms room tone
+    d. pydub crossfade 100ms 拼接: front + room + back
+    e. Loudnorm -22.2
+    f. 自检 4 层 (silence/RMS/spectral/duration)
+    g. 通过才 export mp3
+5. 生成 manifest.json 记 SOP 参数
+```
+
+## 附 · 与 v208/v209/v210 的差异
+
+| 版本 | 源 | Room tone 源 | 起音保留 | Crossfade | 自检 |
+|---|---|---|---|---|---|
+| v208 | automix | anullsrc（静音）| ❌ | afade 20ms + concat | ❌ |
+| v209 | automix | automix 里最安静 | ❌ | ffmpeg acrossfade 50ms | ❌ |
+| v210 | automix | pydub.silence（automix）| ❌ | pydub crossfade 80ms | ❌ |
+| **v211** | automix | **raw 三轨** | **✅ 30ms** | **pydub 100ms** | **✅ 4 层** |

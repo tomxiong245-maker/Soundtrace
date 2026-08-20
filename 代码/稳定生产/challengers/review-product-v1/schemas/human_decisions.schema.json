@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://minglue.local/review-product-v1/human_decisions.schema.json",
+  "title": "Human Decisions · review-product-v1",
+  "description": "P1 审核决定契约。fail-closed：缺字段、pending、重复、未知 candidate、reviewer 为空、旧试听、旧 package、越界、篡改 → validator 拒绝。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "package_id",
+    "review_manifest_sha256",
+    "reviewer",
+    "session_started_at",
+    "session_ended_at",
+    "decisions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["human-decisions-v1"]
+    },
+    "package_id": {
+      "type": "string",
+      "pattern": "^EP[0-9]{2,}-review-product-v1-[0-9]{8}-[0-9]{4}$"
+    },
+    "review_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "必须与 review_package.review_manifest_sha256 相等"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 2,
+      "description": "真人输入；validator 拒绝空字符串、'null'、'Agent'、'system'、'renting'（防硬编码）之外的自动填充"
+    },
+    "session_started_at": { "type": "string", "format": "date-time" },
+    "session_ended_at":   { "type": "string", "format": "date-time" },
+    "decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/decision" }
+    }
+  },
+  "definitions": {
+    "decision": {
+      "type": "object",
+      "required": [
+        "candidate_id",
+        "candidate_semantic_sha256",
+        "decision",
+        "reviewer",
+        "decided_at",
+        "listened_at",
+        "listened_preview_sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "candidate_id": { "type": "string", "pattern": "^C[0-9]+$" },
+        "candidate_semantic_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "decision": {
+          "type": "string",
+          "enum": ["accept", "reject", "adjust"],
+          "description": "禁止导出 pending；validator 若见到即拒绝。"
+        },
+        "reviewer": { "type": "string", "minLength": 2 },
+        "decided_at":  { "type": "string", "format": "date-time" },
+        "listened_at": { "type": "string", "format": "date-time" },
+        "listened_preview_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "adjust 后必须是新试听的 SHA；不得等于旧 preview"
+        },
+        "adjustment": {
+          "type": "object",
+          "required": [
+            "new_start_sample",
+            "new_end_sample",
+            "crossfade_ms",
+            "reprocessed_preview_sha256"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "new_start_sample": { "type": "integer", "minimum": 0 },
+            "new_end_sample":   { "type": "integer", "minimum": 1 },
+            "crossfade_ms": {
+              "type": "integer",
+              "minimum": 20,
+              "maximum": 80
+            },
+            "reprocessed_preview_sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "decision": { "const": "adjust" } } },
+          "then": { "required": ["adjustment"] }
+        }
+      ]
+    }
+  }
+}

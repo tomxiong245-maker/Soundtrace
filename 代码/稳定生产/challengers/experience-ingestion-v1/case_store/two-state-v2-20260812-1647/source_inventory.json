@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-08-12T16:49:54+0800",
+  "sources": {
+    "EP03-review-product-v1": {
+      "label": "EP03-review-product-v1",
+      "episode_id": "EP03",
+      "run_dir": "main/runs/EP03-review-product-v1",
+      "files": {
+        "human_decisions.json": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "review_session_metrics.json": "ab012163d17c084a74bcf7c815351094e17a169878d7c9045ace3405d70e79eb",
+        "approved.edl.draft.json": "3a9961d67759dac61238b8b319ed3bb221e9d86d1c0e57372b73899ecf6aa656",
+        "review_bundle/review_package.json": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8"
+      },
+      "baseline_match": true
+    },
+    "EP04-review-product-v2": {
+      "label": "EP04-review-product-v2",
+      "episode_id": "EP04",
+      "run_dir": "main/runs/EP04-review-product-v2",
+      "files": {
+        "human_decisions.json": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "review_session_metrics.json": "0bada32cdebba07fbe6c923d10189df8a1257c8a5f2d1cdc4581125c195de4c3",
+        "approved.edl.draft.json": "87a1f4f51e2c2ef788d95581b848073a2122fdc5d324524fcede446148e5a148",
+        "review_bundle/review_package.json": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c"
+      },
+      "baseline_match": true
+    },
+    "EP04-filler-global-pause-v1-r2-20260812": {
+      "label": "EP04-filler-global-pause-v1-r2-20260812",
+      "episode_id": "EP04",
+      "run_dir": "main/runs/EP04-filler-global-pause-v1-r2-20260812",
+      "files": {
+        "human_decisions.json": "8f89a8b8563dbb4f98cd6f2a7709efd356d5f9dd65e35d2a49e6e77ffd4362a8",
+        "review_session_metrics.json": "4b060149c541ff5c46e5215167655a6a39644a1001185e6d8c2ca17b5c18547b",
+        "approved.edl.draft.json": "",
+        "review_bundle/review_package.json": "825e28639946021da96609f76b4c9c9ebbf0bb285d75afdad9ded8a86d94d341",
+        "bridge_report.json": "543d9b505285206b23f0768bfa966b0c6f91a9684191282f87df9d5002543da3",
+        "review_bundle-final/review_package.json": "cc4eb71b65035fd8548f5e924b5f8f109f55e0c9f4816043565f4493aa7cc57d"
+      },
+      "baseline_match": true
+    },
+    "EP03-bulk-accept": {
+      "label": "EP03-bulk-accept",
+      "episode_id": "EP03",
+      "run_dir": "main/runs/EP03",
+      "files": {
+        "human_decisions.json": "b138aedb7131901de4451423409f724b3182f5d298f1dbac07805ba82e300ae7"
+      },
+      "baseline_match": true
+    }
+  }
+}

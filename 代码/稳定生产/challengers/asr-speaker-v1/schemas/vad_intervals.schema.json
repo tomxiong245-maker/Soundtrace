@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "asr-speaker-v1/vad_intervals",
+  "title": "Normalized VAD / speech intervals for one benchmark segment + one track",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "engine",
+    "engine_version",
+    "segment_id",
+    "source_track",
+    "source_audio_sha256",
+    "sample_rate_hz",
+    "intervals"
+  ],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "engine": {"type": "string"},
+    "engine_version": {"type": "string"},
+    "segment_id": {"type": "string"},
+    "source_track": {"type": "string"},
+    "source_audio_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "sample_rate_hz": {"type": "integer"},
+    "segment_start_offset_seconds_in_ep03": {"type": "number"},
+    "intervals": {
+      "type": "array",
+      "items": {"$ref": "speaker_interval.schema.json"}
+    }
+  },
+  "additionalProperties": false
+}

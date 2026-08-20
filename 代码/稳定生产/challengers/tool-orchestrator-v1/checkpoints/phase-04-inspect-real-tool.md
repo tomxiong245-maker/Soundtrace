@@ -1,0 +1,36 @@
+# Phase 4 Checkpoint · Real read-only tool wired in
+
+- task_id: phase-04-inspect-real-tool
+- saved_at: 2026-08-12
+- status: completed
+- objective: 把 Champion 只读工具 `inspect_audio.py` 通过 Challenger adapter + runner 真调一次，从 config 到 HUMAN_REVIEW_REQUIRED；同时保留一次真实的 FAILED 事件作为失败证据。
+- files_changed:
+    - `稳定生产/challengers/tool-orchestrator-v1/adapters/inspect_audio_adapter.py` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/registries/adapters.tools.json` (新增)
+    - `main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-20260812-010424/**` (新增；含合成 3 条 mono 48kHz WAV、失败的 run)
+    - `main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-20260812-010506/**` (新增；含合成 WAV 拷贝、成功的 run)
+    - `稳定生产/challengers/tool-orchestrator-v1/runner/runner.py` (小改：`--project-root`，`params` 支持 list 展开)
+- files_untouched:
+    - `端到端学习剪辑/代码/inspect_audio.py` (Champion，只是被 subprocess 调用；SHA 由 registry 校验器复算)
+    - `main/tools/tools.json`
+    - `main/orchestrator.py`
+    - 任何既有 EP03/EP04 run
+- commands_run:
+    - `python3 -c "..."` 生成 3 条合成 48kHz mono WAV
+    - `runner.py create --registry <adapter-registry> --project-root .`
+    - `runner.py run --run-dir <RUN2>/run`
+    - `head 01_inspect/inspection.json`
+- automated_tests: 复用 Phase 1/2 测试 (14/14 通过)。真实 subprocess 运行不作为测试断言，只作为运行证据。
+- real_audio_run:
+    - 输入：3 条 Challenger 自建的合成 tone WAV（220/330/440 Hz、48 kHz mono、2s、SHA 落盘）。
+    - 输出：`main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-20260812-010506/run/01_inspect/inspection.json`，schema_version=1，`inputs` 列出 3 条轨的 sha256/duration/channels/bits_per_sample。
+    - Runner 最终状态：`HUMAN_REVIEW_REQUIRED`。**未继续任何 post-review 步骤，也未自动 approve。**
+- evidence:
+    - 成功 run：`state.json` 含 CREATED → PLAN_FROZEN → RUNNING → HUMAN_REVIEW_REQUIRED 历史，`completed_step_ids=["01_inspect_all"]`；`tool_calls.jsonl` 1 行；`run_manifest.json` 记录 `output_json` 的路径与 SHA。
+    - 失败 run（保留）：`main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-20260812-010424`，`state=FAILED`，`stderr` 记录 "Champion inspect_audio not found"（adapter 的 PROJECT_ROOT bug）。修复后 SHA 变化被 runner 拒绝复用旧 run，符合 fail-closed 设计。
+- known_failures: 无（失败已修复并保留证据；Champion 未动）。
+- next_action: Phase 5 补齐 11 类失败场景测试；Phase 6 用同 fixture 加一个 mock post-tool 或链式步骤，验证多步管线。
+- context_for_next_worker:
+    - Runner 现在支持两个来源的注册表：Champion `main/tools/tools.json` 与 Challenger 的 `registries/adapters.tools.json`。前者名字/参数固定，本轮不改；后者用于把 Champion 脚本包成 runner 期望的 `--<param>` 形式。
+    - `params` 允许 list 值（如 `input_wav` 多轨）；runner 会 fan out 成重复 flag。
+    - 每次 adapter 源码变动都会引起 script SHA 变化 → runner `run` 时 fail closed。必须开新 run 目录，永远不覆盖旧目录。

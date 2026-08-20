@@ -1,0 +1,58 @@
+{
+  "plan_id": "EP04-v2-20260812-1730",
+  "episode_id": "EP04",
+  "run_dir": "main/runs/EP04-v2-20260812-1730",
+  "sample_rate_hz": 48000,
+  "inputs": {
+    "tracks": [
+      {"track_id": "track_01",
+       "wav": "main/runs/EP04-p0-20260811/04_denoise/track_01.denoised.wav",
+       "canonical": "main/runs/EP04-filler-global-pause-v1-r2-20260812/canonical_transcripts/track_01.canonical.json"},
+      {"track_id": "track_02",
+       "wav": "main/runs/EP04-p0-20260811/04_denoise/track_02.denoised.wav",
+       "canonical": "main/runs/EP04-filler-global-pause-v1-r2-20260812/canonical_transcripts/track_02.canonical.json"},
+      {"track_id": "track_03",
+       "wav": "main/runs/EP04-p0-20260811/04_denoise/track_03.denoised.wav",
+       "canonical": "main/runs/EP04-filler-global-pause-v1-r2-20260812/canonical_transcripts/track_03.canonical.json"}
+    ]
+  },
+  "steps": [
+    {"id": "classify_activity",
+     "tool": "orchestrator-e2e-v1/classify_activity_local.py",
+     "out": "01_inputs/activity"},
+    {"id": "candidates_crosstalk",
+     "tool": "crosstalk-candidate-v1/detect_crosstalk_candidates.py",
+     "out": "02_candidates/crosstalk.candidates.json"},
+    {"id": "candidates_self_correction",
+     "tool": "self-correction-v1/detect_self_correction.py",
+     "out": "02_candidates/self_correction.candidates.json"},
+    {"id": "candidates_transient",
+     "tool": "transient-events-v1/detect_transient_events.py",
+     "out": "02_candidates/transient.candidates.json"},
+    {"id": "candidates_merge",
+     "tool": "orchestrator-e2e-v1/merge_candidates.py",
+     "in": ["02_candidates/crosstalk.candidates.json",
+            "02_candidates/self_correction.candidates.json",
+            "02_candidates/transient.candidates.json"],
+     "out": "02_candidates/all.candidates.json"},
+    {"id": "human_review",
+     "policy": "review_only_no_automatic_accept",
+     "note": "在既有 P1 前端或 filler-global-pause 页面里逐项审核；输出到 05_review/human_decisions.json"},
+    {"id": "post_review_learning",
+     "tool": "orchestrator-e2e-v1/post_review_learn.py",
+     "in": ["05_review/human_decisions.json",
+            "02_candidates/all.candidates.json"],
+     "out": "04_learning"}
+  ],
+  "prohibited_writes": [
+    "稳定生产/rules/**",
+    "稳定生产/scripts/**",
+    "稳定生产/challengers/filler-global-pause-v1/**",
+    "稳定生产/challengers/cross-track-safety-v1/**",
+    "稳定生产/challengers/review-product-v1/**",
+    "main/tools/**",
+    "main/orchestrator/**",
+    "审核前端/**",
+    "端到端学习剪辑/代码/**"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "schema_version": "gold-edl-v1",
+  "episode_id": "EP04",
+  "source": "EP04-DELIVERY-20260817-1427 (mentor + Sophie 双审通过)",
+  "provenance_chain": [
+    "raw_3_tracks → automix_v1 (no EDL) → speech.mono.wav",
+    "+ machine_assisted_draft.edl.json (3 cuts)",
+    "= EP04-V21.mp3 machine_assisted_draft",
+    "+ ffmpeg loudnorm two-pass (改响度不改内容)",
+    "= EP04_codex_loudnorm_corrected.mp3 (mentor + Sophie 审)"
+  ],
+  "gold_cuts": [
+    {
+      "gold_cut_id": "GOLD_C007",
+      "candidate_id": "C007",
+      "start_sample": 17003059,
+      "end_sample": 17021547,
+      "start_seconds": 354.2303958333333,
+      "end_seconds": 354.6155625,
+      "duration_ms": 385.16666666666663,
+      "pause_ms_in_gold": 0.0,
+      "provenance": "EP04-machine-assisted-draft-20260817-002/machine_assisted_draft.edl.json"
+    },
+    {
+      "gold_cut_id": "GOLD_C034",
+      "candidate_id": "C034",
+      "start_sample": 83687520,
+      "end_sample": 83720160,
+      "start_seconds": 1743.49,
+      "end_seconds": 1744.17,
+      "duration_ms": 680.0,
+      "pause_ms_in_gold": 0.0,
+      "provenance": "EP04-machine-assisted-draft-20260817-002/machine_assisted_draft.edl.json"
+    },
+    {
+      "gold_cut_id": "GOLD_C044",
+      "candidate_id": "C044",
+      "start_sample": 108881309,
+      "end_sample": 108901743,
+      "start_seconds": 2268.3606041666667,
+      "end_seconds": 2268.7863125,
+      "duration_ms": 425.70833333333337,
+      "pause_ms_in_gold": 0.0,
+      "provenance": "EP04-machine-assisted-draft-20260817-002/machine_assisted_draft.edl.json"
+    }
+  ],
+  "comparison_with_current_system": {
+    "system_cuts": [
+      "C007",
+      "C014",
+      "C023",
+      "C034",
+      "C036",
+      "C039",
+      "SC005"
+    ],
+    "gold_cuts_ids": [
+      "C007",
+      "C034",
+      "C044"
+    ],
+    "matched": [
+      "C007",
+      "C034"
+    ],
+    "system_extra_over_cut": [
+      "C014",
+      "C023",
+      "C036",
+      "C039",
+      "SC005"
+    ],
+    "gold_missing_in_system": [
+      "C044"
+    ],
+    "precision": "2/7 = 28.6%",
+    "recall": "2/3 = 66.7%"
+  },
+  "learned_mentor_rules": {
+    "cuts_accepted": [
+      "C007",
+      "C034",
+      "C044"
+    ],
+    "cuts_rejected_after_review": [
+      "C014",
+      "C023",
+      "C036",
+      "C039",
+      "SC005"
+    ],
+    "mentor_metadata": {
+      "no_pause_insert": true,
+      "no_crossfade": true,
+      "prefers_content_word_only": true
+    }
+  }
+}

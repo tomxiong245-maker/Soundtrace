@@ -1,0 +1,52 @@
+{
+  "_FROZEN_2026-08-19_LLM_TAKEOVER": {
+    "value": true,
+    "reason": "LLM 主导 · rules 冻结作 fallback",
+    "consumer_check": "pipeline Stage 3.5.5 走 LLM 主导 · 本 JSON 不再被消费"
+  },
+  "rules_version": "transient-events-v1",
+  "policy": "review_only_no_automatic_accept",
+  "sample_rate_hz": 48000,
+  "_field_consumers": {
+    "rules_version": "written into run manifest as fingerprint (rules_sha256 是权威 · rules_version 供人读)",
+    "policy": "detector 逐候选写 candidate['policy']=review_only_no_automatic_accept (hard-coded); 顶层字段为人读 SOT · 与 candidate 字段必须同步",
+    "sample_rate_hz": "detect_transient_events.py::detect — 消费点在 WAV 打开后, 若与 wav sr 不一致直接 ValueError (2026-08-19 落地). 避免 crest/flux 阈值按 48k 校准但 wav 是 44.1k 的隐性错配."
+  },
+  "frame_seconds": 0.010,
+  "window_seconds": 0.025,
+  "cough_like_disabled": {
+    "value": true,
+    "reason": "用户 2026-08-19 明确关闭 cough_like detector · 33/36 candidates 全是 cough 误报 · '布置' 等中文爆破辅音被误判 · ASR veto classification=unknown 完全失效 · 短期用最简单的 disable 兜底 · 未来若需要重新开 · 换 YAMNet speech classifier",
+    "disabled_at_utc": "2026-08-19T09:30:00Z",
+    "reenable_conditions": ["加 speech vs cough 分类器 (YAMNet / PANNs)", "阈值调整验证真咳嗽 recall"]
+  },
+  "cough_like": {
+    "min_duration_seconds": 0.05,
+    "max_duration_seconds": 0.40,
+    "min_peak_dbfs": -18.0,
+    "min_crest_db": 12.0,
+    "min_spectral_flux": 0.30,
+    "notes": "咳嗽：短促、瞬态、能量突增；不产生词。"
+  },
+  "mic_bump_like": {
+    "min_duration_seconds": 0.02,
+    "max_duration_seconds": 0.15,
+    "min_peak_dbfs": -14.0,
+    "min_crest_db": 8.0,
+    "min_low_energy_ratio": 0.55,
+    "notes": "碰麦：短，能量集中在低频（≤500 Hz）；crest 相对普通语音显著偏高。"
+  },
+  "thump_like": {
+    "min_duration_seconds": 0.03,
+    "max_duration_seconds": 0.30,
+    "min_peak_dbfs": -16.0,
+    "min_crest_db": 15.0,
+    "notes": "桌敲/敲击类瞬态，兜底类别。"
+  },
+  "asr_conflict": {
+    "primary_words_veto": true,
+    "primary_words_veto_ratio": 0.3,
+    "notes": "2026-08-19 修：ratio 从 0.5 降至 0.3；语义从 primary 词占比改为 speech-like 词占比（primary/unknown/None + 有 text）。unknown 视为可能语音（兼容 activity 分类器未启用场景）。"
+  },
+  "merge_gap_seconds": 0.05
+}

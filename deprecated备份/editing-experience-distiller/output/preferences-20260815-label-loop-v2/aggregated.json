@@ -1,0 +1,4233 @@
+{
+  "schema_version": "preference-aggregate-v2",
+  "snapshot_id": "preferences-20260815-label-loop-v2",
+  "total_records": 92,
+  "decisions": {
+    "reject": 56,
+    "accept": 36
+  },
+  "records": [
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C001::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C001",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 6290880,
+        "end_sample": 6322560,
+        "start_seconds": 131.06,
+        "end_seconds": 131.72,
+        "proposed_text": "去对对完",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:01:49.257Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "2f5e10f3e2e5abc28eabc845acfa6bdefda656f36e9f910f669209ef41b77603"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C006::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C006",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 13300320,
+        "end_sample": 13328160,
+        "start_seconds": 277.09,
+        "end_seconds": 277.67,
+        "proposed_text": "还是移动端移",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:02:06.539Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "88aeace9b35986f4b1a77691bf964dbcd8ef34e8114ae44f573f56a136d892d4"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C007::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C007",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 14633760,
+        "end_sample": 14667360,
+        "start_seconds": 304.87,
+        "end_seconds": 305.57,
+        "proposed_text": "一个产品管家",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:02:11.756Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "e0253770c0655aa823dcb6495f3f9ad9c5f6558e7d04c492319c7a26a929a7e4"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C009::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C009",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 23172000,
+        "end_sample": 23186400,
+        "start_seconds": 482.75,
+        "end_seconds": 483.05,
+        "proposed_text": "西一条一",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:02:41.256Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "f521bd1c81d79e7fca8280f67be3e785c932e273f186fbd124593e0e93b33503"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C011::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C011",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 26949120,
+        "end_sample": 26975040,
+        "start_seconds": 561.44,
+        "end_seconds": 561.98,
+        "proposed_text": "gent对这个产",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:03:00.627Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "05c594baae515add025f44741017cf06e44e5d58289fe4f7727973eb2bf90943"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C013::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C013",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 38831520,
+        "end_sample": 38855520,
+        "start_seconds": 808.99,
+        "end_seconds": 809.49,
+        "proposed_text": "时候人类人",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:03:21.756Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "dd645adf88fcff3338d65bafdba999ace92645d5b60a57a684fa9b5b34fbd4d2"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C014::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C014",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 39379200,
+        "end_sample": 39405120,
+        "start_seconds": 820.4000000000001,
+        "end_seconds": 820.9399999999999,
+        "proposed_text": "范然后这个花",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:03:42.671Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "e0d074c7d630a85c0fe249f30bf202960298fdec67664707da274f97a4884e04"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C018::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C018",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 48805440,
+        "end_sample": 48828480,
+        "start_seconds": 1016.7800000000001,
+        "end_seconds": 1017.26,
+        "proposed_text": "出设计",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:03:57.339Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "5e0a2c9b3d3578827db46d7f7d1f6df6f6d0fd02448cf6ea5205517339b2e12f"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C021::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C021",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 63173280,
+        "end_sample": 63191520,
+        "start_seconds": 1316.1100000000001,
+        "end_seconds": 1316.49,
+        "proposed_text": "西特别特",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:04:22.338Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "8e991383cff2e6082a9bb851ffaa50e3f3a68dc17e644697d42805c4f781669f"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C022::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C022",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 63255840,
+        "end_sample": 63275040,
+        "start_seconds": 1317.83,
+        "end_seconds": 1318.23,
+        "proposed_text": "ature特别特",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:04:42.337Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "eb57f876af1ebcd94b715314826f8b10a0d2e6dd5356f9cb39ee6a2336826fb8"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03-review-product-v1::C024::5168e5bf8329",
+      "episode_id": "runs",
+      "run_id": "EP03-review-product-v1",
+      "candidate_id": "C024",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 73634880,
+        "end_sample": 73681920,
+        "start_seconds": 1534.06,
+        "end_seconds": 1535.04,
+        "proposed_text": "对这个产",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:04:55.405Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP03-review-product-v1/human_decisions.json",
+        "decision_file_sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "package_file_relpath": "main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "package_file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-review-00cc8692b46c",
+        "review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_semantic_sha256": "768cfeadd85d1c1d56701de7fde59f4f8faa1d4cb46aba8878962e3514415154"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-filler-global-pause-v1-r2-20260812::C001::8f89a8b8563d",
+      "episode_id": "runs",
+      "run_id": "EP04-filler-global-pause-v1-r2-20260812",
+      "candidate_id": "C001",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": "filler_hesitation",
+        "source_track_id": "track_02",
+        "start_sample": 2436480,
+        "end_sample": 2456640,
+        "start_seconds": 50.76,
+        "end_seconds": 51.18,
+        "proposed_text": "对",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T06:20:55.576Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-filler-global-pause-v1-r2-20260812/human_decisions.json",
+        "decision_file_sha256": "8f89a8b8563dbb4f98cd6f2a7709efd356d5f9dd65e35d2a49e6e77ffd4362a8",
+        "package_file_relpath": "main/runs/EP04-filler-global-pause-v1-r2-20260812/review_bundle/review_package.json",
+        "package_file_sha256": "825e28639946021da96609f76b4c9c9ebbf0bb285d75afdad9ded8a86d94d341",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-3cadf0f352f2",
+        "review_manifest_sha256": "e747e86e17490815c41f3b98b1136dfbcd2f51a8dd61e1deb30ec8577936d41d",
+        "candidate_semantic_sha256": "10b7419e6206a6197bcd109a0377a6eb9ae07562d2ee8279e6c612baa440e8a9"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-filler-global-pause-v1-r2-20260812::C010::8f89a8b8563d",
+      "episode_id": "runs",
+      "run_id": "EP04-filler-global-pause-v1-r2-20260812",
+      "candidate_id": "C010",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": "filler_hesitation",
+        "source_track_id": "track_01",
+        "start_sample": 31809120,
+        "end_sample": 31850400,
+        "start_seconds": 662.69,
+        "end_seconds": 663.55,
+        "proposed_text": "对对",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T06:21:21.445Z",
+        "review_basis": "text_and_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-filler-global-pause-v1-r2-20260812/human_decisions.json",
+        "decision_file_sha256": "8f89a8b8563dbb4f98cd6f2a7709efd356d5f9dd65e35d2a49e6e77ffd4362a8",
+        "package_file_relpath": "main/runs/EP04-filler-global-pause-v1-r2-20260812/review_bundle/review_package.json",
+        "package_file_sha256": "825e28639946021da96609f76b4c9c9ebbf0bb285d75afdad9ded8a86d94d341",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-3cadf0f352f2",
+        "review_manifest_sha256": "e747e86e17490815c41f3b98b1136dfbcd2f51a8dd61e1deb30ec8577936d41d",
+        "candidate_semantic_sha256": "8bec736e07cb0e6669176e85f2d90df31116aa3d21548f3eea67d4d90c714b60"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-filler-global-pause-v1-r2-20260812::C032::8f89a8b8563d",
+      "episode_id": "runs",
+      "run_id": "EP04-filler-global-pause-v1-r2-20260812",
+      "candidate_id": "C032",
+      "candidate": {
+        "reason_key": "global_long_pause",
+        "candidate_kind": "global_long_pause",
+        "source_track_id": "track_01",
+        "start_sample": 116395920,
+        "end_sample": 116791920,
+        "start_seconds": 2424.915,
+        "end_seconds": 2433.165,
+        "proposed_text": "",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T06:21:52.761Z",
+        "review_basis": "text_and_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-filler-global-pause-v1-r2-20260812/human_decisions.json",
+        "decision_file_sha256": "8f89a8b8563dbb4f98cd6f2a7709efd356d5f9dd65e35d2a49e6e77ffd4362a8",
+        "package_file_relpath": "main/runs/EP04-filler-global-pause-v1-r2-20260812/review_bundle/review_package.json",
+        "package_file_sha256": "825e28639946021da96609f76b4c9c9ebbf0bb285d75afdad9ded8a86d94d341",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-3cadf0f352f2",
+        "review_manifest_sha256": "e747e86e17490815c41f3b98b1136dfbcd2f51a8dd61e1deb30ec8577936d41d",
+        "candidate_semantic_sha256": "9f7f1edb055a2d2563a149e861c89c023122f36877ad7406186cef2b79dea69e"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::E301::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "E301",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": "filler_hesitation",
+        "source_track_id": "male",
+        "start_sample": 78108480,
+        "end_sample": 78118080,
+        "start_seconds": 1627.26,
+        "end_seconds": 1627.46,
+        "proposed_text": "额",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:14:26.945Z",
+        "review_basis": "text_only",
+        "feedback": "不要剪，额度是一个词"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "9bb2f868424ec6035f2509a454ddd93381d9105703b62c39a19ceff96e8f169c"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::E302::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "E302",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": "filler_hesitation",
+        "source_track_id": "male",
+        "start_sample": 74270400,
+        "end_sample": 74276160,
+        "start_seconds": 1547.3,
+        "end_seconds": 1547.42,
+        "proposed_text": "er",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:15:09.313Z",
+        "review_basis": "text_only",
+        "feedback": "一个完整的单词，为什么要剪"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "c8d8d073da67fac619523e4332ff9b8931b15ad2c81d1b3e989c77d2cd49074e"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::E303::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "E303",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": "filler_hesitation",
+        "source_track_id": "female",
+        "start_sample": 78109440,
+        "end_sample": 78119040,
+        "start_seconds": 1627.28,
+        "end_seconds": 1627.48,
+        "proposed_text": "额",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:15:15.446Z",
+        "review_basis": "text_only",
+        "feedback": "这是一个词啊"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "fca816e43023363735ea19a09ecc2a596f5273cba3fb5ae437180d30f3f76a17"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::E304::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "E304",
+      "candidate": {
+        "reason_key": "filler_weak",
+        "candidate_kind": "filler_weak",
+        "source_track_id": "female",
+        "start_sample": 40405440,
+        "end_sample": 40425600,
+        "start_seconds": 841.78,
+        "end_seconds": 842.2,
+        "proposed_text": "然后这个",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:15:40.787Z",
+        "review_basis": "text_only",
+        "feedback": "识别正确，但是剪辑痕迹明显"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "00fca2ae0f28c8e44d121f275047317e8124982c341e1a8946dac6726c84733e"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::E305::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "E305",
+      "candidate": {
+        "reason_key": "filler_weak",
+        "candidate_kind": "filler_weak",
+        "source_track_id": "female",
+        "start_sample": 26952960,
+        "end_sample": 26973120,
+        "start_seconds": 561.52,
+        "end_seconds": 561.94,
+        "proposed_text": "对这个",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:16:17.052Z",
+        "review_basis": "text_only",
+        "feedback": "不是口癖啊，是完整的词"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "2ed8927112fadc005681f1c3abd61b775bee4f82a52f28d38c93c8f5c3bfb8cc"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::E306::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "E306",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": "immediate_repetition",
+        "source_track_id": "female",
+        "start_sample": 71754240,
+        "end_sample": 71770560,
+        "start_seconds": 1494.88,
+        "end_seconds": 1495.22,
+        "proposed_text": "一个一个",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:16:46.669Z",
+        "review_basis": "text_only",
+        "feedback": "可以剪辑，但是剪辑痕迹太明显了"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "a397dfd2210fa8e43f9f2e8b1e48f2770fee05e7b490fe16e79dffe0ceebaf45"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::S022::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "S022",
+      "candidate": {
+        "reason_key": "long_pause",
+        "candidate_kind": "long_pause",
+        "source_track_id": "track_02",
+        "start_sample": 74852640,
+        "end_sample": 74886720,
+        "start_seconds": 1559.43,
+        "end_seconds": 1560.14,
+        "proposed_text": "解我这个",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:13:21.861Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "29cc7d4f277d6929d0e798cab04d3e2836a9a60490920bc33abc5c08bdc6edcf"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::S025::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "S025",
+      "candidate": {
+        "reason_key": "cough_like",
+        "candidate_kind": "cough_like",
+        "source_track_id": "track_02",
+        "start_sample": 79301280,
+        "end_sample": 79316640,
+        "start_seconds": 1652.11,
+        "end_seconds": 1652.43,
+        "proposed_text": "和框架,",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T04:50:30.710Z",
+        "review_basis": "text_with_audio",
+        "feedback": "没有咳嗽"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "4bb0745dd9929c00bcae3a62085273903c0048d3afd3992688ac2652f03697e7"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::S032::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "S032",
+      "candidate": {
+        "reason_key": "long_pause",
+        "candidate_kind": "long_pause",
+        "source_track_id": "track_01",
+        "start_sample": 98169120,
+        "end_sample": 98198400,
+        "start_seconds": 2045.19,
+        "end_seconds": 2045.8,
+        "proposed_text": "我现在",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:14:14.392Z",
+        "review_basis": "text_with_audio",
+        "feedback": "剪辑痕迹明显"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "ea855faaefacdad1236a0bd635b2b9679cf41424670ca836f17eadb3d5883e2d"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::S038::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "S038",
+      "candidate": {
+        "reason_key": "filler_immediate_repetition",
+        "candidate_kind": "filler_immediate_repetition",
+        "source_track_id": "track_01",
+        "start_sample": 103951680,
+        "end_sample": 103977599,
+        "start_seconds": 2165.66,
+        "end_seconds": 2166.2,
+        "proposed_text": "是拿了",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:12:33.613Z",
+        "review_basis": "text_with_audio",
+        "feedback": "很明显的剪辑痕迹，而且不需要剪"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "3c46902a63d153a848969f0eae7279c184653e9061b394706666951f5631d762"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::S047::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "S047",
+      "candidate": {
+        "reason_key": "long_pause",
+        "candidate_kind": "long_pause",
+        "source_track_id": "track_01",
+        "start_sample": 116417760,
+        "end_sample": 116733599,
+        "start_seconds": 2425.37,
+        "end_seconds": 2431.95,
+        "proposed_text": "",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:13:43.343Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "7652600a13b2c6b700744e13a26bc958c447efd4b1385de43723893b6f26dfd0"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::S056::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "S056",
+      "candidate": {
+        "reason_key": "filler_immediate_repetition",
+        "candidate_kind": "filler_immediate_repetition",
+        "source_track_id": "track_01",
+        "start_sample": 137379360,
+        "end_sample": 137393760,
+        "start_seconds": 2862.07,
+        "end_seconds": 2862.37,
+        "proposed_text": "我自己",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:13:00.261Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "8383ba8ff2fab79fda861f1647002fe19950d42345700b3292f15bcf1b40a809"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::S081::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "S081",
+      "candidate": {
+        "reason_key": "cough_like",
+        "candidate_kind": "cough_like",
+        "source_track_id": "track_02",
+        "start_sample": 156642240,
+        "end_sample": 156647520,
+        "start_seconds": 3263.38,
+        "end_seconds": 3263.49,
+        "proposed_text": "新",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:12:00.678Z",
+        "review_basis": "text_with_audio",
+        "feedback": "声音很轻\n为什么要见"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "c1bf0dbd608bb94dd084a3fdd925558b040fc2772e0cf2502d1c87c30553966b"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-mixed-14-20260814-043428::S082::df94c9a6ff0f",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-mixed-14-20260814-043428",
+      "candidate_id": "S082",
+      "candidate": {
+        "reason_key": "mic_bump_like",
+        "candidate_kind": "mic_bump_like",
+        "source_track_id": "track_02",
+        "start_sample": 156650400,
+        "end_sample": 156655680,
+        "start_seconds": 3263.55,
+        "end_seconds": 3263.66,
+        "proposed_text": "进",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:12:02.134Z",
+        "review_basis": "text_with_audio",
+        "feedback": "根本没有"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": [
+          "missing_review_manifest_sha256"
+        ]
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/human_decisions_and_feedback__20260814-052319.json",
+        "decision_file_sha256": "df94c9a6ff0f7d3e4b85ed4e7af8095a964c840c1a85c8d7abb8a656bf6c9d9f",
+        "package_file_relpath": "main/runs/EP04/EP04-review-mixed-14-20260814-043428/review_bundle/review_package.json",
+        "package_file_sha256": "21e1a14df6397bb8e4ec636bc31bf9bebbe0bf942c113c7526908530c13032a2",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-mixed-14-20260814-043428",
+        "review_manifest_sha256": "",
+        "candidate_semantic_sha256": "166fdd680e17601a85bbd00dd4f11617c9574d32aebf2f0628a4c244a99878eb"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C001::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C001",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 60480,
+        "end_sample": 85440,
+        "start_seconds": 1.26,
+        "end_seconds": 1.78,
+        "proposed_text": "Hello",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:13.224Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "f9d972b82b22bb75ddaaac0f0715749509d0a7abfa532b2387c1b1c1b894c76b"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C005::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C005",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 11368800,
+        "end_sample": 11392800,
+        "start_seconds": 236.85,
+        "end_seconds": 237.35,
+        "proposed_text": "在上面",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:25.779Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "346927a61351495f0a866b1889364538af85c75ad3c0c4b95deae8998bd1b54e"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C014::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C014",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 24433440,
+        "end_sample": 24489120,
+        "start_seconds": 509.03,
+        "end_seconds": 510.19,
+        "proposed_text": "呵呵",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:34.749Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "f80cae008742482c98777f2ba5a51342c350518de79e3b9a77942ce89069f559"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C015::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C015",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_03",
+        "start_sample": 24916800,
+        "end_sample": 24929280,
+        "start_seconds": 519.1,
+        "end_seconds": 519.36,
+        "proposed_text": "一步",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:41.883Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "62c3ed1c10001bc23c3a034155c13a39c51c84c3b89514621e2b78286ad27e07"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C017::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C017",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_03",
+        "start_sample": 31710720,
+        "end_sample": 31725120,
+        "start_seconds": 660.64,
+        "end_seconds": 660.94,
+        "proposed_text": "一条",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:51.778Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "a093f66a49dec59cd52806ce19c027e639b76410d541adedc43deadf6eb7a1ca"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C035::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C035",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 83691360,
+        "end_sample": 83718240,
+        "start_seconds": 1743.57,
+        "end_seconds": 1744.13,
+        "proposed_text": "我们",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:01.362Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "95119452afa910aa63942ac5dfbcd01eebcfe663c4c663abc28f555cbc585266"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C039::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C039",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 84889920,
+        "end_sample": 84898560,
+        "start_seconds": 1768.54,
+        "end_seconds": 1768.72,
+        "proposed_text": "什么",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:14.594Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "67f5ac4ae15e35fd4f3e6b071dfd6f3dceec5f9aced5bc5306bac7a304010dfd"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C040::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C040",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 84899040,
+        "end_sample": 84909600,
+        "start_seconds": 1768.73,
+        "end_seconds": 1768.95,
+        "proposed_text": "什么",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:17.147Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "5023d7eb0138fe14c21b2b63857954ba0b210b48da24ad85531b801d9ad57ff3"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C041::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C041",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 90800640,
+        "end_sample": 90816960,
+        "start_seconds": 1891.68,
+        "end_seconds": 1892.02,
+        "proposed_text": "工具",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:26.945Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "78082995a3cfdd7bef31ea30a1b02489e67299d1cec662c4e84862777617f233"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C043::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C043",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_03",
+        "start_sample": 103951680,
+        "end_sample": 103977600,
+        "start_seconds": 2165.66,
+        "end_seconds": 2166.2,
+        "proposed_text": "拿了",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:35.979Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "7c227cd6b8b2b58d436cbdc55510c58100b66dad189bc8bff410eaf43c2a49e1"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C047::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C047",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_03",
+        "start_sample": 112104000,
+        "end_sample": 112130880,
+        "start_seconds": 2335.5,
+        "end_seconds": 2336.06,
+        "proposed_text": "会比",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:45.463Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "579f5d468f2b7f307fbd99cf9587fa2d2635fae6b050113691893dc3508cc7ad"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C049::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C049",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 119749920,
+        "end_sample": 119770080,
+        "start_seconds": 2494.79,
+        "end_seconds": 2495.21,
+        "proposed_text": "所以",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:56.405Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "a0eefae48600286a1f6584199bb80132a47e70ebd2463493ac7d98fa64c9458d"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-product-v2::C053::8c90d8262c85",
+      "episode_id": "runs",
+      "run_id": "EP04-review-product-v2",
+      "candidate_id": "C053",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 137379360,
+        "end_sample": 137393760,
+        "start_seconds": 2862.07,
+        "end_seconds": 2862.37,
+        "proposed_text": "我自己",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:45:06.037Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+        "decision_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+        "package_file_relpath": "main/runs/EP04-review-product-v2/review_bundle/review_package.json",
+        "package_file_sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP04-review-294a5930b8a9",
+        "review_manifest_sha256": "c69ca1916d22f8a8f8b58d0cc0160fe2e688705e55059627477baa565f10f1ec",
+        "candidate_semantic_sha256": "03e6c242b529d3e98df427a4852c6b4857a052b6418ef761b7e2831f8925d28c"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::M001::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "M001",
+      "candidate": {
+        "reason_key": "filler_weak_topic",
+        "candidate_kind": "filler_weak_topic",
+        "source_track_id": "female",
+        "start_sample": 39381120,
+        "end_sample": 39403200,
+        "start_seconds": 820.44,
+        "end_seconds": 820.9,
+        "proposed_text": "",
+        "clause_position": "edge-of-track",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:47:00.248Z",
+        "review_basis": "text_only",
+        "feedback": "还是剪辑痕迹明显"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "c63dc5710f8854cc8aabf294034cfce05eb7c602ad3c0cd78ae80d40121c851f"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N002::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N002",
+      "candidate": {
+        "reason_key": "filler_strong",
+        "candidate_kind": "filler_strong",
+        "source_track_id": "track_01",
+        "start_sample": 31482720,
+        "end_sample": 31488480,
+        "start_seconds": 655.89,
+        "end_seconds": 656.01,
+        "proposed_text": "",
+        "clause_position": "clause-mid",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:47:17.970Z",
+        "review_basis": "text_only",
+        "feedback": "剪辑痕迹明显"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "08462ea05aba872ec78a394b725d65e31b1176d775a7d73d894cdfbb637c5b2b"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N003::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N003",
+      "candidate": {
+        "reason_key": "filler_strong",
+        "candidate_kind": "filler_strong",
+        "source_track_id": "track_01",
+        "start_sample": 21208320,
+        "end_sample": 21214080,
+        "start_seconds": 441.84,
+        "end_seconds": 441.96,
+        "proposed_text": "",
+        "clause_position": "clause-boundary",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:47:37.800Z",
+        "review_basis": "text_only",
+        "feedback": "不要剪（要保证完整性，这个是在句中）"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "b5daa786b055f71027c9df13b095953e7db7f616d0e4f4d8ba14211ddd20dcf3"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N004::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N004",
+      "candidate": {
+        "reason_key": "filler_ack_long_single",
+        "candidate_kind": "filler_ack_long_single",
+        "source_track_id": "track_03",
+        "start_sample": 60627360,
+        "end_sample": 60710880,
+        "start_seconds": 1263.07,
+        "end_seconds": 1264.81,
+        "proposed_text": "",
+        "clause_position": "clause-boundary",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:08:23.885Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "c70174d73877c2be90e02842b0b77353e56bb22ba1b8544aa9a173c078fd665f"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N005::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N005",
+      "candidate": {
+        "reason_key": "filler_ack_long_single",
+        "candidate_kind": "filler_ack_long_single",
+        "source_track_id": "track_03",
+        "start_sample": 108718559,
+        "end_sample": 108763680,
+        "start_seconds": 2264.97,
+        "end_seconds": 2265.91,
+        "proposed_text": "",
+        "clause_position": "clause-boundary",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:08:42.253Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "9804f89d7d55abaefb6bbf46f15328a1864a1748c08ea75b653e8cc474f54744"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N006::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N006",
+      "candidate": {
+        "reason_key": "filler_ack_dense",
+        "candidate_kind": "filler_ack_dense",
+        "source_track_id": "track_03",
+        "start_sample": 64974720,
+        "end_sample": 64975680,
+        "start_seconds": 1353.64,
+        "end_seconds": 1353.66,
+        "proposed_text": "",
+        "clause_position": "clause-boundary",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:08:49.869Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "708226b58f44e080dae2456f2d995b6fa0033818aec7236fe7b010d97085940a"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N007::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N007",
+      "candidate": {
+        "reason_key": "filler_ack_dense",
+        "candidate_kind": "filler_ack_dense",
+        "source_track_id": "track_03",
+        "start_sample": 64973759,
+        "end_sample": 64974720,
+        "start_seconds": 1353.62,
+        "end_seconds": 1353.64,
+        "proposed_text": "",
+        "clause_position": "clause-boundary",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:08:16.723Z",
+        "review_basis": "text_and_audio",
+        "feedback": "保留一些活人感（而且这是对别人的认可，表示自己在听，让播客更有活人感，不是废话）"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "7ecde56478556c4d227f50ca7f5855d08c66c1f14f47d10c385d21798e65e778"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N008::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N008",
+      "candidate": {
+        "reason_key": "filler_weak_topic",
+        "candidate_kind": "filler_weak_topic",
+        "source_track_id": "track_01",
+        "start_sample": 148603200,
+        "end_sample": 148630080,
+        "start_seconds": 3095.9,
+        "end_seconds": 3096.46,
+        "proposed_text": "",
+        "clause_position": "clause-boundary",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:11:23.762Z",
+        "review_basis": "text_and_audio",
+        "feedback": "这也是表示对别人的认可（你可以理解为因为楠哥在这里没有说完整的句子，就可以判定为认可的模板）"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "c7f00ddec747968e17a3031a465f2709588c0fcf2b542f0b46ed99f5bd7b323c"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N009::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N009",
+      "candidate": {
+        "reason_key": "filler_weak_topic",
+        "candidate_kind": "filler_weak_topic",
+        "source_track_id": "track_02",
+        "start_sample": 112258080,
+        "end_sample": 112278240,
+        "start_seconds": 2338.71,
+        "end_seconds": 2339.13,
+        "proposed_text": "",
+        "clause_position": "clause-mid",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:11:50.682Z",
+        "review_basis": "text_and_audio",
+        "feedback": "不剪，剪辑痕迹很重，而且句中不大需要"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "93bde71fec20970d3feaadfc75c072c312af683fdbcb8120ef0bbc4bcf513b1a"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N010::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N010",
+      "candidate": {
+        "reason_key": "filler_weak_pure",
+        "candidate_kind": "filler_weak_pure",
+        "source_track_id": "track_02",
+        "start_sample": 154660800,
+        "end_sample": 154689600,
+        "start_seconds": 3222.1,
+        "end_seconds": 3222.7,
+        "proposed_text": "",
+        "clause_position": "clause-boundary",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:10:10.041Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "01d106766a5c17d01211de3107fc46dd5606b3e338b4fba3c6be1e5b8a4c7444"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N011::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N011",
+      "candidate": {
+        "reason_key": "filler_weak_pure",
+        "candidate_kind": "filler_weak_pure",
+        "source_track_id": "track_03",
+        "start_sample": 44098560,
+        "end_sample": 44118720,
+        "start_seconds": 918.72,
+        "end_seconds": 919.14,
+        "proposed_text": "",
+        "clause_position": "clause-boundary",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:12:21.892Z",
+        "review_basis": "text_and_audio",
+        "feedback": "不剪"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "ec58a28bf98fb110ddb14052b5afb86e6a14225dfcd412a2047dbc8474ab5fb5"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N012::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N012",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": "immediate_repetition",
+        "source_track_id": "track_02",
+        "start_sample": 45752640,
+        "end_sample": 45777600,
+        "start_seconds": 953.18,
+        "end_seconds": 953.7,
+        "proposed_text": "",
+        "clause_position": "clause-mid",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:09:10.200Z",
+        "review_basis": "text_and_audio",
+        "feedback": "很好"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "f5ca1bf66d9bf9d2a8f48e4001f46922edd2d1d1020abc46dd79455cf2b05e97"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N013::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N013",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": "immediate_repetition",
+        "source_track_id": "track_01",
+        "start_sample": 31067040,
+        "end_sample": 31079520,
+        "start_seconds": 647.23,
+        "end_seconds": 647.49,
+        "proposed_text": "",
+        "clause_position": "clause-tail",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:07:09.240Z",
+        "review_basis": "text_with_audio",
+        "feedback": "不减不减"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "7349bfd062170db4bf05a9c24139a22bbac68313fd32cd96c4990a41b2dc175e"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::N014::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "N014",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": "immediate_repetition",
+        "source_track_id": "track_01",
+        "start_sample": 101729760,
+        "end_sample": 101796960,
+        "start_seconds": 2119.37,
+        "end_seconds": 2120.77,
+        "proposed_text": "",
+        "clause_position": "clause-mid",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T06:06:45.841Z",
+        "review_basis": "text_with_audio",
+        "feedback": "很好"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "0a71d79c2640cd9fa0ba7db48be471c273f43a73680d4d07e966da9cf1b6c4b3"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::R-E304::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "R-E304",
+      "candidate": {
+        "reason_key": "REAUDIT_filler_weak_topic",
+        "candidate_kind": "REAUDIT_filler_weak_topic",
+        "source_track_id": "female",
+        "start_sample": 40405440,
+        "end_sample": 40425600,
+        "start_seconds": 841.78,
+        "end_seconds": 842.2,
+        "proposed_text": "",
+        "clause_position": "edge-of-track",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:45:39.772Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "3a9fd833e68559cfd5ed161bc6c2ea015628087de51b96e2c088adc9d9f4d321"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::R-E306::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "R-E306",
+      "candidate": {
+        "reason_key": "REAUDIT_immediate_repetition",
+        "candidate_kind": "REAUDIT_immediate_repetition",
+        "source_track_id": "female",
+        "start_sample": 71754240,
+        "end_sample": 71770560,
+        "start_seconds": 1494.88,
+        "end_seconds": 1495.22,
+        "proposed_text": "",
+        "clause_position": "edge-of-track",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:46:06.987Z",
+        "review_basis": "text_only",
+        "feedback": "剪辑痕迹明显（剪辑的不够干净，而且这个其实可以不用剪）"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "b280435c286222f22c57dcae188590c7886a335611fc2d430fad41e903fa3851"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::R-S032::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "R-S032",
+      "candidate": {
+        "reason_key": "REAUDIT_long_pause",
+        "candidate_kind": "REAUDIT_long_pause",
+        "source_track_id": "track_01",
+        "start_sample": 98169120,
+        "end_sample": 98198400,
+        "start_seconds": 2045.19,
+        "end_seconds": 2045.8,
+        "proposed_text": "",
+        "clause_position": "clause-mid",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:45:20.674Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "e5b58e7ec666924c4291c148d87fdd35008bfbe042801a7fa34c161b7ed32e37"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-review-round2-20260814-1355::R-S038::1dd2d8664061",
+      "episode_id": "EP04",
+      "run_id": "EP04-review-round2-20260814-1355",
+      "candidate_id": "R-S038",
+      "candidate": {
+        "reason_key": "REAUDIT_filler_repetition",
+        "candidate_kind": "REAUDIT_filler_repetition",
+        "source_track_id": "track_01",
+        "start_sample": 103951680,
+        "end_sample": 103977599,
+        "start_seconds": 2165.66,
+        "end_seconds": 2166.2,
+        "proposed_text": "",
+        "clause_position": "clause-mid",
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-14T05:44:57.855Z",
+        "review_basis": "text_only",
+        "feedback": "不剪"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/human_decisions_and_feedback__20260814-061242.json",
+        "decision_file_sha256": "1dd2d86640614046c31a0558115386d554c47578c395ab580dc98fe2ee8f00f0",
+        "package_file_relpath": "main/runs/EP04/EP04-review-round2-20260814-1355/review_bundle/review_package.json",
+        "package_file_sha256": "3d29214ecf3d6862679b600cc3be8cf02aed245834e20249f3a162e76cc604bf",
+        "run_identity_relpath": null,
+        "run_identity_sha256": "",
+        "candidate_source_relpath": null,
+        "candidate_source_sha256": "",
+        "package_id": "EP03-EP04-review-round2-20260814-1355",
+        "review_manifest_sha256": "round2-20260814-1355",
+        "candidate_semantic_sha256": "9e8dc6b64afd5856e48dd938b50896123b23bffd4050c6bb9356b1b11bfe482f"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-v13-20260813-2002::C002::401883f512d2",
+      "episode_id": "EP04",
+      "run_id": "EP04-v13-20260813-2002",
+      "candidate_id": "C002",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": "filler_hesitation",
+        "source_track_id": "track_01",
+        "start_sample": 16995840,
+        "end_sample": 17028480,
+        "start_seconds": 354.08,
+        "end_seconds": 354.76,
+        "proposed_text": "呃",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-13T14:21:24.643Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": false,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-v13-20260813-2002/human_decisions.json",
+        "decision_file_sha256": "401883f512d23319c5dbd6e5760e2134e82b598f824c9c55068b7b6b493d43d2",
+        "package_file_relpath": "main/runs/EP04/EP04-v13-20260813-2002/review_bundle/review_package.json",
+        "package_file_sha256": "5208ff41013159558529170bb8c672632749aa8c9761598d5fe8e3a660e87ca1",
+        "run_identity_relpath": "main/runs/EP04/EP04-v13-20260813-2002/run_identity.json",
+        "run_identity_sha256": "d4ae64fc7834d64d06db6aa597afaf0844c52a3cb1b84bda4af1056f6ee0b6bf",
+        "candidate_source_relpath": "main/runs/EP04/EP04-v13-20260813-2002/candidates/candidate_source.json",
+        "candidate_source_sha256": "b5e754aa8fa7be007c2fbd0f3f9f88c946c24e0fea869e5bcc43cf60360ccf5d",
+        "package_id": "EP04-review-ed05cddbe178",
+        "review_manifest_sha256": "24ee48efc19bec92fdefa5605e859d44168711a8a4f019646f221e936720ed99",
+        "candidate_semantic_sha256": "f2191ba18a64236bcafd2683f7949abec8448a8e55699df20dfd1fad3e6c32b6"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-v20-20260814-1617::C003::5f8a6b457488",
+      "episode_id": "EP04",
+      "run_id": "EP04-v20-20260814-1617",
+      "candidate_id": "C003",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": "filler_hesitation",
+        "source_track_id": "track_01",
+        "start_sample": 16995840,
+        "end_sample": 17028480,
+        "start_seconds": 354.08,
+        "end_seconds": 354.76,
+        "proposed_text": "呃",
+        "clause_position": "clause-tail",
+        "confidence_tier": "high"
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-15T03:03:40.599Z",
+        "review_basis": "text_and_audio",
+        "feedback": "很好"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/human_decisions.json",
+        "decision_file_sha256": "5f8a6b457488642a3a614da5451faffffda60be996f08ff76e31d5aff2dbf502",
+        "package_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/review_bundle/review_package.json",
+        "package_file_sha256": "9913ef9a0263297265e55541b94377740dbfe191720e399283b18041a3fdf2fa",
+        "run_identity_relpath": "main/runs/EP04/EP04-v20-20260814-1617/run_identity.json",
+        "run_identity_sha256": "6f9697d706e37121f075aad0de47f78421a379537e68b661a219fefbe0e5a85f",
+        "candidate_source_relpath": "main/runs/EP04/EP04-v20-20260814-1617/candidates/candidate_source.json",
+        "candidate_source_sha256": "8250755372d7772ae8ad743d411dcf396a1eca2ddeea8561d9d9bec0dda96e51",
+        "package_id": "EP04-review-8e6d559af1d2",
+        "review_manifest_sha256": "91137ece6ad6360ae54e463240d86d79fb48b0db1b6837f3e0aa158b6e8af545",
+        "candidate_semantic_sha256": "eb461398d4c4603ff46b96b1dfe147e521b11af2ea169c589a1f3ef8432843c4"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-v20-20260814-1617::C012::5f8a6b457488",
+      "episode_id": "EP04",
+      "run_id": "EP04-v20-20260814-1617",
+      "candidate_id": "C012",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": "immediate_repetition",
+        "source_track_id": "track_02",
+        "start_sample": 46048320,
+        "end_sample": 46056960,
+        "start_seconds": 959.34,
+        "end_seconds": 959.52,
+        "proposed_text": "然后",
+        "clause_position": "clause-mid",
+        "confidence_tier": "high"
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-15T03:01:01.800Z",
+        "review_basis": "text_and_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/human_decisions.json",
+        "decision_file_sha256": "5f8a6b457488642a3a614da5451faffffda60be996f08ff76e31d5aff2dbf502",
+        "package_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/review_bundle/review_package.json",
+        "package_file_sha256": "9913ef9a0263297265e55541b94377740dbfe191720e399283b18041a3fdf2fa",
+        "run_identity_relpath": "main/runs/EP04/EP04-v20-20260814-1617/run_identity.json",
+        "run_identity_sha256": "6f9697d706e37121f075aad0de47f78421a379537e68b661a219fefbe0e5a85f",
+        "candidate_source_relpath": "main/runs/EP04/EP04-v20-20260814-1617/candidates/candidate_source.json",
+        "candidate_source_sha256": "8250755372d7772ae8ad743d411dcf396a1eca2ddeea8561d9d9bec0dda96e51",
+        "package_id": "EP04-review-8e6d559af1d2",
+        "review_manifest_sha256": "91137ece6ad6360ae54e463240d86d79fb48b0db1b6837f3e0aa158b6e8af545",
+        "candidate_semantic_sha256": "9306036b19012af292773f2caa239e96d99134cda16677377ebd2b64d199f2c8"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-v20-20260814-1617::C019::5f8a6b457488",
+      "episode_id": "EP04",
+      "run_id": "EP04-v20-20260814-1617",
+      "candidate_id": "C019",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": "immediate_repetition",
+        "source_track_id": "track_01",
+        "start_sample": 83687520,
+        "end_sample": 83720160,
+        "start_seconds": 1743.49,
+        "end_seconds": 1744.17,
+        "proposed_text": "我们",
+        "clause_position": "clause-mid",
+        "confidence_tier": "high"
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-15T03:01:45.836Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/human_decisions.json",
+        "decision_file_sha256": "5f8a6b457488642a3a614da5451faffffda60be996f08ff76e31d5aff2dbf502",
+        "package_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/review_bundle/review_package.json",
+        "package_file_sha256": "9913ef9a0263297265e55541b94377740dbfe191720e399283b18041a3fdf2fa",
+        "run_identity_relpath": "main/runs/EP04/EP04-v20-20260814-1617/run_identity.json",
+        "run_identity_sha256": "6f9697d706e37121f075aad0de47f78421a379537e68b661a219fefbe0e5a85f",
+        "candidate_source_relpath": "main/runs/EP04/EP04-v20-20260814-1617/candidates/candidate_source.json",
+        "candidate_source_sha256": "8250755372d7772ae8ad743d411dcf396a1eca2ddeea8561d9d9bec0dda96e51",
+        "package_id": "EP04-review-8e6d559af1d2",
+        "review_manifest_sha256": "91137ece6ad6360ae54e463240d86d79fb48b0db1b6837f3e0aa158b6e8af545",
+        "candidate_semantic_sha256": "368a359c41405981b0f3163a314f0b492bd6b6c5a90e96a7516b9baff7cd46aa"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-v20-20260814-1617::C026::5f8a6b457488",
+      "episode_id": "EP04",
+      "run_id": "EP04-v20-20260814-1617",
+      "candidate_id": "C026",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": "immediate_repetition",
+        "source_track_id": "track_02",
+        "start_sample": 102613440,
+        "end_sample": 102629760,
+        "start_seconds": 2137.78,
+        "end_seconds": 2138.12,
+        "proposed_text": "也是",
+        "clause_position": "clause-mid",
+        "confidence_tier": "high"
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-15T03:02:52.198Z",
+        "review_basis": "text_with_audio",
+        "feedback": "剪辑的时候声音明显小了"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/human_decisions.json",
+        "decision_file_sha256": "5f8a6b457488642a3a614da5451faffffda60be996f08ff76e31d5aff2dbf502",
+        "package_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/review_bundle/review_package.json",
+        "package_file_sha256": "9913ef9a0263297265e55541b94377740dbfe191720e399283b18041a3fdf2fa",
+        "run_identity_relpath": "main/runs/EP04/EP04-v20-20260814-1617/run_identity.json",
+        "run_identity_sha256": "6f9697d706e37121f075aad0de47f78421a379537e68b661a219fefbe0e5a85f",
+        "candidate_source_relpath": "main/runs/EP04/EP04-v20-20260814-1617/candidates/candidate_source.json",
+        "candidate_source_sha256": "8250755372d7772ae8ad743d411dcf396a1eca2ddeea8561d9d9bec0dda96e51",
+        "package_id": "EP04-review-8e6d559af1d2",
+        "review_manifest_sha256": "91137ece6ad6360ae54e463240d86d79fb48b0db1b6837f3e0aa158b6e8af545",
+        "candidate_semantic_sha256": "bcc2bc0ec2417bd1d54d0d7d42fa8cfe8102661fd05e433143d108abb52da100"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04-v20-20260814-1617::C028::5f8a6b457488",
+      "episode_id": "EP04",
+      "run_id": "EP04-v20-20260814-1617",
+      "candidate_id": "C028",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": "immediate_repetition",
+        "source_track_id": "track_01",
+        "start_sample": 108874080,
+        "end_sample": 108908640,
+        "start_seconds": 2268.21,
+        "end_seconds": 2268.93,
+        "proposed_text": "因为",
+        "clause_position": "clause-head",
+        "confidence_tier": "high"
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-15T03:02:13.616Z",
+        "review_basis": "text_with_audio",
+        "feedback": "剪辑痕迹很重"
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": []
+      },
+      "provenance": {
+        "decision_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/human_decisions.json",
+        "decision_file_sha256": "5f8a6b457488642a3a614da5451faffffda60be996f08ff76e31d5aff2dbf502",
+        "package_file_relpath": "main/runs/EP04/EP04-v20-20260814-1617/review_bundle/review_package.json",
+        "package_file_sha256": "9913ef9a0263297265e55541b94377740dbfe191720e399283b18041a3fdf2fa",
+        "run_identity_relpath": "main/runs/EP04/EP04-v20-20260814-1617/run_identity.json",
+        "run_identity_sha256": "6f9697d706e37121f075aad0de47f78421a379537e68b661a219fefbe0e5a85f",
+        "candidate_source_relpath": "main/runs/EP04/EP04-v20-20260814-1617/candidates/candidate_source.json",
+        "candidate_source_sha256": "8250755372d7772ae8ad743d411dcf396a1eca2ddeea8561d9d9bec0dda96e51",
+        "package_id": "EP04-review-8e6d559af1d2",
+        "review_manifest_sha256": "91137ece6ad6360ae54e463240d86d79fb48b0db1b6837f3e0aa158b6e8af545",
+        "candidate_semantic_sha256": "04e06029a4f6ea4be623c9c15893bb9a9c70cd4b686b47e60539532a7b5855df"
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C001",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C001",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 6290880,
+        "end_sample": 6322560,
+        "start_seconds": 131.06,
+        "end_seconds": 131.72,
+        "proposed_text": "对对",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:01:49.257Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "2f5e10f3e2e5abc28eabc845acfa6bdefda656f36e9f910f669209ef41b77603",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C006",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C006",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 13300320,
+        "end_sample": 13328160,
+        "start_seconds": 277.09,
+        "end_seconds": 277.67,
+        "proposed_text": "移动端",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:02:06.539Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "88aeace9b35986f4b1a77691bf964dbcd8ef34e8114ae44f573f56a136d892d4",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C007",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C007",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 14633760,
+        "end_sample": 14667360,
+        "start_seconds": 304.87,
+        "end_seconds": 305.57,
+        "proposed_text": "产品管家",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:02:11.756Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "e0253770c0655aa823dcb6495f3f9ad9c5f6558e7d04c492319c7a26a929a7e4",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C009",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C009",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 23172000,
+        "end_sample": 23186400,
+        "start_seconds": 482.75,
+        "end_seconds": 483.05,
+        "proposed_text": "一条",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:02:41.256Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "f521bd1c81d79e7fca8280f67be3e785c932e273f186fbd124593e0e93b33503",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C011",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C011",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 26949120,
+        "end_sample": 26975040,
+        "start_seconds": 561.44,
+        "end_seconds": 561.98,
+        "proposed_text": "对这个",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:03:00.627Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "05c594baae515add025f44741017cf06e44e5d58289fe4f7727973eb2bf90943",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C013",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C013",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 38831520,
+        "end_sample": 38855520,
+        "start_seconds": 808.99,
+        "end_seconds": 809.49,
+        "proposed_text": "人类",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:03:21.756Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "dd645adf88fcff3338d65bafdba999ace92645d5b60a57a684fa9b5b34fbd4d2",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C014",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C014",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 39379200,
+        "end_sample": 39405120,
+        "start_seconds": 820.4000000000001,
+        "end_seconds": 820.9399999999999,
+        "proposed_text": "然后这个",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:03:42.671Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "e0d074c7d630a85c0fe249f30bf202960298fdec67664707da274f97a4884e04",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C018",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C018",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 48805440,
+        "end_sample": 48828480,
+        "start_seconds": 1016.7800000000001,
+        "end_seconds": 1017.26,
+        "proposed_text": "设计",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:03:57.339Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "5e0a2c9b3d3578827db46d7f7d1f6df6f6d0fd02448cf6ea5205517339b2e12f",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C021",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C021",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 63173280,
+        "end_sample": 63191520,
+        "start_seconds": 1316.1100000000001,
+        "end_seconds": 1316.49,
+        "proposed_text": "特别",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:04:22.338Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "8e991383cff2e6082a9bb851ffaa50e3f3a68dc17e644697d42805c4f781669f",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C022",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C022",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 63255840,
+        "end_sample": 63275040,
+        "start_seconds": 1317.83,
+        "end_seconds": 1318.23,
+        "proposed_text": "特别",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:04:42.337Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "eb57f876af1ebcd94b715314826f8b10a0d2e6dd5356f9cb39ee6a2336826fb8",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP03::EP03-review-00cc8692b46c::C024",
+      "episode_id": "EP03",
+      "run_id": "main/runs/EP03-review-product-v1",
+      "candidate_id": "C024",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 73634880,
+        "end_sample": 73681920,
+        "start_seconds": 1534.06,
+        "end_seconds": 1535.04,
+        "proposed_text": "对这个",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-11T09:04:55.405Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP03.jsonl",
+        "canonical_case_file_sha256": "489d858d1e7a56dbbbb7e90fa289a4de2b1786d79501eb60c487baa11453ca97",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP03-review-product-v1",
+          "package_id": "EP03-review-00cc8692b46c",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "768cfeadd85d1c1d56701de7fde59f4f8faa1d4cb46aba8878962e3514415154",
+          "source_package_sha256": "00cc8692b46c79fcfe6d7e0bc84652935803f8e5b2a4990d7d7b744e636be2b2",
+          "rules_sha256": "26a20d8589444366d9e27c04ca90196ec611c9e866f950b5ba036bffb3849d30",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-3cadf0f352f2::C001",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-filler-global-pause-v1-r2-20260812",
+      "candidate_id": "C001",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 2436480,
+        "end_sample": 2456640,
+        "start_seconds": 50.76,
+        "end_seconds": 51.18,
+        "proposed_text": "对",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T06:20:55.576Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-filler-global-pause-v1-r2-20260812",
+          "package_id": "EP04-review-3cadf0f352f2",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "10b7419e6206a6197bcd109a0377a6eb9ae07562d2ee8279e6c612baa440e8a9",
+          "source_package_sha256": "3cadf0f352f298d847e37bed7bc8060136e62c211b4953120a8beea9008f8fc5",
+          "rules_sha256": "dd821494c9a7ad393073e1ade368e266473f012707e742309881bc9e2caefd45",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-3cadf0f352f2::C010",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-filler-global-pause-v1-r2-20260812",
+      "candidate_id": "C010",
+      "candidate": {
+        "reason_key": "filler_hesitation",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 31809120,
+        "end_sample": 31850400,
+        "start_seconds": 662.69,
+        "end_seconds": 663.55,
+        "proposed_text": "对对",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T06:21:21.445Z",
+        "review_basis": "text_and_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-filler-global-pause-v1-r2-20260812",
+          "package_id": "EP04-review-3cadf0f352f2",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "8bec736e07cb0e6669176e85f2d90df31116aa3d21548f3eea67d4d90c714b60",
+          "source_package_sha256": "3cadf0f352f298d847e37bed7bc8060136e62c211b4953120a8beea9008f8fc5",
+          "rules_sha256": "dd821494c9a7ad393073e1ade368e266473f012707e742309881bc9e2caefd45",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-3cadf0f352f2::C032",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-filler-global-pause-v1-r2-20260812",
+      "candidate_id": "C032",
+      "candidate": {
+        "reason_key": "global_long_pause",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 116395920,
+        "end_sample": 116791920,
+        "start_seconds": 2424.915,
+        "end_seconds": 2433.165,
+        "proposed_text": "",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T06:21:52.761Z",
+        "review_basis": "text_and_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-filler-global-pause-v1-r2-20260812",
+          "package_id": "EP04-review-3cadf0f352f2",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "9f7f1edb055a2d2563a149e861c89c023122f36877ad7406186cef2b79dea69e",
+          "source_package_sha256": "3cadf0f352f298d847e37bed7bc8060136e62c211b4953120a8beea9008f8fc5",
+          "rules_sha256": "dd821494c9a7ad393073e1ade368e266473f012707e742309881bc9e2caefd45",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C001",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C001",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 60480,
+        "end_sample": 85440,
+        "start_seconds": 1.26,
+        "end_seconds": 1.78,
+        "proposed_text": "Hello",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:13.224Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "f9d972b82b22bb75ddaaac0f0715749509d0a7abfa532b2387c1b1c1b894c76b",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C005",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C005",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 11368800,
+        "end_sample": 11392800,
+        "start_seconds": 236.85,
+        "end_seconds": 237.35,
+        "proposed_text": "在上面",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:25.779Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "346927a61351495f0a866b1889364538af85c75ad3c0c4b95deae8998bd1b54e",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C014",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C014",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 24433440,
+        "end_sample": 24489120,
+        "start_seconds": 509.03,
+        "end_seconds": 510.19,
+        "proposed_text": "呵呵",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:34.749Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "f80cae008742482c98777f2ba5a51342c350518de79e3b9a77942ce89069f559",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C015",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C015",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_03",
+        "start_sample": 24916800,
+        "end_sample": 24929280,
+        "start_seconds": 519.1,
+        "end_seconds": 519.36,
+        "proposed_text": "一步",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:41.883Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "62c3ed1c10001bc23c3a034155c13a39c51c84c3b89514621e2b78286ad27e07",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C017",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C017",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_03",
+        "start_sample": 31710720,
+        "end_sample": 31725120,
+        "start_seconds": 660.64,
+        "end_seconds": 660.94,
+        "proposed_text": "一条",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:43:51.778Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "a093f66a49dec59cd52806ce19c027e639b76410d541adedc43deadf6eb7a1ca",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C035",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C035",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 83691360,
+        "end_sample": 83718240,
+        "start_seconds": 1743.57,
+        "end_seconds": 1744.13,
+        "proposed_text": "我们",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:01.362Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "95119452afa910aa63942ac5dfbcd01eebcfe663c4c663abc28f555cbc585266",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C039",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C039",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 84889920,
+        "end_sample": 84898560,
+        "start_seconds": 1768.54,
+        "end_seconds": 1768.72,
+        "proposed_text": "什么",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:14.594Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "67f5ac4ae15e35fd4f3e6b071dfd6f3dceec5f9aced5bc5306bac7a304010dfd",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C040",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C040",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 84899040,
+        "end_sample": 84909600,
+        "start_seconds": 1768.73,
+        "end_seconds": 1768.95,
+        "proposed_text": "什么",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:17.147Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "5023d7eb0138fe14c21b2b63857954ba0b210b48da24ad85531b801d9ad57ff3",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C041",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C041",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 90800640,
+        "end_sample": 90816960,
+        "start_seconds": 1891.68,
+        "end_seconds": 1892.02,
+        "proposed_text": "工具",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "reject",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:26.945Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "78082995a3cfdd7bef31ea30a1b02489e67299d1cec662c4e84862777617f233",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C043",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C043",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_03",
+        "start_sample": 103951680,
+        "end_sample": 103977600,
+        "start_seconds": 2165.66,
+        "end_seconds": 2166.2,
+        "proposed_text": "拿了",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:35.979Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "7c227cd6b8b2b58d436cbdc55510c58100b66dad189bc8bff410eaf43c2a49e1",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C047",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C047",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_03",
+        "start_sample": 112104000,
+        "end_sample": 112130880,
+        "start_seconds": 2335.5,
+        "end_seconds": 2336.06,
+        "proposed_text": "会比",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:45.463Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "579f5d468f2b7f307fbd99cf9587fa2d2635fae6b050113691893dc3508cc7ad",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C049",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C049",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_02",
+        "start_sample": 119749920,
+        "end_sample": 119770080,
+        "start_seconds": 2494.79,
+        "end_seconds": 2495.21,
+        "proposed_text": "所以",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:44:56.405Z",
+        "review_basis": "text_with_audio",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "a0eefae48600286a1f6584199bb80132a47e70ebd2463493ac7d98fa64c9458d",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    },
+    {
+      "schema_version": "preference-record-v2",
+      "case_id": "EP04::EP04-review-294a5930b8a9::C053",
+      "episode_id": "EP04",
+      "run_id": "main/runs/EP04-review-product-v2",
+      "candidate_id": "C053",
+      "candidate": {
+        "reason_key": "immediate_repetition",
+        "candidate_kind": null,
+        "source_track_id": "track_01",
+        "start_sample": 137379360,
+        "end_sample": 137393760,
+        "start_seconds": 2862.07,
+        "end_seconds": 2862.37,
+        "proposed_text": "我自己",
+        "clause_position": null,
+        "confidence_tier": null
+      },
+      "label": {
+        "decision": "accept",
+        "reviewer": "熊镇正",
+        "decided_at": "2026-08-12T08:45:06.037Z",
+        "review_basis": "text_only",
+        "feedback": ""
+      },
+      "quality": {
+        "rule_analysis_eligible": true,
+        "model_training_eligible": false,
+        "legacy_schema": true,
+        "warnings": [
+          "imported_from_verified_canonical_case_store"
+        ]
+      },
+      "provenance": {
+        "canonical_case_file": "稳定生产/challengers/experience-ingestion-v1/case_store/two-state-v2-20260812-1647/cases/EP04.jsonl",
+        "canonical_case_file_sha256": "7cf40fb6fbd0c713007aaf3857ef5d8304a619253731ad0a8e002a68e34a7a58",
+        "original_case_provenance": {
+          "source_run_dir": "main/runs/EP04-review-product-v2",
+          "package_id": "EP04-review-294a5930b8a9",
+          "review_manifest_sha256": "",
+          "candidate_semantic_sha256": "03e6c242b529d3e98df427a4852c6b4857a052b6418ef761b7e2831f8925d28c",
+          "source_package_sha256": "294a5930b8a9d7197da466ce44dae28d986d2b749dacd4822208624025611b1d",
+          "rules_sha256": "d287dd6f5ab7fbcb3c1ec7855ac37ae26823f1803e413c5d0b270b7de0179aa0",
+          "tool_or_model_versions": {}
+        }
+      }
+    }
+  ]
+}

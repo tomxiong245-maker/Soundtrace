@@ -1,0 +1,30 @@
+{
+  "schema_version": "music-template-definitions-v1",
+  "templates": {
+    "reference-linear-v1": {
+      "role": "current_default",
+      "timing_authority": "USER_HARD_REQUIREMENT_2026-08-14",
+      "voice_start_seconds": 5.0,
+      "intro_music_only_end_seconds": 5.0,
+      "intro_fade_out_start_seconds": 5.0,
+      "intro_fade_out_end_seconds": 16.0,
+      "outro_fade_in_lead_seconds": 22.0,
+      "outro_music_tail_seconds": 37.976,
+      "music_gain_db": -12.0,
+      "ducking": "none",
+      "release_parameter_status": "AUDITION_DEFAULTS_ONLY"
+    },
+    "EP04-v12-crossfade-audition": {
+      "role": "historical_comparison_only",
+      "timing_authority": "HISTORICAL_EP04_AUDITION",
+      "intro_music_seconds": 15.0,
+      "voice_start_seconds": 12.0,
+      "crossfade_seconds": 3.0,
+      "outro_music_seconds": 15.0,
+      "outro_fade_out_seconds": 3.0,
+      "music_gain_db": -12.0,
+      "ducking": "none",
+      "release_parameter_status": "HISTORICAL_AUDITION_ONLY"
+    }
+  }
+}

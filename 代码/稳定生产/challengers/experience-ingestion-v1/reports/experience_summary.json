@@ -1,0 +1,75 @@
+{
+  "schema_version": "experience-summary-v1",
+  "counts": {
+    "total_cases": 27,
+    "by_episode": {
+      "EP03": 11,
+      "EP04": 16
+    },
+    "by_reason": {
+      "filler_hesitation": 6,
+      "immediate_repetition": 20,
+      "global_long_pause": 1
+    },
+    "by_decision": {
+      "reject": 15,
+      "accept": 12
+    },
+    "by_review_basis": {
+      "text_only": 11,
+      "text_with_audio": 14,
+      "text_and_audio": 2
+    },
+    "with_edl": 10,
+    "without_edl": 17,
+    "excluded_bulk_accept": 26,
+    "quarantine": 0
+  },
+  "audio_evidence_complete_rate": 1.0,
+  "audio_evidence_complete_count": 27,
+  "human_accept_rate_by_reason": {
+    "filler_hesitation": {
+      "total": 6,
+      "accept": 3,
+      "reject": 3,
+      "adjust": 0,
+      "human_accept_rate": 0.5,
+      "episodes": [
+        "EP03",
+        "EP04"
+      ],
+      "note": "口径为人工接受率，不是模型 precision（候选集合非随机样本）"
+    },
+    "immediate_repetition": {
+      "total": 20,
+      "accept": 8,
+      "reject": 12,
+      "adjust": 0,
+      "human_accept_rate": 0.4,
+      "episodes": [
+        "EP03",
+        "EP04"
+      ],
+      "note": "口径为人工接受率，不是模型 precision（候选集合非随机样本）"
+    },
+    "global_long_pause": {
+      "total": 1,
+      "accept": 1,
+      "reject": 0,
+      "adjust": 0,
+      "human_accept_rate": 1.0,
+      "episodes": [
+        "EP04"
+      ],
+      "note": "口径为人工接受率，不是模型 precision（候选集合非随机样本）"
+    }
+  },
+  "reviewers": [
+    "熊镇正"
+  ],
+  "eligibility_notes": [
+    "所有已导入案例的 eligible_for_model_training=False；仍处 pending_review_mode。",
+    "人工接受率只反映候选被人工采纳的比例，不等于模型 precision。",
+    "候选集合不是完整随机样本，不能据此宣称 precision 或 recall。"
+  ]
+}

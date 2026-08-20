@@ -1,0 +1,3543 @@
+{
+  "kept": [
+    {
+      "candidate_id": "C007",
+      "status": "pending_human_review",
+      "start_seconds": 136.9,
+      "end_seconds": 139.34,
+      "start_sample": 6571200,
+      "end_sample": 6688320,
+      "duration_seconds": 2.44,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "risk": "high",
+      "deleted_text": "female: 体来说,我们这个市场并不短对,然后如果\nmale: 对,然后如果",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "以后可能才会再形成一个PR D然后可能也会有一些打磨的事情所以总"
+            },
+            {
+              "deleted": true,
+              "text": "体来说,我们这个市场并不短对,然后如果"
+            },
+            {
+              "deleted": false,
+              "text": "是比如一个小的fe ature,或者一个小的把这个真心这个应该过"
+            }
+          ],
+          "original_text": "以后可能才会再形成一个PR D然后可能也会有一些打磨的事情所以总体来说,我们这个市场并不短对,然后如果是比如一个小的fe ature,或者一个小的把这个真心这个应该过",
+          "edited_text": "以后可能才会再形成一个PR D然后可能也会有一些打磨的事情所以总是比如一个小的fe ature,或者一个小的把这个真心这个应该过",
+          "deleted_text": "体来说,我们这个市场并不短对,然后如果"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "对,你会有一些大模的时间"
+            },
+            {
+              "deleted": true,
+              "text": "对,然后如果"
+            },
+            {
+              "deleted": false,
+              "text": "是比如一个小的fe ature或者一个小的bug的更新这个应该过"
+            }
+          ],
+          "original_text": "对,你会有一些大模的时间对,然后如果是比如一个小的fe ature或者一个小的bug的更新这个应该过",
+          "edited_text": "对,你会有一些大模的时间是比如一个小的fe ature或者一个小的bug的更新这个应该过",
+          "deleted_text": "对,然后如果"
+        }
+      ],
+      "original_preview": "previews/C007.original.mp3",
+      "edited_preview": "previews/C007.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "keep_reason": "熊镇正真审 accept"
+    },
+    {
+      "candidate_id": "C009",
+      "status": "pending_human_review",
+      "start_seconds": 173.22,
+      "end_seconds": 174.28,
+      "start_sample": 8314560,
+      "end_sample": 8365440,
+      "duration_seconds": 1.06,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "risk": "high",
+      "deleted_text": "female: 上对,然后为什么\nmale: 上对,然后为什么",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "或者隔两天上对,因为我们有可能会集几个fe ature一块作为一个版本"
+            },
+            {
+              "deleted": true,
+              "text": "上对,然后为什么"
+            },
+            {
+              "deleted": false,
+              "text": "先检查采访一下是因为我觉得西班牙是有一个本居马克莱兰了解"
+            }
+          ],
+          "original_text": "或者隔两天上对,因为我们有可能会集几个fe ature一块作为一个版本上对,然后为什么先检查采访一下是因为我觉得西班牙是有一个本居马克莱兰了解",
+          "edited_text": "或者隔两天上对,因为我们有可能会集几个fe ature一块作为一个版本先检查采访一下是因为我觉得西班牙是有一个本居马克莱兰了解",
+          "deleted_text": "上对,然后为什么"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "上或者隔两天上可能会集几个fe ature一块做一个版本"
+            },
+            {
+              "deleted": true,
+              "text": "上对,然后为什么"
+            },
+            {
+              "deleted": false,
+              "text": "我先简单采访了一下是因为我觉得算是有一个bench mark让大家了解"
+            }
+          ],
+          "original_text": "上或者隔两天上可能会集几个fe ature一块做一个版本上对,然后为什么我先简单采访了一下是因为我觉得算是有一个bench mark让大家了解",
+          "edited_text": "上或者隔两天上可能会集几个fe ature一块做一个版本我先简单采访了一下是因为我觉得算是有一个bench mark让大家了解",
+          "deleted_text": "上对,然后为什么"
+        }
+      ],
+      "original_preview": "previews/C009.original.mp3",
+      "edited_preview": "previews/C009.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "keep_reason": "熊镇正真审 accept"
+    },
+    {
+      "candidate_id": "C014",
+      "status": "pending_human_review",
+      "start_seconds": 339.25,
+      "end_seconds": 340.41,
+      "start_sample": 16284000,
+      "end_sample": 16339680,
+      "duration_seconds": 1.16,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "risk": "high",
+      "deleted_text": "female: 对99然后\nmale: 对,然后还有",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "配件的是装的鞋PR D的应该是叫99"
+            },
+            {
+              "deleted": true,
+              "text": "对99然后"
+            },
+            {
+              "deleted": false,
+              "text": "还有一个装的做需求评审的一个配件的叫奥利还有"
+            }
+          ],
+          "original_text": "配件的是装的鞋PR D的应该是叫99对99然后还有一个装的做需求评审的一个配件的叫奥利还有",
+          "edited_text": "配件的是装的鞋PR D的应该是叫99还有一个装的做需求评审的一个配件的叫奥利还有",
+          "deleted_text": "对99然后"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "ag ent是专门写PR D的应该是叫99"
+            },
+            {
+              "deleted": true,
+              "text": "对,然后还有"
+            },
+            {
+              "deleted": false,
+              "text": "一个专门做需求评审的一个ag ent叫O li还有"
+            }
+          ],
+          "original_text": "ag ent是专门写PR D的应该是叫99对,然后还有一个专门做需求评审的一个ag ent叫O li还有",
+          "edited_text": "ag ent是专门写PR D的应该是叫99一个专门做需求评审的一个ag ent叫O li还有",
+          "deleted_text": "对,然后还有"
+        }
+      ],
+      "original_preview": "previews/C014.original.mp3",
+      "edited_preview": "previews/C014.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "keep_reason": "熊镇正真审 accept"
+    },
+    {
+      "candidate_id": "C024",
+      "status": "pending_human_review",
+      "start_seconds": 780.4,
+      "end_seconds": 784.26,
+      "start_sample": 37459200,
+      "end_sample": 37644480,
+      "duration_seconds": 3.86,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "risk": "high",
+      "deleted_text": "female: 背景还有cont ext包括一些团队间的沟通其实也都是现在AI\nmale: 进来",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "因为其实很多传统PM会觉得他们的项目有很多历史的"
+            },
+            {
+              "deleted": true,
+              "text": "背景还有cont ext包括一些团队间的沟通其实也都是现在AI"
+            },
+            {
+              "deleted": false,
+              "text": "做不到的那咱们为什么能达到这种很全流程自动的状态呢我就过"
+            }
+          ],
+          "original_text": "因为其实很多传统PM会觉得他们的项目有很多历史的背景还有cont ext包括一些团队间的沟通其实也都是现在AI做不到的那咱们为什么能达到这种很全流程自动的状态呢我就过",
+          "edited_text": "因为其实很多传统PM会觉得他们的项目有很多历史的做不到的那咱们为什么能达到这种很全流程自动的状态呢我就过",
+          "deleted_text": "背景还有cont ext包括一些团队间的沟通其实也都是现在AI"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "历史的"
+            },
+            {
+              "deleted": true,
+              "text": "进来"
+            },
+            {
+              "deleted": false,
+              "text": "也做不到我觉得过"
+            }
+          ],
+          "original_text": "历史的进来也做不到我觉得过",
+          "edited_text": "历史的也做不到我觉得过",
+          "deleted_text": "进来"
+        }
+      ],
+      "original_preview": "previews/C024.original.mp3",
+      "edited_preview": "previews/C024.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "keep_reason": "熊镇正真审 accept"
+    }
+  ],
+  "never_cut": [
+    {
+      "candidate_id": "C001",
+      "status": "pending_human_review",
+      "start_seconds": 27.67,
+      "end_seconds": 33.72,
+      "start_sample": 1328160,
+      "end_sample": 1618560,
+      "duration_seconds": 6.05,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "risk": "high",
+      "deleted_text": "female: 理好的,\nmale: 理我是花南,现在在研究A IN AT IVE组织转型的话题",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "和交流欢迎大家关注,我是S oph ie,带点素补的AI产品经"
+            },
+            {
+              "deleted": true,
+              "text": "理好的,"
+            },
+            {
+              "deleted": false,
+              "text": "谢谢南哥我们今天的话题其实是AI它已经"
+            }
+          ],
+          "original_text": "和交流欢迎大家关注,我是S oph ie,带点素补的AI产品经理好的,谢谢南哥我们今天的话题其实是AI它已经",
+          "edited_text": "和交流欢迎大家关注,我是S oph ie,带点素补的AI产品经谢谢南哥我们今天的话题其实是AI它已经",
+          "deleted_text": "理好的,"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "和交流欢迎大家关注我是S of i,带点素补的A IN AT IVE经"
+            },
+            {
+              "deleted": true,
+              "text": "理我是花南,现在在研究A IN AT IVE组织转型的话题"
+            },
+            {
+              "deleted": false,
+              "text": "我们今天的话题其实是A IN AT IVE已经"
+            }
+          ],
+          "original_text": "和交流欢迎大家关注我是S of i,带点素补的A IN AT IVE经理我是花南,现在在研究A IN AT IVE组织转型的话题我们今天的话题其实是A IN AT IVE已经",
+          "edited_text": "和交流欢迎大家关注我是S of i,带点素补的A IN AT IVE经我们今天的话题其实是A IN AT IVE已经",
+          "deleted_text": "理我是花南,现在在研究A IN AT IVE组织转型的话题"
+        }
+      ],
+      "original_preview": "previews/C001.original.mp3",
+      "edited_preview": "previews/C001.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "block_reason": "熊镇正真审 reject"
+    },
+    {
+      "candidate_id": "C006",
+      "status": "pending_human_review",
+      "start_seconds": 132.38,
+      "end_seconds": 134.9,
+      "start_sample": 6354240,
+      "end_sample": 6475200,
+      "duration_seconds": 2.52,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "risk": "high",
+      "deleted_text": "female: 才会再形成一个PR D然后可能\nmale: 对,你",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "然后画半天然后再跟团队内部以及研发去对对完以后可能"
+            },
+            {
+              "deleted": true,
+              "text": "才会再形成一个PR D然后可能"
+            },
+            {
+              "deleted": false,
+              "text": "也会有一些打磨的事情所以总体来说,我们这个市场并不短对,然后如果是"
+            }
+          ],
+          "original_text": "然后画半天然后再跟团队内部以及研发去对对完以后可能才会再形成一个PR D然后可能也会有一些打磨的事情所以总体来说,我们这个市场并不短对,然后如果是",
+          "edited_text": "然后画半天然后再跟团队内部以及研发去对对完以后可能也会有一些打磨的事情所以总体来说,我们这个市场并不短对,然后如果是",
+          "deleted_text": "才会再形成一个PR D然后可能"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": true,
+              "text": "对,你"
+            },
+            {
+              "deleted": false,
+              "text": "会有一些大模的时间对,然后如果是"
+            }
+          ],
+          "original_text": "对,你会有一些大模的时间对,然后如果是",
+          "edited_text": "会有一些大模的时间对,然后如果是",
+          "deleted_text": "对,你"
+        }
+      ],
+      "original_preview": "previews/C006.original.mp3",
+      "edited_preview": "previews/C006.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "block_reason": "熊镇正真审 reject"
+    },
+    {
+      "candidate_id": "C011",
+      "status": "pending_human_review",
+      "start_seconds": 218.78,
+      "end_seconds": 219.18,
+      "start_sample": 10501440,
+      "end_sample": 10520640,
+      "duration_seconds": 0.4,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "risk": "low",
+      "deleted_text": "female: 话搜索搜\nmale: 话搜索搜",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "后会发现跳转到对应的对话一个对"
+            },
+            {
+              "deleted": true,
+              "text": "话搜索搜"
+            },
+            {
+              "deleted": false,
+              "text": "索跳的对应对话但是那个弹穿就没有办法自动关闭然后其实就算是个小bug"
+            }
+          ],
+          "original_text": "后会发现跳转到对应的对话一个对话搜索搜索跳的对应对话但是那个弹穿就没有办法自动关闭然后其实就算是个小bug",
+          "edited_text": "后会发现跳转到对应的对话一个对索跳的对应对话但是那个弹穿就没有办法自动关闭然后其实就算是个小bug",
+          "deleted_text": "话搜索搜"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "后会发现跳转到对应的对话就是一个对"
+            },
+            {
+              "deleted": true,
+              "text": "话搜索搜"
+            },
+            {
+              "deleted": false,
+              "text": "索跳转到对应对话但是那个弹窗就没有办法自动关闭然后其实就算是个小bug"
+            }
+          ],
+          "original_text": "后会发现跳转到对应的对话就是一个对话搜索搜索跳转到对应对话但是那个弹窗就没有办法自动关闭然后其实就算是个小bug",
+          "edited_text": "后会发现跳转到对应的对话就是一个对索跳转到对应对话但是那个弹窗就没有办法自动关闭然后其实就算是个小bug",
+          "deleted_text": "话搜索搜"
+        }
+      ],
+      "original_preview": "previews/C011.original.mp3",
+      "edited_preview": "previews/C011.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "block_reason": "熊镇正真审 reject"
+    },
+    {
+      "candidate_id": "C013",
+      "status": "pending_human_review",
+      "start_seconds": 304.87,
+      "end_seconds": 305.57,
+      "start_sample": 14633760,
+      "end_sample": 14667360,
+      "duration_seconds": 0.7,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "risk": "low",
+      "deleted_text": "female: 一个产品管家\nmale: 一个产品管家",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "馈的处理的整个链路那首先大家接触得到的就是"
+            },
+            {
+              "deleted": true,
+              "text": "一个产品管家"
+            },
+            {
+              "deleted": false,
+              "text": "那产品管家核心但是的作用是在群里面"
+            }
+          ],
+          "original_text": "馈的处理的整个链路那首先大家接触得到的就是一个产品管家那产品管家核心但是的作用是在群里面",
+          "edited_text": "馈的处理的整个链路那首先大家接触得到的就是那产品管家核心但是的作用是在群里面",
+          "deleted_text": "一个产品管家"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "馈的处理的这么一整个链路首先大家接触得到的就是"
+            },
+            {
+              "deleted": true,
+              "text": "一个产品管家"
+            },
+            {
+              "deleted": false,
+              "text": "产品管家核心但是的作用是在群里面"
+            }
+          ],
+          "original_text": "馈的处理的这么一整个链路首先大家接触得到的就是一个产品管家产品管家核心但是的作用是在群里面",
+          "edited_text": "馈的处理的这么一整个链路首先大家接触得到的就是产品管家核心但是的作用是在群里面",
+          "deleted_text": "一个产品管家"
+        }
+      ],
+      "original_preview": "previews/C013.original.mp3",
+      "edited_preview": "previews/C013.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "block_reason": "熊镇正真审 reject"
+    },
+    {
+      "candidate_id": "C018",
+      "status": "pending_human_review",
+      "start_seconds": 536.07,
+      "end_seconds": 537.75,
+      "start_sample": 25731360,
+      "end_sample": 25812000,
+      "duration_seconds": 1.68,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "risk": "high",
+      "deleted_text": "female: 程了解那\nmale: 程那",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "些公事在干的工作还有包括我们产品助理去收集这个产品需求的一个过"
+            },
+            {
+              "deleted": true,
+              "text": "程了解那"
+            },
+            {
+              "deleted": false,
+              "text": "现在比如说这种产品管家的ag ent然后以及像刚刚提到99花花"
+            }
+          ],
+          "original_text": "些公事在干的工作还有包括我们产品助理去收集这个产品需求的一个过程了解那现在比如说这种产品管家的ag ent然后以及像刚刚提到99花花",
+          "edited_text": "些公事在干的工作还有包括我们产品助理去收集这个产品需求的一个过现在比如说这种产品管家的ag ent然后以及像刚刚提到99花花",
+          "deleted_text": "程了解那"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "些同事在干的工作还有包括我们产品助理去收集产品需求的一个过"
+            },
+            {
+              "deleted": true,
+              "text": "程那"
+            },
+            {
+              "deleted": false,
+              "text": "现在比如说这种产品管家的A gent然后以及要干"
+            }
+          ],
+          "original_text": "些同事在干的工作还有包括我们产品助理去收集产品需求的一个过程那现在比如说这种产品管家的A gent然后以及要干",
+          "edited_text": "些同事在干的工作还有包括我们产品助理去收集产品需求的一个过现在比如说这种产品管家的A gent然后以及要干",
+          "deleted_text": "程那"
+        }
+      ],
+      "original_preview": "previews/C018.original.mp3",
+      "edited_preview": "previews/C018.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "block_reason": "熊镇正真审 reject"
+    },
+    {
+      "candidate_id": "C021",
+      "status": "pending_human_review",
+      "start_seconds": 561.44,
+      "end_seconds": 561.98,
+      "start_sample": 26949120,
+      "end_sample": 26975040,
+      "duration_seconds": 0.54,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "risk": "low",
+      "deleted_text": "female: ent对这个产\nmale: gent对这个产",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "说整个团队就共用这么几个配件的因为它核心目的是让这几个ag"
+            },
+            {
+              "deleted": true,
+              "text": "ent对这个产"
+            },
+            {
+              "deleted": false,
+              "text": "品项目本身非常的了解所以我们就讲到说如果说产"
+            }
+          ],
+          "original_text": "说整个团队就共用这么几个配件的因为它核心目的是让这几个ag ent对这个产品项目本身非常的了解所以我们就讲到说如果说产",
+          "edited_text": "说整个团队就共用这么几个配件的因为它核心目的是让这几个ag品项目本身非常的了解所以我们就讲到说如果说产",
+          "deleted_text": "ent对这个产"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "说整个团队就共用这么几个A gent因为它核心目的是让这几个A"
+            },
+            {
+              "deleted": true,
+              "text": "gent对这个产"
+            },
+            {
+              "deleted": false,
+              "text": "品项目本身非常的了解所以我们就讲到说如果说产"
+            }
+          ],
+          "original_text": "说整个团队就共用这么几个A gent因为它核心目的是让这几个A gent对这个产品项目本身非常的了解所以我们就讲到说如果说产",
+          "edited_text": "说整个团队就共用这么几个A gent因为它核心目的是让这几个A品项目本身非常的了解所以我们就讲到说如果说产",
+          "deleted_text": "gent对这个产"
+        }
+      ],
+      "original_preview": "previews/C021.original.mp3",
+      "edited_preview": "previews/C021.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "block_reason": "熊镇正真审 reject"
+    },
+    {
+      "candidate_id": "C022",
+      "status": "pending_human_review",
+      "start_seconds": 610.5,
+      "end_seconds": 612.2,
+      "start_sample": 29304000,
+      "end_sample": 29385600,
+      "duration_seconds": 1.7,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "risk": "high",
+      "deleted_text": "female: 这个做叫做\nmale: 做",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "ag ent可以持续地去开形容去做开发所以其实我们在这里就比起了"
+            },
+            {
+              "deleted": true,
+              "text": "这个做叫做"
+            },
+            {
+              "deleted": false,
+              "text": "叫做迭代的一个逻辑所以整体的逻辑像就变成了说我们"
+            }
+          ],
+          "original_text": "ag ent可以持续地去开形容去做开发所以其实我们在这里就比起了这个做叫做叫做迭代的一个逻辑所以整体的逻辑像就变成了说我们",
+          "edited_text": "ag ent可以持续地去开形容去做开发所以其实我们在这里就比起了叫做迭代的一个逻辑所以整体的逻辑像就变成了说我们",
+          "deleted_text": "这个做叫做"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "A gent可以持续的去开新任务去做开发所以其实我们在这里面就摒弃了"
+            },
+            {
+              "deleted": true,
+              "text": "做"
+            },
+            {
+              "deleted": false,
+              "text": "叫做迭代的逻辑所以整体的逻辑现在就变成了说我们"
+            }
+          ],
+          "original_text": "A gent可以持续的去开新任务去做开发所以其实我们在这里面就摒弃了做叫做迭代的逻辑所以整体的逻辑现在就变成了说我们",
+          "edited_text": "A gent可以持续的去开新任务去做开发所以其实我们在这里面就摒弃了叫做迭代的逻辑所以整体的逻辑现在就变成了说我们",
+          "deleted_text": "做"
+        }
+      ],
+      "original_preview": "previews/C022.original.mp3",
+      "edited_preview": "previews/C022.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL",
+      "block_reason": "熊镇正真审 reject"
+    }
+  ],
+  "human_review": [
+    {
+      "candidate_id": "C002",
+      "status": "pending_human_review",
+      "start_seconds": 104.32,
+      "end_seconds": 106.02,
+      "start_sample": 5007360,
+      "end_sample": 5088960,
+      "duration_seconds": 1.7,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 久这\nmale: 久还有印象",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "需要前到后短,合起来,开发个两周左右的这种功能一般要多"
+            },
+            {
+              "deleted": true,
+              "text": "久这"
+            },
+            {
+              "deleted": false,
+              "text": "种PR D加原型的话我可能也是需要一个两周左右"
+            }
+          ],
+          "original_text": "需要前到后短,合起来,开发个两周左右的这种功能一般要多久这种PR D加原型的话我可能也是需要一个两周左右",
+          "edited_text": "需要前到后短,合起来,开发个两周左右的这种功能一般要多种PR D加原型的话我可能也是需要一个两周左右",
+          "deleted_text": "久这"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "需要前段后端合起来开发跟两周左右的这种功能一般要多"
+            },
+            {
+              "deleted": true,
+              "text": "久还有印象"
+            },
+            {
+              "deleted": false,
+              "text": "两周左右"
+            }
+          ],
+          "original_text": "需要前段后端合起来开发跟两周左右的这种功能一般要多久还有印象两周左右",
+          "edited_text": "需要前段后端合起来开发跟两周左右的这种功能一般要多两周左右",
+          "deleted_text": "久还有印象"
+        }
+      ],
+      "original_preview": "previews/C002.original.mp3",
+      "edited_preview": "previews/C002.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C003",
+      "status": "pending_human_review",
+      "start_seconds": 116.68,
+      "end_seconds": 119.48,
+      "start_sample": 5600640,
+      "end_sample": 5735040,
+      "duration_seconds": 2.8,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 度对\nmale: 对吧,因为咱们研发可能比例会高一点对吧,1比6,",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "时间就是研发跟PR D的设计机物是同等的时间的产"
+            },
+            {
+              "deleted": true,
+              "text": "度对"
+            },
+            {
+              "deleted": false,
+              "text": "因为我一般会先用传"
+            }
+          ],
+          "original_text": "时间就是研发跟PR D的设计机物是同等的时间的产度对因为我一般会先用传",
+          "edited_text": "时间就是研发跟PR D的设计机物是同等的时间的产因为我一般会先用传",
+          "deleted_text": "度对"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "时间研发跟PR D的设计几乎是同等的时间的产度"
+            },
+            {
+              "deleted": true,
+              "text": "对吧,因为咱们研发可能比例会高一点对吧,1比6,"
+            },
+            {
+              "deleted": false,
+              "text": "1比8都有可能就是研发跟PM的比因为我一般会先用这个"
+            }
+          ],
+          "original_text": "时间研发跟PR D的设计几乎是同等的时间的产度对吧,因为咱们研发可能比例会高一点对吧,1比6,1比8都有可能就是研发跟PM的比因为我一般会先用这个",
+          "edited_text": "时间研发跟PR D的设计几乎是同等的时间的产度1比8都有可能就是研发跟PM的比因为我一般会先用这个",
+          "deleted_text": "对吧,因为咱们研发可能比例会高一点对吧,1比6,"
+        }
+      ],
+      "original_preview": "previews/C003.original.mp3",
+      "edited_preview": "previews/C003.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C004",
+      "status": "pending_human_review",
+      "start_seconds": 119.76,
+      "end_seconds": 122.66,
+      "start_sample": 5748480,
+      "end_sample": 5887680,
+      "duration_seconds": 2.9,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "filler_hesitation",
+      "category_label": "口癖 / 犹豫",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "medium",
+      "deleted_text": "female: 对因为\nmale: 6,1比8都有可能就是研发跟PM的比",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "机物是同等的时间的产度"
+            },
+            {
+              "deleted": true,
+              "text": "对因为"
+            },
+            {
+              "deleted": false,
+              "text": "我一般会先用传统的原型工具画一个原型,然后画"
+            }
+          ],
+          "original_text": "机物是同等的时间的产度对因为我一般会先用传统的原型工具画一个原型,然后画",
+          "edited_text": "机物是同等的时间的产度我一般会先用传统的原型工具画一个原型,然后画",
+          "deleted_text": "对因为"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "几乎是同等的时间的产度对吧,因为咱们研发可能比例会高一点对吧,1比"
+            },
+            {
+              "deleted": true,
+              "text": "6,1比8都有可能就是研发跟PM的比"
+            },
+            {
+              "deleted": false,
+              "text": "因为我一般会先用这个传统的原型工具"
+            }
+          ],
+          "original_text": "几乎是同等的时间的产度对吧,因为咱们研发可能比例会高一点对吧,1比6,1比8都有可能就是研发跟PM的比因为我一般会先用这个传统的原型工具",
+          "edited_text": "几乎是同等的时间的产度对吧,因为咱们研发可能比例会高一点对吧,1比因为我一般会先用这个传统的原型工具",
+          "deleted_text": "6,1比8都有可能就是研发跟PM的比"
+        }
+      ],
+      "original_preview": "previews/C004.original.mp3",
+      "edited_preview": "previews/C004.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C005",
+      "status": "pending_human_review",
+      "start_seconds": 126.34,
+      "end_seconds": 132.1,
+      "start_sample": 6064320,
+      "end_sample": 6340800,
+      "duration_seconds": 5.76,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 具画一个原型,然后画半天然后再跟团队内部以及研发去对对完以后可能\nmale: 具对,",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "因为我一般会先用传统的原型工"
+            },
+            {
+              "deleted": true,
+              "text": "具画一个原型,然后画半天然后再跟团队内部以及研发去对对完以后可能"
+            },
+            {
+              "deleted": false,
+              "text": "才会再形成一个PR D然后可能也会有一些打磨的事情所以总体来说,"
+            }
+          ],
+          "original_text": "因为我一般会先用传统的原型工具画一个原型,然后画半天然后再跟团队内部以及研发去对对完以后可能才会再形成一个PR D然后可能也会有一些打磨的事情所以总体来说,",
+          "edited_text": "因为我一般会先用传统的原型工才会再形成一个PR D然后可能也会有一些打磨的事情所以总体来说,",
+          "deleted_text": "具画一个原型,然后画半天然后再跟团队内部以及研发去对对完以后可能"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "就是研发跟PM的比因为我一般会先用这个传统的原型工"
+            },
+            {
+              "deleted": true,
+              "text": "具对,"
+            },
+            {
+              "deleted": false,
+              "text": "你会有一些大模的时间对,"
+            }
+          ],
+          "original_text": "就是研发跟PM的比因为我一般会先用这个传统的原型工具对,你会有一些大模的时间对,",
+          "edited_text": "就是研发跟PM的比因为我一般会先用这个传统的原型工你会有一些大模的时间对,",
+          "deleted_text": "具对,"
+        }
+      ],
+      "original_preview": "previews/C005.original.mp3",
+      "edited_preview": "previews/C005.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C008",
+      "status": "pending_human_review",
+      "start_seconds": 147.28,
+      "end_seconds": 149.3,
+      "start_sample": 7069440,
+      "end_sample": 7166400,
+      "duration_seconds": 2.02,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 是这\nmale: 吧,这种一般时间会多久还有",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "一个小的把这个真心这个应该过去在咱们的工作中日常站地也这么大"
+            },
+            {
+              "deleted": true,
+              "text": "是这"
+            },
+            {
+              "deleted": false,
+              "text": "种其实写一个PR D加原型的话一个小bug,或者一个小fe ature"
+            }
+          ],
+          "original_text": "一个小的把这个真心这个应该过去在咱们的工作中日常站地也这么大是这种其实写一个PR D加原型的话一个小bug,或者一个小fe ature",
+          "edited_text": "一个小的把这个真心这个应该过去在咱们的工作中日常站地也这么大种其实写一个PR D加原型的话一个小bug,或者一个小fe ature",
+          "deleted_text": "是这"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "一个小的bug的更新这个应该过去在咱们的工作中日产占比是蛮大的对"
+            },
+            {
+              "deleted": true,
+              "text": "吧,这种一般时间会多久还有"
+            },
+            {
+              "deleted": false,
+              "text": "印象其实写一个PR D价原型的话一个小bug或者一个小fe ature"
+            }
+          ],
+          "original_text": "一个小的bug的更新这个应该过去在咱们的工作中日产占比是蛮大的对吧,这种一般时间会多久还有印象其实写一个PR D价原型的话一个小bug或者一个小fe ature",
+          "edited_text": "一个小的bug的更新这个应该过去在咱们的工作中日产占比是蛮大的对印象其实写一个PR D价原型的话一个小bug或者一个小fe ature",
+          "deleted_text": "吧,这种一般时间会多久还有"
+        }
+      ],
+      "original_preview": "previews/C008.original.mp3",
+      "edited_preview": "previews/C008.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C010",
+      "status": "pending_human_review",
+      "start_seconds": 188.08,
+      "end_seconds": 188.36,
+      "start_sample": 9027840,
+      "end_sample": 9041280,
+      "duration_seconds": 0.28,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 的动作动\nmale: 用了这么",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "我们现在是有什么状态的就是我上周在一个场合上做分享集中"
+            },
+            {
+              "deleted": true,
+              "text": "的动作动"
+            },
+            {
+              "deleted": false,
+              "text": "作P ace当时应该是我们上线了一个比较大的fe ature但是里"
+            }
+          ],
+          "original_text": "我们现在是有什么状态的就是我上周在一个场合上做分享集中的动作动作P ace当时应该是我们上线了一个比较大的fe ature但是里",
+          "edited_text": "我们现在是有什么状态的就是我上周在一个场合上做分享集中作P ace当时应该是我们上线了一个比较大的fe ature但是里",
+          "deleted_text": "的动作动"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "然后我们现在是个什么状态呢我上周在一个产合上做分享其实"
+            },
+            {
+              "deleted": true,
+              "text": "用了这么"
+            },
+            {
+              "deleted": false,
+              "text": "个case当时应该是我们上线了一个比较大的fe ature但是里"
+            }
+          ],
+          "original_text": "然后我们现在是个什么状态呢我上周在一个产合上做分享其实用了这么个case当时应该是我们上线了一个比较大的fe ature但是里",
+          "edited_text": "然后我们现在是个什么状态呢我上周在一个产合上做分享其实个case当时应该是我们上线了一个比较大的fe ature但是里",
+          "deleted_text": "用了这么"
+        }
+      ],
+      "original_preview": "previews/C010.original.mp3",
+      "edited_preview": "previews/C010.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C012",
+      "status": "pending_human_review",
+      "start_seconds": 277.09,
+      "end_seconds": 277.67,
+      "start_sample": 13300320,
+      "end_sample": 13328160,
+      "duration_seconds": 0.58,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 还是移动端啊\nmale: 还是移动端移",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "同的确认细节然后问他说这个bug在什么时候浮现是外部端啊"
+            },
+            {
+              "deleted": true,
+              "text": "还是移动端啊"
+            },
+            {
+              "deleted": false,
+              "text": "移动的是安卓啊还是苹果啊之类的那对于这个用户的另一个视角他隔"
+            }
+          ],
+          "original_text": "同的确认细节然后问他说这个bug在什么时候浮现是外部端啊还是移动端啊移动的是安卓啊还是苹果啊之类的那对于这个用户的另一个视角他隔",
+          "edited_text": "同的确认细节然后问他说这个bug在什么时候浮现是外部端啊移动的是安卓啊还是苹果啊之类的那对于这个用户的另一个视角他隔",
+          "deleted_text": "还是移动端啊"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "的确认细节然后问他说bug在什么时候复线是we b端"
+            },
+            {
+              "deleted": true,
+              "text": "还是移动端移"
+            },
+            {
+              "deleted": false,
+              "text": "动端是安卓还是苹果之类的对于用户的另一个视角看就是他"
+            }
+          ],
+          "original_text": "的确认细节然后问他说bug在什么时候复线是we b端还是移动端移动端是安卓还是苹果之类的对于用户的另一个视角看就是他",
+          "edited_text": "的确认细节然后问他说bug在什么时候复线是we b端动端是安卓还是苹果之类的对于用户的另一个视角看就是他",
+          "deleted_text": "还是移动端移"
+        }
+      ],
+      "original_preview": "previews/C012.original.mp3",
+      "edited_preview": "previews/C012.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C015",
+      "status": "pending_human_review",
+      "start_seconds": 373.8,
+      "end_seconds": 375.82,
+      "start_sample": 17942400,
+      "end_sample": 18039360,
+      "duration_seconds": 2.02,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 然后我\nmale: 然后我估",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "上有很多人讲这个研发动作当然就是产品经历动作其实讲的是比较少的"
+            },
+            {
+              "deleted": true,
+              "text": "然后我"
+            },
+            {
+              "deleted": false,
+              "text": "估计市面向大家听到这个东西觉得这个流程其实是比较简单就是收到需求然后"
+            }
+          ],
+          "original_text": "上有很多人讲这个研发动作当然就是产品经历动作其实讲的是比较少的然后我估计市面向大家听到这个东西觉得这个流程其实是比较简单就是收到需求然后",
+          "edited_text": "上有很多人讲这个研发动作当然就是产品经历动作其实讲的是比较少的估计市面向大家听到这个东西觉得这个流程其实是比较简单就是收到需求然后",
+          "deleted_text": "然后我"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "上有很多人讲这个研发怎么做但我觉得产品经历怎么做其实讲的是比较少的"
+            },
+            {
+              "deleted": true,
+              "text": "然后我估"
+            },
+            {
+              "deleted": false,
+              "text": "计市面上大家听到这个东西觉得这个流程其实是比较简单就是收到需求然后"
+            }
+          ],
+          "original_text": "上有很多人讲这个研发怎么做但我觉得产品经历怎么做其实讲的是比较少的然后我估计市面上大家听到这个东西觉得这个流程其实是比较简单就是收到需求然后",
+          "edited_text": "上有很多人讲这个研发怎么做但我觉得产品经历怎么做其实讲的是比较少的计市面上大家听到这个东西觉得这个流程其实是比较简单就是收到需求然后",
+          "deleted_text": "然后我估"
+        }
+      ],
+      "original_preview": "previews/C015.original.mp3",
+      "edited_preview": "previews/C015.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C016",
+      "status": "pending_human_review",
+      "start_seconds": 388.59,
+      "end_seconds": 394.51,
+      "start_sample": 18652320,
+      "end_sample": 18936480,
+      "duration_seconds": 5.92,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 评审和上线的那套流程但是每一个环节都是用一个特定的岗位的ag ent去写或替代\nmale: 对但",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "然后有个人设定一个删线对其实这个流程还是传统的产品"
+            },
+            {
+              "deleted": true,
+              "text": "评审和上线的那套流程但是每一个环节都是用一个特定的岗位的ag ent去写或替代"
+            },
+            {
+              "deleted": false,
+              "text": "但其实这里面是有一个管理的一个逻辑办人就是我们并不是说让产"
+            }
+          ],
+          "original_text": "然后有个人设定一个删线对其实这个流程还是传统的产品评审和上线的那套流程但是每一个环节都是用一个特定的岗位的ag ent去写或替代但其实这里面是有一个管理的一个逻辑办人就是我们并不是说让产",
+          "edited_text": "然后有个人设定一个删线对其实这个流程还是传统的产品但其实这里面是有一个管理的一个逻辑办人就是我们并不是说让产",
+          "deleted_text": "评审和上线的那套流程但是每一个环节都是用一个特定的岗位的ag ent去写或替代"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "然后一个人设计就删线对其实这个流程还是传统的产品"
+            },
+            {
+              "deleted": true,
+              "text": "对但"
+            },
+            {
+              "deleted": false,
+              "text": "其实这里面是有一个管理的一个逻辑在的我们并不是说让"
+            }
+          ],
+          "original_text": "然后一个人设计就删线对其实这个流程还是传统的产品对但其实这里面是有一个管理的一个逻辑在的我们并不是说让",
+          "edited_text": "然后一个人设计就删线对其实这个流程还是传统的产品其实这里面是有一个管理的一个逻辑在的我们并不是说让",
+          "deleted_text": "对但"
+        }
+      ],
+      "original_preview": "previews/C016.original.mp3",
+      "edited_preview": "previews/C016.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C017",
+      "status": "pending_human_review",
+      "start_seconds": 482.75,
+      "end_seconds": 483.05,
+      "start_sample": 23172000,
+      "end_sample": 23186400,
+      "duration_seconds": 0.3,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 西一条一\nmale: 西一条一",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "到我们的这用户反馈的需求持续进去我们有一个专门的G ate hall所有的这种类型的东"
+            },
+            {
+              "deleted": true,
+              "text": "西一条一"
+            },
+            {
+              "deleted": false,
+              "text": "条地水平都放进来当它在提之前它还会做一个确认的工作它会检查"
+            }
+          ],
+          "original_text": "到我们的这用户反馈的需求持续进去我们有一个专门的G ate hall所有的这种类型的东西一条一条地水平都放进来当它在提之前它还会做一个确认的工作它会检查",
+          "edited_text": "到我们的这用户反馈的需求持续进去我们有一个专门的G ate hall所有的这种类型的东条地水平都放进来当它在提之前它还会做一个确认的工作它会检查",
+          "deleted_text": "西一条一"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "到我们的用户反馈的需求池里面去我们会有一个专门的G ate Hub把所有的这种类型的东"
+            },
+            {
+              "deleted": true,
+              "text": "西一条一"
+            },
+            {
+              "deleted": false,
+              "text": "条e-s hoot全部都放进来但它在提之前它还会做一个check的工作它会检查"
+            }
+          ],
+          "original_text": "到我们的用户反馈的需求池里面去我们会有一个专门的G ate Hub把所有的这种类型的东西一条一条e-s hoot全部都放进来但它在提之前它还会做一个check的工作它会检查",
+          "edited_text": "到我们的用户反馈的需求池里面去我们会有一个专门的G ate Hub把所有的这种类型的东条e-s hoot全部都放进来但它在提之前它还会做一个check的工作它会检查",
+          "deleted_text": "西一条一"
+        }
+      ],
+      "original_preview": "previews/C017.original.mp3",
+      "edited_preview": "previews/C017.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C019",
+      "status": "pending_human_review",
+      "start_seconds": 541.73,
+      "end_seconds": 545.62,
+      "start_sample": 26003040,
+      "end_sample": 26189760,
+      "duration_seconds": 3.89,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 刚刚提到99花花他们都是我们产品团队自己去训练的\nmale: 干的",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "解那现在比如说这种产品管家的ag ent然后以及像"
+            },
+            {
+              "deleted": true,
+              "text": "刚刚提到99花花他们都是我们产品团队自己去训练的"
+            },
+            {
+              "deleted": false,
+              "text": "他们训练的人的角色也都是根据这个岗位上的人的角色"
+            }
+          ],
+          "original_text": "解那现在比如说这种产品管家的ag ent然后以及像刚刚提到99花花他们都是我们产品团队自己去训练的他们训练的人的角色也都是根据这个岗位上的人的角色",
+          "edited_text": "解那现在比如说这种产品管家的ag ent然后以及像他们训练的人的角色也都是根据这个岗位上的人的角色",
+          "deleted_text": "刚刚提到99花花他们都是我们产品团队自己去训练的"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "那现在比如说这种产品管家的A gent然后以及要"
+            },
+            {
+              "deleted": true,
+              "text": "干的"
+            },
+            {
+              "deleted": false,
+              "text": "他们训练的人的角色也都是根据这个岗位上的人的角色"
+            }
+          ],
+          "original_text": "那现在比如说这种产品管家的A gent然后以及要干的他们训练的人的角色也都是根据这个岗位上的人的角色",
+          "edited_text": "那现在比如说这种产品管家的A gent然后以及要他们训练的人的角色也都是根据这个岗位上的人的角色",
+          "deleted_text": "干的"
+        }
+      ],
+      "original_preview": "previews/C019.original.mp3",
+      "edited_preview": "previews/C019.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C020",
+      "status": "pending_human_review",
+      "start_seconds": 550.94,
+      "end_seconds": 551.92,
+      "start_sample": 26445120,
+      "end_sample": 26492160,
+      "duration_seconds": 0.98,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 色然后针对\nmale: 色然后对",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "他们训练的人的角色也都是根据这个岗位上的人的角"
+            },
+            {
+              "deleted": true,
+              "text": "色然后针对"
+            },
+            {
+              "deleted": false,
+              "text": "性的训练我们现在其实是几个人一起把这个东西都比如说整个团"
+            }
+          ],
+          "original_text": "他们训练的人的角色也都是根据这个岗位上的人的角色然后针对性的训练我们现在其实是几个人一起把这个东西都比如说整个团",
+          "edited_text": "他们训练的人的角色也都是根据这个岗位上的人的角性的训练我们现在其实是几个人一起把这个东西都比如说整个团",
+          "deleted_text": "色然后针对"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "他们训练的人的角色也都是根据这个岗位上的人的角"
+            },
+            {
+              "deleted": true,
+              "text": "色然后对"
+            },
+            {
+              "deleted": false,
+              "text": "我们现在其实是几个人一起把这个东西都等于说整个团"
+            }
+          ],
+          "original_text": "他们训练的人的角色也都是根据这个岗位上的人的角色然后对我们现在其实是几个人一起把这个东西都等于说整个团",
+          "edited_text": "他们训练的人的角色也都是根据这个岗位上的人的角我们现在其实是几个人一起把这个东西都等于说整个团",
+          "deleted_text": "色然后对"
+        }
+      ],
+      "original_preview": "previews/C020.original.mp3",
+      "edited_preview": "previews/C020.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C023",
+      "status": "pending_human_review",
+      "start_seconds": 685.02,
+      "end_seconds": 687.5,
+      "start_sample": 32880960,
+      "end_sample": 33000000,
+      "duration_seconds": 2.48,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 的比较的产\nmale: 的产",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "来那你也不能不看那怎么办呢我们后来又增加了那时候那个叫奥利"
+            },
+            {
+              "deleted": true,
+              "text": "的比较的产"
+            },
+            {
+              "deleted": false,
+              "text": "品的ag ent他的核心作用其实是做所有需求的评审说把它其实优"
+            }
+          ],
+          "original_text": "来那你也不能不看那怎么办呢我们后来又增加了那时候那个叫奥利的比较的产品的ag ent他的核心作用其实是做所有需求的评审说把它其实优",
+          "edited_text": "来那你也不能不看那怎么办呢我们后来又增加了那时候那个叫奥利品的ag ent他的核心作用其实是做所有需求的评审说把它其实优",
+          "deleted_text": "的比较的产"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "你也不能不看那怎么办呢我们后来又增加了刚才说的那个叫O li"
+            },
+            {
+              "deleted": true,
+              "text": "的产"
+            },
+            {
+              "deleted": false,
+              "text": "品的ag ent他的核心做东西就是做所有需求的评审说白了其实有"
+            }
+          ],
+          "original_text": "你也不能不看那怎么办呢我们后来又增加了刚才说的那个叫O li的产品的ag ent他的核心做东西就是做所有需求的评审说白了其实有",
+          "edited_text": "你也不能不看那怎么办呢我们后来又增加了刚才说的那个叫O li品的ag ent他的核心做东西就是做所有需求的评审说白了其实有",
+          "deleted_text": "的产"
+        }
+      ],
+      "original_preview": "previews/C023.original.mp3",
+      "edited_preview": "previews/C023.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C025",
+      "status": "pending_human_review",
+      "start_seconds": 784.86,
+      "end_seconds": 788.69,
+      "start_sample": 37673280,
+      "end_sample": 37857120,
+      "duration_seconds": 3.83,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 的那咱们为什么能达到这种很全流程自动的状态呢\nmale: 不到我觉得",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "史的背景还有cont ext包括一些团队间的沟通其实也都是现在AI做不到"
+            },
+            {
+              "deleted": true,
+              "text": "的那咱们为什么能达到这种很全流程自动的状态呢"
+            },
+            {
+              "deleted": false,
+              "text": "我就过去如果都人人是沟通的话确实很多cont act也是不全的对"
+            }
+          ],
+          "original_text": "史的背景还有cont ext包括一些团队间的沟通其实也都是现在AI做不到的那咱们为什么能达到这种很全流程自动的状态呢我就过去如果都人人是沟通的话确实很多cont act也是不全的对",
+          "edited_text": "史的背景还有cont ext包括一些团队间的沟通其实也都是现在AI做不到我就过去如果都人人是沟通的话确实很多cont act也是不全的对",
+          "deleted_text": "的那咱们为什么能达到这种很全流程自动的状态呢"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "史的进来也做"
+            },
+            {
+              "deleted": true,
+              "text": "不到我觉得"
+            },
+            {
+              "deleted": false,
+              "text": "过去如果都人去沟通的话你确实很多cont act是不全的对"
+            }
+          ],
+          "original_text": "史的进来也做不到我觉得过去如果都人去沟通的话你确实很多cont act是不全的对",
+          "edited_text": "史的进来也做过去如果都人去沟通的话你确实很多cont act是不全的对",
+          "deleted_text": "不到我觉得"
+        }
+      ],
+      "original_preview": "previews/C025.original.mp3",
+      "edited_preview": "previews/C025.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C026",
+      "status": "pending_human_review",
+      "start_seconds": 808.99,
+      "end_seconds": 809.49,
+      "start_sample": 38831520,
+      "end_sample": 38855520,
+      "duration_seconds": 0.5,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 时候人类人\nmale: 时候人类人",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "一般都会有一个职位叫UI设计或者U X设计对吧很多"
+            },
+            {
+              "deleted": true,
+              "text": "时候人类人"
+            },
+            {
+              "deleted": false,
+              "text": "类多产品经理有设计是配合大家都会幻想我们叫幻想都颤想过一个东西叫"
+            }
+          ],
+          "original_text": "一般都会有一个职位叫UI设计或者U X设计对吧很多时候人类人类多产品经理有设计是配合大家都会幻想我们叫幻想都颤想过一个东西叫",
+          "edited_text": "一般都会有一个职位叫UI设计或者U X设计对吧很多类多产品经理有设计是配合大家都会幻想我们叫幻想都颤想过一个东西叫",
+          "deleted_text": "时候人类人"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "里一般都会有一个职位叫UI设计或者U X设计对吧很多"
+            },
+            {
+              "deleted": true,
+              "text": "时候人类人"
+            },
+            {
+              "deleted": false,
+              "text": "类做产品经理和设计师配合大家都会幻想不能叫幻想都债想过一个东西叫"
+            }
+          ],
+          "original_text": "里一般都会有一个职位叫UI设计或者U X设计对吧很多时候人类人类做产品经理和设计师配合大家都会幻想不能叫幻想都债想过一个东西叫",
+          "edited_text": "里一般都会有一个职位叫UI设计或者U X设计对吧很多类做产品经理和设计师配合大家都会幻想不能叫幻想都债想过一个东西叫",
+          "deleted_text": "时候人类人"
+        }
+      ],
+      "original_preview": "previews/C026.original.mp3",
+      "edited_preview": "previews/C026.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C027",
+      "status": "pending_human_review",
+      "start_seconds": 817.83,
+      "end_seconds": 823.72,
+      "start_sample": 39255840,
+      "end_sample": 39538560,
+      "duration_seconds": 5.89,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "filler_hesitation",
+      "category_label": "口癖 / 犹豫",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "medium",
+      "deleted_text": "female: 我们现在其实就已经设计了一套UI规范然后这个花花是不是就是已经把这个每次在设\nmale: 吧对",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "想都颤想过一个东西叫做我有一套UI规范是"
+            },
+            {
+              "deleted": true,
+              "text": "我们现在其实就已经设计了一套UI规范然后这个花花是不是就是已经把这个每次在设"
+            },
+            {
+              "deleted": false,
+              "text": "计UI之前都会读一套这个东西就是过去人类做UI规范的时候一般都拥不"
+            }
+          ],
+          "original_text": "想都颤想过一个东西叫做我有一套UI规范是我们现在其实就已经设计了一套UI规范然后这个花花是不是就是已经把这个每次在设计UI之前都会读一套这个东西就是过去人类做UI规范的时候一般都拥不",
+          "edited_text": "想都颤想过一个东西叫做我有一套UI规范是计UI之前都会读一套这个东西就是过去人类做UI规范的时候一般都拥不",
+          "deleted_text": "我们现在其实就已经设计了一套UI规范然后这个花花是不是就是已经把这个每次在设"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "想都债想过一个东西叫做我有一套UI规范对"
+            },
+            {
+              "deleted": true,
+              "text": "吧对"
+            },
+            {
+              "deleted": false,
+              "text": "是的过去人类做UI规范的时候一般都用不起"
+            }
+          ],
+          "original_text": "想都债想过一个东西叫做我有一套UI规范对吧对是的过去人类做UI规范的时候一般都用不起",
+          "edited_text": "想都债想过一个东西叫做我有一套UI规范对是的过去人类做UI规范的时候一般都用不起",
+          "deleted_text": "吧对"
+        }
+      ],
+      "original_preview": "previews/C027.original.mp3",
+      "edited_preview": "previews/C027.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C028",
+      "status": "pending_human_review",
+      "start_seconds": 841.24,
+      "end_seconds": 842.24,
+      "start_sample": 40379520,
+      "end_sample": 40427520,
+      "duration_seconds": 1.0,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 能对然后这个时候\nmale: 能然后这个时候",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "的人不愿意用或者有的人非愿意自己能喘心对吧他一定要做有什么新的功"
+            },
+            {
+              "deleted": true,
+              "text": "能对然后这个时候"
+            },
+            {
+              "deleted": false,
+              "text": "做了新的一些设计之后有跟老的规范接入不起来那种那种规范"
+            }
+          ],
+          "original_text": "的人不愿意用或者有的人非愿意自己能喘心对吧他一定要做有什么新的功能对然后这个时候做了新的一些设计之后有跟老的规范接入不起来那种那种规范",
+          "edited_text": "的人不愿意用或者有的人非愿意自己能喘心对吧他一定要做有什么新的功做了新的一些设计之后有跟老的规范接入不起来那种那种规范",
+          "deleted_text": "能对然后这个时候"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "的人不愿意用或者有的人非得觉得自己能创新对吧他一定要做一个什么新的功"
+            },
+            {
+              "deleted": true,
+              "text": "能然后这个时候"
+            },
+            {
+              "deleted": false,
+              "text": "做了新的一些设计之后又跟老的规范进入不起来那套规范"
+            }
+          ],
+          "original_text": "的人不愿意用或者有的人非得觉得自己能创新对吧他一定要做一个什么新的功能然后这个时候做了新的一些设计之后又跟老的规范进入不起来那套规范",
+          "edited_text": "的人不愿意用或者有的人非得觉得自己能创新对吧他一定要做一个什么新的功做了新的一些设计之后又跟老的规范进入不起来那套规范",
+          "deleted_text": "能然后这个时候"
+        }
+      ],
+      "original_preview": "previews/C028.original.mp3",
+      "edited_preview": "previews/C028.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C029",
+      "status": "pending_human_review",
+      "start_seconds": 846.18,
+      "end_seconds": 846.54,
+      "start_sample": 40616640,
+      "end_sample": 40633920,
+      "duration_seconds": 0.36,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 来那种那\nmale: 那套规",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "能对然后这个时候做了新的一些设计之后有跟老的规范接入不起"
+            },
+            {
+              "deleted": true,
+              "text": "来那种那"
+            },
+            {
+              "deleted": false,
+              "text": "种规范可能久而久之他的服务没有人在关心了但是对"
+            }
+          ],
+          "original_text": "能对然后这个时候做了新的一些设计之后有跟老的规范接入不起来那种那种规范可能久而久之他的服务没有人在关心了但是对",
+          "edited_text": "能对然后这个时候做了新的一些设计之后有跟老的规范接入不起种规范可能久而久之他的服务没有人在关心了但是对",
+          "deleted_text": "来那种那"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "能然后这个时候做了新的一些设计之后又跟老的规范进入不起来"
+            },
+            {
+              "deleted": true,
+              "text": "那套规"
+            },
+            {
+              "deleted": false,
+              "text": "范可能久而久之他就腐化了就没有人再关心了但是对AI"
+            }
+          ],
+          "original_text": "能然后这个时候做了新的一些设计之后又跟老的规范进入不起来那套规范可能久而久之他就腐化了就没有人再关心了但是对AI",
+          "edited_text": "能然后这个时候做了新的一些设计之后又跟老的规范进入不起来范可能久而久之他就腐化了就没有人再关心了但是对AI",
+          "deleted_text": "那套规"
+        }
+      ],
+      "original_preview": "previews/C029.original.mp3",
+      "edited_preview": "previews/C029.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C030",
+      "status": "pending_human_review",
+      "start_seconds": 944.24,
+      "end_seconds": 948.42,
+      "start_sample": 45323520,
+      "end_sample": 45524160,
+      "duration_seconds": 4.18,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 他们产出的PR D和原型给到研发现在是直接可用的吗\nmale: 队我们",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "那比如说他们现在这些产品团队A gent团队"
+            },
+            {
+              "deleted": true,
+              "text": "他们产出的PR D和原型给到研发现在是直接可用的吗"
+            },
+            {
+              "deleted": false,
+              "text": "我们但是我们这里面还是加了一道人类来把关的一个过程毕竟是一个先看生"
+            }
+          ],
+          "original_text": "那比如说他们现在这些产品团队A gent团队他们产出的PR D和原型给到研发现在是直接可用的吗我们但是我们这里面还是加了一道人类来把关的一个过程毕竟是一个先看生",
+          "edited_text": "那比如说他们现在这些产品团队A gent团队我们但是我们这里面还是加了一道人类来把关的一个过程毕竟是一个先看生",
+          "deleted_text": "他们产出的PR D和原型给到研发现在是直接可用的吗"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "那比如说他们现在这个产品团队A IS非常团"
+            },
+            {
+              "deleted": true,
+              "text": "队我们"
+            },
+            {
+              "deleted": false,
+              "text": "但我们这里面还是加了一道人类来把关的一个过程对吧毕竟是一个线上生"
+            }
+          ],
+          "original_text": "那比如说他们现在这个产品团队A IS非常团队我们但我们这里面还是加了一道人类来把关的一个过程对吧毕竟是一个线上生",
+          "edited_text": "那比如说他们现在这个产品团队A IS非常团但我们这里面还是加了一道人类来把关的一个过程对吧毕竟是一个线上生",
+          "deleted_text": "队我们"
+        }
+      ],
+      "original_preview": "previews/C030.original.mp3",
+      "edited_preview": "previews/C030.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C031",
+      "status": "pending_human_review",
+      "start_seconds": 960.34,
+      "end_seconds": 962.1,
+      "start_sample": 46096320,
+      "end_sample": 46180800,
+      "duration_seconds": 1.76,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 说奥\nmale: 说O",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "AI百分之百怪的优努不看看就让它上线所以我们其实我刚才讲到"
+            },
+            {
+              "deleted": true,
+              "text": "说奥"
+            },
+            {
+              "deleted": false,
+              "text": "里评论完需求之后其实它会把这个需求制为一个叫"
+            }
+          ],
+          "original_text": "AI百分之百怪的优努不看看就让它上线所以我们其实我刚才讲到说奥里评论完需求之后其实它会把这个需求制为一个叫",
+          "edited_text": "AI百分之百怪的优努不看看就让它上线所以我们其实我刚才讲到里评论完需求之后其实它会把这个需求制为一个叫",
+          "deleted_text": "说奥"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "AI百分之百的Y OL O不看的就让它上线所以我们其实刚才讲到"
+            },
+            {
+              "deleted": true,
+              "text": "说O"
+            },
+            {
+              "deleted": false,
+              "text": "li评设完需求之后其实他会把需求置为一个叫"
+            }
+          ],
+          "original_text": "AI百分之百的Y OL O不看的就让它上线所以我们其实刚才讲到说O li评设完需求之后其实他会把需求置为一个叫",
+          "edited_text": "AI百分之百的Y OL O不看的就让它上线所以我们其实刚才讲到li评设完需求之后其实他会把需求置为一个叫",
+          "deleted_text": "说O"
+        }
+      ],
+      "original_preview": "previews/C031.original.mp3",
+      "edited_preview": "previews/C031.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C032",
+      "status": "pending_human_review",
+      "start_seconds": 969.98,
+      "end_seconds": 970.84,
+      "start_sample": 46559040,
+      "end_sample": 46600320,
+      "duration_seconds": 0.86,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 但人类P\nmale: 但人类PM人类",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "它会把这个需求制为一个叫做等待人类P&M评审的标签"
+            },
+            {
+              "deleted": true,
+              "text": "但人类P"
+            },
+            {
+              "deleted": false,
+              "text": "&M就是根据每个需求的一个复杂情况决定详细看还是扫理也就过"
+            }
+          ],
+          "original_text": "它会把这个需求制为一个叫做等待人类P&M评审的标签但人类P&M就是根据每个需求的一个复杂情况决定详细看还是扫理也就过",
+          "edited_text": "它会把这个需求制为一个叫做等待人类P&M评审的标签&M就是根据每个需求的一个复杂情况决定详细看还是扫理也就过",
+          "deleted_text": "但人类P"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "他会把需求置为一个叫做等待人类PM评审的标签"
+            },
+            {
+              "deleted": true,
+              "text": "但人类PM人类"
+            },
+            {
+              "deleted": false,
+              "text": "PM就会根据每个需求的一个复杂情况决定详细看还是扫一眼就过然后"
+            }
+          ],
+          "original_text": "他会把需求置为一个叫做等待人类PM评审的标签但人类PM人类PM就会根据每个需求的一个复杂情况决定详细看还是扫一眼就过然后",
+          "edited_text": "他会把需求置为一个叫做等待人类PM评审的标签PM就会根据每个需求的一个复杂情况决定详细看还是扫一眼就过然后",
+          "deleted_text": "但人类PM人类"
+        }
+      ],
+      "original_preview": "previews/C032.original.mp3",
+      "edited_preview": "previews/C032.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C033",
+      "status": "pending_human_review",
+      "start_seconds": 1016.78,
+      "end_seconds": 1017.26,
+      "start_sample": 48805440,
+      "end_sample": 48828480,
+      "duration_seconds": 0.48,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 出设计\nmale: 出设计",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "吧所以研发这个模块固有关的于是研发配件就会"
+            },
+            {
+              "deleted": true,
+              "text": "出设计"
+            },
+            {
+              "deleted": false,
+              "text": "这个设计包括技术设计也会催着去让花花去化对应的前端的"
+            }
+          ],
+          "original_text": "吧所以研发这个模块固有关的于是研发配件就会出设计这个设计包括技术设计也会催着去让花花去化对应的前端的",
+          "edited_text": "吧所以研发这个模块固有关的于是研发配件就会这个设计包括技术设计也会催着去让花花去化对应的前端的",
+          "deleted_text": "出设计"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "吧所以研发可能他发现这个模块跟我有关的于是研发的ag ent就会"
+            },
+            {
+              "deleted": true,
+              "text": "出设计"
+            },
+            {
+              "deleted": false,
+              "text": "设计机包括技术设计也会催着去让花花去划对应的前端的"
+            }
+          ],
+          "original_text": "吧所以研发可能他发现这个模块跟我有关的于是研发的ag ent就会出设计设计机包括技术设计也会催着去让花花去划对应的前端的",
+          "edited_text": "吧所以研发可能他发现这个模块跟我有关的于是研发的ag ent就会设计机包括技术设计也会催着去让花花去划对应的前端的",
+          "deleted_text": "出设计"
+        }
+      ],
+      "original_preview": "previews/C033.original.mp3",
+      "edited_preview": "previews/C033.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C034",
+      "status": "pending_human_review",
+      "start_seconds": 1042.84,
+      "end_seconds": 1043.48,
+      "start_sample": 50056320,
+      "end_sample": 50087040,
+      "duration_seconds": 0.64,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 到底不过不\nmale: 到底符不符",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "到这部分你会发现整个过程中人类是做了几个关键的判断PR P写的"
+            },
+            {
+              "deleted": true,
+              "text": "到底不过不"
+            },
+            {
+              "deleted": false,
+              "text": "过期待这个需求到底是真的需求要不要做一些东西人家判断然后"
+            }
+          ],
+          "original_text": "到这部分你会发现整个过程中人类是做了几个关键的判断PR P写的到底不过不过期待这个需求到底是真的需求要不要做一些东西人家判断然后",
+          "edited_text": "到这部分你会发现整个过程中人类是做了几个关键的判断PR P写的过期待这个需求到底是真的需求要不要做一些东西人家判断然后",
+          "deleted_text": "到底不过不"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "到这部分的时候你就发现整个过程中人类是做了几个关键的判断对吧PR D写的"
+            },
+            {
+              "deleted": true,
+              "text": "到底符不符"
+            },
+            {
+              "deleted": false,
+              "text": "合期待这个需求到底是不是真的需求要不要作写都不是人在判断"
+            }
+          ],
+          "original_text": "到这部分的时候你就发现整个过程中人类是做了几个关键的判断对吧PR D写的到底符不符合期待这个需求到底是不是真的需求要不要作写都不是人在判断",
+          "edited_text": "到这部分的时候你就发现整个过程中人类是做了几个关键的判断对吧PR D写的合期待这个需求到底是不是真的需求要不要作写都不是人在判断",
+          "deleted_text": "到底符不符"
+        }
+      ],
+      "original_preview": "previews/C034.original.mp3",
+      "edited_preview": "previews/C034.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C035",
+      "status": "pending_human_review",
+      "start_seconds": 1047.78,
+      "end_seconds": 1049.46,
+      "start_sample": 50293440,
+      "end_sample": 50374080,
+      "duration_seconds": 1.68,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 断然后研\nmale: 断然后",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "到底不过不过期待这个需求到底是真的需求要不要做一些东西人家判"
+            },
+            {
+              "deleted": true,
+              "text": "断然后研"
+            },
+            {
+              "deleted": false,
+              "text": "发主要看一下整体的技术设计和整体的UI的设计想是否合适"
+            }
+          ],
+          "original_text": "到底不过不过期待这个需求到底是真的需求要不要做一些东西人家判断然后研发主要看一下整体的技术设计和整体的UI的设计想是否合适",
+          "edited_text": "到底不过不过期待这个需求到底是真的需求要不要做一些东西人家判发主要看一下整体的技术设计和整体的UI的设计想是否合适",
+          "deleted_text": "断然后研"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "到底符不符合期待这个需求到底是不是真的需求要不要作写都不是人在判"
+            },
+            {
+              "deleted": true,
+              "text": "断然后"
+            },
+            {
+              "deleted": false,
+              "text": "研发主要看一下整体的技术设计和整体的UI的设计上是不是合适"
+            }
+          ],
+          "original_text": "到底符不符合期待这个需求到底是不是真的需求要不要作写都不是人在判断然后研发主要看一下整体的技术设计和整体的UI的设计上是不是合适",
+          "edited_text": "到底符不符合期待这个需求到底是不是真的需求要不要作写都不是人在判研发主要看一下整体的技术设计和整体的UI的设计上是不是合适",
+          "deleted_text": "断然后"
+        }
+      ],
+      "original_preview": "previews/C035.original.mp3",
+      "edited_preview": "previews/C035.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C036",
+      "status": "pending_human_review",
+      "start_seconds": 1080.06,
+      "end_seconds": 1084.93,
+      "start_sample": 51842880,
+      "end_sample": 52076640,
+      "duration_seconds": 4.87,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 策然后以及审美方向的事情上其实就够了对\nmale: 策对",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "需要刚才您提到只需要去做一些基础的关键决"
+            },
+            {
+              "deleted": true,
+              "text": "策然后以及审美方向的事情上其实就够了对"
+            },
+            {
+              "deleted": false,
+              "text": "我觉得这个事情其实还是背后它是有一套首先它肯定是有边"
+            }
+          ],
+          "original_text": "需要刚才您提到只需要去做一些基础的关键决策然后以及审美方向的事情上其实就够了对我觉得这个事情其实还是背后它是有一套首先它肯定是有边",
+          "edited_text": "需要刚才您提到只需要去做一些基础的关键决我觉得这个事情其实还是背后它是有一套首先它肯定是有边",
+          "deleted_text": "策然后以及审美方向的事情上其实就够了对"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "只需要刚才您提到只需要去做一些基础的关键决"
+            },
+            {
+              "deleted": true,
+              "text": "策对"
+            },
+            {
+              "deleted": false,
+              "text": "我觉得这个事情其实还是背后它是有一套首先它肯定是有边"
+            }
+          ],
+          "original_text": "只需要刚才您提到只需要去做一些基础的关键决策对我觉得这个事情其实还是背后它是有一套首先它肯定是有边",
+          "edited_text": "只需要刚才您提到只需要去做一些基础的关键决我觉得这个事情其实还是背后它是有一套首先它肯定是有边",
+          "deleted_text": "策对"
+        }
+      ],
+      "original_preview": "previews/C036.original.mp3",
+      "edited_preview": "previews/C036.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C037",
+      "status": "pending_human_review",
+      "start_seconds": 1115.95,
+      "end_seconds": 1118.71,
+      "start_sample": 53565600,
+      "end_sample": 53698080,
+      "duration_seconds": 2.76,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "filler_hesitation",
+      "category_label": "口癖 / 犹豫",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "medium",
+      "deleted_text": "female: 事情就是\nmale: 事情我们",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "理念和逻辑过去其实我们也尝试过做这样类型的"
+            },
+            {
+              "deleted": true,
+              "text": "事情就是"
+            },
+            {
+              "deleted": false,
+              "text": "我们肯定会希望去写比较完整的模块划算做整体的产品加过图然后去"
+            }
+          ],
+          "original_text": "理念和逻辑过去其实我们也尝试过做这样类型的事情就是我们肯定会希望去写比较完整的模块划算做整体的产品加过图然后去",
+          "edited_text": "理念和逻辑过去其实我们也尝试过做这样类型的我们肯定会希望去写比较完整的模块划算做整体的产品加过图然后去",
+          "deleted_text": "事情就是"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "理念和逻辑过去其实我们也尝试过做这样类型的"
+            },
+            {
+              "deleted": true,
+              "text": "事情我们"
+            },
+            {
+              "deleted": false,
+              "text": "肯定会希望去写比较完整的模块的划分做整体的产品架构图然后去"
+            }
+          ],
+          "original_text": "理念和逻辑过去其实我们也尝试过做这样类型的事情我们肯定会希望去写比较完整的模块的划分做整体的产品架构图然后去",
+          "edited_text": "理念和逻辑过去其实我们也尝试过做这样类型的肯定会希望去写比较完整的模块的划分做整体的产品架构图然后去",
+          "deleted_text": "事情我们"
+        }
+      ],
+      "original_preview": "previews/C037.original.mp3",
+      "edited_preview": "previews/C037.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C038",
+      "status": "pending_human_review",
+      "start_seconds": 1125.98,
+      "end_seconds": 1126.82,
+      "start_sample": 54047040,
+      "end_sample": 54087360,
+      "duration_seconds": 0.84,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 下面的用户的\nmale: 下面的用户的",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "块划算做整体的产品加过图然后去更新每个模块"
+            },
+            {
+              "deleted": true,
+              "text": "下面的用户的"
+            },
+            {
+              "deleted": false,
+              "text": "用户故事对吧然后再去看每一个具体系的每一个字任务到底应"
+            }
+          ],
+          "original_text": "块划算做整体的产品加过图然后去更新每个模块下面的用户的用户故事对吧然后再去看每一个具体系的每一个字任务到底应",
+          "edited_text": "块划算做整体的产品加过图然后去更新每个模块用户故事对吧然后再去看每一个具体系的每一个字任务到底应",
+          "deleted_text": "下面的用户的"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "块的划分做整体的产品架构图然后去更新每个模块"
+            },
+            {
+              "deleted": true,
+              "text": "下面的用户的"
+            },
+            {
+              "deleted": false,
+              "text": "user story用户故事对吧然后再去看每一个具体系的每一个子任务到底应"
+            }
+          ],
+          "original_text": "块的划分做整体的产品架构图然后去更新每个模块下面的用户的user story用户故事对吧然后再去看每一个具体系的每一个子任务到底应",
+          "edited_text": "块的划分做整体的产品架构图然后去更新每个模块user story用户故事对吧然后再去看每一个具体系的每一个子任务到底应",
+          "deleted_text": "下面的用户的"
+        }
+      ],
+      "original_preview": "previews/C038.original.mp3",
+      "edited_preview": "previews/C038.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C039",
+      "status": "pending_human_review",
+      "start_seconds": 1165.6,
+      "end_seconds": 1167.38,
+      "start_sample": 55948800,
+      "end_sample": 56034240,
+      "duration_seconds": 1.78,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 这个里\nmale: 包括里面",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "所以我们其实打了一套从阴影的优点向过去传统的联工程包括"
+            },
+            {
+              "deleted": true,
+              "text": "这个里"
+            },
+            {
+              "deleted": false,
+              "text": "面一些比较好的一些盯盖我们叫做主题整个产品的战略"
+            }
+          ],
+          "original_text": "所以我们其实打了一套从阴影的优点向过去传统的联工程包括这个里面一些比较好的一些盯盖我们叫做主题整个产品的战略",
+          "edited_text": "所以我们其实打了一套从阴影的优点向过去传统的联工程包括面一些比较好的一些盯盖我们叫做主题整个产品的战略",
+          "deleted_text": "这个里"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "所以我们其实是搭了一套其实引得有点像过去传统软件工程"
+            },
+            {
+              "deleted": true,
+              "text": "包括里面"
+            },
+            {
+              "deleted": false,
+              "text": "一些比较好的一些定义概念对吧你从我们叫做主题整个产品的战略"
+            }
+          ],
+          "original_text": "所以我们其实是搭了一套其实引得有点像过去传统软件工程包括里面一些比较好的一些定义概念对吧你从我们叫做主题整个产品的战略",
+          "edited_text": "所以我们其实是搭了一套其实引得有点像过去传统软件工程一些比较好的一些定义概念对吧你从我们叫做主题整个产品的战略",
+          "deleted_text": "包括里面"
+        }
+      ],
+      "original_preview": "previews/C039.original.mp3",
+      "edited_preview": "previews/C039.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C040",
+      "status": "pending_human_review",
+      "start_seconds": 1316.11,
+      "end_seconds": 1316.49,
+      "start_sample": 63173280,
+      "end_sample": 63191520,
+      "duration_seconds": 0.38,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 西特别特\nmale: 西特别特",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "往小一点说到底要不要增加某个大的模块对吧最近进品哪个东"
+            },
+            {
+              "deleted": true,
+              "text": "西特别特"
+            },
+            {
+              "deleted": false,
+              "text": "别的火有一些必选特别特别的火我们要不要超或者我看到其他别"
+            }
+          ],
+          "original_text": "往小一点说到底要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些必选特别特别的火我们要不要超或者我看到其他别",
+          "edited_text": "往小一点说到底要不要增加某个大的模块对吧最近进品哪个东别的火有一些必选特别特别的火我们要不要超或者我看到其他别",
+          "deleted_text": "西特别特"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "往小一点说到底要不要增加某个大的模块对吧最近进品哪个东"
+            },
+            {
+              "deleted": true,
+              "text": "西特别特"
+            },
+            {
+              "deleted": false,
+              "text": "别的火有一些fe ature特别特别的火我们要不要超或者我看到其他别"
+            }
+          ],
+          "original_text": "往小一点说到底要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些fe ature特别特别的火我们要不要超或者我看到其他别",
+          "edited_text": "往小一点说到底要不要增加某个大的模块对吧最近进品哪个东别的火有一些fe ature特别特别的火我们要不要超或者我看到其他别",
+          "deleted_text": "西特别特"
+        }
+      ],
+      "original_preview": "previews/C040.original.mp3",
+      "edited_preview": "previews/C040.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C041",
+      "status": "pending_human_review",
+      "start_seconds": 1317.83,
+      "end_seconds": 1318.23,
+      "start_sample": 63255840,
+      "end_sample": 63275040,
+      "duration_seconds": 0.4,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 选特别特\nmale: ature特别特",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些必"
+            },
+            {
+              "deleted": true,
+              "text": "选特别特"
+            },
+            {
+              "deleted": false,
+              "text": "别的火我们要不要超或者我看到其他别的赛道的产品推了一些性"
+            }
+          ],
+          "original_text": "要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些必选特别特别的火我们要不要超或者我看到其他别的赛道的产品推了一些性",
+          "edited_text": "要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些必别的火我们要不要超或者我看到其他别的赛道的产品推了一些性",
+          "deleted_text": "选特别特"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些fe"
+            },
+            {
+              "deleted": true,
+              "text": "ature特别特"
+            },
+            {
+              "deleted": false,
+              "text": "别的火我们要不要超或者我看到其他别的赛道的产品推了一些性"
+            }
+          ],
+          "original_text": "要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些fe ature特别特别的火我们要不要超或者我看到其他别的赛道的产品推了一些性",
+          "edited_text": "要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些fe别的火我们要不要超或者我看到其他别的赛道的产品推了一些性",
+          "deleted_text": "ature特别特"
+        }
+      ],
+      "original_preview": "previews/C041.original.mp3",
+      "edited_preview": "previews/C041.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C042",
+      "status": "pending_human_review",
+      "start_seconds": 1343.35,
+      "end_seconds": 1345.06,
+      "start_sample": 64480800,
+      "end_sample": 64562880,
+      "duration_seconds": 1.71,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "filler_hesitation",
+      "category_label": "口癖 / 犹豫",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "medium",
+      "deleted_text": "female: 所以您提到就是像流程\nmale: 不成",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "讲的那个流程力其实是不太过分还是需要很多人的工作"
+            },
+            {
+              "deleted": true,
+              "text": "所以您提到就是像流程"
+            },
+            {
+              "deleted": false,
+              "text": "性的工作其实更多的可以被A IT带但是比较开放性的这些问题"
+            }
+          ],
+          "original_text": "讲的那个流程力其实是不太过分还是需要很多人的工作所以您提到就是像流程性的工作其实更多的可以被A IT带但是比较开放性的这些问题",
+          "edited_text": "讲的那个流程力其实是不太过分还是需要很多人的工作性的工作其实更多的可以被A IT带但是比较开放性的这些问题",
+          "deleted_text": "所以您提到就是像流程"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "讲的那个流程里其实是不太work了还是需要很多人的工作"
+            },
+            {
+              "deleted": true,
+              "text": "不成"
+            },
+            {
+              "deleted": false,
+              "text": "性的"
+            }
+          ],
+          "original_text": "讲的那个流程里其实是不太work了还是需要很多人的工作不成性的",
+          "edited_text": "讲的那个流程里其实是不太work了还是需要很多人的工作性的",
+          "deleted_text": "不成"
+        }
+      ],
+      "original_preview": "previews/C042.original.mp3",
+      "edited_preview": "previews/C042.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C043",
+      "status": "pending_human_review",
+      "start_seconds": 1345.64,
+      "end_seconds": 1352.76,
+      "start_sample": 64590720,
+      "end_sample": 64932480,
+      "duration_seconds": 7.12,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 工作其实更多的可以被A IT带但是比较开放性的这些问题或者工作更多的还是以人为主导的\nmale: 的对",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "分还是需要很多人的工作所以您提到就是像流程性的"
+            },
+            {
+              "deleted": true,
+              "text": "工作其实更多的可以被A IT带但是比较开放性的这些问题或者工作更多的还是以人为主导的"
+            },
+            {
+              "deleted": false,
+              "text": "会比较好对像那个其实也是这么来去增工的就是你在一个老的功"
+            }
+          ],
+          "original_text": "分还是需要很多人的工作所以您提到就是像流程性的工作其实更多的可以被A IT带但是比较开放性的这些问题或者工作更多的还是以人为主导的会比较好对像那个其实也是这么来去增工的就是你在一个老的功",
+          "edited_text": "分还是需要很多人的工作所以您提到就是像流程性的会比较好对像那个其实也是这么来去增工的就是你在一个老的功",
+          "deleted_text": "工作其实更多的可以被A IT带但是比较开放性的这些问题或者工作更多的还是以人为主导的"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "了还是需要很多人的工作不成性"
+            },
+            {
+              "deleted": true,
+              "text": "的对"
+            },
+            {
+              "deleted": false,
+              "text": "我们现在那部其实也是这么来去分工的你在一个老的功"
+            }
+          ],
+          "original_text": "了还是需要很多人的工作不成性的对我们现在那部其实也是这么来去分工的你在一个老的功",
+          "edited_text": "了还是需要很多人的工作不成性我们现在那部其实也是这么来去分工的你在一个老的功",
+          "deleted_text": "的对"
+        }
+      ],
+      "original_preview": "previews/C043.original.mp3",
+      "edited_preview": "previews/C043.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C044",
+      "status": "pending_human_review",
+      "start_seconds": 1398.88,
+      "end_seconds": 1403.34,
+      "start_sample": 67146240,
+      "end_sample": 67360320,
+      "duration_seconds": 4.46,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 就其实AI已经能干很多传统产品经理的一些这种封闭式的\nmale: 那是不是",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "糊的感觉依据我的经验去拍的吧那比如说在这个时代下"
+            },
+            {
+              "deleted": true,
+              "text": "就其实AI已经能干很多传统产品经理的一些这种封闭式的"
+            },
+            {
+              "deleted": false,
+              "text": "工作了那是不是人人都是AI产品经理这个话题到底成不成立"
+            }
+          ],
+          "original_text": "糊的感觉依据我的经验去拍的吧那比如说在这个时代下就其实AI已经能干很多传统产品经理的一些这种封闭式的工作了那是不是人人都是AI产品经理这个话题到底成不成立",
+          "edited_text": "糊的感觉依据我的经验去拍的吧那比如说在这个时代下工作了那是不是人人都是AI产品经理这个话题到底成不成立",
+          "deleted_text": "就其实AI已经能干很多传统产品经理的一些这种封闭式的"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "糊的感觉依据我的经验去拍的板那比如说这个失败"
+            },
+            {
+              "deleted": true,
+              "text": "那是不是"
+            },
+            {
+              "deleted": false,
+              "text": "人"
+            }
+          ],
+          "original_text": "糊的感觉依据我的经验去拍的板那比如说这个失败那是不是人",
+          "edited_text": "糊的感觉依据我的经验去拍的板那比如说这个失败人",
+          "deleted_text": "那是不是"
+        }
+      ],
+      "original_preview": "previews/C044.original.mp3",
+      "edited_preview": "previews/C044.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C045",
+      "status": "pending_human_review",
+      "start_seconds": 1405.38,
+      "end_seconds": 1409.14,
+      "start_sample": 67458240,
+      "end_sample": 67638720,
+      "duration_seconds": 3.76,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 人都是AI产品经理这个话题到底成不成立呢\nmale: 人对",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "很多传统产品经理的一些这种封闭式的工作了那是不是人"
+            },
+            {
+              "deleted": true,
+              "text": "人都是AI产品经理这个话题到底成不成立呢"
+            },
+            {
+              "deleted": false,
+              "text": "对所以这个也是我们自己内部讨论比较多的一个问题刚才提到很多"
+            }
+          ],
+          "original_text": "很多传统产品经理的一些这种封闭式的工作了那是不是人人都是AI产品经理这个话题到底成不成立呢对所以这个也是我们自己内部讨论比较多的一个问题刚才提到很多",
+          "edited_text": "很多传统产品经理的一些这种封闭式的工作了那是不是人对所以这个也是我们自己内部讨论比较多的一个问题刚才提到很多",
+          "deleted_text": "人都是AI产品经理这个话题到底成不成立呢"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "是不是"
+            },
+            {
+              "deleted": true,
+              "text": "人对"
+            },
+            {
+              "deleted": false,
+              "text": "所以这个也是我们自己内部讨论比较多的一个问题刚才提到很多产"
+            }
+          ],
+          "original_text": "是不是人对所以这个也是我们自己内部讨论比较多的一个问题刚才提到很多产",
+          "edited_text": "是不是所以这个也是我们自己内部讨论比较多的一个问题刚才提到很多产",
+          "deleted_text": "人对"
+        }
+      ],
+      "original_preview": "previews/C045.original.mp3",
+      "edited_preview": "previews/C045.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C046",
+      "status": "pending_human_review",
+      "start_seconds": 1413.68,
+      "end_seconds": 1415.66,
+      "start_sample": 67856640,
+      "end_sample": 67951680,
+      "duration_seconds": 1.98,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 很多产\nmale: 很多产",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "对所以这个也是我们自己内部讨论比较多的一个问题刚才提到"
+            },
+            {
+              "deleted": true,
+              "text": "很多产"
+            },
+            {
+              "deleted": false,
+              "text": "品经理一些有多反正包括自己我觉得在半年前也非常焦虑你发现"
+            }
+          ],
+          "original_text": "对所以这个也是我们自己内部讨论比较多的一个问题刚才提到很多产品经理一些有多反正包括自己我觉得在半年前也非常焦虑你发现",
+          "edited_text": "对所以这个也是我们自己内部讨论比较多的一个问题刚才提到品经理一些有多反正包括自己我觉得在半年前也非常焦虑你发现",
+          "deleted_text": "很多产"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "对所以这个也是我们自己内部讨论比较多的一个问题刚才提到"
+            },
+            {
+              "deleted": true,
+              "text": "很多产"
+            },
+            {
+              "deleted": false,
+              "text": "品经理包括我自己我觉得在半年前也是非常焦虑你发现"
+            }
+          ],
+          "original_text": "对所以这个也是我们自己内部讨论比较多的一个问题刚才提到很多产品经理包括我自己我觉得在半年前也是非常焦虑你发现",
+          "edited_text": "对所以这个也是我们自己内部讨论比较多的一个问题刚才提到品经理包括我自己我觉得在半年前也是非常焦虑你发现",
+          "deleted_text": "很多产"
+        }
+      ],
+      "original_preview": "previews/C046.original.mp3",
+      "edited_preview": "previews/C046.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C047",
+      "status": "pending_human_review",
+      "start_seconds": 1440.64,
+      "end_seconds": 1442.28,
+      "start_sample": 69150720,
+      "end_sample": 69229440,
+      "duration_seconds": 1.64,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 我觉得\nmale: 我觉得自",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "了这些话是蛮焦虑的但是我自己这么半年多跟AI协作下来之后反而"
+            },
+            {
+              "deleted": true,
+              "text": "我觉得"
+            },
+            {
+              "deleted": false,
+              "text": "资讯是更多的一些生主型的公司应该给我更多的钱为什么呢因为我"
+            }
+          ],
+          "original_text": "了这些话是蛮焦虑的但是我自己这么半年多跟AI协作下来之后反而我觉得资讯是更多的一些生主型的公司应该给我更多的钱为什么呢因为我",
+          "edited_text": "了这些话是蛮焦虑的但是我自己这么半年多跟AI协作下来之后反而资讯是更多的一些生主型的公司应该给我更多的钱为什么呢因为我",
+          "deleted_text": "我觉得"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "了其实那会还是蛮焦虑的但是我自己这么半年多跟AI写作下来之后反而"
+            },
+            {
+              "deleted": true,
+              "text": "我觉得自"
+            },
+            {
+              "deleted": false,
+              "text": "信是更多了一些甚至我觉得公司应该给我付更多的钱"
+            }
+          ],
+          "original_text": "了其实那会还是蛮焦虑的但是我自己这么半年多跟AI写作下来之后反而我觉得自信是更多了一些甚至我觉得公司应该给我付更多的钱",
+          "edited_text": "了其实那会还是蛮焦虑的但是我自己这么半年多跟AI写作下来之后反而信是更多了一些甚至我觉得公司应该给我付更多的钱",
+          "deleted_text": "我觉得自"
+        }
+      ],
+      "original_preview": "previews/C047.original.mp3",
+      "edited_preview": "previews/C047.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C048",
+      "status": "pending_human_review",
+      "start_seconds": 1460.88,
+      "end_seconds": 1462.04,
+      "start_sample": 70122240,
+      "end_sample": 70177920,
+      "duration_seconds": 1.16,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "filler_hesitation",
+      "category_label": "口癖 / 犹豫",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "medium",
+      "deleted_text": "female: 讲就是对于\nmale: 讲对于",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "自己也是一个像是一个产品经理一样我觉得这里面有两个点我们先从两个角度"
+            },
+            {
+              "deleted": true,
+              "text": "讲就是对于"
+            },
+            {
+              "deleted": false,
+              "text": "一个产品的开发和上线来说设计一款产品甚至包括把"
+            }
+          ],
+          "original_text": "自己也是一个像是一个产品经理一样我觉得这里面有两个点我们先从两个角度讲就是对于一个产品的开发和上线来说设计一款产品甚至包括把",
+          "edited_text": "自己也是一个像是一个产品经理一样我觉得这里面有两个点我们先从两个角度一个产品的开发和上线来说设计一款产品甚至包括把",
+          "deleted_text": "讲就是对于"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "产品经验我觉得这里面有两个点我们先从两个角度"
+            },
+            {
+              "deleted": true,
+              "text": "讲对于"
+            },
+            {
+              "deleted": false,
+              "text": "一个产品的开发和上限来说设计一款产品甚至包括把"
+            }
+          ],
+          "original_text": "产品经验我觉得这里面有两个点我们先从两个角度讲对于一个产品的开发和上限来说设计一款产品甚至包括把",
+          "edited_text": "产品经验我觉得这里面有两个点我们先从两个角度一个产品的开发和上限来说设计一款产品甚至包括把",
+          "deleted_text": "讲对于"
+        }
+      ],
+      "original_preview": "previews/C048.original.mp3",
+      "edited_preview": "previews/C048.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C049",
+      "status": "pending_human_review",
+      "start_seconds": 1490.46,
+      "end_seconds": 1492.98,
+      "start_sample": 71542080,
+      "end_sample": 71663040,
+      "duration_seconds": 2.52,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 了所以\nmale: 了所以",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "道克服支撑等等一系列的工作不是说你把产品做完这个事情就结束"
+            },
+            {
+              "deleted": true,
+              "text": "了所以"
+            },
+            {
+              "deleted": false,
+              "text": "过去其实我们就提过一个一个概念叫大产品经理的概念有点像我们产品一号"
+            }
+          ],
+          "original_text": "道克服支撑等等一系列的工作不是说你把产品做完这个事情就结束了所以过去其实我们就提过一个一个概念叫大产品经理的概念有点像我们产品一号",
+          "edited_text": "道克服支撑等等一系列的工作不是说你把产品做完这个事情就结束过去其实我们就提过一个一个概念叫大产品经理的概念有点像我们产品一号",
+          "deleted_text": "了所以"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "道客服支撑等等一系列的工作不是说你把产品做完这个事情就结束"
+            },
+            {
+              "deleted": true,
+              "text": "了所以"
+            },
+            {
+              "deleted": false,
+              "text": "过去其实我们就提过一个概念叫大产品经理的概念有点像什么产品一号位"
+            }
+          ],
+          "original_text": "道客服支撑等等一系列的工作不是说你把产品做完这个事情就结束了所以过去其实我们就提过一个概念叫大产品经理的概念有点像什么产品一号位",
+          "edited_text": "道客服支撑等等一系列的工作不是说你把产品做完这个事情就结束过去其实我们就提过一个概念叫大产品经理的概念有点像什么产品一号位",
+          "deleted_text": "了所以"
+        }
+      ],
+      "original_preview": "previews/C049.original.mp3",
+      "edited_preview": "previews/C049.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C050",
+      "status": "pending_human_review",
+      "start_seconds": 1507.7,
+      "end_seconds": 1509.94,
+      "start_sample": 72369600,
+      "end_sample": 72477120,
+      "duration_seconds": 2.24,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 的那\nmale: 货你看",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "写PR D肯定不是所以我觉得现在其实AM干掉这大多数的货是产品注意"
+            },
+            {
+              "deleted": true,
+              "text": "的那"
+            },
+            {
+              "deleted": false,
+              "text": "你看我们团队的这几个同学的表现就是当他们不需要成立在写文胆扣滑土"
+            }
+          ],
+          "original_text": "写PR D肯定不是所以我觉得现在其实AM干掉这大多数的货是产品注意的那你看我们团队的这几个同学的表现就是当他们不需要成立在写文胆扣滑土",
+          "edited_text": "写PR D肯定不是所以我觉得现在其实AM干掉这大多数的货是产品注意你看我们团队的这几个同学的表现就是当他们不需要成立在写文胆扣滑土",
+          "deleted_text": "的那"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "写PR D的吗肯定不是所以我觉得现在其实AI我们干掉绝大多数的货是产品助理的"
+            },
+            {
+              "deleted": true,
+              "text": "货你看"
+            },
+            {
+              "deleted": false,
+              "text": "我们团队的这几个同学的表情就是当他们不需要成立在写文档和画图"
+            }
+          ],
+          "original_text": "写PR D的吗肯定不是所以我觉得现在其实AI我们干掉绝大多数的货是产品助理的货你看我们团队的这几个同学的表情就是当他们不需要成立在写文档和画图",
+          "edited_text": "写PR D的吗肯定不是所以我觉得现在其实AI我们干掉绝大多数的货是产品助理的我们团队的这几个同学的表情就是当他们不需要成立在写文档和画图",
+          "deleted_text": "货你看"
+        }
+      ],
+      "original_preview": "previews/C050.original.mp3",
+      "edited_preview": "previews/C050.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C051",
+      "status": "pending_human_review",
+      "start_seconds": 1528.82,
+      "end_seconds": 1534.14,
+      "start_sample": 73383360,
+      "end_sample": 73638720,
+      "duration_seconds": 5.32,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 展对我们感觉更多的会讨论一下我们自己的想法然后以及对未来的这个\nmale: 展对",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "需要再去想这个需求到底怎么设计我们会就来考虑我这个产品到底应该怎么发"
+            },
+            {
+              "deleted": true,
+              "text": "展对我们感觉更多的会讨论一下我们自己的想法然后以及对未来的这个"
+            },
+            {
+              "deleted": false,
+              "text": "产品的构想对是包括我应该去服务我怎么去商业化等等一些的问题"
+            }
+          ],
+          "original_text": "需要再去想这个需求到底怎么设计我们会就来考虑我这个产品到底应该怎么发展对我们感觉更多的会讨论一下我们自己的想法然后以及对未来的这个产品的构想对是包括我应该去服务我怎么去商业化等等一些的问题",
+          "edited_text": "需要再去想这个需求到底怎么设计我们会就来考虑我这个产品到底应该怎么发产品的构想对是包括我应该去服务我怎么去商业化等等一些的问题",
+          "deleted_text": "展对我们感觉更多的会讨论一下我们自己的想法然后以及对未来的这个"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "需要再去想这个需求到底怎么设计了你们很快就来考虑我这个产品到底应该怎么发"
+            },
+            {
+              "deleted": true,
+              "text": "展对"
+            },
+            {
+              "deleted": false,
+              "text": "这个产品的构想包括我应该去服务我怎么去商业化等等一些的问题"
+            }
+          ],
+          "original_text": "需要再去想这个需求到底怎么设计了你们很快就来考虑我这个产品到底应该怎么发展对这个产品的构想包括我应该去服务我怎么去商业化等等一些的问题",
+          "edited_text": "需要再去想这个需求到底怎么设计了你们很快就来考虑我这个产品到底应该怎么发这个产品的构想包括我应该去服务我怎么去商业化等等一些的问题",
+          "deleted_text": "展对"
+        }
+      ],
+      "original_preview": "previews/C051.original.mp3",
+      "edited_preview": "previews/C051.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C052",
+      "status": "pending_human_review",
+      "start_seconds": 1567.56,
+      "end_seconds": 1569.32,
+      "start_sample": 75242880,
+      "end_sample": 75327360,
+      "duration_seconds": 1.76,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 的然后\nmale: 的然后",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "你就会发现这种人就是很席权的不可能是人人都能干"
+            },
+            {
+              "deleted": true,
+              "text": "的然后"
+            },
+            {
+              "deleted": false,
+              "text": "我觉得这里面还有一点正传另一个问题是我其实对你觉得当然现在很多view ers他"
+            }
+          ],
+          "original_text": "你就会发现这种人就是很席权的不可能是人人都能干的然后我觉得这里面还有一点正传另一个问题是我其实对你觉得当然现在很多view ers他",
+          "edited_text": "你就会发现这种人就是很席权的不可能是人人都能干我觉得这里面还有一点正传另一个问题是我其实对你觉得当然现在很多view ers他",
+          "deleted_text": "的然后"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "都会发现这种人就是很稀缺的不可能是人人都能干"
+            },
+            {
+              "deleted": true,
+              "text": "的然后"
+            },
+            {
+              "deleted": false,
+              "text": "我觉得这里面还衍生出来另一个问题是我其实对觉得当然现在很多Bu ild er"
+            }
+          ],
+          "original_text": "都会发现这种人就是很稀缺的不可能是人人都能干的然后我觉得这里面还衍生出来另一个问题是我其实对觉得当然现在很多Bu ild er",
+          "edited_text": "都会发现这种人就是很稀缺的不可能是人人都能干我觉得这里面还衍生出来另一个问题是我其实对觉得当然现在很多Bu ild er",
+          "deleted_text": "的然后"
+        }
+      ],
+      "original_preview": "previews/C052.original.mp3",
+      "edited_preview": "previews/C052.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C053",
+      "status": "pending_human_review",
+      "start_seconds": 1580.84,
+      "end_seconds": 1582.84,
+      "start_sample": 75880320,
+      "end_sample": 75976320,
+      "duration_seconds": 2.0,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "filler_hesitation",
+      "category_label": "口癖 / 犹豫",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "medium",
+      "deleted_text": "female: 难就是\nmale: 难",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "一些产品商得到很不错的一些反馈我觉得未来可能这个事情会变得越来越"
+            },
+            {
+              "deleted": true,
+              "text": "难就是"
+            },
+            {
+              "deleted": false,
+              "text": "过去大家可能会发现发现一个机会是一个"
+            }
+          ],
+          "original_text": "一些产品商得到很不错的一些反馈我觉得未来可能这个事情会变得越来越难就是过去大家可能会发现发现一个机会是一个",
+          "edited_text": "一些产品商得到很不错的一些反馈我觉得未来可能这个事情会变得越来越过去大家可能会发现发现一个机会是一个",
+          "deleted_text": "难就是"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "一些产品然后得到很不错的一些反馈我觉得未来可能这个事情会变得越来越"
+            },
+            {
+              "deleted": true,
+              "text": "难"
+            },
+            {
+              "deleted": false,
+              "text": "就是过去大家可能会发现你发现一个机会是一个"
+            }
+          ],
+          "original_text": "一些产品然后得到很不错的一些反馈我觉得未来可能这个事情会变得越来越难就是过去大家可能会发现你发现一个机会是一个",
+          "edited_text": "一些产品然后得到很不错的一些反馈我觉得未来可能这个事情会变得越来越就是过去大家可能会发现你发现一个机会是一个",
+          "deleted_text": "难"
+        }
+      ],
+      "original_preview": "previews/C053.original.mp3",
+      "edited_preview": "previews/C053.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C054",
+      "status": "pending_human_review",
+      "start_seconds": 1586.36,
+      "end_seconds": 1586.7,
+      "start_sample": 76145280,
+      "end_sample": 76161600,
+      "duration_seconds": 0.34,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "pause",
+      "category_label": "停顿 / 空白",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "low",
+      "deleted_text": "female: 会发现发\nmale: 会发现你",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "就是过去大家可能"
+            },
+            {
+              "deleted": true,
+              "text": "会发现发"
+            },
+            {
+              "deleted": false,
+              "text": "现一个机会是一个特殊的技能就可能是他们经历的一个核心的品"
+            }
+          ],
+          "original_text": "就是过去大家可能会发现发现一个机会是一个特殊的技能就可能是他们经历的一个核心的品",
+          "edited_text": "就是过去大家可能现一个机会是一个特殊的技能就可能是他们经历的一个核心的品",
+          "deleted_text": "会发现发"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "就是过去大家可能"
+            },
+            {
+              "deleted": true,
+              "text": "会发现你"
+            },
+            {
+              "deleted": false,
+              "text": "发现一个机会是一个特殊的技能这可能是产品经理的一个核心的品"
+            }
+          ],
+          "original_text": "就是过去大家可能会发现你发现一个机会是一个特殊的技能这可能是产品经理的一个核心的品",
+          "edited_text": "就是过去大家可能发现一个机会是一个特殊的技能这可能是产品经理的一个核心的品",
+          "deleted_text": "会发现你"
+        }
+      ],
+      "original_preview": "previews/C054.original.mp3",
+      "edited_preview": "previews/C054.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C055",
+      "status": "pending_human_review",
+      "start_seconds": 1594.78,
+      "end_seconds": 1596.5,
+      "start_sample": 76549440,
+      "end_sample": 76632000,
+      "duration_seconds": 1.72,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 足现在\nmale: 足现在",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "可能是他们经历的一个核心的品规之一这个人的需求没有被满"
+            },
+            {
+              "deleted": true,
+              "text": "足现在"
+            },
+            {
+              "deleted": false,
+              "text": "更常见的过去这个需求是不只能看保可能是个产品好几十家伙"
+            }
+          ],
+          "original_text": "可能是他们经历的一个核心的品规之一这个人的需求没有被满足现在更常见的过去这个需求是不只能看保可能是个产品好几十家伙",
+          "edited_text": "可能是他们经历的一个核心的品规之一这个人的需求没有被满更常见的过去这个需求是不只能看保可能是个产品好几十家伙",
+          "deleted_text": "足现在"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "可能是产品经理的一个核心的品位之一对吧我们看到这个人有个需求没有被满"
+            },
+            {
+              "deleted": true,
+              "text": "足现在"
+            },
+            {
+              "deleted": false,
+              "text": "更常见的过去但产品情况是这个需求其实不只有你看到可能市面上已经有好几十家团"
+            }
+          ],
+          "original_text": "可能是产品经理的一个核心的品位之一对吧我们看到这个人有个需求没有被满足现在更常见的过去但产品情况是这个需求其实不只有你看到可能市面上已经有好几十家团",
+          "edited_text": "可能是产品经理的一个核心的品位之一对吧我们看到这个人有个需求没有被满更常见的过去但产品情况是这个需求其实不只有你看到可能市面上已经有好几十家团",
+          "deleted_text": "足现在"
+        }
+      ],
+      "original_preview": "previews/C055.original.mp3",
+      "edited_preview": "previews/C055.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    },
+    {
+      "candidate_id": "C056",
+      "status": "pending_human_review",
+      "start_seconds": 1726.1,
+      "end_seconds": 1732.71,
+      "start_sample": 82852800,
+      "end_sample": 83170080,
+      "duration_seconds": 6.61,
+      "crossfade_ms": 50,
+      "confidence": "medium",
+      "category": "boundary_review",
+      "category_label": "边界不确定",
+      "reason": "no explicit decision · bulk_accept 不足以自动",
+      "risk": "high",
+      "deleted_text": "female: 好的产品经理人的能力然后也加速了我们整体的构建流程但是其实更好的判断或者是\nmale: 好的决",
+      "text_tracks": [
+        {
+          "track": "female",
+          "speaker": "女声（Tr1）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "的那部分所以总体来说AI它其实放大了比较"
+            },
+            {
+              "deleted": true,
+              "text": "好的产品经理人的能力然后也加速了我们整体的构建流程但是其实更好的判断或者是"
+            },
+            {
+              "deleted": false,
+              "text": "决策也是变得更加稀缺了对是的而且甚至我觉得会更加因为你的竞"
+            }
+          ],
+          "original_text": "的那部分所以总体来说AI它其实放大了比较好的产品经理人的能力然后也加速了我们整体的构建流程但是其实更好的判断或者是决策也是变得更加稀缺了对是的而且甚至我觉得会更加因为你的竞",
+          "edited_text": "的那部分所以总体来说AI它其实放大了比较决策也是变得更加稀缺了对是的而且甚至我觉得会更加因为你的竞",
+          "deleted_text": "好的产品经理人的能力然后也加速了我们整体的构建流程但是其实更好的判断或者是"
+        },
+        {
+          "track": "male",
+          "speaker": "男声（Tr3）",
+          "spans": [
+            {
+              "deleted": false,
+              "text": "那部分所以总讲的就是AI它其实放大了比较"
+            },
+            {
+              "deleted": true,
+              "text": "好的决"
+            },
+            {
+              "deleted": false,
+              "text": "策也是变得跟它稀缺了对是的而且甚至我觉得会更加因为你的竞"
+            }
+          ],
+          "original_text": "那部分所以总讲的就是AI它其实放大了比较好的决策也是变得跟它稀缺了对是的而且甚至我觉得会更加因为你的竞",
+          "edited_text": "那部分所以总讲的就是AI它其实放大了比较策也是变得跟它稀缺了对是的而且甚至我觉得会更加因为你的竞",
+          "deleted_text": "好的决"
+        }
+      ],
+      "original_preview": "previews/C056.original.mp3",
+      "edited_preview": "previews/C056.proposed-cut.mp3",
+      "provenance": "inferred from Mentor reference timeline; not an original Mentor EDL"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+# case-memory-embedding-v1 · 骨架期依赖声明（尚未执行 pip install）
+#
+# faster-whisper 已由 Champion 环境安装，本 Challenger 复用其内置 encoder，不重复声明。
+# 本文件只声明本 Challenger 新增的依赖。
+
+faiss-cpu>=1.7.4

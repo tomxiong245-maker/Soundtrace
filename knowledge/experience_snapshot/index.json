@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "description": "内部经验快照——从人工审核决定和成片反馈中积累。本文件当前为空占位，等 EP03 走完 archive 后会追加第一批。",
+  "snapshot_version": "v0-empty-2026-08-10",
+  "status": "empty",
+  "policy": {
+    "read_only": true,
+    "may_be_read_by": ["orchestrator PLANNED stage"],
+    "populated_by": [
+      "orchestrator archive 阶段：每次 EP 归档时把 feedback_bundle.json 的关键字段追加到 cases/"
+    ],
+    "may_not_be_learned_online_during_production": true,
+    "note": "《全局统筹记忆》§8：生产中不允许在线自我修改；新经验只能通过离线 Challenger → 冻结基准集评测 → 人工晋升 → Champion 路径升上去"
+  },
+  "cases": [],
+  "how_it_grows": [
+    "1. orchestrator archive 阶段自动读取 runs/<EP>/feedback_bundle.json",
+    "2. 提取：候选ID + 分类 + 风险等级 + 人工决定 + 备注 + 最终 EDL 采纳与否",
+    "3. 追加为 cases/<EP>.jsonl（每期一份 jsonl）",
+    "4. 达到 N 期后再启动经验学习 Agent（本轮 N 未定，最少 3 期）",
+    "5. 学习结果先进 challenger/，评测通过 + 人工晋升后才 bump snapshot_version"
+  ],
+  "learn_from_new_episodes_this_run": false,
+  "future_dirs_to_create": [
+    "cases/       - 每期的结构化审核事件流",
+    "challenger/  - 从 cases 学出来的候选经验规则（未晋升）",
+    "champion/    - 已晋升的正式经验（可影响下一期候选生成）",
+    "eval/        - 冻结基准集，评测 challenger 用"
+  ]
+}

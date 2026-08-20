@@ -1,0 +1,2 @@
+# Installed into .tools/python; the faster-whisper model is kept outside Git.
+faster-whisper==1.2.1

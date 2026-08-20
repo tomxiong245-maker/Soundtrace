@@ -1,0 +1,106 @@
+{
+  "_FROZEN_2026-08-19_LLM_TAKEOVER": {
+    "value": true,
+    "reason": "LLM 主导 · rules 冻结作 fallback",
+    "consumer_check": "pipeline Stage 3.5.5 走 LLM 主导 · 本 JSON 不再被消费"
+  },
+  "rules_version": "filler-global-pause-v13",
+  "policy": "review_only_no_automatic_accept",
+  "profile_note": "V13 preserves complete-sentence filler words by default, only nominates clearly repeat-like low-risk cases, and makes any long-pause edit an A/B-reviewed natural compression.",
+  "context_seconds": 5.0,
+  "min_candidate_seconds": 0.1,
+  "opening_protection_seconds": 8.0,
+  "closing_protection_seconds": 8.0,
+  "filler_hesitation": {
+    "enabled": true,
+    "strong_tokens": [
+      "呃",
+      "额",
+      "唔",
+      "唉",
+      "哎",
+      "哦",
+      "uh",
+      "um",
+      "er",
+      "erm"
+    ],
+    "acknowledgement_tokens": [
+      "嗯"
+    ],
+    "acknowledgement_single_min_seconds": 0.8,
+    "acknowledgement_dense_window_seconds": 5.0,
+    "acknowledgement_dense_min_count": 3,
+    "weak_tokens": [
+      "啊",
+      "那个",
+      "这个",
+      "然后",
+      "对",
+      "那個",
+      "這個",
+      "然後",
+      "對",
+      "这据",
+      "這据",
+      "這據"
+    ],
+    "weak_tokens_removed_20260819": [
+      "就是",
+      "就是說"
+    ],
+    "weak_tokens_removal_reason": "用户 2026-08-19 明确移除 · '就是' 中文常作内容词 (就是这样 / 我就是想说) · 不能无脑当 filler",
+    "strong_min_consecutive": 1,
+    "weak_min_consecutive": 2,
+    "max_gap_seconds": 0.45,
+    "weak_max_gap_seconds": 0.3,
+    "weak_min_duration_seconds": 0.1,
+    "weak_max_duration_seconds": 0.4,
+    "weak_density_window_seconds": 5.0,
+    "weak_max_candidates_per_window": 2,
+    "cross_mic_event_merge_gap_seconds": 0.25,
+    "same_token_boundary_jitter_seconds": 0.08,
+    "note": "完整句子中的弱口癖和普通单个“嗯”默认保留。只有短促连续弱词、较长“嗯”或同轨密集“嗯”才提名；提名仍须通过跨轨安全和人工/校准门。"
+  },
+  "global_long_pause": {
+    "enabled": true,
+    "detection_hint_seconds": 0.6,
+    "min_silence_seconds": 1.5,
+    "max_silence_seconds": 12.0,
+    "retention_by_original_silence": [
+      {
+        "max_silence_seconds": 1.0,
+        "head_tail_seconds": 0.1
+      },
+      {
+        "max_silence_seconds": 2.0,
+        "head_tail_seconds": 0.2
+      },
+      {
+        "max_silence_seconds": 3.0,
+        "head_tail_seconds": 0.3
+      },
+      {
+        "max_silence_seconds": null,
+        "head_tail_seconds": 0.4
+      }
+    ],
+    "activity_merge_gap_seconds": 0.05,
+    "acoustic_frame_seconds": 0.05,
+    "max_frame_rms_dbfs": -38.0,
+    "max_frame_peak_dbfs": -20.0,
+    "speaker_turnover_guard": {
+      "enabled": true,
+      "min_silence_seconds_when_turnover": 2.0,
+      "suppress_if_turnover": false,
+      "edge_probe_seconds": 0.1,
+      "reason": "用户 2026-08-19 明确 · 话轮转换的 pause 是自然衔接 · 阈值抬到 2.0s · 900ms C001 case 自动排除 · 需 pyannote RTTM"
+    },
+    "user_override_note": "用户 2026-08-19 明确改回 · 1.5s 是合适阈值 · 900ms 触发说明下游有 bug · 需要单独找",
+    "note": "0.6 秒仅用于检测/诊断；候选门槛 2026-08-19 由 1.5s 提到 1.5s，只有至少 1.5 秒的全轨共同安静才进入审核候选。候选只压缩中段，按时长分档保留头尾自然呼吸，且必须真人听原版与压缩版 A/B。"
+  },
+  "cross_track_guard": {
+    "conflicting_word_overlap_seconds": 0.05,
+    "note": "口癖候选中，其他轨只有重叠的同一证据词才可视为串音；任何不同文字都阻断。长停顿必须全轨共同空白。"
+  }
+}

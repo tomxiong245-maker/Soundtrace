@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "description": "外部知识快照——只作只读引用，本文件本身不含知识内容，只存指针 + 冻结版本号。",
+  "snapshot_version": "v1-2026-08-10",
+  "status": "frozen",
+  "policy": {
+    "read_only": true,
+    "may_be_read_by": ["orchestrator PLANNED stage"],
+    "may_not_be_written_by_agent": true,
+    "note": "《全局统筹记忆》§3：生产期间快照不能被本期 Agent 静默修改"
+  },
+  "sources": [
+    {
+      "id": "youtube-lessons-v1",
+      "kind": "已总结的外部经验",
+      "path": "从视频学习经验/",
+      "entrypoints": [
+        "README.md",
+        "YouTube学习总结.md",
+        "SKILL_DRAFT.md",
+        "给Mentor的汇报.md"
+      ],
+      "references_dir": "从视频学习经验/references/",
+      "topics_covered": [
+        "Curtis Judd 时间码/时钟",
+        "Clean Cut Audio 剪口 crossfade",
+        "MP3 编码峰值",
+        "联动剪切与局部音量",
+        "room tone 修补"
+      ],
+      "acquisition_tool": {
+        "name": "felo-youtube-subtitling",
+        "path": "external-skill:felo-youtube-subtitling",
+        "note": "只在需要新增外部素材时才动这个 tool；本轮不启用"
+      }
+    },
+    {
+      "id": "production-skill-references-v1",
+      "kind": "已收敛进主 skill 的外部结论",
+      "path": "端到端学习剪辑/skill/dual-track-podcast-editing-mvp/references/",
+      "note": "外部学习的结论已经并入这里；orchestrator 无需重复读原始 references"
+    }
+  ],
+  "learn_new_this_run": false,
+  "how_to_add_new_source_later": [
+    "1. 用 felo-youtube-subtitling tool 拉字幕到临时目录（不入库）",
+    "2. 人工阅读 + 提取要点写成 md",
+    "3. 更新 从视频学习经验/YouTube学习总结.md 或 references/",
+    "4. bump 本文件 snapshot_version",
+    "5. 通过后续晋升流程（离线评测 + 人工闸门）才允许影响生产"
+  ]
+}

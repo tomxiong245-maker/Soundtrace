@@ -1,0 +1,160 @@
+ M .gitignore
+ M CLAUDE.md
+ M README.md
+ M SKILL.md
+ M benchmark/asr-public-suite-v1/README.md
+ M benchmark/editing-e2e-v1/README.md
+ M main/README.md
+ M main/orchestrator/delivery_orchestrator.py
+ M main/orchestrator/tests/test_delivery_orchestrator.py
+ M main/tools/tools.json
+ M skills/editing-experience-distiller/SKILL.md
+ M skills/podcast-editing-orchestrator/SKILL.md
+ M "\345\256\241\346\240\270\345\211\215\347\253\257/challenger-review-product-v1/mvp.html"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/asr-speaker-v1/audits/funasr-paraformer.md"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/asr-speaker-v1/pipeline/run_asr_baseline.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/asr-speaker-v1/pipeline/run_asr_mlx.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/asr-speaker-v1/pipeline/run_asr_sensevoice.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/asr-speaker-v1/schemas/normalized_transcript.schema.json"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/asr-speaker-v1/schemas/word_record.schema.json"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/asr-speaker-v1/scripts/adapters/funasr_paraformer_adapter.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/denoise-ab-v1/README.md"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/schemas/experience_case.schema.json"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/scripts/collect_experience_cases.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/tests/test_experience_ingestion.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/filler-global-pause-v1/scripts/build_filler_global_pause_review_source.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/filler-global-pause-v1/tests/test_filler_global_pause.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/review-product-v1/audits/deepfilternet.md"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/review-product-v1/scripts/build_mvp_package.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/review-product-v1/scripts/server_episode.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/review-product-v1/scripts/validate_mvp.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/review-product-v1/tests/test_episode_parameterization.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/review-product-v1/tests/test_text_first_mvp.py"
+ M "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/tool-orchestrator-v1/tests/test_registry_validator.py"
+ M "\347\253\257\345\210\260\347\253\257\345\255\246\344\271\240\345\211\252\350\276\221/README.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/Agent\344\272\244\344\273\230\346\265\201\347\250\213-\344\273\216\351\237\263\351\242\221\345\210\260\346\210\220\347\211\207.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/README.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\205\250\345\261\200\347\273\237\347\255\271\350\256\260\345\277\206.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/F02-\351\231\215\345\231\252\344\270\216\346\227\266\351\227\264\347\272\277\346\240\241\345\207\206.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/F03-ASR-VAD\344\270\216\350\257\264\350\257\235\344\272\272.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/F04-\345\200\231\351\200\211\347\224\237\346\210\220\344\270\216\350\267\250\350\275\250\345\256\211\345\205\250.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/F05-\344\272\272\345\267\245\345\256\241\346\240\270\344\270\216\350\256\255\347\273\203\346\240\207\347\255\276.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/F06-EDL\346\270\262\346\237\223\346\267\267\351\237\263\344\270\216QC.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/F07-\347\273\237\347\255\271Agent\344\270\216Tool\346\263\250\345\206\214\350\241\250.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/F08-\345\244\226\351\203\250\347\237\245\350\257\206\344\270\216\347\233\221\347\235\243\345\255\246\344\271\240.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/F10-\345\237\272\345\207\206\343\200\201\350\203\275\345\212\233\347\233\256\345\275\225\344\270\216Skill\350\267\257\347\272\277.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\212\237\350\203\275\350\257\264\346\230\216/README.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\275\223\345\211\215\345\211\252\350\276\221\345\201\217\345\245\275\345\277\253\347\205\247.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\275\223\345\211\215\351\241\271\347\233\256\350\277\233\345\272\246.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\345\276\205\344\274\230\345\214\226\346\270\205\345\215\225.md"
+ M "\347\273\237\347\255\271\345\205\250\345\261\200/\350\203\275\345\212\233\347\233\256\345\275\225.md"
+?? AGENTS.md
+?? benchmark/asr-public-suite-v1/candidate_registry.v1.json
+?? benchmark/editing-e2e-v1/EXTERNAL_BENCHMARKS.md
+?? benchmark/editing-e2e-v1/NO_CANDIDATE_AUDIT_README.md
+?? benchmark/editing-e2e-v1/SCORECARD_README.md
+?? benchmark/editing-e2e-v1/audits/
+?? benchmark/editing-e2e-v1/build_scorecard.py
+?? benchmark/editing-e2e-v1/manifests/
+?? benchmark/editing-e2e-v1/mentor-feedback-regression-v1/
+?? benchmark/editing-e2e-v1/reports/
+?? benchmark/editing-e2e-v1/run_development_benchmark.py
+?? benchmark/editing-e2e-v1/sample_no_candidate_windows.py
+?? benchmark/editing-e2e-v1/scorecards/
+?? benchmark/editing-e2e-v1/tests/
+?? benchmark/editing-e2e-v1/validate_manifest.py
+?? main/orchestrator/build_label_learning_challenger.py
+?? main/orchestrator/check_current_delivery_sync.py
+?? main/orchestrator/claude_headless/
+?? main/orchestrator/context_checkpoint.py
+?? main/orchestrator/create_policy_promotion_evidence.py
+?? main/orchestrator/editing_policy.guards-v1.json
+?? main/orchestrator/event_identity.py
+?? main/orchestrator/label_learning_driver.py
+?? main/orchestrator/music_templates.json
+?? main/orchestrator/policy_promotion.py
+?? main/orchestrator/predict_cut_artifact.py
+?? main/orchestrator/production_edit_policy.py
+?? main/orchestrator/refresh_label_learning_snapshot.py
+?? main/orchestrator/review_event_routes.py
+?? main/orchestrator/snap_candidate_boundaries.py
+?? main/orchestrator/tests/event_identity_regression_expectations.json
+?? main/orchestrator/tests/test_artifact_risk_contract.py
+?? main/orchestrator/tests/test_context_checkpoint.py
+?? main/orchestrator/tests/test_event_identity.py
+?? main/orchestrator/tests/test_event_route_integration_contract.py
+?? main/orchestrator/tests/test_label_learning_challenger.py
+?? main/orchestrator/tests/test_label_learning_driver.py
+?? main/orchestrator/tests/test_policy_promotion.py
+?? main/orchestrator/tests/test_policy_promotion_evidence.py
+?? main/orchestrator/tests/test_production_edit_policy.py
+?? main/orchestrator/tests/test_refresh_label_learning_snapshot.py
+?? main/orchestrator/tests/test_review_event_routes.py
+?? main/orchestrator/tests/test_transcript_text_layers.py
+?? main/orchestrator/tests/test_transition_qc.py
+?? main/orchestrator/transcript_text_layers.py
+?? main/orchestrator/transition_qc.py
+?? main/runs/AUDIO-CLEANUP-20260814/
+?? main/runs/EP04/EP04-deepfilternet-listening-20260813-190500/
+?? main/runs/EP04/EP04-label-loop-v1-20260815-1800/
+?? main/runs/EP04/EP04-label-loop-v1-20260815-1805/
+?? main/runs/EP04/EP04-music-reference-linear-v1-20260813-165556/
+?? main/runs/EP04/EP04-review-mixed-14-20260814-043428/
+?? main/runs/EP04/EP04-review-round2-20260814-1355/
+?? main/runs/EP04/EP04-semantic-transcript-v1-20260814-115046/
+?? main/runs/EP04/EP04-semantic-transcript-v1-20260814-120456/
+?? main/runs/EP04/EP04-v13-20260813-1920/
+?? main/runs/EP04/EP04-v13-20260813-1939/
+?? main/runs/EP04/EP04-v13-20260813-1955/
+?? main/runs/EP04/EP04-v13-20260813-2002/
+?? main/runs/EP04/EP04-v16-20260814-150006/
+?? main/runs/EP04/EP04-v17-20260814-154450/
+?? main/runs/EP04/EP04-v18-20260814-1601/
+?? main/runs/EP04/EP04-v19-20260814-1605/
+?? main/runs/EP04/EP04-v20-20260814-1617/
+?? main/runs/EP04/EP04-v21-20260815-1311/
+?? main/runs/EP04/EP04-v22-20260815-1315/
+?? main/runs/EP04/EP04-v23-20260815-1500/
+?? main/runs/EP04/EP04-v23b-20260815-1510/
+?? main/runs/EP04/EP04-v24-20260815-1615/
+?? main/runs/EP04/EP04-v25-20260815-1640/
+?? main/runs/EP04/EP04-v26-20260815-1650/
+?? main/runs/LABEL-LEARNING-DRIVER-v1-20260816/
+?? main/runs/LABEL-LEARNING-DRIVER-v2-20260816/
+?? main/runs/LABEL-LEARNING-DRIVER-v3-20260816/
+?? main/runs/LABEL-LEARNING-DRIVER-v4-20260816/
+?? main/runs/LABEL-LEARNING-DRIVER-v5-20260817/
+?? main/runs/LABEL-LEARNING-v1-20260816/
+?? main/runs/LABEL-LEARNING-v2-20260816/
+?? main/runs/LABEL-LEARNING-v3-20260816/
+?? main/runs/POLICY-PROMOTION-v1-20260816/
+?? main/runs/SELF-CORRECTION-v1-20260815-1420/
+?? main/tools/audits/
+?? skills/editing-experience-distiller/output/
+?? skills/label-learning-driver/
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/asr-multilang-v1/"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/scripts/apply_preference_snapshot.py"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/scripts/build_policy_cards.py"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/scripts/build_preference_snapshot.py"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/scripts/classify_feedback.py"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/tests/test_learning_loop.py"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/experience-ingestion-v1/tests/test_preference_snapshot_loop.py"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/filler-global-pause-v1/rules/candidate-generation.filler-global-pause-v13.json"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/filler-global-pause-v14/"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/intro-outro-music-v1/scripts/render_reference_linear_v1.py"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/semantic-transcript-v1/"
+?? "\347\250\263\345\256\232\347\224\237\344\272\247/challengers/tool-orchestrator-v2/"
+?? "\347\253\257\345\210\260\347\253\257\345\255\246\344\271\240\345\211\252\350\276\221/\344\273\243\347\240\201/deepfilternet_denoise_tracks.py"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/2026-08-14-codex-\344\272\244\346\216\245\346\270\205\345\215\225.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/2026-08-14-\344\274\232\350\257\235\344\272\244\346\216\245\346\200\273\347\273\223.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/ASR-\345\275\223\345\211\215\345\237\272\347\272\277\344\270\216\345\275\222\346\241\243.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/Agent-SOP-\350\267\250\346\250\241\345\236\213\347\250\263\345\256\232\345\245\221\347\272\246.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/Preflight-checklist-\344\270\216\344\273\212\346\227\245\350\270\251\345\235\221\346\270\205\345\215\225.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/\344\270\212\344\270\213\346\226\207\350\257\273\345\217\226\347\264\242\345\274\225.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/\345\255\246\344\271\240\351\227\255\347\216\257\345\256\236\346\226\275\346\211\271\345\207\206-20260816.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/\345\255\246\344\271\240\351\251\261\345\212\250\345\231\250-v1\345\256\236\346\226\275\350\256\241\345\210\222-20260816.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/\345\275\223\345\211\215\344\272\244\346\216\245\346\243\200\346\237\245\347\202\271.json"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/\345\275\223\345\211\215\347\212\266\346\200\201\346\221\230\350\246\201.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/\346\234\200\347\273\210\347\211\210\346\234\254\345\256\241\350\256\241-20260814.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/\346\262\231\347\233\222\350\277\201\347\247\273-20260814.md"
+?? "\347\273\237\347\255\271\345\205\250\345\261\200/\347\211\210\346\234\254\345\220\214\346\255\245\344\270\216\344\272\244\344\273\230\344\272\213\345\256\236\351\227\250.md"

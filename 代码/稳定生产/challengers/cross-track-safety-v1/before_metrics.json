@@ -1,0 +1,83 @@
+{
+  "task": "EP03 跨轨误删安全修复 Challenger v1 · Before Metrics",
+  "generated_at": "2026-08-11T13:26:26+08:00",
+  "baseline_reproduction_result": "PASS",
+  "reproduction_details": [
+    {
+      "metric": "total_candidates",
+      "expected": 56,
+      "actual": 56,
+      "match": true
+    },
+    {
+      "metric": "long_pause",
+      "expected": 34,
+      "actual": 34,
+      "match": true
+    },
+    {
+      "metric": "immediate_repetition",
+      "expected": 15,
+      "actual": 15,
+      "match": true
+    },
+    {
+      "metric": "filler_hesitation",
+      "expected": 7,
+      "actual": 7,
+      "match": true
+    },
+    {
+      "metric": "source_track_no_primary_count",
+      "expected": 27,
+      "actual": 27,
+      "match": true
+    },
+    {
+      "metric": "source_track_majority_bleed_count",
+      "expected": 28,
+      "actual": 28,
+      "match": true
+    },
+    {
+      "metric": "long_pause_other_track_has_primary_count",
+      "expected": 27,
+      "actual": 27,
+      "match": true
+    },
+    {
+      "metric": "long_pause_other_track_has_3plus_primary_count",
+      "expected": 21,
+      "actual": 21,
+      "match": true
+    }
+  ],
+  "metrics": {
+    "generated_at": "2026-08-11T13:26:26+08:00",
+    "candidates_source": "审核前端/candidates.json",
+    "total_candidates": 56,
+    "by_category": {
+      "long_pause": 34,
+      "filler_hesitation": 7,
+      "immediate_repetition": 15
+    },
+    "source_track_no_primary_count": 27,
+    "source_track_majority_bleed_count": 28,
+    "long_pause_other_track_has_primary_count": 27,
+    "long_pause_other_track_has_3plus_primary_count": 21
+  },
+  "baseline_sha256": {
+    "稳定生产/scripts/generate_cut_candidates.py": "937fd5406cf8daef3359573b046aa8926c1375d9f49a6be27a4bfa00767a7d89",
+    "稳定生产/rules/candidate-generation.v1.json": "a1c43c544a1b5c836c0b6990e080637e3ac5fe2d2400845c1dd53a4bd3fdf8a1",
+    "审核前端/index.html": "4e4c04343100c79dc0badad1dd6aff3ad77bc20dd76e7ff7abf146bd0ca82d30",
+    "审核前端/candidates.json": "c59169300af5c72174aa83442cf39112f8af39b3cff9bf8175d94de82daa2762",
+    "端到端学习剪辑/代码/render_approved_edl.py": "32138c370dc16b5a4801bead0591c69853047e9be270f97b124d827a92f5e107",
+    "main/runs/EP03-freshrun-20260810-1730/06_activity/female.classified.json": "8af71c16a6d3127dd5fe5dd0927e3996ab5215fbbc6ff6bd0f2f9244b230b22f",
+    "main/runs/EP03-freshrun-20260810-1730/06_activity/male.classified.json": "bf8d7cc40dd01badf108a916cca08b505ddbeec3d89d3bfa3738baf010e6b798",
+    "main/runs/EP03-freshrun-20260810-1730/09_review/package/edit_candidates.json": "b092a2fa9f83acd6631f686504f04ce5b13b921418f3c49be6972e2b756d9297",
+    "main/runs/EP03-freshrun-20260810-1730/09_review/asr_candidates_report.json": "15988a002929434694c79ecf8d474f610e0a2b347a8e003a6b1349146a44a74a",
+    "main/runs/EP03-freshrun-20260810-1730/05_asr/female.transcript.json": "b09803ec1696f931fb376c0b038769df96d0fe7138dd19fefaa0529905d598e1",
+    "main/runs/EP03-freshrun-20260810-1730/05_asr/male.transcript.json": "2aa5fe346a2d0f92546b6db02c98a104a5e990976a863008d4807a418f16cd20",
+    "审核前端/track_activity.json": "80d68079128e33d3b0a362a1c67318d65d5093f2fd7029477fbae7802383bb8f"
+  }
+}

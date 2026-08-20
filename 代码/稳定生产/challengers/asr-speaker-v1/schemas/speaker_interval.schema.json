@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "asr-speaker-v1/speaker_interval",
+  "title": "Normalized speaker interval",
+  "type": "object",
+  "required": [
+    "interval_id",
+    "start_seconds",
+    "end_seconds",
+    "start_sample",
+    "end_sample",
+    "sample_rate_hz",
+    "speaker_id",
+    "overlap",
+    "decision_source",
+    "confidence",
+    "confidence_semantics"
+  ],
+  "properties": {
+    "interval_id": {"type": "string"},
+    "start_seconds": {"type": "number", "minimum": 0},
+    "end_seconds": {"type": "number", "exclusiveMinimum": 0},
+    "start_sample": {"type": "integer", "minimum": 0},
+    "end_sample": {"type": "integer", "minimum": 1},
+    "sample_rate_hz": {"type": "integer"},
+    "speaker_id": {
+      "type": "string",
+      "description": "Cluster id from the speaker model (e.g. 'campp:c0'). NEVER 'female'/'male' unless matched against an audited speaker profile; use 'unknown' or 'ambiguous' otherwise."
+    },
+    "profile_match": {
+      "type": ["object", "null"],
+      "description": "If a speaker profile matched this cluster, record which profile and score.",
+      "properties": {
+        "profile_id": {"type": "string"},
+        "match_score": {"type": "number"}
+      }
+    },
+    "overlap": {
+      "type": "string",
+      "enum": ["none", "overlap", "unknown"]
+    },
+    "decision_source": {
+      "type": "string",
+      "enum": [
+        "fsmn_vad",
+        "campp_cluster",
+        "campp_profile_match",
+        "cross_track_energy",
+        "fallback_unknown"
+      ]
+    },
+    "confidence": {
+      "anyOf": [
+        {"type": "number", "minimum": 0, "maximum": 1},
+        {"type": "null"}
+      ]
+    },
+    "confidence_semantics": {"type": "string"}
+  },
+  "additionalProperties": false
+}

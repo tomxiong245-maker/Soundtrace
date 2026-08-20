@@ -1,0 +1,38 @@
+# Phase 08 Checkpoint · Independent audit hardening
+
+- task_id: tool-orchestrator-v1
+- saved_at: 2026-08-12
+- status: completed
+- objective: 独立复核夜间施工结果，并把“只允许安全只读工具、必须停在真人闸门、输出不能逃出新 run、dry-run 不伪造正式状态”写成 fail-closed 代码约束。
+- files_changed:
+  - `runner/registry_validator.py`
+  - `runner/runner.py`
+  - `runner/SCHEMA.md`
+  - `tests/test_registry_validator.py`
+  - `tests/test_runner.py`
+  - `README.md`
+  - `benchmark_report.md`
+  - `HANDOFF.md`
+  - `exact_commands.md`
+- files_untouched:
+  - `main/tools/tools.json`
+  - `main/orchestrator/orchestrator.py`
+  - `稳定生产/scripts/**`
+  - `稳定生产/rules/**`
+  - `端到端学习剪辑/代码/**`
+  - 所有既有 `main/runs/EP*`
+- commands_run:
+  - `python3 tests/test_registry_validator.py`
+  - `python3 tests/test_runner.py`
+  - `python3 tests/test_safety_gates.py`
+- automated_tests: 26/26 pass（registry validator 7、runner 12、safety gates 7）。
+- real_audio_run: 本 checkpoint 尚未读取公司真实音频；后续以新的合成 WAV run 复核当前代码。
+- evidence:
+  - `reads_only=false` 工具在 plan freeze 阶段被拒绝。
+  - `scripts_root` 的绝对路径、`..` 路径和 resolve 后越界均被拒绝。
+  - 缺失 `human_review_after` 被拒绝；到达 `HUMAN_REVIEW_REQUIRED` 后再运行不会推进状态。
+  - 所有 `output*` 参数必须使用 `run:` 且解析后仍位于本次新 run 内。
+  - dry-run 只写 `dry_run_tool_calls.jsonl`，不创建 outputs/logs、不推进正式 state。
+- known_failures: 无。
+- next_action: 在全新的合成 fixture run 上验证加固后的当前代码，再由项目负责人决定是否用真实 EP04 音频做只读 pre-review 验证。
+- context_for_next_worker: 这是 Challenger；不得把合成 WAV subprocess 说成真实节目验证，不得将 runner 描述为 Champion 已集成。

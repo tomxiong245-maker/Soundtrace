@@ -1,0 +1,38 @@
+{
+  "_FROZEN_2026-08-19_LLM_TAKEOVER": {
+    "value": true,
+    "reason": "LLM 主导 · rules 冻结作 fallback",
+    "consumer_check": "pipeline Stage 3.5.5 走 LLM 主导 · 本 JSON 不再被消费"
+  },
+  "rules_version": "self-correction-wordlevel-v1",
+  "algorithm": "wordlevel_sliding_v1",
+  "policy": "review_only_no_automatic_accept",
+  "sentence_boundary_veto": {
+    "value": true,
+    "boundary_tokens": ["。", "？", "！", ".", "?", "!"],
+    "check_position": "pre_last_word_suffix",
+    "reason": "用户 2026-08-19 · 句号后新句是话轮转换 · 非自纠正 · 例: '怎么保证。怎么确保' 不该判纠正",
+    "consumer": "detect_self_correction_wordlevel.py::detect_word_level_self_correction — 消费点在 sliding window 主循环, 读 value+boundary_tokens, 若 pre 段末词原文本包含 boundary token 即跳过候选. 与 protected_starts 互补 (protected_starts 按开场语料词过滤, 本检查按句法边界过滤). 与 sentence-level self-correction.v1.json::self_correction_pre_check 是同一语义在 wordlevel 上的实现 · 该字段在此文件权威."
+  },
+  "pre_window_words": 3,
+  "edit_ratio_min": 0.4,
+  "high_confidence_edit_ratio": 0.7,
+  "gap_min_seconds": 0.05,
+  "gap_max_seconds": 0.6,
+  "min_pre_chars": 2,
+  "min_post_chars": 2,
+  "protected_starts": [
+    "大家好",
+    "欢迎",
+    "哈喽",
+    "hello",
+    "拜拜",
+    "感谢",
+    "谢谢",
+    "章予",
+    "章鱼",
+    "张约",
+    "张磊"
+  ],
+  "notes": "sliding word window; K=3 (pre/post 各 3 词); gap 0.05-0.6s; edit_ratio ≥ 0.4; 逐字重复走 immediate_repetition. protected_starts 排除节目开场自介 (人名/开场语). 2026-08-19 · 删除冗余 self_correction_pre_check 块 (语义与 sentence_boundary_veto 完全重合, 且 wordlevel 检查粒度在 pre 段末词, 应统一为 sentence_boundary_veto); sentence-level 的同名字段在 self-correction.v1.json 权威."
+}

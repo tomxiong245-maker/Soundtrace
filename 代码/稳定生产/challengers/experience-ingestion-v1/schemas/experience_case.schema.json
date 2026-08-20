@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "experience-case-v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "case_id",
+    "episode_id",
+    "candidate_id",
+    "candidate",
+    "label",
+    "review_quality",
+    "eligibility",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "experience-case-v1"
+    },
+    "case_id": {
+      "type": "string",
+      "description": "稳定且可重复生成的 ID：<episode_id>::<package_id>::<candidate_id>"
+    },
+    "episode_id": {
+      "type": "string"
+    },
+    "candidate_id": {
+      "type": "string"
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "reason_key",
+        "source_track_id",
+        "track_count",
+        "start_sample",
+        "end_sample",
+        "start_seconds",
+        "end_seconds"
+      ],
+      "properties": {
+        "reason_key": { "type": "string" },
+        "source_track_id": { "type": "string" },
+        "track_count": { "type": "integer", "minimum": 1 },
+        "start_sample": { "type": "integer" },
+        "end_sample": { "type": "integer" },
+        "start_seconds": { "type": "number" },
+        "end_seconds": { "type": "number" },
+        "deleted_text": { "type": ["string", "null"] },
+        "evidence_text": { "type": ["string", "null"] },
+        "risk": {
+          "type": ["array", "string", "null"],
+          "description": "risk_notes 或简述"
+        },
+        "required_listen_to": {
+          "type": ["array", "null"],
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "label": {
+      "type": "object",
+      "required": [
+        "decision",
+        "review_basis",
+        "reviewer",
+        "decided_at",
+        "applied_to_edl"
+      ],
+      "properties": {
+        "decision": { "enum": ["accept", "reject", "adjust"] },
+        "review_basis": {
+          "enum": ["text_only", "text_with_audio", "text_and_audio", "bulk_accept"]
+        },
+        "reviewer": { "type": "string" },
+        "decided_at": { "type": "string" },
+        "feedback": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "审核人可选备注；用于检索和规则/Skill 分析，不能替代标签或改写 EDL"
+        },
+        "applied_to_edl": { "type": "boolean" },
+        "final_start_sample": { "type": ["integer", "null"] },
+        "final_end_sample": { "type": ["integer", "null"] },
+        "edl_status": {
+          "type": ["string", "null"],
+          "description": "not_generated_yet | present | source_missing"
+        }
+      }
+    },
+    "review_quality": {
+      "type": "object",
+      "required": [
+        "review_complete",
+        "package_hash_valid",
+        "candidate_hash_valid",
+        "source_audio_hash_valid",
+        "required_audio_evidence_complete"
+      ],
+      "properties": {
+        "review_complete": { "type": "boolean" },
+        "package_hash_valid": { "type": "boolean" },
+        "candidate_hash_valid": { "type": "boolean" },
+        "source_audio_hash_valid": { "type": "boolean" },
+        "required_audio_evidence_complete": { "type": "boolean" }
+      }
+    },
+    "eligibility": {
+      "type": "object",
+      "required": [
+        "eligible_for_rule_analysis",
+        "eligible_for_model_training",
+        "status",
+        "reason"
+      ],
+      "properties": {
+        "eligible_for_rule_analysis": { "type": "boolean" },
+        "eligible_for_model_training": { "type": "boolean" },
+        "status": {
+          "enum": [
+            "excluded_bulk_accept",
+            "quarantine",
+            "eligible_rule_only"
+          ]
+        },
+        "reason": { "type": "string" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "source_run_dir",
+        "package_id",
+        "review_manifest_sha256",
+        "candidate_semantic_sha256"
+      ],
+      "properties": {
+        "source_run_dir": { "type": "string" },
+        "package_id": { "type": "string" },
+        "review_manifest_sha256": { "type": "string" },
+        "candidate_semantic_sha256": { "type": "string" },
+        "source_package_sha256": { "type": ["string", "null"] },
+        "rules_sha256": { "type": ["string", "null"] },
+        "tool_or_model_versions": { "type": "object" }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+# Phase 1 Checkpoint · Registry Validator
+
+- task_id: phase-01-registry-validator
+- saved_at: 2026-08-12
+- status: completed
+- objective: 提供一个静态、可复现的 tool 注册表校验器，覆盖 name/script/params/reads_only/scripts_root，并给出失败 fixture 与自动测试。
+- files_changed:
+    - `稳定生产/challengers/tool-orchestrator-v1/runner/registry_validator.py` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/tests/test_registry_validator.py` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/tests/fixtures/registry_valid.json` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/tests/fixtures/registry_invalid_many.json` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/tests/fixtures/registry_missing_script.json` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/tests/fixtures/mock_scripts/mock_inspect.py` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/tests/fixtures/mock_scripts/mock_transform.py` (新增)
+- files_untouched:
+    - `main/tools/tools.json`（只读校验）
+    - Champion / P0 / P1 / N-track Challenger / 既有 run
+- commands_run:
+    - `python3 稳定生产/challengers/tool-orchestrator-v1/tests/test_registry_validator.py`
+    - `python3 稳定生产/challengers/tool-orchestrator-v1/runner/registry_validator.py main/tools/tools.json --project-root . --require-scripts`
+- automated_tests:
+    - 6/6 pass: valid mock、包含多种错误的 fixture、缺 script warning、缺 script 且 `--require-scripts` fatal、真实 19-tool 注册表、校验器只读不写。
+- real_audio_run: 无
+- evidence:
+    - 校验器 CLI 对真实 `main/tools/tools.json` 输出 `ok=True, tool_count=19, errors=[], warnings=[]`。
+    - `test_absolute_project_root_and_no_write` 显式断言校验流程不修改 tools.json 字节内容。
+- known_failures: 无
+- next_action: 进入 Phase 2，实现最小统筹 Runner（读注册表 → 冻结计划 → 逐 tool 调用 → 停在 HUMAN_REVIEW_REQUIRED）。
+- context_for_next_worker:
+    - 只用 `main/tools/tools.json` 字段：name/description/params/script/reads_only。
+    - `params` 是位置参数名列表；具体 CLI 形式（`--input-wav`、`--input_wav` 或位置）需要在 Phase 4 决定并写入 runner，不得改 Champion 脚本参数。
+    - 校验器不做任何 audio 处理；Phase 2 起才涉及 subprocess。

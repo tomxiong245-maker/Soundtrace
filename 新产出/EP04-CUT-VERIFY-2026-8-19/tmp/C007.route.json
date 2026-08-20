@@ -1,0 +1,14 @@
+{
+  "schema_version": "route-crossfade-strategy-v1",
+  "candidate_count": 1,
+  "results": [
+    {
+      "strategy": "REMOVE_FROM_EDL",
+      "recommended_crossfade_ms": null,
+      "recommended_room_tone_pad_ms": null,
+      "priority_level": "P1",
+      "why": "Check 1 (幻觉): ASR word '呃' @ 354.080s probability 0.4876 < threshold 0.6. Whisper 在低能量段常幻觉出 filler 词 · 该候选大概率无真实语音.",
+      "candidate_id": "C007"
+    }
+  ]
+}

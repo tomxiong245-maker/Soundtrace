@@ -1,0 +1,72 @@
+{
+  "schema_version": "loudness-qc-v1",
+  "run_id": "EP04-DELIVERY-20260817-1427",
+  "measured_at": "2026-08-17",
+  "target_spec": {
+    "spec_source": "main/orchestrator/release_specs.json::reference-linear-v1",
+    "target_integrated_lufs": -22.2,
+    "target_integrated_lufs_tolerance_lu": 1.0,
+    "target_true_peak_dbfs_safety_floor": -1.0,
+    "target_lra_lu": 7.9,
+    "target_lra_tolerance_lu": 2.0,
+    "container": "mp3",
+    "bit_rate_bps": 192000,
+    "sample_rate_hz": 48000,
+    "channels": 2
+  },
+  "candidates": [
+    {
+      "label": "codex_original",
+      "relpath": "main/runs/EP04/EP04-machine-assisted-draft-20260817-002/render_machine_assisted_draft/EP04-machine-assisted-draft-20260817-002.machine_assisted_draft.master.mp3",
+      "sha256": "c58bc29660206d32ba2641b8b7cff376f86deac3585f2296643c4151b194dd72",
+      "size_bytes": 79527788,
+      "measured": {
+        "integrated_lufs": -16.38,
+        "true_peak_dbfs": -0.84,
+        "lra_lu": 6.20,
+        "threshold_lufs": -26.69
+      },
+      "vs_target": {
+        "integrated_delta_lu": 5.82,
+        "true_peak_over_safety_floor_db": 0.16,
+        "lra_in_tolerance": true,
+        "verdict": "OFF_TARGET_TOO_LOUD"
+      },
+      "container": {"codec": "mp3", "sample_rate": 48000, "channels": 2, "bit_rate": 192003, "duration_seconds": 3313.593}
+    },
+    {
+      "label": "loudnorm_corrected",
+      "relpath": "main/runs/EP04-DELIVERY-20260817-1427/render/EP04_codex_loudnorm_corrected.mp3",
+      "sha256": "35adf2f2f4945f4079c404c9d565ed4b71cf828e7a530972c580d96a6b2df254",
+      "size_bytes": 79527788,
+      "measured": {
+        "integrated_lufs": -22.46,
+        "true_peak_dbfs": -6.91,
+        "lra_lu": 6.30,
+        "threshold_lufs": -32.77
+      },
+      "vs_target": {
+        "integrated_delta_lu": -0.26,
+        "true_peak_headroom_db": 5.91,
+        "lra_in_tolerance": true,
+        "verdict": "PASS_ALL_TARGETS"
+      },
+      "container": {"codec": "mp3", "sample_rate": 48000, "channels": 2, "bit_rate": 192000, "duration_seconds": 3313.593}
+    }
+  ],
+  "correction_method": {
+    "type": "two_pass_loudnorm_linear",
+    "pass1_stderr_measurements": {
+      "input_i": -16.38,
+      "input_tp": -0.84,
+      "input_lra": 6.20,
+      "input_thresh": -26.69,
+      "target_offset": -0.42
+    },
+    "pass2_ffmpeg_filter": "loudnorm=I=-22.2:TP=-1.0:LRA=7.9:measured_I=-16.38:measured_TP=-0.84:measured_LRA=6.20:measured_thresh=-26.69:offset=-0.42:linear=true",
+    "pass2_encoder": "libmp3lame 192k stereo 48000Hz",
+    "content_preserved": "linear normalization preserves waveform shape; only gain scaled uniformly across the file. Cut decisions, music timing, and speaker mixing are identical to codex original.",
+    "processing_time_seconds": 20
+  },
+  "recommendation": "loudnorm_corrected 命中全部目标；建议采用为发布候选。原版内容 mentor 已认可；本次仅做线性响度对齐，不改动任何音频决策。"
+}

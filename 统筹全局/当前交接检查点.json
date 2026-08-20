@@ -1,0 +1,41 @@
+{
+  "schema_version": "context-handoff-checkpoint-v1",
+  "generated_at": "2026-08-16T16:20:33.625477+00:00",
+  "source": {
+    "status_relpath": "统筹全局/当前项目进度.md",
+    "status_sha256": "82ad4677b1738f2721a310a2de2843809ed7fc179aede938639a9df450b99d82",
+    "facts_schema": "current-delivery-facts-v1"
+  },
+  "current_review": {
+    "run_id": "EP04-label-loop-v1-20260815-1805",
+    "state": "CALIBRATION_REVIEW_REQUIRED",
+    "run_relpath": "main/runs/EP04/EP04-label-loop-v1-20260815-1805",
+    "candidate_count": 12,
+    "review_package_candidate_count": 11,
+    "frontend_visible_candidate_count": 11,
+    "candidate_rules_version": "filler-global-pause-v18",
+    "reuse_analysis_from": "EP04-v13-20260813-2002",
+    "reuse_semantic_from": "EP04-semantic-transcript-v1-20260814-120456"
+  },
+  "hard_requirements": {
+    "music_template_id": "reference-linear-v1",
+    "voice_start_seconds": 5.0,
+    "feedback_max_chars": 500,
+    "human_decision_required": true,
+    "autocut_policy": "NOT_APPROVED",
+    "do_not_render_without_user_gate": true
+  },
+  "learning_loop": {
+    "status": "CHALLENGER_EVIDENCE_GENERATED__ACTIVE_GUARDS_IN_PRODUCTION__ACTIVE_RUN_FROZEN",
+    "evidence_run_relpath": "main/runs/LABEL-LEARNING-v3-20260816",
+    "evidence_manifest_sha256": "8278d44aeea494f1c922dc3ea0ba1ec27360e5e5a586ae829341d27804cbb2da",
+    "autocut_policy": "NOT_APPROVED",
+    "production_guard_policy": {
+      "policy_id": "editing-policy-guards-v1",
+      "policy_sha256": "936d4d0dcc70d58a86c357032474fe27858a25077cc82b03910c33d56faf62ca",
+      "status": "ACTIVE_GUARDS_ONLY"
+    }
+  },
+  "next_gate": "CALIBRATION_REVIEW_REQUIRED:真人决定和备注未完成前不得 resume",
+  "provenance_policy": "历史证据保留；此检查点只作交接索引，不替代 run manifest 或 CURRENT_DELIVERY_FACTS"
+}

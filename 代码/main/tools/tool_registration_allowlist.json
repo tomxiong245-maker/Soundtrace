@@ -1,0 +1,36 @@
+{
+  "$schema": "tool-registration-allowlist.v1",
+  "description": "verify.sh Layer 21 (§11 未登记即报错) 的白名单。这里列的 .py 允许存在于 main/orchestrator/ 里但不出现在 tools.json 的 full_path/script 字段中。修改前请先想清楚：新加的 .py 应该是登记为 tool，还是纳入下面某个 bucket。",
+  "buckets": {
+    "orchestrator_modules": {
+      "rationale": "编排入口本身，不是被调用的 tool，是 tool 的调用方",
+      "files": [
+        "main/orchestrator/delivery_orchestrator.py",
+        "main/orchestrator/orchestrator.py",
+        "main/orchestrator/make_edl_ab_clips.py",
+        "main/orchestrator/render_user_authorized_machine_draft.py",
+        "main/orchestrator/resume_user_authorized_machine_draft.py"
+      ]
+    },
+    "helper_modules": {
+      "rationale": "被多个 tool import 的共享库，不直接作为 CLI 或 pipeline stage 调用",
+      "files": [
+        "main/orchestrator/event_identity.py",
+        "main/orchestrator/context_checkpoint.py",
+        "main/orchestrator/transcript_text_layers.py",
+        "main/orchestrator/production_edit_policy.py"
+      ]
+    },
+    "dev_and_governance_scripts": {
+      "rationale": "开发工具与治理脚本，不参与生产 pipeline",
+      "files": [
+        "main/orchestrator/build_label_learning_challenger.py",
+        "main/orchestrator/create_policy_promotion_evidence.py",
+        "main/orchestrator/check_current_delivery_sync.py",
+        "main/orchestrator/policy_promotion.py",
+        "main/orchestrator/refresh_label_learning_snapshot.py"
+      ]
+    }
+  },
+  "note_on_challenger_scripts": "稳定生产/challengers/*/scripts/*.py 暂时不受 Layer 21 强制约束。Challenger 在实验期允许写未登记脚本；Challenger 晋升时须把稳定脚本移入 端到端学习剪辑/代码/ 或登记到 tools.json，届时 Layer 21 会强制约束这些脚本。"
+}

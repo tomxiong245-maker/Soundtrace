@@ -1,0 +1,50 @@
+{
+  "rules_version": "self-correction-v1",
+  "policy": "review_only_no_automatic_accept",
+  "self_correction_pre_check": {
+    "skip_if_prev_ends_with_period": true,
+    "skip_if_prev_ends_with_punctuation": [
+      "。",
+      "！",
+      "？",
+      "!",
+      "?",
+      "."
+    ],
+    "reason": "句号后新句是话轮/句子转换 · 非同一小句自纠正. 加入以避免 FAM-self_correction-track_01-42a1ca9d868e 式误报: '…业务背景。 我的话,' — '。' 之后 '我的话' 是新句自介, 不是把'背景'改成'我的话'的自纠正.",
+    "consumer_note_20260819": "detector 未消费时仅记录; 未来 detector 升级读取 pre_sentence 尾字符, 命中标点即跳过提名. 与 protected_starts 互补."
+  },
+  "min_shared_prefix_chars": 2,
+  "min_edit_ratio": 0.4,
+  "max_abandoned_chars": 12,
+  "interrupt_min_gap_seconds": 0.05,
+  "interrupt_max_gap_seconds": 2.5,
+  "sentence_split_gap_seconds": 0.6,
+  "min_words_per_sentence": 2,
+  "max_words_per_sentence": 20,
+  "interrupt_tokens": [
+    "不对",
+    "不是",
+    "错了",
+    "说错",
+    "应该是",
+    "等一下",
+    "等等",
+    "先",
+    "哦不",
+    "啊不",
+    "呃",
+    "那个",
+    "重新"
+  ],
+  "protected_starts": [
+    "大家好",
+    "欢迎",
+    "哈喽",
+    "hello",
+    "拜拜",
+    "感谢",
+    "谢谢"
+  ],
+  "notes": "只覆盖'A 前缀 → 打断 → B 是 A 的改写'这种自我更正模式，不覆盖'我觉得...我觉得'这种间隔重复。"
+}

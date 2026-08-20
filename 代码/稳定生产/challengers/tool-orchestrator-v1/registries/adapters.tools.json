@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "scripts_root_base": "project_root",
+  "scripts_root": "稳定生产/challengers/tool-orchestrator-v1/adapters",
+  "description": "Challenger-local registry: adapters that keep Champion scripts read-only while exposing the runner's uniform CLI (--input-wav/--output-json). Not a replacement for main/tools/tools.json.",
+  "tools": [
+    {
+      "name": "inspect_audio_adapter",
+      "description": "Adapter for Champion inspect_audio: --input-wav (repeatable) → --input LABEL=path (Champion), --output-json → --output.",
+      "params": ["input_wav", "output_json"],
+      "script": "inspect_audio_adapter.py",
+      "reads_only": true
+    },
+    {
+      "name": "summarize_inspection_adapter",
+      "description": "Reads-only. Takes inspection.json, writes summary.json. Used to prove multi-step orchestration.",
+      "params": ["input_json", "output_json"],
+      "script": "summarize_inspection_adapter.py",
+      "reads_only": true
+    }
+  ]
+}

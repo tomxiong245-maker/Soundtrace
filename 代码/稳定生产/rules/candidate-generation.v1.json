@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "rules_version": "v1-2026-08-10",
+  "purpose": "候选生成规则的初值。混合三类来源，每条参数标注来源，未来经验学习 Agent 产的规则以新版本文件形式追加。",
+  "source_types": {
+    "甲": "AI 常识初值——未经证据验证，只是通用中文口语常识",
+    "乙": "外部学习证据——有 从视频学习经验/references/ 或官方文档支撑",
+    "丙": "内部经验——本轮为空，未来经验学习 Agent 产出后追加"
+  },
+  "filler_hesitation": {
+    "enabled": true,
+    "source": "甲",
+    "description": "连续 N 个口癖词，判为口癖片段",
+    "tokens": ["呃", "嗯", "啊", "哦", "那个", "这个", "就是", "然后", "对", "嗯对", "嗯嗯"],
+    "min_consecutive": 2,
+    "notes_甲": "口癖词表来自一般中文口语常识；实际是否该删取决于说话人风格。EP03 里 male speaker 常用'对然后'作为句子起头，未来内部经验 Agent 应该学到这一点"
+  },
+  "long_pause": {
+    "enabled": true,
+    "source": "甲",
+    "description": "词间静音区间（不删词，只删空白）",
+    "min_seconds": 1.5,
+    "max_seconds": 8.0,
+    "notes_甲": "min=1.5 避免正常语间停顿；max=8.0 避开段落间/插入片段的长静音",
+    "notes_pending": "真实中文播客节目里 1.5s 是否合适、8s 上限是否漏掉真实需要删的段间冷场——未验证"
+  },
+  "immediate_repetition": {
+    "enabled": true,
+    "source": "甲",
+    "description": "相邻 N 字短语原样重复（'搜索搜索'）",
+    "min_phrase_chars": 2,
+    "max_phrase_chars": 4,
+    "notes_甲": "只匹配紧邻重复；不匹配'我觉得......我觉得'这种间隔重复。间隔重复语义损失更大，v1 不做"
+  },
+  "guards": {
+    "opening_seconds": 20.0,
+    "closing_seconds": 20.0,
+    "source": "甲",
+    "notes_甲": "开头 20 秒 + 结尾 20 秒不生成候选，避免误删片头片尾话术",
+    "protected_phrases_substrings": [
+      "哈喽哈喽", "大家好", "欢迎来到", "章鱼AI", "章鱼ai", "章鱼",
+      "再见", "拜拜", "感谢", "谢谢"
+    ]
+  },
+  "boundary_padding": {
+    "source": "乙",
+    "description": "候选边界向外扩 N 毫秒缓冲，避免'crush adjacent speech'",
+    "padding_ms": 40,
+    "evidence": {
+      "yt_id": "YT-02",
+      "video": "Clean Cut Audio - Crossfade Tips",
+      "url": "https://www.youtube.com/watch?v=fiRoCDHC0_Y",
+      "timestamp": "01:09-02:00 & 02:33-03:36",
+      "claim_id": "C-07",
+      "verbatim": "a filler deletion must not crush adjacent speech together"
+    },
+    "notes_乙": "视频里没有给具体毫秒数；40ms 是保守选择——大于典型辅音起始 20ms、小于最短 crossfade 20ms"
+  },
+  "crossfade_ms": {
+    "source": "乙",
+    "description": "剪口 crossfade 时长",
+    "default_ms": 50,
+    "min_ms": 20,
+    "max_ms": 80,
+    "evidence": {
+      "yt_id": "YT-02",
+      "claim_id": "C-07",
+      "adopt_status": "ADOPT (from claim-matrix.md)"
+    },
+    "notes_乙": "20-80ms 范围有 YouTube 证据支撑；50ms 默认是 EP03 已用过的经验值"
+  },
+  "min_candidate_seconds": {
+    "source": "甲",
+    "value_seconds": 0.15,
+    "notes_甲": "小于此的候选无法有效应用 crossfade（crossfade 已经占了 100ms，再短就是碎片）"
+  },
+  "min_gap_between_candidates_seconds": {
+    "source": "甲",
+    "value_seconds": 0.05,
+    "notes_甲": "候选之间的最小间隔——防止相邻候选重叠导致渲染错误"
+  }
+}

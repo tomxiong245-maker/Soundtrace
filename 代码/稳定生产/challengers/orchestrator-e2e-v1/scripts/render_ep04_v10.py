@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+"""EP04-v10：口癖词表扩繁体 + 常见 ASR 简繁混用。"""
+
+from __future__ import annotations
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import render_ep04_v4 as v4
+from render_ep04_v5 import long_pause_cuts_tiered
+from render_ep04_v7 import (
+    STRONG_FILLERS_ONLY_LONG_OR_DENSE,
+    NG_LONG_THRESHOLD_SECONDS, NG_DENSE_WINDOW_SECONDS, NG_DENSE_MIN_COUNT,
+    _load_activity, _other_primary_overlap, _ng_is_dense,
+)
+from render_ep04_v8 import apply_sync_cuts_adaptive
+
+
+# 强口癖（不含"嗯"）：单发即剪；简繁全覆盖
+STRONG_FILLERS_ALWAYS_V10 = {
+    "呃", "额", "唔", "唉", "哎", "哦",
+    "uh", "um", "er", "erm",
+}
+# 弱口癖：跨轨安全 + 单发即剪；简繁 & 常见 ASR 别名
+WEAK_FILLERS_V10 = {
+    # 简体
+    "啊", "那个", "这个", "就是", "然后", "对",
+    # 繁体（whisper 中文常混用）
+    "那個", "這個", "就是說", "然後", "對",
+    # ASR 常见错识别
+    "这据", "這据", "這據",
+}
+
+
+def detect_solo_fillers_v10(activity_dir: Path, sr: int) -> list[dict]:
+    by_track = _load_activity(activity_dir)
+    all_ng = []
+    for tr, ws in by_track.items():
+        for w in ws:
+            if str(w.get("text", "")).strip() != "嗯":
+                continue
+            if (w.get("activity", {}) or {}).get("classification") == "bleed":
+                continue
+            all_ng.append({"track": tr, "start_s": float(w["start_seconds"])})
+
+    out = []
+    for tr, ws in by_track.items():
+        for i, w in enumerate(ws):
+            t = str(w.get("text", "")).strip()
+            cls = (w.get("activity", {}) or {}).get("classification", "unknown")
+            if cls == "bleed":
+                continue
+            is_ng = t in STRONG_FILLERS_ONLY_LONG_OR_DENSE
+            is_other_strong = t in STRONG_FILLERS_ALWAYS_V10
+            is_weak = t in WEAK_FILLERS_V10
+            if not (is_ng or is_other_strong or is_weak):
+                continue
+            s = float(w["start_seconds"]); e = float(w["end_seconds"])
+            dur = e - s
+            if is_ng:
+                dense = _ng_is_dense(all_ng, {"track": tr, "start_s": s})
+                if dur < NG_LONG_THRESHOLD_SECONDS and not dense:
+                    continue
+                kind = "ng"
+            elif is_weak:
+                kind = "weak"
+            else:
+                kind = "strong"
+            if _other_primary_overlap(by_track, tr, s, e):
+                continue
+            out.append({
+                "track_id": tr, "text": t, "kind": kind, "reason": f"solo_{kind}:{t}",
+                "start_sample": int(round(s * sr)),
+                "end_sample": int(round(e * sr)),
+                "start_seconds": s, "end_seconds": e,
+            })
+    return out
+
+
+_ACTIVITY_DIR = None
+
+
+def _lp_and_solo_v10(mix_source, sr, noise_db, min_silence_seconds,
+                     trigger_seconds, safety_ms,
+                     keep_head_ms, keep_tail_ms):
+    lps = long_pause_cuts_tiered(mix_source, sr, noise_db, min_silence_seconds,
+                                  trigger_seconds, safety_ms)
+    if _ACTIVITY_DIR is None:
+        return lps
+    for s in detect_solo_fillers_v10(Path(_ACTIVITY_DIR), sr):
+        lps.append({
+            "silence_start_seconds": s["start_seconds"],
+            "silence_end_seconds": s["end_seconds"],
+            "silence_duration_seconds": round(s["end_seconds"] - s["start_seconds"], 3),
+            "cut_start_sample": s["start_sample"],
+            "cut_end_sample": s["end_sample"],
+            "cut_duration_seconds": round(s["end_seconds"] - s["start_seconds"], 3),
+            "keep_head_ms": 0, "keep_tail_ms": 0,
+            "solo_filler": True, "solo_text": s["text"],
+            "solo_kind": s["kind"], "track_id": s["track_id"],
+            "reason": s["reason"],
+        })
+    return lps
+
+
+v4.apply_sync_cuts_ep = apply_sync_cuts_adaptive
+v4.long_pause_cuts = _lp_and_solo_v10
+
+
+if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser(add_help=False)
+    ap.add_argument("--activity-dir", required=True)
+    args, remaining = ap.parse_known_args()
+    _ACTIVITY_DIR = args.activity_dir
+    sys.argv = [sys.argv[0]] + remaining
+    sys.exit(v4.main())

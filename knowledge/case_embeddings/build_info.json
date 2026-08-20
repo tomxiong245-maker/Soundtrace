@@ -1,0 +1,7 @@
+{
+  "schema": "case-embedding-index-v1",
+  "model_size": "base",
+  "dim": 512,
+  "count": 27,
+  "computed_at_utc": "2026-08-19T09:52:44.589986+00:00"
+}

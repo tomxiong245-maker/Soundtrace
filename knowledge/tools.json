@@ -1,0 +1,759 @@
+{
+  "schema_version": 1,
+  "description": "音频剪辑项目的 tool 注册表。每个 tool 是一个可被 agent 调用的能力——名字/说明/参数/执行命令。当前实现方式：直接 shell 调 python 脚本；未来可无缝改成 MCP server 或 function calling。",
+  "scripts_root_base": "project_root",
+  "scripts_root": "端到端学习剪辑/代码",
+  "runtime_dependencies": [
+    {
+      "name": "ffmpeg",
+      "role": "本地渲染、A/B 试听、并轨、响度与 MP3 编码",
+      "path": "/opt/homebrew/bin/ffmpeg",
+      "version": "9.0.1",
+      "sha256": "11012f10d9d2eff4df94d760eec5964980880ced20bd4cdbd9f82ec399867e9d",
+      "paired_ffprobe_path": "/opt/homebrew/bin/ffprobe",
+      "paired_ffprobe_sha256": "6435b1b488afc9af1a22de2b839bfd1ef4a29d932122898f0c79dcffb43bdfb8",
+      "audit": "main/tools/audits/ffmpeg-homebrew-9.0.1.md",
+      "data_flow": "local files only; no program audio upload"
+    }
+  ],
+  "tools": [
+    {
+      "name": "inspect_audio",
+      "description": "读取 WAV 文件的容器/编码/采样率/声道/时长，输出 inspection.json。用于输入检查与 QC。",
+      "params": [
+        "input_wav",
+        "output_json"
+      ],
+      "script": "inspect_audio.py",
+      "reads_only": true
+    },
+    {
+      "name": "measure_loudness",
+      "description": "用 FFmpeg ebur128 测量 integrated LUFS / loudness range / true peak，输出 loudness.json。",
+      "params": [
+        "input_audio",
+        "output_json"
+      ],
+      "script": "measure_loudness.py",
+      "reads_only": true
+    },
+    {
+      "name": "analyze_reference_timeline",
+      "description": "对比 Mentor 参考成品与本地降噪轨的时间线偏移，作为 sanity check。",
+      "params": [
+        "reference_audio",
+        "denoised_tracks",
+        "output_json"
+      ],
+      "script": "analyze_reference_timeline.py",
+      "reads_only": true
+    },
+    {
+      "name": "estimate_sync",
+      "description": "估计两条独立轨道之间的 offset 与 clock drift（ppm）。低置信度会拒绝自动校正。",
+      "params": [
+        "track_a",
+        "track_b",
+        "output_json"
+      ],
+      "script": "estimate_sync.py",
+      "reads_only": true
+    },
+    {
+      "name": "correct_clock_drift",
+      "description": "在 estimate_sync 给出可信 drift 后，对轨道做线性 clock drift 校正（重采样）。",
+      "params": [
+        "input_wav",
+        "drift_ppm",
+        "output_wav"
+      ],
+      "script": "correct_clock_drift.py",
+      "reads_only": false
+    },
+    {
+      "name": "create_clock_drift_fixture",
+      "description": "生成合成 fixture（已知 offset+drift）用于 estimate_sync/correct_clock_drift 的自检。",
+      "params": [
+        "output_dir",
+        "offset_ms",
+        "drift_ppm"
+      ],
+      "script": "create_clock_drift_fixture.py",
+      "reads_only": false
+    },
+    {
+      "name": "denoise_tracks",
+      "description": "正式降噪：调用本地固定版本 DeepFilterNet，对每条 48 kHz mono 轨处理并恢复同一 sample 时间线。原始轨不改写；旧 afftdn 不在生产工具链中。",
+      "params": [
+        "tracks",
+        "output_dir",
+        "atten_lim_db"
+      ],
+      "script": "deepfilternet_denoise_tracks.py",
+      "reads_only": false
+    },
+    {
+      "name": "analyze_denoise_previews",
+      "description": "从降噪前/后各截几段做 A/B 短片段试听。",
+      "params": [
+        "raw_wav",
+        "denoised_wav",
+        "segments",
+        "output_dir"
+      ],
+      "script": "analyze_denoise_previews.py",
+      "reads_only": false
+    },
+    {
+      "name": "transcribe_tracks",
+      "description": "调用外部 faster-whisper（当前 baseline）做中文词级 ASR；本项目只校验并保存上游时间戳与文本。",
+      "params": [
+        "input_wav",
+        "model",
+        "output_json"
+      ],
+      "script": "transcribe_tracks.py",
+      "reads_only": false
+    },
+    {
+      "name": "classify_track_activity",
+      "description": "对每 20ms 窗口比较两轨能量，标注 primary / bleed / ambiguous（串音标注）。",
+      "params": [
+        "track_a_wav",
+        "track_b_wav",
+        "output_json"
+      ],
+      "script": "classify_track_activity.py",
+      "reads_only": false
+    },
+    {
+      "name": "build_review_package",
+      "description": "把转写+串音标注+启发式候选生成规则，做成 edit_candidates.json + review.html + review_manifest.json。",
+      "params": [
+        "transcripts",
+        "activity",
+        "sources",
+        "output_dir"
+      ],
+      "script": "build_review_package.py",
+      "reads_only": false
+    },
+    {
+      "name": "build_priority_review_page",
+      "description": "把候选按风险分层（高风险剪口 / 声学抽查 / 常规抽查）生成 priority-review.html。",
+      "params": [
+        "edit_candidates",
+        "output_html"
+      ],
+      "script": "build_priority_review_page.py",
+      "reads_only": false
+    },
+    {
+      "name": "create_aligned_ab_previews",
+      "description": "为每个候选生成 original / proposed-cut 两段 MP3 试听（对齐时间线版）。",
+      "params": [
+        "edit_candidates",
+        "denoised_tracks",
+        "output_dir"
+      ],
+      "script": "create_aligned_ab_previews.py",
+      "reads_only": false
+    },
+    {
+      "name": "approve_review_candidates",
+      "description": "把 review_manifest + 人工决定合成 approved EDL（integer samples 时间基）。绑定审核人身份与哈希。",
+      "params": [
+        "review_manifest",
+        "human_decisions",
+        "output_edl"
+      ],
+      "script": "approve_review_candidates.py",
+      "reads_only": false
+    },
+    {
+      "name": "analyze_cut_transitions",
+      "description": "对 approved EDL 里每个剪口做客观 QC——crossfade、边界能量、削波检查。",
+      "params": [
+        "edl",
+        "denoised_tracks",
+        "output_json"
+      ],
+      "script": "analyze_cut_transitions.py",
+      "reads_only": true
+    },
+    {
+      "name": "render_approved_edl",
+      "description": "按 approved EDL 对每条降噪轨做同步剪切+短 crossfade，输出剪切后的多轨 WAV。",
+      "params": [
+        "edl",
+        "denoised_tracks",
+        "output_dir"
+      ],
+      "script": "render_approved_edl.py",
+      "reads_only": false
+    },
+    {
+      "name": "assemble_program",
+      "description": "把剪切后的多轨混音成单轨节目 WAV；本步可选拼授权片头片尾（本轮不加）。",
+      "params": [
+        "cut_tracks",
+        "mix_spec",
+        "intro",
+        "outro",
+        "output_wav"
+      ],
+      "script": "assemble_program.py",
+      "reads_only": false
+    },
+    {
+      "name": "finish_approved_project",
+      "description": "从 approved EDL 一步跑完剪切→拼接→MP3 编码→编码后 QC（inspection + loudness）。",
+      "params": [
+        "edl",
+        "denoised_tracks",
+        "mix_spec",
+        "output_dir"
+      ],
+      "script": "finish_approved_project.py",
+      "reads_only": false
+    },
+    {
+      "name": "p0_transcribe_mvp",
+      "description": "P0 baseline: faster-whisper 词级 ASR + energy 启发式 activity。本项目当前的 ASR 生产入口；固定模型、CPU int8、beam 5、VAD 开启。",
+      "params": [
+        "input_tracks",
+        "output_dir"
+      ],
+      "full_path": "稳定生产/challengers/asr-speaker-v1/scripts/p0_mvp.py",
+      "reads_only": false,
+      "audit_reference": "稳定生产/challengers/asr-speaker-v1/audits/faster-whisper.md"
+    },
+    {
+      "name": "build_semantic_transcript",
+      "description": "生成语义分句/标点假设层：从词级 ASR 出 sentence/clause 边界与 word_context_index。只提供上下文，不判定删除。",
+      "params": [
+        "asr_report",
+        "output_dir"
+      ],
+      "full_path": "稳定生产/challengers/semantic-transcript-v1/scripts/build_semantic_transcript.py",
+      "reads_only": false
+    },
+    {
+      "name": "build_filler_global_pause_candidates",
+      "description": "口癖 + 全轨长停顿候选生成。当前 Champion 候选家族的唯一实现；受 candidate_rules.v18.json 驱动。",
+      "params": [
+        "transcripts",
+        "semantic",
+        "rules",
+        "output_dir"
+      ],
+      "full_path": "稳定生产/challengers/filler-global-pause-v1/scripts/build_filler_global_pause_review_source.py",
+      "reads_only": false
+    },
+    {
+      "name": "serve_review_ui",
+      "description": "启动本地 HTTP 审核前端服务器：/api/save 草稿保存 + /api/submit 正式决定。触发点：每次有效 save 自动重建 preference snapshot（refresh_label_learning_snapshot）。",
+      "params": [
+        "run_dir",
+        "port"
+      ],
+      "full_path": "稳定生产/challengers/review-product-v1/scripts/server_episode.py",
+      "reads_only": false
+    },
+    {
+      "name": "analyze_transition_qc",
+      "description": "剪口客观 QC：电平、频谱、边界波形异常排序。绑定 EDL + render manifest + WAV SHA；不判定语义/自然度。",
+      "params": [
+        "edl",
+        "denoised_tracks",
+        "rendered_wav",
+        "output_json"
+      ],
+      "full_path": "main/orchestrator/transition_qc.py",
+      "reads_only": true
+    },
+    {
+      "name": "snap_candidate_boundaries",
+      "description": "候选边界 ±150 ms 内找能量最低点/零交叉点做精修。纯 stdlib，输出 snapped canonical boundaries。",
+      "params": [
+        "candidates",
+        "denoised_tracks",
+        "output_json"
+      ],
+      "full_path": "main/orchestrator/snap_candidate_boundaries.py",
+      "reads_only": false
+    },
+    {
+      "name": "predict_cut_artifact",
+      "description": "剪口质量预测：dBFS 阈值 (-50/-35/-25) 输出 OK / HUMAN_REVIEW / BLOCK verdict。阈值来自 65 条历史剪辑痕迹 reject 归纳。",
+      "params": [
+        "candidates",
+        "denoised_tracks",
+        "output_json"
+      ],
+      "full_path": "main/orchestrator/predict_cut_artifact.py",
+      "reads_only": false
+    },
+    {
+      "name": "review_event_routes",
+      "description": "把历史逐项人审 run 的事件路由（already_reviewed_exact / semantic_reuse_boundary_review / rejected_execution_issue / new_event 等）写入未来新审核包的只读侧车 event_routes.json。",
+      "params": [
+        "event_history_run",
+        "candidates",
+        "output_json"
+      ],
+      "full_path": "main/orchestrator/review_event_routes.py",
+      "reads_only": false
+    },
+    {
+      "name": "apply_preference_snapshot",
+      "description": "把 editing-experience-distiller 冻结的 preference snapshot 应用到候选：只影响排序/展示；不改决定或 EDL。",
+      "params": [
+        "snapshot_dir",
+        "candidates",
+        "output_dir"
+      ],
+      "full_path": "稳定生产/challengers/experience-ingestion-v1/scripts/apply_preference_snapshot.py",
+      "reads_only": false
+    },
+    {
+      "name": "label_learning_driver",
+      "description": "标签学习驱动器：对每条候选输出 MACHINE_CUT_SUGGESTED / MACHINE_PRESERVE_SUGGESTED / HUMAN_REVIEW_REQUIRED；含防泄漏回测与只读 shadow。不写决定/EDL/音频。",
+      "params": [
+        "snapshot_dir",
+        "candidates",
+        "target_run_identity",
+        "output_dir"
+      ],
+      "full_path": "main/orchestrator/label_learning_driver.py",
+      "reads_only": false
+    },
+    {
+      "name": "build_case_memory",
+      "description": "案例记忆侧车：从冻结的逐项真人案例中为每条候选检索可解释的相似 case，输出历史 accept/reject、备注、匹配理由和审核优先级；不改候选/审核包，不写决定、EDL 或自动剪辑权限。",
+      "params": [
+        "snapshot_dir",
+        "candidate_source",
+        "candidate_overlay",
+        "target_run_identity",
+        "review_package",
+        "output_json"
+      ],
+      "full_path": "main/orchestrator/case_memory.py",
+      "reads_only": false
+    },
+    {
+      "name": "validate_integration_governance",
+      "description": "校验负责人确认的能力接入登记，并在新 run 中冻结其 SHA；组件接入批准与语义删剪/发布授权严格分离，不生成 human_accept、EDL 或 autocut 权限。",
+      "params": [
+        "registry",
+        "output_json"
+      ],
+      "full_path": "main/orchestrator/integration_governance.py",
+      "reads_only": false
+    },
+    {
+      "name": "build_candidate_family_bundle",
+      "description": "运行负责人批准接入的说错重来与咳嗽检测器，并把输出规范化为 canonical ntrack-review-source-v1；所有新增候选强制 human_review_required，咳嗽只能产生 source-track gate 候选。",
+      "params": [
+        "base_source",
+        "self_transcript",
+        "transient_wav",
+        "transient_transcript",
+        "sample_rate_hz",
+        "output_json",
+        "detector_out_dir"
+      ],
+      "full_path": "main/orchestrator/candidate_family_adapter.py",
+      "reads_only": false
+    },
+    {
+      "name": "automix_render_speech",
+      "description": "对已执行 EDL/source-track gate 的 N 轨 stem 做主麦 automix，生成 run-local speech mix 与 SHA 绑定 manifest；不改变语义 EDL。",
+      "params": [
+        "tracks",
+        "output_wav",
+        "run_id",
+        "run_identity_sha256",
+        "variant",
+        "edl"
+      ],
+      "full_path": "main/orchestrator/automix_adapter.py",
+      "reads_only": false
+    },
+    {
+      "name": "experience_consumer_adapter",
+      "description": "只读 experience-ingestion 适配器：给定 case_store，返回当前经验摘要 / 相关历史案例（按 episode_id/reason_key 过滤） / 规则建议 / 训练准备度 / 明确禁止动作。不改生产规则、不批 EDL、不训练模型。editing-experience-distiller Skill 的主入口。",
+      "params": [
+        "case_store",
+        "episode_id",
+        "reason_key",
+        "max_examples",
+        "out"
+      ],
+      "full_path": "稳定生产/challengers/experience-ingestion-v1/scripts/experience_consumer_adapter.py",
+      "reads_only": true
+    },
+    {
+      "name": "detect_self_correction",
+      "description": "self-correction-v1 检测器：找说错后停顿重来的候选。输入词级 transcript，输出 self_correction candidates JSON。EP04 数据上 0 命中（内容多是半句内自我修正，未落进 sentence_split_gap>=0.6 -> 整句对比算法的覆盖）；等 EP05+ 有停顿+重说样本后评估重设计。已在 policy v2 白名单里。",
+      "params": [
+        "transcript",
+        "rules",
+        "out"
+      ],
+      "full_path": "稳定生产/challengers/self-correction-v1/scripts/detect_self_correction.py",
+      "reads_only": true,
+      "audit_reference": "稳定生产/challengers/self-correction-v1/TASK_CONTRACT.md"
+    },
+    {
+      "name": "detect_self_correction_wordlevel",
+      "description": "self_correction v2 词级 sliding-window 检测器：不用切句，对每个位置 i 取 pre=w[i-K:i] vs post=w[i:i+K] 做 edit_ratio + gap 判定。EP04 数据 33 个候选（vs 句级 v1 的 0），高 tier 命中如 '怎么保证→怎么确保'（ratio 0.75）。走 human_review_required，未进白名单直接 auto。",
+      "params": [
+        "transcript",
+        "rules",
+        "out"
+      ],
+      "full_path": "稳定生产/challengers/self-correction-v1/scripts/detect_self_correction_wordlevel.py",
+      "reads_only": true,
+      "audit_reference": "稳定生产/challengers/release-policy-v2/docs/2026-08-17-1830-A-self-correction-wordlevel.md"
+    },
+    {
+      "name": "mfa_align_and_extract_boundaries",
+      "description": "Montreal Forced Aligner 局部对齐 · 输入候选 + 3 轨 wav + ASR 分析目录，输出精确音素级 boundary (mfa-boundaries-v1)。用 mandarin_mfa acoustic + mandarin_china_mfa dictionary，精度 10-20ms（vs ASR 50-150ms 误差）。EP04 v26 用户 accept 后固化为标准边界工具。",
+      "params": [
+        "candidates",
+        "tracks",
+        "asr_transcript_dir",
+        "out",
+        "context_seconds",
+        "head_pad_ms",
+        "tail_pad_ms"
+      ],
+      "full_path": "稳定生产/challengers/mfa-alignment-v1/scripts/mfa_align_and_extract_boundaries.py",
+      "reads_only": true,
+      "runtime_dependencies": [
+        "miniforge3 (conda arm64)",
+        "conda-forge::montreal-forced-aligner>=3.4",
+        "pip: spacy-pkuseg + dragonmapper + hanziconv",
+        "mfa model download acoustic mandarin_mfa",
+        "mfa model download dictionary mandarin_china_mfa"
+      ],
+      "audit_reference": "稳定生产/challengers/mfa-alignment-v1/docs/2026-08-17-mfa-v26-integration.md"
+    },
+    {
+      "name": "apply_autocut_gate",
+      "description": "autocut-gate-v1 7-gate 判决器：对候选按 whitelist + high_confidence + no_preserve + history_no_reject + duration + protection 组合判决 auto_cut 或 review_required。EP04 数据实测：3/12 auto-cut (与 codex 手签 2/3 一致 C007/C034；gate 独选 C023，codex 独选 C044 被 gate 保守拒)。precision-first 设计。",
+      "params": [
+        "candidates",
+        "policy",
+        "episode_duration_seconds",
+        "out"
+      ],
+      "full_path": "稳定生产/challengers/autocut-gate-v1/scripts/apply_autocut_gate.py",
+      "reads_only": false,
+      "audit_reference": "稳定生产/challengers/autocut-gate-v1/docs/2026-08-17-1900-EP04-baseline.md"
+    },
+    {
+      "name": "build_labels_lake",
+      "description": "扫全项目 human_decisions.json 汇总真人打标数据到 main/knowledge/labels_lake.json，按 (reason_key, subtype) 分组给出 accept/reject/rate。autocut-gate-v2 消费本文件做类别通行证。EP04 baseline: 33 项/5 runs/1 reviewer, immediate_repetition accept rate 40-50%（用户自己就一半一半），filler.strong_hesitation 100%.",
+      "params": [
+        "project_root",
+        "exclude_reviewers",
+        "out"
+      ],
+      "full_path": "main/orchestrator/build_labels_lake.py",
+      "reads_only": true
+    },
+    {
+      "name": "detect_transient_events",
+      "description": "检测 cough_like 等瞬态候选；主线适配器只保留 cough_like，并强制 human_review_required/source_track_gate 语义。",
+      "params": [
+        "wav",
+        "transcript",
+        "rules",
+        "output_json"
+      ],
+      "full_path": "稳定生产/challengers/transient-events-v1/scripts/detect_transient_events.py",
+      "reads_only": false
+    },
+    {
+      "name": "refresh_lake_and_regate",
+      "description": "online 学习闭环 (evolution path 1): 每次人审后 rebuild labels_lake + regate 指定 run + diff old vs new auto_cut. 加 --run <dir> 触发全套; 不加则只 rebuild lake.",
+      "params": [
+        "run",
+        "policy",
+        "episode_duration_seconds"
+      ],
+      "full_path": "main/orchestrator/refresh_lake_and_regate.py",
+      "reads_only": false
+    },
+    {
+      "name": "run_end_to_end",
+      "description": "zero-touch pipeline: N 轨 mono WAV -> machine_assisted_draft mp3。走 policy_v2 白名单 + autocut-gate v3 判决。两种模式: --from-existing-run (复用 candidates, 5-10 min) / --from-raw-wav (完整 denoise+ASR+..., 30-60 min).",
+      "params": [
+        "episode_id",
+        "out_dir",
+        "from_existing_run|from_raw_wav",
+        "tracks_for_automix",
+        "template_id"
+      ],
+      "full_path": "稳定生产/challengers/e2e-auto-runner-v1/scripts/run_end_to_end.py",
+      "reads_only": false
+    },
+    {
+      "name": "write_delivery_report",
+      "description": "写 DELIVERY_REPORT.md：读 run 目录 identity/qc/candidates/prediction/EDL JSON 综合出交付报告 md。原来在 delivery_orchestrator.py 里 (81 行)，抽出到独立 tool。自包含 helpers (read_json/write_text/require_identity)，可 CLI 也可 import。",
+      "params": [
+        "run_dir",
+        "final_status",
+        "special_scope"
+      ],
+      "full_path": "main/orchestrator/write_delivery_report.py",
+      "reads_only": false,
+      "audit_reference": "稳定生产/challengers/release-policy-v2/docs/2026-08-17-1810-C-write-delivery-report-tool.md"
+    },
+    {
+      "name": "run_development_benchmark",
+      "description": "端到端 benchmark：候选覆盖、无候选区抽查、剪口客观异常、备注回归、scorecard。orchestrator 在候选冻结/审核包刷新/渲染后/最终决定后默认调用。只读 JSON/MD，不动音频。",
+      "params": [
+        "run_dir",
+        "phase"
+      ],
+      "full_path": "benchmark/editing-e2e-v1/run_development_benchmark.py",
+      "reads_only": true
+    },
+    {
+      "name": "load_session_feedback",
+      "description": "v20.6 Q4 备注记忆: 加载 main/knowledge/session_feedback/EP0X.session_feedback.jsonl + labels_lake feedback. 供 stage_feedback_lookup 消费. 触发词: session feedback, 备注记忆, 用户反馈, 反馈历史, previous_user_feedback.",
+      "params": [
+        "episode_id"
+      ],
+      "full_path": "main/orchestrator/session_feedback.py",
+      "reads_only": true
+    },
+    {
+      "name": "auto_speaker_role",
+      "description": "v20.6 Q2 自动判说话人角色 (host/guest): 用 faster-whisper 词级输出统计 backchannel_ratio + total_speaking_fraction · 相对判决. EP04 track_03 判 host 与人工 map 一致. 触发词: auto speaker, 说话人角色, host guest, backchannel ratio.",
+      "params": [
+        "episode_id",
+        "analysis_dir",
+        "episode_duration_seconds",
+        "out"
+      ],
+      "full_path": "main/orchestrator/auto_speaker_role.py",
+      "reads_only": true
+    },
+    {
+      "name": "spacy_semantic_transcript",
+      "description": "v20.6 Q1 spaCy 中文语义分句 (zh_core_web_sm): 对 faster-whisper 词级 transcript 用 spaCy 统计模型分句 + 判 interrogative/declarative/exclamation. 替换 timing_text_heuristic 启发式. 触发词: spacy, 语义分句, sentence segmentation, 中文分句, interrogative.",
+      "params": [
+        "transcript",
+        "output",
+        "model"
+      ],
+      "full_path": "稳定生产/challengers/semantic-transcript-v1/scripts/spacy_semantic_transcript.py",
+      "reads_only": true,
+      "runtime_dependencies": [
+        "conda-forge spacy>=3.6",
+        "python -m spacy download zh_core_web_sm"
+      ]
+    },
+    {
+      "name": "generate_ab_clip_learning_driven",
+      "description": "A/B clip 生成 · **唯一合规入口** (v215, 2026-08-18). 强制从三条进化路径学参数 (session_feedback + labels_lake + preference_snapshot 140 条历史知识), 强制用装了的工具 (librosa.onset + pydub crossfade + reverse). CLAUDE.md §9 从 automix speech.mono.wav 切, §11 禁止自由发挥, §15 装了必用, §16 拼接方法, §17 保留词起音保护. 触发词: A/B clip 生成, 剪辑对比, 保留词起音, room tone splice, librosa onset.",
+      "params": [
+        "candidate_id",
+        "cut_start_seconds",
+        "cut_end_seconds",
+        "kept_word_asr_start",
+        "n_cut",
+        "has_segment_separator",
+        "episode_id",
+        "automix_wav",
+        "raw_track_wav",
+        "out_dir",
+        "label"
+      ],
+      "full_path": "main/orchestrator/generate_ab_clip_learning_driven.py",
+      "reads_only": false,
+      "runtime_dependencies": [
+        "conda pydub audioop-lts",
+        "conda librosa 1.0.0"
+      ]
+    },
+    {
+      "name": "feedback_first_retrieval",
+      "description": "[LEGACY SHIM] RAG · 决策前必调 · 检索 session_feedback + labels_lake 里最匹配的反馈规则 · verdict priority DESC + timestamp DESC + 精确匹配优先. CLAUDE.md §18 硬规则. 触发词: 决策前查反馈, feedback-first, retrieval augmented, 就近反馈, 反馈优先. · 合并到 feedback_engine (v220).",
+      "params": [
+        "candidate_json",
+        "decision_type",
+        "episode_id",
+        "max_return"
+      ],
+      "full_path": "main/orchestrator/feedback_first_retrieval.py",
+      "reads_only": true
+    },
+    {
+      "name": "user_feedback_analyzer",
+      "description": "[LEGACY SHIM] 用户反馈决策路由器 · CLAUDE.md §21. 分析 verdict+note 提炼 root_cause · 优先查工具 → 其次查知识沉淀文档 → 最后 append session_feedback (补丁). 触发词: 反馈分析, root cause, feedback analyzer, decision router, 用户反馈处理. · 合并到 feedback_engine (v220).",
+      "params": [
+        "candidate_json",
+        "verdict",
+        "note",
+        "episode_id",
+        "apply"
+      ],
+      "full_path": "main/orchestrator/user_feedback_analyzer.py",
+      "reads_only": false
+    },
+    {
+      "name": "feedback_engine",
+      "description": "反馈闭环唯一入口 (合并 v220) · 读(retrieve_before_decision)+写(analyze_feedback) · CLAUDE.md §18 硬规则. Mode: retrieve | analyze. 触发词: 反馈闭环, feedback engine, retrieve before decide, analyze after review.",
+      "params": [
+        "mode(retrieve|analyze)",
+        "candidate_json",
+        "decision_type",
+        "verdict",
+        "note",
+        "episode_id"
+      ],
+      "full_path": "main/orchestrator/feedback_engine.py",
+      "reads_only": false
+    },
+    {
+      "name": "extract_gold_cut_features",
+      "description": "从人工 gold EDL 反向提取每条剪切的 WHERE/HOW 特征 (crossfade_ms, RMS envelope, librosa onset, silence gaps, prev/next word gap, cross-track speaking, deleted_text) 为 jsonl. 支撑 CLAUDE.md §21 PARAMETER/PREFERENCE 分家学习流. 触发词: gold cut 特征, mentor 剪切特征, PARAMETER 提取, PREFERENCE 提取, where how 分析.",
+      "params": [
+        "episode_id",
+        "gold_edl_path",
+        "candidate_package_path",
+        "asr_dir",
+        "raw_wav_dir",
+        "output_jsonl"
+      ],
+      "full_path": "main/orchestrator/extract_gold_cut_features.py",
+      "reads_only": true,
+      "runtime_dependencies": [
+        "python>=3.10",
+        "numpy",
+        "librosa==1.0.0",
+        "scipy",
+        "soundfile"
+      ],
+      "audit_reference": "main/tools/audits/extract_gold_cut_features-20260818.md"
+    },
+    {
+      "name": "check_hallucination",
+      "description": "cut-verify skill · 点 1 · 用 faster-whisper word.probability 检测 filler_hesitation/immediate_repetition 候选是否 ASR 幻觉. prob<0.6 → REJECT_LOW_PROB_HALLUCINATION. EP04 C007 呃 prob=0.488 实证.",
+      "params": [
+        "candidate-json",
+        "transcript",
+        "prob-threshold",
+        "out"
+      ],
+      "full_path": "skills/cut-verify/scripts/check_hallucination.py",
+      "reads_only": true,
+      "skill": "cut-verify",
+      "audit_ref": "skills/cut-verify/audits/cut-verify-v1.md"
+    },
+    {
+      "name": "check_silence_location",
+      "description": "cut-verify skill · 点 2 · 用 pydub.silence.detect_silence 判 cut 是否落静音段内 · 决定 butt_splice vs crossfade. 需要 miniforge python (pydub 装那).",
+      "params": [
+        "candidate-json",
+        "raw-wav",
+        "silence-thresh-db",
+        "min-silence-len-ms",
+        "context-s",
+        "out"
+      ],
+      "full_path": "skills/cut-verify/scripts/check_silence_location.py",
+      "reads_only": true,
+      "skill": "cut-verify",
+      "audit_ref": "skills/cut-verify/audits/cut-verify-v1.md"
+    },
+    {
+      "name": "check_rhythm_gap",
+      "description": "cut-verify skill · 点 3 · 剪后 gap_before/gap_after 与 cut_parameters.json target_range 阈值比对 · 检测 '抢话' 或 '拖沓'. 纯 Python.",
+      "params": [
+        "candidate-json",
+        "transcript",
+        "cut-params-json",
+        "out"
+      ],
+      "full_path": "skills/cut-verify/scripts/check_rhythm_gap.py",
+      "reads_only": true,
+      "skill": "cut-verify",
+      "audit_ref": "skills/cut-verify/audits/cut-verify-v1.md"
+    },
+    {
+      "name": "route_crossfade_strategy",
+      "description": "cut-verify skill · 点 4 · 融合前 3 项 check · P1-P7 优先级路由 · 输出 strategy ∈ {REMOVE_FROM_EDL · NEEDS_HUMAN_REVIEW · BUTT_SPLICE · CROSSFADE_50MS · CROSSFADE_100MS_HUMAN_REVIEW}. 纯 policy · 不含 LLM.",
+      "params": [
+        "hallucination-json",
+        "silence-json",
+        "rhythm-json",
+        "out"
+      ],
+      "full_path": "skills/cut-verify/scripts/route_crossfade_strategy.py",
+      "reads_only": true,
+      "skill": "cut-verify",
+      "audit_ref": "skills/cut-verify/audits/cut-verify-v1.md"
+    },
+    {
+      "name": "verify_cut_plan",
+      "description": "cut-verify skill · entry_tool · 一次跑完 4 项 check · 输出 verified_edl.json 侧车 (schema cut-verify-v1). 每候选带 overall_verdict + recommended_params. EP04 7 候选实测 4/7 与 mentor gold 一致.",
+      "params": [
+        "candidate-json",
+        "transcript-dir",
+        "raw-track-map",
+        "cut-params-json",
+        "tmp-dir",
+        "out"
+      ],
+      "full_path": "skills/cut-verify/scripts/verify_cut_plan.py",
+      "reads_only": true,
+      "skill": "cut-verify",
+      "audit_ref": "skills/cut-verify/audits/cut-verify-v1.md"
+    },
+    {
+      "name": "expand_to_asr_word_boundary",
+      "description": "cut-verify skill · 应用 2026-08-19 学到的经验 · 把 filler 候选的 cut 范围扩展到匹配 ASR word 完整边界 · 加 50ms xfade. EP04 C007 gold 385ms → ASR 680ms · C044 gold 426ms → ASR 720ms · 用户 v04 A/B 确认.",
+      "params": [
+        "candidate-json",
+        "transcript",
+        "out"
+      ],
+      "full_path": "skills/cut-verify/scripts/expand_to_asr_word_boundary.py",
+      "reads_only": true,
+      "skill": "cut-verify",
+      "audit_ref": "skills/cut-verify/audits/cut-verify-v1.md",
+      "consumes_rule": "session_feedback:filler_cut_use_full_asr_word_range_plus_50ms_xfade (2026-08-19)"
+    },
+    {
+      "name": "iterate_until_clean",
+      "category": "audition_refinement",
+      "description": "Optuna 驱动的迭代精修 · 5 次上限 · 每候选按 discontinuity < threshold 继续迭代",
+      "wraps_script": "稳定生产/challengers/iterative-cut-refinement-v1/scripts/iterate_until_clean.py",
+      "v2_status": "adapter_registered_promoted",
+      "v2_note": "PROMOTED 2026-08-19 · user + mentor 签字 · 见 统筹全局/PROMOTION_MANIFEST_2026-08-19.md"
+    },
+    {
+      "name": "optuna_refine",
+      "category": "audition_refinement",
+      "description": "Optuna TPE + warm start 学参数 · 从 mentor gold + YouTube learning 起始点开始",
+      "wraps_script": "稳定生产/challengers/iterative-cut-refinement-v1/scripts/optuna_refine.py",
+      "v2_status": "adapter_registered_promoted",
+      "v2_note": "PROMOTED 2026-08-19 · user + mentor 签字 · 见 统筹全局/PROMOTION_MANIFEST_2026-08-19.md"
+    },
+    {
+      "name": "render_clip_for_iteration",
+      "category": "audition_refinement",
+      "description": "pydub 单候选按参数剪一段短 clip · 供 Optuna iteration 用",
+      "wraps_script": "稳定生产/challengers/iterative-cut-refinement-v1/scripts/render_clip_for_iteration.py",
+      "v2_status": "adapter_registered_promoted",
+      "v2_note": "PROMOTED 2026-08-19 · user + mentor 签字 · 见 统筹全局/PROMOTION_MANIFEST_2026-08-19.md"
+    }
+  ]
+}

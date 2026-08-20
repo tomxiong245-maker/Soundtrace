@@ -1,0 +1,218 @@
+{
+  "rules_version": "filler-global-pause-v18",
+  "supersedes": "filler-global-pause-v17",
+  "policy": "review_only_no_automatic_accept",
+  "policy_note": "V17 preserves the review-only policy at the rules level; the stratum-unanimous propagation described in profile_note is enforced by delivery_orchestrator.py (calibration report + prediction manifest layer), not by candidate rules themselves.",
+  "profile_note": "V18 relaxes cross_track_guard from 0.05 s to 0.15 s so that short cross-track echoes do not block every same-word repetition. V16/V17 blocked 27-41 candidates each on this gate, leaving each stratum with <3 members and orchestrator stratum-unanimous propagation always inactive. V18 preserves the guard's intent (block genuine simultaneous speech from another speaker) but only when the overlapping word lasts >=150 ms. Downstream: reviewer still audits stratum representatives; unanimous strata propagate to machine_proposed_accept.",
+  "provenance": {
+    "iteration_source_runs": [
+      "main/runs/EP04/EP04-review-mixed-14-20260814-043428",
+      "main/runs/EP04/EP04-review-round2-20260814-1355",
+      "main/runs/EP04/EP04-v20-20260814-1617"
+    ],
+    "reviewer": "熊镇正",
+    "reviewed_candidate_count": 37,
+    "decision_totals": {
+      "accept": 11,
+      "reject": 26
+    },
+    "empirical_gap": "V16 nomination gates produced 5 candidates on 5 distinct strata; orchestrator stratum-unanimous propagation requires >=2 members per stratum with >=1 human sample; therefore machine_proposed_accept always resolved to 0.",
+    "widened_gates_vs_v16": [
+      "filler_hesitation.weak_max_gap_seconds: 0.30 -> 0.60 (broader neighborhood merge)",
+      "filler_hesitation.weak_max_candidates_per_window: 2 -> 5 (allow denser same-window filler)",
+      "filler_hesitation.weak_max_duration_seconds: 0.40 -> 0.60 (accept slightly longer filler)",
+      "filler_hesitation.max_gap_seconds: 0.45 -> 0.60",
+      "immediate_repetition.max_phrase_chars: 4 -> 6 (allow 5-6 char neighboring repeats)",
+      "immediate_repetition.max_gap_seconds: 0.30 -> 0.60 (allow slightly wider repetition)",
+      "global_long_pause.min_silence_seconds: 1.50 -> 1.10 (surface more common-silence windows)",
+      "opening_protection_seconds: 8.0 -> 6.0 (small opening window relief)",
+      "closing_protection_seconds: 8.0 -> 6.0",
+      "cross_track_guard.conflicting_word_overlap_seconds: 0.05 -> 0.15 (block only sustained cross-track speech, not brief 50 ms word echoes)"
+    ],
+    "preserved_from_v16": [
+      "strong_tokens list (no expansion; avoids '额度' first-char false positive)",
+      "acknowledgement 嗯 default preserve",
+      "sentence_position_gate D6 on filler",
+      "immediate_repetition D8 exemption from D6",
+      "confidence_policy.never_auto_cut = true",
+      "cross_track_guard 50 ms overlap threshold",
+      "rendering_gate 100 ms qsin",
+      "long-pause head/tail retention ladder (0.1/0.2/0.3/0.4 s)"
+    ],
+    "date": "2026-08-15"
+  },
+  "context_seconds": 5.0,
+  "min_candidate_seconds": 0.1,
+  "opening_protection_seconds": 6.0,
+  "closing_protection_seconds": 6.0,
+  "filler_context_sensitive_tokens": [
+    "就是",
+    "然后",
+    "这个",
+    "那个",
+    "就是說",
+    "然後",
+    "這個",
+    "那個"
+  ],
+  "filler_context_sensitive_tokens_note_20260819": "以下 token 兼作句法结构词/判断动词/连词, 只有在 (a) ≥2 次连续重复 or (b) 前后为长停顿 (>= long_pause min) 时才算 filler. 单次出现且前后接内容词时应视为语义结构词, 保留. C008 案例: '…主要负责的工作 [就是][就是] 设计工作流' 是重复弱 filler 可剪; 但 '工作 就是 设计' 单独出现的 '就是' 是判断动词, 不该剪. Detector 未消费该字段时也留档, 待未来 detector 升级读取.",
+  "filler_hesitation": {
+    "enabled": true,
+    "strong_tokens": [
+      "呃",
+      "额",
+      "唔",
+      "唉",
+      "哎",
+      "哦",
+      "uh",
+      "um",
+      "er",
+      "erm"
+    ],
+    "acknowledgement_tokens": [
+      "嗯"
+    ],
+    "acknowledgement_handling": "auto_preserve_without_reliable_speaker_attribution",
+    "acknowledgement_single_min_seconds": null,
+    "acknowledgement_dense_window_seconds": null,
+    "acknowledgement_dense_min_count": null,
+    "weak_tokens": [
+      "啊",
+      "那个",
+      "这个",
+      "就是",
+      "然后",
+      "对",
+      "那個",
+      "這個",
+      "然後",
+      "對",
+      "就是說",
+      "这据",
+      "這据",
+      "這據"
+    ],
+    "strong_min_consecutive": 1,
+    "weak_min_consecutive": 2,
+    "max_gap_seconds": 0.6,
+    "weak_max_gap_seconds": 0.6,
+    "weak_min_duration_seconds": 0.1,
+    "weak_max_duration_seconds": 0.6,
+    "weak_density_window_seconds": 5.0,
+    "weak_max_candidates_per_window": 5,
+    "cross_mic_event_merge_gap_seconds": 0.25,
+    "same_token_boundary_jitter_seconds": 0.08,
+    "note": "V17 widens window/gap/density to enlarge candidate pool for stratum propagation. Sentence-internal single filler and single 嗯 still preserved via D6 and acknowledgement_handling."
+  },
+  "immediate_repetition": {
+    "enabled": true,
+    "candidate_kind": "immediate_repetition",
+    "min_phrase_chars": 2,
+    "max_phrase_chars": 6,
+    "max_gap_seconds": 0.6,
+    "exclude_tokens": [
+      "嗯"
+    ],
+    "stutter_signature": {
+      "duration_asymmetry_ratio": 0.3,
+      "very_tight_gap_seconds": 0.15,
+      "markers": [
+        "呃",
+        "额",
+        "嗯",
+        "uh",
+        "um"
+      ]
+    },
+    "stutter_signature_role": "confidence_boost_only_not_nomination_gate",
+    "note": "V17 widens phrase length to 2-6 chars and gap to 0.60 s. Symmetric neighboring repetition remains reviewable, not silently dropped. First occurrence proposed for removal, second retained."
+  },
+  "sentence_position_gate": {
+    "enabled": true,
+    "d6_id": "D6",
+    "applies_to_candidate_kinds": [
+      "filler_hesitation"
+    ],
+    "block_positions": [
+      "clause-mid",
+      "cross-clause",
+      "unknown"
+    ],
+    "allow_positions": [
+      "clause-boundary",
+      "clause-head",
+      "clause-tail",
+      "clause-tail-or-head"
+    ],
+    "head_tail_word_window": 1,
+    "missing_semantic_context": "block_and_preserve",
+    "note": "Unchanged from V16. D6 protects sentence completeness for filler only. D8 explicitly exempts immediate_repetition."
+  },
+  "confidence_policy": {
+    "enabled": true,
+    "tiers": [
+      "high",
+      "mid",
+      "low"
+    ],
+    "review_tiers": [
+      "high",
+      "mid"
+    ],
+    "low_tier_action": "auto_preserve_not_sent_to_review",
+    "never_auto_cut": true,
+    "strong_hesitation_sound": "high",
+    "repeated_weak_filler": "mid",
+    "immediate_repetition_with_stutter_signature": "high",
+    "immediate_repetition_without_stutter_signature": "mid",
+    "global_long_pause": "high",
+    "note": "Unchanged from V16. Machine cuts still gated by delivery_orchestrator stratum-unanimous propagation and NOT_APPROVED autocut_policy; V17 widening only affects nomination, not automatic approval."
+  },
+  "global_long_pause": {
+    "enabled": true,
+    "detection_hint_seconds": 0.6,
+    "min_silence_seconds": 1.5,
+    "min_silence_seconds_rationale_20260819": "中文对话 900ms 停顿是正常思考; > 1.5s 才算异常长停顿. 反转 V17 的 1.1s 放宽 (C001 案例: 68.05-68.95 900ms 被剪出, 前后为主持人→嘉宾话轮转换, 非同一说话人停顿).",
+    "min_silence_seconds_history": {
+      "v16_and_prior": 1.5,
+      "v17_v18": 1.1,
+      "current_20260819": 1.5
+    },
+    "max_silence_seconds": 12.0,
+    "retention_by_original_silence": [
+      {
+        "max_silence_seconds": 1.0,
+        "head_tail_seconds": 0.1
+      },
+      {
+        "max_silence_seconds": 2.0,
+        "head_tail_seconds": 0.2
+      },
+      {
+        "max_silence_seconds": 3.0,
+        "head_tail_seconds": 0.3
+      },
+      {
+        "max_silence_seconds": null,
+        "head_tail_seconds": 0.4
+      }
+    ],
+    "activity_merge_gap_seconds": 0.05,
+    "acoustic_frame_seconds": 0.05,
+    "max_frame_rms_dbfs": -38.0,
+    "max_frame_peak_dbfs": -20.0,
+    "note": "V17 lowers min_silence_seconds from 1.5 to 1.10 to surface more common-silence windows for stratum propagation. Boundary retention ladder unchanged. Compress-not-delete principle unchanged; A/B still required."
+  },
+  "cross_track_guard": {
+    "conflicting_word_overlap_seconds": 0.15,
+    "note": "V18: overlap threshold raised to 150 ms; brief same-word echoes no longer block. Different words on another track still block regardless of length."
+  },
+  "rendering_gate": {
+    "speech_cut_crossfade_ms": 100,
+    "pause_boundary_crossfade_ms": 50,
+    "curve": "qsin",
+    "fallback_curve": "tri",
+    "note": "Unchanged from V16."
+  }
+}

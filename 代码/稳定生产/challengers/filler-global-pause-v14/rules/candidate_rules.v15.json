@@ -1,0 +1,73 @@
+{
+  "rules_version": "filler-global-pause-v15",
+  "supersedes": "filler-global-pause-v14",
+  "policy": "review_only_no_automatic_accept",
+  "profile_note": "V15 relative to v14: (D6) sentence_position_gate — candidates falling at clause-mid are filtered by default; only clause-boundary/head/tail candidates are nominated; (D7) immediate_repetition tightened — 2-4 char repetition alone insufficient, requires either duration asymmetry ≥30% between the two occurrences (real stutter signature) OR presence of stutter markers; (D6/D7 provenance) mentor round 2 feedback N003 '不要剪(要保证完整性,这个是在句中)', R-S038 '为什么要剪', R-E306 '这个其实可以不用剪'; all other rules inherit from v14 including D1-D5.",
+  "provenance": {
+    "iteration_source_run": "main/runs/EP04/EP04-review-round2-20260814-1355",
+    "mentor_review_snapshot": "human_decisions_and_feedback__20260814-1348-partial.json (8 decisions saved)",
+    "reviewer": "熊镇正",
+    "sample_size_partial": 8,
+    "key_feedback": {
+      "N003_mid_sentence": "不要剪(要保证完整性,这个是在句中)",
+      "R-S038_no_cut_needed": "为什么要剪",
+      "R-E306_double_issue": "剪辑的不够干净,而且这个其实可以不用剪",
+      "R-S032_50ms_ok": "accept (crossfade 修复后可接受)"
+    },
+    "date": "2026-08-14"
+  },
+
+  "sentence_position_gate": {
+    "enabled": true,
+    "d6_id": "D6",
+    "block_positions": ["clause-mid", "cross-clause"],
+    "allow_positions": ["clause-boundary", "clause-head", "clause-tail", "clause-tail-or-head"],
+    "conservative_default": "if clause_position is unknown/no-track-sem/no-clause, DEFAULT KEEP (do not nominate)",
+    "clause_position_source": {
+      "EP04": "semantic-transcript-v1 (codex) — reads clauses[] and computes position by center-of-candidate distance to clause bounds",
+      "EP03_fallback": "gap-heuristic — prev_gap and next_gap > 0.4s each → boundary; both < 0.4s → mid"
+    },
+    "note": "D6 explicitly overrides D2/D4 nominations — a filler that survives word-boundary and topic-connective checks BUT falls clause-mid is still rejected. Mentor's explicit priority: '要保证完整性'."
+  },
+
+  "immediate_repetition_v15": {
+    "enabled": true,
+    "d7_id": "D7",
+    "min_phrase_chars": 2,
+    "max_phrase_chars": 4,
+    "max_gap_seconds": 0.3,
+    "additional_stutter_signature_required": true,
+    "stutter_signature_rules": [
+      "duration_asymmetry_ratio >= 0.3 (max_dur / min_dur >= 1.3)",
+      "OR gap_between < 0.15s (very tight repetition, suggests self-correction)",
+      "OR presence of stutter marker: 呃/额/嗯/uh/um immediately preceding or between the two occurrences"
+    ],
+    "block_reason_if_no_signature": "immediate_repetition_v15_no_stutter_signature",
+    "note": "v14 单纯的 '两次相同 2-4 字 phrase 间隔 <0.3s' 会过多误报（R-S038 '报告报告'、R-E306 '一个/一个' 都是无 stutter 特征的对称重复，mentor 认为不该剪）。v15 要求至少一个 stutter 特征。"
+  },
+
+  "inherited_from_v14": {
+    "note": "以下条目从 v14 完整继承，未做变更",
+    "d1_disabled_families": ["cough_like", "mic_bump_like"],
+    "d2_filler_hesitation_strong_next_char_blocklist": "keep as v14",
+    "d2_english_filler_adjacent_english_blocks": "keep as v14",
+    "d2_english_filler_min_chinese_ratio": "keep as v14 (0.5)",
+    "d4_weak_tokens_split": "keep as v14 (backchannel / topic_connective with 对-specific rule / filler)",
+    "d5_long_pause_thresholds": "keep as v14 (1.5-8s, retention_by_original_silence dict)",
+    "d5_immediate_repetition_base_thresholds": "kept but now gated by D7 stutter_signature",
+    "context_seconds": 5.0,
+    "min_candidate_seconds": 0.1,
+    "opening_protection_seconds": 8.0,
+    "closing_protection_seconds": 8.0,
+    "cross_track_guard": "keep as v14"
+  },
+
+  "rendering_gate_v15": {
+    "min_crossfade_ms": 80,
+    "preferred_crossfade_ms": 80,
+    "fallback_crossfade_ms": 120,
+    "curve": "equal_power_sin_cos",
+    "backup_curve": "tanh_s_curve",
+    "note": "v14 was 50→80→120; v15 起 default 80ms (R-S032 accept 证明 50ms 可以但边界; R-E306/M001/N002 说明 50ms 有时不够). GPT rendering time this floor MUST be enforced."
+  }
+}

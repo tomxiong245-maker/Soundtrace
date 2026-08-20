@@ -1,0 +1,51 @@
+{
+  "schema_version": "asr-public-suite-v1",
+  "run_id": "ASR-PUBLIC-<dataset>-<engine>-<timestamp>",
+  "purpose": "筛选值得进入本地播客验证的 ASR/VAD/diarization 组合；不是生产晋升结论。",
+  "dataset": {
+    "name": "AISHELL-1 | AliMeeting | AISHELL-4 | WenetSpeech",
+    "official_source": "",
+    "license": "",
+    "release_version": "",
+    "split": "test",
+    "local_path_outside_git": "",
+    "download_sha256_or_manifest": "",
+    "label_provenance": "human | mixed | automatic | unknown"
+  },
+  "task": {
+    "asr": true,
+    "vad": false,
+    "diarization": false,
+    "overlap": false,
+    "metric_plan": [
+      "CER",
+      "RTF",
+      "failure_count"
+    ]
+  },
+  "engine": {
+    "name": "",
+    "model": "",
+    "code_version_or_commit": "",
+    "weights_version_or_sha256": "",
+    "parameters": {}
+  },
+  "environment": {
+    "machine": "",
+    "os": "",
+    "python": "",
+    "ffmpeg": "",
+    "runtime_versions": {}
+  },
+  "outputs": {
+    "hypotheses_path": "",
+    "metrics_path": "",
+    "logs_path": "",
+    "result_status": "PENDING"
+  },
+  "review": {
+    "reviewer": "",
+    "reviewed_at": "",
+    "notes": ""
+  }
+}

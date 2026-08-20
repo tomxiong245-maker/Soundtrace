@@ -1,0 +1,46 @@
+{
+  "rules_version": "ntrack-candidate-bridge-v1",
+  "policy": "review_only_no_automatic_accept",
+  "context_seconds": 5.0,
+  "min_candidate_seconds": 0.12,
+  "adjacent_candidate_merge_gap_seconds": 0.12,
+  "filler_hesitation": {
+    "enabled": true,
+    "tokens": ["嗯", "呃", "额", "唔", "uh", "um"],
+    "min_consecutive": 1,
+    "max_gap_seconds": 0.45
+  },
+  "immediate_repetition": {
+    "enabled": true,
+    "max_phrase_tokens": 3,
+    "min_phrase_chars": 2,
+    "max_adjacent_gap_seconds": 0.45
+  },
+  "english_normalization": {
+    "max_adjacent_gap_seconds": 0.08,
+    "glossary_terms": [
+      "agent",
+      "api",
+      "asr",
+      "benchmark",
+      "claude",
+      "codex",
+      "feature",
+      "github",
+      "issue",
+      "llm",
+      "mvp",
+      "openai",
+      "podcast",
+      "prd",
+      "prompt",
+      "sofi",
+      "token",
+      "workflow"
+    ]
+  },
+  "cross_track_guard": {
+    "conflicting_word_overlap_seconds": 0.05,
+    "note": "P0 没有帧级主讲/串音标签。发现其他轨有不同的非口癖文字时阻断；其余候选也只进入真人审核，不声明 SAFE。"
+  }
+}

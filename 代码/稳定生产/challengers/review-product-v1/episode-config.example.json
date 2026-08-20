@@ -1,0 +1,11 @@
+{
+  "schema_version": "review-episode-config-v1",
+  "episode_id": "EP04",
+  "source_package": "/path/to/audio-clips/main/runs/EP04-ntrack-bridge-v1/candidate_source.json",
+  "previews_dir": "/path/to/audio-clips/main/runs/EP04-ntrack-bridge-v1/previews",
+  "tracks_manifest": "/path/to/audio-clips/main/runs/EP04-ntrack-bridge-v1/tracks.manifest.json",
+  "frontend": "/path/to/audio-clips/审核前端/challenger-review-product-v1/mvp.html",
+  "run_dir": "/path/to/audio-clips/main/runs/EP04-review-product-v1",
+  "ffmpeg": "/path/to/ffmpeg",
+  "port": 8768
+}

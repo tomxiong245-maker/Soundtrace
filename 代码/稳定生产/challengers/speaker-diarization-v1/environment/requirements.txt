@@ -1,0 +1,22 @@
+# pyannote-audio 3.4.0 Challenger 环境 requirements
+#
+# 只装到 environment/venv/，不污染项目主 Python。
+# 装法：
+#   cd 稳定生产/challengers/speaker-diarization-v1/environment
+#   python3.11 -m venv venv
+#   source venv/bin/activate
+#   pip install -r requirements.txt
+#
+# 锁死 3.4.0；4.x 是 breaking change（config.yaml 格式变、
+# use_auth_token→token、torchaudio→torchcodec），禁装。
+# CPU-only：Apple Silicon MPS wontfix（见 audits/pyannote-audio-3.4.0.md §6）。
+
+pyannote.audio==3.4.0
+
+# torch 走 CPU wheel；上限不锁死，pyannote 3.4.0 只要求 torch>=2.0。
+# 若装 M3 Metal wheel 也无所谓，代码强制 `pipeline.to(torch.device("cpu"))`。
+torch>=2.0,<3.0
+torchaudio>=2.2,<3.0
+
+# 权重下载一次性用；HF_HUB_OFFLINE=1 后不再联网。
+huggingface_hub>=0.13,<1.0

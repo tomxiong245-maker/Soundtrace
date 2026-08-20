@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "purpose": "T01-T12 — evaluate_candidate_safety() 单元测试 fixture。每条测试独立设计一个最小场景，验证四态决策 (SAFE/BLOCK/NEEDS_HUMAN_REVIEW/FAIL_CLOSED) 与 reason_code。",
+  "context_seconds": 5.0,
+  "cases": [
+    {
+      "id": "T01",
+      "description": "filler 在女轨主讲；男轨在 cut 窗口内静默 → SAFE",
+      "candidate": {"reason_key": "filler_hesitation", "source_track": "female",
+                    "start_seconds": 10.0, "end_seconds": 10.6},
+      "words": {
+        "female": [
+          {"s": 8.0, "e": 8.4, "cls": "primary", "t": "所以"},
+          {"s": 10.0, "e": 10.3, "cls": "primary", "t": "呃"},
+          {"s": 10.3, "e": 10.6, "cls": "primary", "t": "呃"},
+          {"s": 11.0, "e": 11.4, "cls": "primary", "t": "接下来"}
+        ],
+        "male": [
+          {"s": 6.5, "e": 6.9, "cls": "primary", "t": "嗯"},
+          {"s": 12.0, "e": 12.4, "cls": "primary", "t": "对"}
+        ]
+      },
+      "expect": {"decision": "SAFE", "reason_codes": []}
+    },
+    {
+      "id": "T02",
+      "description": "immediate_repetition 在男轨主讲；女轨在 cut 窗口内只有 bleed → SAFE",
+      "candidate": {"reason_key": "immediate_repetition", "source_track": "male",
+                    "start_seconds": 20.0, "end_seconds": 21.0},
+      "words": {
+        "female": [
+          {"s": 20.1, "e": 20.4, "cls": "bleed", "t": "这个"},
+          {"s": 20.5, "e": 20.8, "cls": "bleed", "t": "这个"}
+        ],
+        "male": [
+          {"s": 20.0, "e": 20.4, "cls": "primary", "t": "这个"},
+          {"s": 20.5, "e": 21.0, "cls": "primary", "t": "这个"}
+        ]
+      },
+      "expect": {"decision": "SAFE", "reason_codes": []}
+    },
+    {
+      "id": "T03",
+      "description": "filler 在女轨；男轨在 cut 窗口内有 primary 词 → BLOCK OTHER_TRACK_PRIMARY_SPEECH",
+      "candidate": {"reason_key": "filler_hesitation", "source_track": "female",
+                    "start_seconds": 30.0, "end_seconds": 31.0},
+      "words": {
+        "female": [
+          {"s": 30.0, "e": 30.4, "cls": "primary", "t": "呃"},
+          {"s": 30.5, "e": 31.0, "cls": "primary", "t": "嗯"}
+        ],
+        "male": [
+          {"s": 30.2, "e": 30.7, "cls": "primary", "t": "我觉得"}
+        ]
+      },
+      "expect": {"decision": "BLOCK", "reason_codes": ["OTHER_TRACK_PRIMARY_SPEECH"]}
+    },
+    {
+      "id": "T04",
+      "description": "filler 源轨 primary=0，bleed>0 → BLOCK SOURCE_NOT_PRIMARY",
+      "candidate": {"reason_key": "filler_hesitation", "source_track": "female",
+                    "start_seconds": 40.0, "end_seconds": 41.0},
+      "words": {
+        "female": [
+          {"s": 40.0, "e": 40.4, "cls": "bleed", "t": "对"},
+          {"s": 40.5, "e": 41.0, "cls": "bleed", "t": "然后"}
+        ],
+        "male": [
+          {"s": 40.0, "e": 40.5, "cls": "primary", "t": "对"},
+          {"s": 40.5, "e": 41.0, "cls": "primary", "t": "然后"}
+        ]
+      },
+      "expect": {"decision": "BLOCK", "reason_codes": ["SOURCE_NOT_PRIMARY", "OTHER_TRACK_PRIMARY_SPEECH"]}
+    },
+    {
+      "id": "T05",
+      "description": "任务书原始定义：候选证据在源轨全部是 bleed → BLOCK SOURCE_NOT_PRIMARY（另一轨在 cut 窗口静默，避免叠加 OTHER_TRACK_PRIMARY_SPEECH）",
+      "candidate": {"reason_key": "filler_hesitation", "source_track": "female",
+                    "start_seconds": 50.0, "end_seconds": 51.0},
+      "words": {
+        "female": [
+          {"s": 50.0, "e": 50.3, "cls": "bleed", "t": "对"},
+          {"s": 50.4, "e": 50.7, "cls": "bleed", "t": "然后"},
+          {"s": 50.7, "e": 51.0, "cls": "bleed", "t": "对"}
+        ],
+        "male": [
+          {"s": 47.0, "e": 47.5, "cls": "primary", "t": "背景"},
+          {"s": 53.0, "e": 53.5, "cls": "primary", "t": "后续"}
+        ]
+      },
+      "expect": {"decision": "BLOCK", "reason_codes": ["SOURCE_NOT_PRIMARY"]}
+    },
+    {
+      "id": "T06",
+      "description": "源轨 ambiguous 占比 >50% → NEEDS_HUMAN_REVIEW AMBIGUOUS_ACTIVITY",
+      "candidate": {"reason_key": "immediate_repetition", "source_track": "female",
+                    "start_seconds": 60.0, "end_seconds": 61.5},
+      "words": {
+        "female": [
+          {"s": 60.0, "e": 60.3, "cls": "primary", "t": "对"},
+          {"s": 60.3, "e": 60.6, "cls": "ambiguous", "t": "然后"},
+          {"s": 60.6, "e": 60.9, "cls": "ambiguous", "t": "对"},
+          {"s": 60.9, "e": 61.5, "cls": "ambiguous", "t": "然后"}
+        ],
+        "male": []
+      },
+      "expect": {"decision": "NEEDS_HUMAN_REVIEW", "reason_codes": ["AMBIGUOUS_ACTIVITY"]}
+    },
+    {
+      "id": "T07",
+      "description": "有词但缺 activity.classification → FAIL_CLOSED MISSING_ACTIVITY_DATA",
+      "candidate": {"reason_key": "filler_hesitation", "source_track": "female",
+                    "start_seconds": 70.0, "end_seconds": 70.6},
+      "words": {
+        "female": [
+          {"s": 70.0, "e": 70.3, "cls": "primary", "t": "呃"},
+          {"s": 70.3, "e": 70.6, "cls": null, "t": "呃"}
+        ],
+        "male": []
+      },
+      "expect": {"decision": "FAIL_CLOSED", "reason_codes": ["MISSING_ACTIVITY_DATA"]}
+    },
+    {
+      "id": "T08",
+      "description": "immediate_repetition 男轨；女轨 cut 窗口内 primary → BLOCK OTHER_TRACK_PRIMARY_SPEECH",
+      "candidate": {"reason_key": "immediate_repetition", "source_track": "male",
+                    "start_seconds": 80.0, "end_seconds": 81.0},
+      "words": {
+        "female": [
+          {"s": 80.1, "e": 80.6, "cls": "primary", "t": "我觉得"}
+        ],
+        "male": [
+          {"s": 80.0, "e": 80.4, "cls": "primary", "t": "这个"},
+          {"s": 80.5, "e": 81.0, "cls": "primary", "t": "这个"}
+        ]
+      },
+      "expect": {"decision": "BLOCK", "reason_codes": ["OTHER_TRACK_PRIMARY_SPEECH"]}
+    },
+    {
+      "id": "T09",
+      "description": "另一轨在 context 内讲话但在 cut 内静默 → SAFE（守卫只看 cut 窗口）",
+      "candidate": {"reason_key": "filler_hesitation", "source_track": "female",
+                    "start_seconds": 90.0, "end_seconds": 90.5},
+      "words": {
+        "female": [
+          {"s": 88.0, "e": 88.5, "cls": "primary", "t": "所以"},
+          {"s": 90.0, "e": 90.3, "cls": "primary", "t": "呃"},
+          {"s": 90.3, "e": 90.5, "cls": "primary", "t": "呃"},
+          {"s": 91.0, "e": 91.5, "cls": "primary", "t": "对"}
+        ],
+        "male": [
+          {"s": 86.0, "e": 87.5, "cls": "primary", "t": "背景说"},
+          {"s": 92.0, "e": 93.0, "cls": "primary", "t": "接话"}
+        ]
+      },
+      "expect": {"decision": "SAFE", "reason_codes": []}
+    },
+    {
+      "id": "T10",
+      "description": "源轨 primary=1 bleed=3 → BLOCK SOURCE_NOT_PRIMARY (primary < bleed)",
+      "candidate": {"reason_key": "filler_hesitation", "source_track": "female",
+                    "start_seconds": 100.0, "end_seconds": 101.0},
+      "words": {
+        "female": [
+          {"s": 100.0, "e": 100.2, "cls": "primary", "t": "对"},
+          {"s": 100.2, "e": 100.5, "cls": "bleed", "t": "然后"},
+          {"s": 100.5, "e": 100.8, "cls": "bleed", "t": "对"},
+          {"s": 100.8, "e": 101.0, "cls": "bleed", "t": "然后"}
+        ],
+        "male": [
+          {"s": 100.0, "e": 100.5, "cls": "primary", "t": "然后"}
+        ]
+      },
+      "expect": {"decision": "BLOCK", "reason_codes": ["SOURCE_NOT_PRIMARY", "OTHER_TRACK_PRIMARY_SPEECH"]}
+    },
+    {
+      "id": "T11",
+      "description": "候选靠近轴 0.5s，context 左侧被 clamp 到 0 → 不 crash，SAFE 判定不受影响",
+      "candidate": {"reason_key": "immediate_repetition", "source_track": "male",
+                    "start_seconds": 0.5, "end_seconds": 1.3},
+      "words": {
+        "female": [],
+        "male": [
+          {"s": 0.5, "e": 0.9, "cls": "primary", "t": "这个"},
+          {"s": 0.9, "e": 1.3, "cls": "primary", "t": "这个"}
+        ]
+      },
+      "expect": {"decision": "SAFE", "reason_codes": []}
+    },
+    {
+      "id": "T12",
+      "description": "cut 窗口内另一轨只有 1 个 primary 词 → 也必须 BLOCK，零容忍",
+      "candidate": {"reason_key": "filler_hesitation", "source_track": "female",
+                    "start_seconds": 120.0, "end_seconds": 120.8},
+      "words": {
+        "female": [
+          {"s": 120.0, "e": 120.3, "cls": "primary", "t": "呃"},
+          {"s": 120.4, "e": 120.8, "cls": "primary", "t": "呃"}
+        ],
+        "male": [
+          {"s": 120.4, "e": 120.6, "cls": "primary", "t": "对"}
+        ]
+      },
+      "expect": {"decision": "BLOCK", "reason_codes": ["OTHER_TRACK_PRIMARY_SPEECH"]}
+    }
+  ]
+}

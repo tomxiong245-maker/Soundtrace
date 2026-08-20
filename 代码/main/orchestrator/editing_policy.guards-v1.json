@@ -1,0 +1,75 @@
+{
+  "schema_version": "production-edit-policy-v1",
+  "policy_id": "editing-policy-guards-v1",
+  "version": "2026-08-16",
+  "status": "ACTIVE_GUARDS_ONLY",
+  "purpose": "Apply only conservative, evidence-backed preserve/review guards before calibration. This file never authorizes unattended semantic deletion.",
+  "evidence": {
+    "label_learning_run": "main/runs/LABEL-LEARNING-v3-20260816",
+    "label_learning_manifest_sha256": "8278d44aeea494f1c922dc3ea0ba1ec27360e5e5a586ae829341d27804cbb2da",
+    "policy_card_ids": [
+      "POL-009-false_positive-ada507645c",
+      "POL-010-false_positive-8f8b296f1e",
+      "POL-017-semantic_keep-45598652e1"
+    ],
+    "interpretation": "The cards support only exact preserve/block safeguards. They do not authorize a positive semantic deletion rule."
+  },
+  "autocut_policy": {
+    "id": "NOT_APPROVED",
+    "status": "NOT_APPROVED",
+    "scope": "no automatic semantic deletion; machine-assisted draft remains subject to the current run's representative human calibration and final human listening"
+  },
+  "rules": [
+    {
+      "rule_id": "G-001-preserve-acknowledgement",
+      "kind": "acknowledgement_token",
+      "candidate_kinds": ["filler_hesitation"],
+      "tokens": ["嗯"],
+      "action": "auto_preserve",
+      "evidence": "Project preference: a standalone acknowledgement can carry interpersonal meaning; preserve it rather than infer that it is a filler."
+    },
+    {
+      "rule_id": "G-002-preserve-sentence-internal-weak-filler",
+      "kind": "sentence_position",
+      "candidate_kinds": ["filler_hesitation"],
+      "positions": ["clause-mid", "cross-clause", "unknown"],
+      "action": "auto_preserve",
+      "evidence": "A weak spoken connector inside an incomplete/unknown clause must not be deleted from text shape alone."
+    },
+    {
+      "rule_id": "G-003-preserve-known-chinese-compound",
+      "kind": "adjacent_compound",
+      "candidate_kinds": ["filler_hesitation"],
+      "pairs": [
+        {"token": "额", "neighbor": "度", "direction": "after", "max_gap_seconds": 0.12},
+        {"token": "对", "neighbor": "这个", "direction": "after", "max_gap_seconds": 0.12}
+      ],
+      "action": "auto_preserve",
+      "evidence": "Human feedback identified these exact ASR/token-boundary false positives. The rule is intentionally exact rather than a generic lexical guess."
+    },
+    {
+      "rule_id": "G-004-preserve-english-word-fragment",
+      "kind": "english_fragment",
+      "candidate_kinds": ["filler_hesitation"],
+      "tokens": ["er", "erm"],
+      "max_gap_seconds": 0.08,
+      "action": "auto_preserve",
+      "evidence": "A short Latin fragment joined to adjacent Latin text is more safely treated as an ASR word-boundary error than a removable hesitation."
+    },
+    {
+      "rule_id": "G-005-review-nonstutter-repetition",
+      "kind": "repetition_without_stutter_signature",
+      "candidate_kinds": ["immediate_repetition"],
+      "action": "human_review_required",
+      "evidence": "The same repeated text can be a correction, emphasis, or a real stutter. Without an acoustic/temporal stutter signature it is not low-risk."
+    },
+    {
+      "rule_id": "G-006-review-high-risk-family",
+      "kind": "high_risk_family",
+      "candidate_kinds": ["global_long_pause", "self_correction", "semantic_duplicate", "off_topic", "crosstalk_attribution", "transient_events", "cough_like", "mic_bump_like"],
+      "action": "human_review_required",
+      "evidence": "Long pauses and semantic/audio events require A/B or semantic review; they can never enter unattended automatic deletion."
+    }
+  ],
+  "rollback": "Choose a different frozen policy file for a future run; never rewrite a run that already contains this policy SHA."
+}

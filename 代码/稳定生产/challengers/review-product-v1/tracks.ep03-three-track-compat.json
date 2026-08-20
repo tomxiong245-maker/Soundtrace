@@ -1,0 +1,29 @@
+{
+  "schema_version": "ntrack-input-v1",
+  "episode_id": "EP03",
+  "purpose": "THREE_TRACK_COMPATIBILITY_FIXTURE_ONLY",
+  "note": "track_03 是现有 speech_mix，只用于证明审核产品支持三轨；不是今天的新三轨录音。",
+  "tracks": [
+    {
+      "track_id": "track_01",
+      "label": "轨 1｜物理麦 A（原文件标记 female；非 AI 性别判断）",
+      "source_key": "female",
+      "audio_path": "main/runs/EP03-freshrun-20260810-1730/04_denoise/female.denoised.wav",
+      "transcript_path": "main/runs/EP03-freshrun-20260810-1730/06_activity/female.classified.json"
+    },
+    {
+      "track_id": "track_02",
+      "label": "轨 2｜物理麦 B（原文件标记 male；非 AI 性别判断）",
+      "source_key": "male",
+      "audio_path": "main/runs/EP03-freshrun-20260810-1730/04_denoise/male.denoised.wav",
+      "transcript_path": "main/runs/EP03-freshrun-20260810-1730/06_activity/male.classified.json"
+    },
+    {
+      "track_id": "track_03",
+      "label": "轨 3（三轨兼容夹具：speech_mix）",
+      "source_key": "speech_mix",
+      "audio_path": "main/runs/EP03-freshrun-20260810-1730/04_denoise/speech_mix.denoised.wav",
+      "transcript_path": null
+    }
+  ]
+}

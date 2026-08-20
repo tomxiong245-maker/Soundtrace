@@ -1,0 +1,14 @@
+{
+  "schema_version": "route-crossfade-strategy-v1",
+  "candidate_count": 1,
+  "results": [
+    {
+      "strategy": "BUTT_SPLICE",
+      "recommended_crossfade_ms": 0,
+      "recommended_room_tone_pad_ms": 10,
+      "priority_level": "P4",
+      "why": "Check 2 (静音): 剪口完全落在静音段内 · butt splice (crossfade=0) 可用 · 无 ghost 风险",
+      "candidate_id": "C044"
+    }
+  ]
+}

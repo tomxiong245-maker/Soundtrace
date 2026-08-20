@@ -1,0 +1,17 @@
+# pyannote-audio 3.x 权重 SHA-256 lockfile
+#
+# 首次下载权重后，把三份权重的实际 SHA-256 填在这里。
+# 每次 run_diarization.py 加载前必须 verify 这些 SHA，任一漂移 fail closed。
+# 官方 model card 未公示 SHA，所以这是项目层自建的可复现兜底。
+#
+# 格式：<sha256>  <relative_path_from_models_dir>
+# 示例（占位；真值由首次下载后填入）：
+# 0000000000000000000000000000000000000000000000000000000000000000  speaker-diarization-3.1/config.yaml
+# 0000000000000000000000000000000000000000000000000000000000000000  segmentation-3.0/pytorch_model.bin
+# 0000000000000000000000000000000000000000000000000000000000000000  wespeaker-voxceleb-resnet34-LM/pytorch_model.bin
+#
+# 生成命令（首次下载后跑）：
+#   cd 稳定生产/challengers/speaker-diarization-v1/models
+#   for f in speaker-diarization-3.1/config.yaml segmentation-3.0/pytorch_model.bin wespeaker-voxceleb-resnet34-LM/pytorch_model.bin; do
+#     shasum -a 256 "$f"
+#   done > hashes.txt

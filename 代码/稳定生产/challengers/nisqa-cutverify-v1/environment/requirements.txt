@@ -1,0 +1,22 @@
+# nisqa-cutverify-v1 · requirements.txt
+#
+# ⚠️ 骨架阶段：**未启用任何真实依赖**。
+# 下方 nisqa 行**保持注释**·不会被 pip 解析·不触发下载。
+# 若走到 promote 前的 sandbox 验证阶段，才在独立 venv 里手动去掉注释安装。
+#
+# 严禁：
+#   - 在主环境 pip install nisqa
+#   - 把 NISQA 权重（.tar / .pt）check-in 本仓库
+#
+# 参考上游：https://github.com/gabrielmittag/NISQA  (MIT)
+# 版本锚定意图：nisqa == 0.1.0（撰写时 latest · promote 前需重新审计）
+
+# nisqa==0.1.0        # placeholder · DO NOT enable in champion env
+# torch>=2.0          # NISQA dep · 主环境应已存在 · 保持注释避免冲突
+# torchaudio>=2.0     # NISQA dep · 同上
+# numpy>=1.24         # NISQA dep · 主环境已存在
+# librosa>=0.10       # NISQA 特征前端 · 主环境已存在
+
+# 骨架层测试所需（**仅** unittest + mock · Python 标准库自带 · 无需安装）：
+# unittest  (stdlib)
+# unittest.mock  (stdlib)

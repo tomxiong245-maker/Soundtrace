@@ -1,0 +1,49 @@
+{
+  "$schema_version": "release-spec-definitions-v1",
+  "supersedes": "main/orchestrator/release_specs.json",
+  "supersedes_note": "challenger v2；不覆盖 champion 里 reference-linear-v1（FROZEN）。orchestrator 显式指向本 template_id 才生效。",
+  "coupling_rule": "每条 release spec 通过 template_id 与 music_templates.v2.json 的模板绑定；delivery_orchestrator 读取 checkpoint 时必须校验双方 SHA。",
+  "specs": {
+    "reference-linear-v2": {
+      "template_id": "reference-linear-v2",
+      "template_source_relpath": "稳定生产/challengers/release-policy-v2/timing/music_templates.v2.json",
+      "status": "CHALLENGER__DERIVED_FROM_RELEASE_LINEAR_V1__ONLY_OUTRO_TIMING_CHANGED",
+      "derived_from": "reference-linear-v1",
+      "frozen_at": "2026-08-17",
+      "frozen_by": "user_directive_2026-08-17__outro_starts_at_guest_last_line",
+      "target_integrated_lufs": -22.2,
+      "target_integrated_lufs_tolerance_lu": 1.0,
+      "target_true_peak_dbfs": -1.0,
+      "target_true_peak_dbfs_safety_floor": -1.0,
+      "target_lra_lu": 7.9,
+      "music_integrated_lufs": -14.8,
+      "music_voice_gap_lu": 7.4,
+      "container": "mp3",
+      "bit_rate_bps": 192000,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "reference_master_relpath": "音频参考库/成品/EP03.mp3",
+      "reference_master_sha256": "8dd95ac34a784c6e0e198805d9ca246843c296d967d4a257c41b231d141353f4",
+      "reference_music_relpath": "音频参考库/raw material/第三集/片头片尾music.mp3",
+      "reference_music_sha256": "3f3a7150c43c21fe5709a8a7b7152590a77579bd4ce87d3ad0e15ed1bb81ed83",
+      "evidence_run_relpath": "main/runs/EP04-DELIVERY-20260817-1427",
+      "diff_from_v1": {
+        "target_true_peak_dbfs": {
+          "v1": -0.1,
+          "v2": -1.0,
+          "note": "从 mentor 实测踩线值 -0.1 直接下推到 safety_floor -1.0；EP04 修正版实测 TP -6.91 dBFS 已经证明 -1.0 target 可安全达成"
+        },
+        "template_id": {
+          "v1": "reference-linear-v1",
+          "v2": "reference-linear-v2-guest-cued-outro",
+          "note": "只换 outro timing，其它响度/容器参数一致"
+        }
+      },
+      "safety_notes": [
+        "所有响度目标沿用 v1（-22.2/-1.0/7.9）",
+        "唯一实质改动是通过 template_id 引用新 timing template（outro_lead 22.0 → 37.617）",
+        "本 spec 是 CHALLENGER，未通过独立复核；晋升为 champion 需要独立 QC 且不覆盖 v1"
+      ]
+    }
+  }
+}

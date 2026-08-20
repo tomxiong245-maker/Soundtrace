@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "description": "登记不能修改文件的 SKILL.md（Mentor 交付、第三方等）。schema 见 docs/skill_frontmatter_contract.md。skills_registry.py 合并时以本文件的 status/owner/entry_tool 为准；description 若此处不写则回落到 SKILL.md 本文。",
+  "skills": [
+    {
+      "name": "podcast-audio-to-content",
+      "path": "mentor的成果/podcast-audio-to-content/SKILL.md",
+      "status": "external",
+      "owner": "mentor",
+      "entry_tool": null,
+      "related_tools": [],
+      "preconditions": [
+        "有播客/访谈音频（wav/mp3/m4a 等）",
+        "SKILL 目录内 .venv 已建好（mlx-whisper 0.4.3 等）"
+      ],
+      "postconditions": [
+        "产出博客简介 md + 带时间轴的 LRC 字幕"
+      ],
+      "notes": "由 Mentor 交付并维护，只读；不属于当前 N 轨播客后期主链路。当前项目未通过 tools.json 调它，故 entry_tool=null。"
+    },
+    {
+      "name": "podcast-plan-writer",
+      "path": "mentor的成果/podcast-plan-writer/SKILL.md",
+      "status": "external",
+      "owner": "mentor",
+      "entry_tool": null,
+      "related_tools": [],
+      "preconditions": [
+        "有 Sophie 给的主题 / 演讲提纲 / 访谈素材 / 调研选题"
+      ],
+      "postconditions": [
+        "产出 ainol/2026-XX-podcast-epXX-plan.md 策划稿（Header + 选题 + 通用开场 + 5-6 Q + 结尾话术）"
+      ],
+      "notes": "由 Mentor 交付；纯文本生成，不涉及音频 tool；因此 entry_tool=null。"
+    }
+  ]
+}

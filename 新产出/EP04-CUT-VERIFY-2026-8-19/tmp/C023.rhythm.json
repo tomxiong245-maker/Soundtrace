@@ -1,0 +1,32 @@
+{
+  "schema_version": "check-rhythm-gap-v1",
+  "cut_params_source": "/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/cut_parameters.json",
+  "transcript_source": "main/runs/EP04/EP04-v13-20260813-2002/analysis/track_02.transcript.json",
+  "candidate_count": 1,
+  "results": [
+    {
+      "verdict": "RHYTHM_OK",
+      "reason": "剪后 gap=266ms 在 target_range [120, 450]ms 内 · 节奏自然",
+      "cut_duration_ms": 393.7,
+      "raw_gap_ms": 660.0,
+      "post_cut_gap_ms": 266.3,
+      "prev_word": {
+        "text": " 对",
+        "end_seconds": 959.1
+      },
+      "next_word": {
+        "text": " 然后",
+        "start_seconds": 959.76
+      },
+      "thresholds": {
+        "target_min_ms": 120,
+        "target_max_ms": 450,
+        "median_before_ms": 180,
+        "median_after_ms": 280,
+        "hard_reject_below_ms": 50,
+        "source": "/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/cut_parameters.json"
+      },
+      "candidate_id": "C023"
+    }
+  ]
+}

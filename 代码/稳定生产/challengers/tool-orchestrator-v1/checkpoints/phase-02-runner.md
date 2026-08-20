@@ -1,0 +1,24 @@
+# Phase 2 Checkpoint · Minimal Orchestrator Runner
+
+- task_id: phase-02-runner
+- saved_at: 2026-08-12
+- status: completed
+- objective: 实现最小 tool-orchestrator runner：读注册表、冻结计划、真调工具（用 mock 脚本验证）、命中 `human_review_after` 或 `--stop-at` 即停止；不允许覆盖既有 run；不允许自动进入 APPROVED/FINALIZED/ARCHIVED。
+- files_changed:
+    - `稳定生产/challengers/tool-orchestrator-v1/runner/runner.py` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/runner/SCHEMA.md` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/tests/test_runner.py` (新增)
+- files_untouched: `main/tools/tools.json`、`main/orchestrator.py`、Champion、既有 run
+- commands_run:
+    - `python3 稳定生产/challengers/tool-orchestrator-v1/tests/test_runner.py`
+- automated_tests: 8/8 pass。覆盖：2/3/4 轨管线均停在 HUMAN_REVIEW_REQUIRED、dry-run 不产 output、拒绝写入已有 run_dir、resume 幂等（不重跑已完成 step，SHA 不变）、未知 tool 拒绝、缺参数拒绝、track SHA mismatch 拒绝、post_review 阶段拒绝。
+- real_audio_run: 无（本阶段用 JSON mock 脚本模拟 tool）
+- evidence:
+    - Runner 与 mock 注册表在假 project layout 中真实 subprocess 调用；`tool_calls.jsonl` 每次调用一行含返回码/耗时/SHA；`run_manifest.json` 只记 `output*` 参数对应的产物 SHA。
+    - `state.json` 状态转换含 CREATED → PLAN_FROZEN → RUNNING → HUMAN_REVIEW_REQUIRED / STOPPED_AT_CHECKPOINT / FAILED。
+- known_failures: 无
+- next_action: Phase 3 已经隐式通过（2/3/4 轨用同一 config schema 通过）。下一步 Phase 4：接一个真实 Champion 只读工具（`inspect_audio`）到 runner。
+- context_for_next_worker:
+    - `human_review_after` 是硬性停止；不要在 runner 里加 approve/finalize/archive；这些留给未来 Champion `orchestrator.py`。
+    - Runner 通过 `--<param_key>` 传参给脚本（下划线转短横），要求 Champion 脚本本身接受这种 CLI；Phase 4 里若脚本不接受，可以在 Challenger 中另写 adapter 而不动 Champion。
+    - `phase` 目前只允许 `pre_review`；任何 post_review 都在 create/run 时 fail closed。

@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "plan.schema.v1.json",
+  "title": "Delivery plan v1 (planner output / executor input)",
+  "description": "Planner_v2 生成、Executor_v2 消费的执行计划。每个 step 通过 adapter_id 绑定到一个 v2 adapter，参数、依赖、超时、写政策显式声明。executor 按拓扑序调 adapter，逐步冻结 provenance；任一 step 失败可精准重试单步。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "plan_id",
+    "run_id",
+    "episode_id",
+    "created_at",
+    "created_by",
+    "inputs",
+    "policy_bindings",
+    "steps"
+  ],
+  "properties": {
+    "schema_version": { "const": "delivery-plan-v1" },
+    "plan_id": {
+      "type": "string",
+      "description": "UUID 或 kebab-case ID，全局唯一"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "对应 run 目录名"
+    },
+    "episode_id": { "type": "string" },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_by": {
+      "type": "object",
+      "required": ["planner_id", "planner_version"],
+      "properties": {
+        "planner_id": { "type": "string" },
+        "planner_version": { "type": "string" },
+        "planner_source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "description": "本次 plan 消费的所有原始/参考素材 SHA-256 冻结，任何变化必须导致新 plan",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["relpath", "sha256"],
+        "properties": {
+          "relpath": { "type": "string" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "role": { "type": "string" }
+        }
+      }
+    },
+    "policy_bindings": {
+      "type": "object",
+      "description": "本次 plan 绑定的所有 policy id + SHA。任一 policy 变化必须新建 plan。",
+      "properties": {
+        "music_template_id": { "type": "string" },
+        "release_spec_id": { "type": "string" },
+        "candidate_rules_id": { "type": "string" },
+        "editing_preference_id": { "type": "string" },
+        "guards_policy_id": { "type": "string" },
+        "label_learning_snapshot_id": { "type": "string" },
+        "autocut_policy_id": {
+          "type": "string",
+          "description": "缺省为 NOT_APPROVED；任何非 NOT_APPROVED 值必须由 signed_authorization 支撑"
+        },
+        "signed_authorization": {
+          "type": ["object", "null"],
+          "description": "autocut_policy_id != NOT_APPROVED 时必填",
+          "properties": {
+            "signed_by": { "type": "string" },
+            "signed_at": { "type": "string", "format": "date-time" },
+            "policy_ids": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["step_id", "adapter_id", "tool_name", "inputs", "expected_outputs"],
+        "properties": {
+          "step_id": {
+            "type": "string",
+            "description": "本 plan 内唯一，kebab-case，如 01-inspect-track-01"
+          },
+          "adapter_id": {
+            "type": "string",
+            "description": "对应 v2 adapter 注册表 ID"
+          },
+          "tool_name": {
+            "type": "string",
+            "description": "冗余记录以便 executor 快速定位；必须与 adapter 声明的 tool_name 一致"
+          },
+          "inputs": {
+            "type": "object",
+            "description": "由 adapter 的 inputs_schema 校验"
+          },
+          "expected_outputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["relpath", "role"],
+              "properties": {
+                "relpath": {
+                  "type": "string",
+                  "description": "相对 run_dir 的输出路径"
+                },
+                "role": { "type": "string" },
+                "expected_schema": { "type": "string" }
+              }
+            }
+          },
+          "depends_on": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "上游 step_id 列表；executor 按拓扑序执行"
+          },
+          "timeout_seconds": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "retryable": {
+            "type": "boolean",
+            "default": false
+          },
+          "writes_policy_id": {
+            "type": "string",
+            "description": "adapter.reads_only=false 时必填"
+          },
+          "writes_scope_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "adapter.reads_only=false 时必填；scope 允许写的路径前缀的 SHA-256"
+          },
+          "human_gate": {
+            "type": "string",
+            "enum": ["none", "before", "after"],
+            "default": "none",
+            "description": "before：执行前需人工闸门；after：执行后停在人工闸门；none：全自动"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

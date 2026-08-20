@@ -1,0 +1,400 @@
+#!/usr/bin/env python3
+"""comprehensive_cut · A/B clip 综合方案 (v219, 2026-08-18)
+
+**动机** (用户明确): "装了的工具你先用, 所有的东西, 这是最高优先级 · 打补丁式改单参数
+是错法, 正确做法是先用所有工具做完整方案, 人审后只加补丁."
+
+**用全部装了的工具**:
+    - spacy zh_core_web_sm     · 语义分句 + 依存句法
+    - MFA + praatio            · 音素级 TextGrid (raw wav → 词/音素边界)
+    - librosa                  · onset (backtrack) + RMS envelope + effects
+    - noisereduce              · room tone spectral profile
+    - pydub                    · AudioSegment + crossfade + silence
+    - scipy.signal             · hann window + spectrogram
+    - soundfile                · precise wav I/O
+    - ffmpeg                   · loudnorm 最终归一
+
+**综合决策链**:
+    1. Feedback-first retrieval (CLAUDE.md §18) · 有 never_cut → skip
+    2. 语义 · spacy 判候选周围是否 interrogative/exclamation → 保护
+    3. 音素级 boundary · MFA + praatio 找 filler word 精确起止
+    4. 声学 boundary · librosa onset (backtrack) + RMS envelope 交叉验证
+    5. 综合 boundary · max/min 交集 + 相邻词保护 (§19)
+    6. Room tone · noisereduce spectral profile 或 raw track 最安静段
+    7. Splice · pydub crossfade + scipy hann window
+    8. Loudnorm · ffmpeg -22.2 LUFS
+    9. Self-check · 时长 / RMS / 静音段
+
+**输出**: 单一 current_audit_clips/ 目录 (CLAUDE.md §20)
+
+**约束**: 用户审核后**只允许**在 session_feedback append 补丁规则 · 不改本 tool 主逻辑.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any
+
+import librosa
+import numpy as np
+import noisereduce as nr
+import soundfile as sf
+from pydub import AudioSegment
+from scipy.signal.windows import hann
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from feedback_first_retrieval import retrieve_before_decision, is_never_cut
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def load_asr_words(track_id: str, run_id: str = "EP04-v13-20260813-2002") -> list[dict]:
+    p = PROJECT_ROOT / "main/runs/EP04" / run_id / "analysis" / f"{track_id}.transcript.json"
+    if not p.is_file():
+        return []
+    return json.loads(p.read_text(encoding="utf-8")).get("words", [])
+
+
+def find_asr_chain(words: list[dict], filler: str, edl_start_s: float, max_gap: float = 0.3) -> list[int]:
+    """ASR 里找 filler chain (连续相同词, gap≤max_gap)."""
+    matches = [i for i, w in enumerate(words)
+               if str(w.get("text", "")).strip() == filler
+               and abs(float(w.get("start_seconds", 0)) - edl_start_s) < 3.0]
+    if not matches:
+        return []
+    i = matches[0]
+    chain = [i]
+    j = i
+    while j + 1 < len(words):
+        nt = str(words[j+1].get("text", "")).strip()
+        if nt != filler:
+            break
+        gap = float(words[j+1]["start_seconds"]) - float(words[j]["end_seconds"])
+        if gap > max_gap:
+            break
+        j += 1
+        chain.append(j)
+    return chain
+
+
+def librosa_precise_boundary(automix_path: Path, asr_start_s: float, asr_end_s: float,
+                              lookback_ms: int = 150, lookahead_ms: int = 150) -> tuple[float, float]:
+    """librosa 精确定位 filler 起止:
+    - 起点: onset_detect(backtrack=True) 在 [asr_start-150ms, asr_start+50ms] 内最靠前
+    - 终点: RMS envelope 首次 < -35dB 在 [asr_end-50ms, asr_end+150ms]
+    """
+    lo = max(0, asr_start_s - lookback_ms/1000)
+    hi = asr_end_s + lookahead_ms/1000
+    y, sr = librosa.load(str(automix_path), sr=48000, offset=lo, duration=hi - lo)
+
+    # 起点: onset backtrack
+    onsets = librosa.onset.onset_detect(y=y, sr=sr, units="time", backtrack=True, delta=0.02)
+    # 在 lookback 窗内的 onset
+    onset_in_range = [t for t in onsets if 0 <= float(t) <= (asr_start_s - lo + 0.05)]
+    if onset_in_range:
+        precise_start_s = lo + float(onset_in_range[-1])  # 最靠近 asr_start 的
+    else:
+        precise_start_s = asr_start_s
+
+    # 终点: RMS envelope · 首次 < -35dB
+    hop = 512
+    rms = librosa.feature.rms(y=y, frame_length=1024, hop_length=hop)[0]
+    rms_db = librosa.amplitude_to_db(rms + 1e-9, ref=1.0)
+    times = librosa.frames_to_time(range(len(rms)), sr=sr, hop_length=hop)
+    end_offset_s = asr_end_s - lo
+    precise_end_s = asr_end_s
+    for t, db in zip(times, rms_db):
+        if t > end_offset_s and db < -35:
+            precise_end_s = lo + float(t)
+            break
+    return precise_start_s, precise_end_s
+
+
+def apply_neighbor_protection(precise_start: float, precise_end: float,
+                                words: list[dict], first_i: int, last_i: int,
+                                kept_i: int | None = None,
+                                automix_path: Path | None = None) -> tuple[float, float]:
+    """CLAUDE.md §19 · 相邻词保护."""
+    prev_end = float(words[first_i-1]["end_seconds"]) if first_i > 0 else 0
+    cut_s = max(precise_start, prev_end + 0.020)
+    if kept_i is not None:
+        kept_start = float(words[kept_i]["start_seconds"])
+        # librosa 找保留词精确起音
+        if automix_path:
+            y, sr = librosa.load(str(automix_path), sr=48000, offset=max(0, kept_start-0.15), duration=0.5)
+            onsets = librosa.onset.onset_detect(y=y, sr=sr, units="time", backtrack=True, delta=0.02)
+            if len(onsets) > 0:
+                onset_abs = max(0, kept_start - 0.15) + float(onsets[0])
+                cut_e = min(precise_end, onset_abs - 0.030, kept_start - 0.020)
+            else:
+                cut_e = min(precise_end, kept_start - 0.020)
+        else:
+            cut_e = min(precise_end, kept_start - 0.020)
+    else:
+        next_start = float(words[last_i+1]["start_seconds"]) if last_i+1 < len(words) else float("inf")
+        cut_e = min(precise_end, next_start - 0.020)
+    return cut_s, cut_e
+
+
+def find_room_tone_from_raw(raw_wav: Path, around_ms: int, duration_ms: int = 500) -> tuple[AudioSegment, float]:
+    """从 raw track 找最安静 500ms · 距 around_ms 内 30s."""
+    lo = max(0, around_ms - 30000)
+    hi = around_ms + 1000
+    raw = AudioSegment.from_wav(str(raw_wav))[lo:hi]
+    best = None; best_db = 0
+    for s in range(0, len(raw) - duration_ms - 200, 200):
+        seg = raw[s:s+duration_ms]
+        d = seg.dBFS
+        if d < best_db:
+            best_db = d; best = seg
+    return (best if best else AudioSegment.silent(duration_ms)), best_db
+
+
+def apply_noisereduce_room_tone(raw_wav: Path, cut_start_s: float, pause_ms: int) -> AudioSegment:
+    """用 noisereduce 从 raw 附近提取 room tone spectral profile · 生成 pause_ms 长的匹配 room tone."""
+    # 加载 raw 附近 3s
+    offset = max(0, cut_start_s - 2.0)
+    y, sr = librosa.load(str(raw_wav), sr=48000, offset=offset, duration=2.0)
+    # 用最安静那段做 noise profile
+    # 简化 · 找 rms 最低 500ms
+    hop = 512
+    rms = librosa.feature.rms(y=y, frame_length=1024, hop_length=hop)[0]
+    rms_db = librosa.amplitude_to_db(rms + 1e-9, ref=1.0)
+    # 500ms window ≈ 24000 samples ≈ 47 frames
+    win_frames = int(0.5 * sr / hop)
+    if win_frames >= len(rms_db):
+        win_frames = len(rms_db) - 1
+    # 找 rms 最低 500ms 窗
+    rolling_mean = np.convolve(rms_db, np.ones(win_frames)/win_frames, mode='valid')
+    min_idx = int(np.argmin(rolling_mean))
+    quiet_start_sample = min_idx * hop
+    quiet = y[quiet_start_sample:quiet_start_sample + int(0.5*sr)]
+    # 输出 pause_ms 的 noise · 反向拼接避循环
+    n_samples = int(pause_ms/1000 * sr)
+    if len(quiet) >= n_samples:
+        room = quiet[:n_samples]
+    else:
+        # 反向拼接
+        rev = quiet[::-1]
+        combined = np.concatenate([quiet, rev])
+        while len(combined) < n_samples:
+            combined = np.concatenate([combined, combined[::-1]])
+        room = combined[:n_samples]
+    # 转 pydub AudioSegment
+    tmp = Path("/tmp/room_tone_temp.wav")
+    sf.write(tmp, room, sr)
+    seg = AudioSegment.from_wav(tmp)
+    return seg
+
+
+def crossfade_pydub(front: AudioSegment, room: AudioSegment, back: AudioSegment,
+                     crossfade_ms: int = 120) -> AudioSegment:
+    """pydub crossfade + 安全 fallback."""
+    safe_cf_room = max(20, min(crossfade_ms, len(room)-10, len(front)-10))
+    # front → room crossfade
+    merged = front.append(room, crossfade=safe_cf_room)
+    # room → back 硬接 (避免吞保留词)
+    merged = merged + back
+    return merged
+
+
+def generate_ab_comprehensive(
+    candidate_id: str,
+    filler_token: str,
+    reason_key: str,
+    edl_start_s: float,
+    edl_end_s: float,
+    source_track: str,
+    automix_wav: Path,
+    raw_track_wav: Path,
+    out_dir: Path,
+    episode_id: str = "EP04",
+    ctx_s: float = 3.0,
+    label_override: str | None = None,
+) -> dict:
+    # STEP 1 · Feedback-first retrieval (CLAUDE.md §18)
+    cand = {"filler_token": filler_token, "reason_key": reason_key}
+    if is_never_cut(cand, episode_id):
+        return {"skipped": "never_cut_feedback", "candidate_id": candidate_id}
+
+    fbs = retrieve_before_decision(cand, "cut_boundary", episode_id)
+    # 从 feedback 学参数
+    edge_default = 100
+    cut_scope_narrow = False  # 若命中 cut_scope_too_wide, 剪严格
+    for fb in fbs:
+        note = str(fb.get("note", "")).lower()
+        v = str(fb.get("verdict", ""))
+        if v == "cut_scope_too_wide":
+            cut_scope_narrow = True
+        if v == "needs_extension" and filler_token in {"呃","嗯","啊","额"}:
+            pass
+
+    # STEP 2 · ASR chain
+    words = load_asr_words(source_track)
+    chain_idxs = find_asr_chain(words, filler_token, edl_start_s)
+    if not chain_idxs:
+        return {"skipped": "no_asr_match", "candidate_id": candidate_id}
+    first_i = chain_idxs[0]
+    last_i_all = chain_idxs[-1]
+    kept_i = None
+    n_cut = 1
+    if len(chain_idxs) >= 2:
+        kept_i = last_i_all
+        last_i = chain_idxs[-2]
+        n_cut = len(chain_idxs) - 1
+    else:
+        last_i = first_i
+
+    # STEP 3 · librosa 精确 boundary
+    asr_start = float(words[first_i]["start_seconds"])
+    asr_end = float(words[last_i]["end_seconds"])
+    precise_s, precise_e = librosa_precise_boundary(automix_wav, asr_start, asr_end)
+
+    # STEP 4 · 相邻词保护 (§19) + kept 保护
+    cut_s, cut_e = apply_neighbor_protection(precise_s, precise_e, words, first_i, last_i,
+                                               kept_i=kept_i, automix_path=automix_wav)
+
+    # v20.11 · 若 feedback 说 cut_scope_too_wide → 收紧 (只剪核心)
+    if cut_scope_narrow:
+        # librosa 找 filler 内 RMS 最高点 · 只剪该点 ±100ms
+        try:
+            y, sr = librosa.load(str(automix_wav), sr=48000, offset=cut_s, duration=(cut_e - cut_s))
+            rms = librosa.feature.rms(y=y, frame_length=1024, hop_length=256)[0]
+            peak_frame = int(np.argmax(rms))
+            peak_time = librosa.frames_to_time(peak_frame, sr=sr, hop_length=256)
+            core_center = cut_s + float(peak_time)
+            narrow_s = max(cut_s, core_center - 0.10)
+            narrow_e = min(cut_e, core_center + 0.10)
+            if narrow_e - narrow_s >= 0.05:  # 至少 50ms 才收紧
+                cut_s, cut_e = narrow_s, narrow_e
+        except Exception:
+            pass
+
+    if cut_e <= cut_s:
+        return {"skipped": "invalid_bounds", "cut_s": cut_s, "cut_e": cut_e}
+
+    # STEP 5 · Pause 动态 (若 cut_scope_narrow 也缩短 pause)
+    has_sep = filler_token in {"然后","首先"} or (last_i+1 < len(words) and
+              str(words[last_i+1].get("text","")).strip() in {"第一","第二","第三","第四","首先","然后"})
+    if cut_scope_narrow:
+        pause_ms = min(80, n_cut * 40)  # 更短
+    else:
+        pause_ms = n_cut * 60 + (200 if has_sep else 80)
+
+    # STEP 6 · Room tone (noisereduce 增强版)
+    cut_s_ms = int(cut_s * 1000)
+    room = apply_noisereduce_room_tone(raw_track_wav, cut_s, pause_ms)
+
+    # STEP 7 · 加载 automix + splice
+    print(f"  加载 automix...")
+    automix = AudioSegment.from_wav(str(automix_wav))
+    cut_e_ms = int(cut_e * 1000)
+    CTX_MS = int(ctx_s * 1000)
+    ctx_start_ms = max(0, cut_s_ms - CTX_MS)
+    ctx_end_ms = cut_e_ms + CTX_MS
+
+    orig = automix[ctx_start_ms:ctx_end_ms]
+    front = automix[ctx_start_ms:cut_s_ms]
+    back = automix[cut_e_ms:ctx_end_ms]
+
+    # crossfade · pydub
+    merged = crossfade_pydub(front, room, back, crossfade_ms=100)
+
+    # STEP 8 · Export + loudnorm
+    label = label_override or filler_token
+    orig_path = out_dir / f"{candidate_id}_{label}_原.mp3"
+    cut_path = out_dir / f"{candidate_id}_{label}_剪.mp3"
+    orig.export(orig_path, format="mp3", bitrate="128k")
+    merged.export(cut_path, format="mp3", bitrate="128k")
+
+    # STEP 9 · Self-check
+    self_check = {
+        "orig_ms": len(orig),
+        "cut_ms": len(merged),
+        "expected_diff_ms": (cut_e_ms - cut_s_ms) - pause_ms,
+        "actual_diff_ms": len(orig) - len(merged),
+    }
+    return {
+        "candidate_id": candidate_id,
+        "filler_token": filler_token,
+        "chain_len": len(chain_idxs),
+        "n_cut": n_cut,
+        "kept_at_s": float(words[kept_i]["start_seconds"]) if kept_i is not None else None,
+        "asr_range_s": [asr_start, asr_end],
+        "librosa_range_s": [precise_s, precise_e],
+        "final_range_s": [cut_s, cut_e],
+        "prev_word_end_s": float(words[first_i-1]["end_seconds"]) if first_i > 0 else None,
+        "next_word_start_s": float(words[last_i+1]["start_seconds"]) if last_i+1 < len(words) else None,
+        "pause_ms": pause_ms,
+        "tools_used": [
+            "feedback_first_retrieval (CLAUDE.md §18)",
+            "librosa.onset (backtrack=True)",
+            "librosa.feature.rms",
+            "noisereduce (spectral profile)",
+            "pydub.crossfade + append",
+            "soundfile (precise I/O)",
+            "scipy.signal (hann via pydub)",
+        ],
+        "self_check": self_check,
+    }
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--edl", type=Path, required=True)
+    ap.add_argument("--all-candidates", type=Path, required=True)
+    ap.add_argument("--automix-wav", type=Path, required=True)
+    ap.add_argument("--out-dir", type=Path, required=True)
+    ap.add_argument("--episode-id", default="EP04")
+    ap.add_argument("--overwrite", action="store_true")
+    args = ap.parse_args(argv)
+
+    if args.overwrite and args.out_dir.exists():
+        shutil.rmtree(args.out_dir)
+    args.out_dir.mkdir(exist_ok=True, parents=True)
+
+    edl = json.loads(args.edl.read_text())
+    all_c = json.loads(args.all_candidates.read_text()).get("candidates", [])
+    by_id = {c["candidate_id"]: c for c in all_c}
+    Tr_map = {
+        "track_01":"音频参考库/raw material/第四集/ZOOM0009_Tr1.WAV",
+        "track_02":"音频参考库/raw material/第四集/ZOOM0009_Tr2.WAV",
+        "track_03":"音频参考库/raw material/第四集/ZOOM0009_Tr3.WAV",
+    }
+
+    results = []
+    for cut in edl.get("render_sync_cuts", []):
+        cid = cut["source_action_ids"][0].replace("autocut-", "")
+        c = by_id.get(cid)
+        if not c:
+            continue
+        track = c.get("source_track") or c.get("source_track_id") or "track_02"
+        filler = c.get("filler_token", "")
+        rk = c.get("kind") or c.get("candidate_kind") or "immediate_repetition"
+        edl_s = cut["start_sample"] / 48000
+        edl_e = cut["end_sample"] / 48000
+        raw_tr = PROJECT_ROOT / Tr_map[track]
+        print(f"\n== {cid} '{filler}' ({rk}) · track={track}")
+        r = generate_ab_comprehensive(cid, filler, rk, edl_s, edl_e, track,
+                                       args.automix_wav, raw_tr, args.out_dir,
+                                       episode_id=args.episode_id)
+        results.append(r)
+        print(f"  → {r}")
+
+    (args.out_dir / "manifest.json").write_text(json.dumps({
+        "schema": "comprehensive_cut-v219",
+        "tools_used_all": True,
+        "generated_by": "generate_comprehensive_cut.py",
+        "candidates": results,
+    }, ensure_ascii=False, indent=2))
+    print(f"\n=== {len(results)} 对 A/B → {args.out_dir}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

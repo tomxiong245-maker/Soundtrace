@@ -1,0 +1,31 @@
+# Phase 7 Checkpoint · Docs & final acceptance
+
+- task_id: phase-07-docs-final
+- saved_at: 2026-08-12
+- status: completed
+- objective: 完成 Challenger 收尾文档（README、benchmark_report、优化候选、HANDOFF、exact_commands、episode.example.json）；最终验证 Champion SHA、测试全绿、文件盘点。
+- files_changed:
+    - `稳定生产/challengers/tool-orchestrator-v1/README.md`
+    - `稳定生产/challengers/tool-orchestrator-v1/benchmark_report.md`
+    - `稳定生产/challengers/tool-orchestrator-v1/优化候选.md`
+    - `稳定生产/challengers/tool-orchestrator-v1/exact_commands.md`
+    - `稳定生产/challengers/tool-orchestrator-v1/HANDOFF.md`
+    - `稳定生产/challengers/tool-orchestrator-v1/contracts/episode.example.json`
+    - `稳定生产/challengers/tool-orchestrator-v1/checkpoints/phase-07-docs-final.md`
+- files_untouched: 与 Phase 0–6 一致；`统筹全局/` 与 `main/tools/tools.json`、`main/orchestrator.py` 全部未动。
+- commands_run:
+    - 三份 test 文件全部重跑：21/21 pass。
+    - Champion SHA 复算：`tracked: 27, changed: 0`。
+    - Challenger 目录文件列表与 3 个新 run 目录列表。
+- automated_tests: 21/21 pass (registry_validator 6 + runner 8 + safety_gates 7)。
+- real_audio_run: 无额外新增；沿用 Phase 4/6 的合成 fixture run（`main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-20260812-010424`、`-010506`、`-010727`）。
+- evidence:
+    - `README.md` 明确 3 档状态：STATIC_TESTS_PASS + SMALL_SCALE_REAL_RUN_PASS + NOT_PROMOTED。
+    - `benchmark_report.md` 覆盖测试计数、真实运行结果、Champion 完整性与明确未做项。
+    - `优化候选.md` 分短/中/长期与“不建议”，每条挂事实标签。
+    - `exact_commands.md` 只用项目相对路径。
+    - `HANDOFF.md` 明确“下一步唯一最重要动作”是让真实 EP04 三轨在此 runner 走一次 pre_review。
+    - `episode.example.json` 提供 N=3 参考 config。
+- known_failures: 无
+- next_action: 交给项目负责人复核；下一位 worker 请从 `HANDOFF.md` 开始，不要动 Champion。
+- context_for_next_worker: 见 `HANDOFF.md`。所有既有工作都在 `稳定生产/challengers/tool-orchestrator-v1/` 与三个新 `main/runs/TOOL-ORCH-FIXTURE-*` 目录内；其它一切保持只读。

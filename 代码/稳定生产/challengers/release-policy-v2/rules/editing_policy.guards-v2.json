@@ -1,0 +1,110 @@
+{
+  "schema_version": "production-edit-policy-v2",
+  "policy_id": "editing-policy-guards-v2",
+  "supersedes": "editing-policy-guards-v1",
+  "version": "2026-08-17",
+  "status": "CHALLENGER__NARROW_AUTOCUT_WHITELIST",
+  "purpose": "在 v1 全禁 autocut 的基础上，按用户 2026-08-17 明确指令开一个窄白名单：filler_hesitation / immediate_repetition / global_long_pause / self_correction 四类允许机器学人工历史标签后自主 auto-cut；其它类型仍强制人工。此文件是 challenger，orchestrator 显式引用才生效。",
+  "user_directive_provenance": {
+    "date": "2026-08-17",
+    "verbatim": [
+      "'长停顿、说错重来、语义重复、离题、串音等仍要人工，把他删了，开始自己学习'",
+      "'长停顿，说错重来也要让机器学习'"
+    ],
+    "interpretation": "长停顿(global_long_pause) 和 说错重来(self_correction) 从 G-006 高风险人工审核家族里移出，进 autocut 白名单；语义重复(semantic_duplicate)/离题(off_topic)/串音(crosstalk) 保持只人工。"
+  },
+  "evidence": {
+    "label_learning_run": "main/runs/LABEL-LEARNING-v3-20260816",
+    "label_learning_manifest_sha256": "8278d44aeea494f1c922dc3ea0ba1ec27360e5e5a586ae829341d27804cbb2da",
+    "user_confirmed_delivery_run": "main/runs/EP04-DELIVERY-20260817-1427",
+    "note": "白名单只允许机器**学人工历史标签后**给出 machine_proposed_accept 或 auto_cut_eligible；仍需 stratum-unanimous propagation 与 label_learning_driver 的独立复核证据才能真正 cut。single-episode single-reviewer 学出的 shadow 不能覆盖跨期泛化。"
+  },
+  "autocut_policy": {
+    "id": "APPROVED_FOR_WHITELIST_KINDS_ONLY",
+    "status": "APPROVED_FOR_WHITELIST_KINDS_ONLY",
+    "scope": "auto-cut only when candidate_kind ∈ whitelist AND label_learning_driver returns machine_cut with match_tier != none AND policy_application does not preserve; anything else falls back to machine_calibration_eligible/human_review_required",
+    "whitelist_kinds": [
+      "filler_hesitation",
+      "immediate_repetition",
+      "global_long_pause",
+      "self_correction"
+    ],
+    "denylist_kinds": [
+      "semantic_duplicate",
+      "off_topic",
+      "crosstalk_attribution",
+      "transient_events",
+      "cough_like",
+      "mic_bump_like"
+    ],
+    "note": "denylist 强制 human_review_required；whitelist 允许 auto-cut 但仍受 rules 层的 auto_preserve 守门"
+  },
+  "rules": [
+    {
+      "rule_id": "G-001-preserve-acknowledgement",
+      "kind": "acknowledgement_token",
+      "candidate_kinds": ["filler_hesitation"],
+      "tokens": ["嗯"],
+      "action": "auto_preserve",
+      "evidence": "V1 保留：'嗯' 承载人际含义，不当填充词删除"
+    },
+    {
+      "rule_id": "G-002-preserve-sentence-internal-weak-filler",
+      "kind": "sentence_position",
+      "candidate_kinds": ["filler_hesitation"],
+      "positions": ["clause-mid", "cross-clause", "unknown"],
+      "action": "auto_preserve",
+      "evidence": "V1 保留：不完整/未知子句内部的 weak filler 不删"
+    },
+    {
+      "rule_id": "G-003-preserve-known-chinese-compound",
+      "kind": "adjacent_compound",
+      "candidate_kinds": ["filler_hesitation"],
+      "pairs": [
+        {"token": "额", "neighbor": "度", "direction": "after", "max_gap_seconds": 0.12},
+        {"token": "对", "neighbor": "这个", "direction": "after", "max_gap_seconds": 0.12}
+      ],
+      "action": "auto_preserve",
+      "evidence": "V1 保留：已知 ASR/词边界误报保护"
+    },
+    {
+      "rule_id": "G-004-preserve-english-word-fragment",
+      "kind": "english_fragment",
+      "candidate_kinds": ["filler_hesitation"],
+      "tokens": ["er", "erm"],
+      "max_gap_seconds": 0.08,
+      "action": "auto_preserve",
+      "evidence": "V1 保留：紧邻英文词段的短 Latin 片段视为 ASR 词边界错误"
+    },
+    {
+      "rule_id": "G-005-review-nonstutter-repetition",
+      "kind": "repetition_without_stutter_signature",
+      "candidate_kinds": ["immediate_repetition"],
+      "action": "human_review_required",
+      "evidence": "V1 保留：无 stutter signature 的重复可能是纠正/强调"
+    },
+    {
+      "rule_id": "G-006-review-high-risk-family",
+      "kind": "high_risk_family",
+      "candidate_kinds": ["semantic_duplicate", "off_topic", "crosstalk_attribution", "transient_events", "cough_like", "mic_bump_like"],
+      "action": "human_review_required",
+      "evidence": "V2 缩窄：仅保留语义重复/离题/串音/瞬态事件为强制人工；global_long_pause 与 self_correction 已按用户指令移出，进 whitelist",
+      "removed_kinds_vs_v1": ["global_long_pause", "self_correction"],
+      "removal_reason": "user_directive_2026-08-17: '长停顿，说错重来也要让机器学习'"
+    },
+    {
+      "rule_id": "G-007-whitelist-autocut-eligible",
+      "kind": "autocut_whitelist",
+      "candidate_kinds": ["filler_hesitation", "immediate_repetition", "global_long_pause", "self_correction"],
+      "action": "auto_cut_eligible_if_learned",
+      "prerequisites": [
+        "label_learning_driver returns machine_cut with match_tier ∈ {exact, strong_semantic}",
+        "no rule G-001..G-005 preserves the candidate",
+        "candidate confidence tier ∈ {high, mid}",
+        "no cross_track_guard violation"
+      ],
+      "evidence": "V2 新增：明确 auto-cut 门槛。所有 gate 必须同时满足；任一 gate 失败 → 降级 machine_calibration_eligible"
+    }
+  ],
+  "rollback": "回退到 champion editing_policy.guards-v1.json（autocut_policy=NOT_APPROVED，全禁 auto-cut）"
+}

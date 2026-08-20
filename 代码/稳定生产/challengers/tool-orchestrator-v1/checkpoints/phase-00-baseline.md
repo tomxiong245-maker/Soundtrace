@@ -1,0 +1,36 @@
+# Phase 0 Checkpoint · Baseline
+
+- task_id: phase-00-baseline
+- saved_at: 2026-08-12 (夜间施工周期开始)
+- status: completed
+- objective: 在动任何代码前建立基线与隔离，把 F07 声明的 Tool 注册表现状与 Champion/orchestrator/邻近 Challenger 的接口都固定下来。
+- files_changed:
+    - `稳定生产/challengers/tool-orchestrator-v1/TASK_CONTRACT.md` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/before_inventory.md` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/baseline/git_status_before.txt` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/baseline/champion_sha256_before.txt` (新增)
+    - `稳定生产/challengers/tool-orchestrator-v1/checkpoints/phase-00-baseline.md` (本文件)
+- files_untouched:
+    - `main/tools/tools.json`
+    - `main/orchestrator/orchestrator.py`
+    - `稳定生产/scripts/**`、`稳定生产/rules/**`
+    - `端到端学习剪辑/代码/**`
+    - `main/runs/**`（所有既有目录）
+    - `原始 WAV`、`mentor的成果/**`、`审核前端/**`
+    - 之前存在的 `checkpoints/phase-00-blocked.md`（保留，用于历史追溯）
+- commands_run:
+    - `git status --short --branch > baseline/git_status_before.txt`
+    - `python3 -c "..."` 计算 Champion 目录 SHA-256（27 个文件）
+    - `python3 -c "..."` 校验 `tools.json` 19 项脚本存在性、重名、重复脚本
+- automated_tests: 尚未（Phase 0 只做静态盘点）
+- real_audio_run: 无
+- evidence:
+    - `baseline/git_status_before.txt` 159 行
+    - `baseline/champion_sha256_before.txt` 27 行
+    - `before_inventory.md` 包含 tool 表、状态机说明与既有 run 目录清单
+- known_failures: 无
+- next_action: 进入 Phase 1，实现注册表校验器与失败 fixture。
+- context_for_next_worker:
+    - 工作树自开工前就有大量遗留 modified/deleted 状态（`git status_before.txt` 159 行）；这些属于环境噪声，不要碰。
+    - 允许写入的目录只有 `稳定生产/challengers/tool-orchestrator-v1/` 与新建的 `main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-<timestamp>/`。
+    - 基线与 F07 声明一致：19 tool、脚本齐全、orchestrator 尚未真实编排。

@@ -1,0 +1,31 @@
+{
+  "n_frames": 88923,
+  "frame_ms": 20,
+  "primary_frame_counts": [
+    15563,
+    55810
+  ],
+  "ambiguous_frame_count": 17550,
+  "primary_percent": [
+    17.5,
+    62.76
+  ],
+  "ambiguous_percent": 19.74,
+  "edl_cuts_applied": 4,
+  "loudnorm_passes_requested": 2,
+  "loudnorm": {
+    "loudnorm_passes": 2,
+    "pass1_measurements": {
+      "input_i": "-20.90",
+      "input_tp": "5.31",
+      "input_lra": "7.40",
+      "input_thresh": "-31.46",
+      "output_i": "-22.86",
+      "output_tp": "-1.00",
+      "output_lra": "6.30",
+      "output_thresh": "-33.36",
+      "normalization_type": "dynamic",
+      "target_offset": "0.66"
+    }
+  }
+}

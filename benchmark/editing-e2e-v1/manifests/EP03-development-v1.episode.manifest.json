@@ -1,0 +1,179 @@
+{
+  "schema_version": "editing-e2e-episode-v1",
+  "manifest_id": "EP03-development-v1",
+  "episode_id": "EP03",
+  "split": "development",
+  "benchmark_status": {
+    "frozen": false,
+    "gold": false,
+    "eligible_for_champion_comparison": false,
+    "purpose": "用于开发期诊断、候选排序和人工复听设计；不得据此冻结规则、报告正式成绩或晋升 Champion。"
+  },
+  "privacy": {
+    "local_only": true,
+    "authorized_for_evaluation": true,
+    "authorization_scope": "仅限本地项目开发评估；不得复制、上传或对外发布真实媒体。",
+    "notes": "本 manifest 只索引路径与既有 SHA，不复制任何 WAV、MP3 或试听文件。"
+  },
+  "raw_tracks": [
+    {
+      "track_id": "track_01",
+      "source_filename": "ZOOM0008_Tr1.WAV",
+      "legacy_source_label": "female（历史文件/内部 source_key，不是 AI 性别判断）",
+      "path": "/Users/renting/Desktop/minglue/剪辑项目/音频参考库/raw material/第三集/ZOOM0008_Tr1.WAV",
+      "sha256": "2648ac12d2df3d713e62549f2d52834da806d9ebf95f3294c3a0da163ce3e5dd",
+      "sha256_status": "从 2026-08-10 历史 inspection 记录；文件后来移入“第三集”子目录，本次不读取/重算真实媒体 SHA。",
+      "sample_rate": 48000,
+      "channels": 1,
+      "bits_per_sample": 24,
+      "sample_count": 85775680,
+      "timeline_relation": "shared_clock"
+    },
+    {
+      "track_id": "track_02",
+      "source_filename": "ZOOM0008_Tr3.WAV",
+      "legacy_source_label": "male（历史文件/内部 source_key，不是 AI 性别判断）",
+      "path": "/Users/renting/Desktop/minglue/剪辑项目/音频参考库/raw material/第三集/ZOOM0008_Tr3.WAV",
+      "sha256": "3f654fb521681437ea7aded6dd581cec791d4cc16ef6ffcd8fe86379cc2ba0c4",
+      "sha256_status": "从 2026-08-10 历史 inspection 记录；文件后来移入“第三集”子目录，本次不读取/重算真实媒体 SHA。",
+      "sample_rate": 48000,
+      "channels": 1,
+      "bits_per_sample": 24,
+      "sample_count": 85775680,
+      "timeline_relation": "shared_clock"
+    }
+  ],
+  "human_reference": {
+    "final_audio_path": "/Users/renting/Desktop/minglue/剪辑项目/音频参考库/成品/EP03.mp3",
+    "final_audio_sha256": "8dd95ac34a784c6e0e198805d9ca246843c296d967d4a257c41b231d141353f4",
+    "sha256_status": "从 2026-08-10 历史 inspection 记录；本次不读取/重算真实媒体 SHA。",
+    "sample_rate": 48000,
+    "channels": 2,
+    "duration_seconds": 1787.5,
+    "reference_edl_path": null,
+    "reference_edl_sha256": null,
+    "human_edit_map_path": null,
+    "human_edit_map_provenance": "none",
+    "provenance_status": "项目旧 README 将此文件称为“Mentor 人工成品”；本 manifest 已证实路径和历史 SHA，但没有独立的人工作者记录、原始人工 EDL 或逐剪口 edit-map。",
+    "reference_notes": "可作风格、时间线和整片盲听参考；不得把从 MP3 反推的边界当作人工语义删剪真值。"
+  },
+  "evaluation_contract": {
+    "must_check": [
+      "semantic_false_delete",
+      "audible_cut",
+      "cross_track_sync",
+      "whole_episode_listening"
+    ],
+    "human_evaluators": [],
+    "frozen_at": null,
+    "cannot_compute_yet": [
+      {
+        "metric": "human_deletion_interval_precision_recall",
+        "reason": "缺少原始人工 reference EDL 或经人工确认的 human_edit_map。"
+      },
+      {
+        "metric": "boundary_difference_samples",
+        "reason": "没有可以作为样本级真值的人类剪口边界。"
+      },
+      {
+        "metric": "candidate_coverage_of_human_deletions",
+        "reason": "不能把从 Mentor MP3 的自动对齐/反推结果视为人工删剪标签。"
+      },
+      {
+        "metric": "whole_episode_blind_comparison_verdict",
+        "reason": "尚未为同一冻结 Challenger 输出建立新的独立盲听记录。"
+      },
+      {
+        "metric": "semantic_false_delete_count_and_audible_cut_count",
+        "reason": "缺少同一系统输出的整期人工听审记录。"
+      }
+    ]
+  },
+  "historical_evidence": {
+    "source_inspection": {
+      "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/01_inspect/inspection.json",
+      "sha256": "75220d66b1ae2b37057017f36ccb44cafdd7a114d673bc1d06b359feedfa89ba",
+      "role": "两条 raw 与 Mentor 参考成片的历史路径、SHA 和格式记录；其中 raw 的历史路径已迁移至当前“第三集”目录。"
+    },
+    "mentor_reference_context": {
+      "path": "/Users/renting/Desktop/minglue/剪辑项目/端到端学习剪辑/A-B试听/Mentor对比/ab_manifest.json",
+      "sha256": "eb700510e52e21bbfff789ca32c074d226b5111efb1a416f66752e5b35141712",
+      "role": "历史 A/B 试听把 EP03.mp3 标记为 mentor 参考；对齐方法明确标注为 approximate listening alignment，而不是 sample-accurate null test。"
+    },
+    "human_review": {
+      "run_dir": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-review-product-v1",
+      "candidate_package": {
+        "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-review-product-v1/review_bundle/review_package.json",
+        "file_sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+        "canonical_review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "candidate_count": 11,
+        "candidate_families": [
+          "filler_hesitation",
+          "immediate_repetition"
+        ],
+        "notes": "file_sha256 是 JSON 文件字节 SHA；canonical_review_manifest_sha256 是去除自身字段后的 canonical JSON SHA。两者用途不同，不能互相比较。"
+      },
+      "human_decisions": {
+        "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-review-product-v1/human_decisions.json",
+        "sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+        "decision_count": 11,
+        "accepted_candidate_ids": [
+          "C007",
+          "C009",
+          "C014",
+          "C024"
+        ],
+        "rejected_candidate_ids": [
+          "C001",
+          "C006",
+          "C011",
+          "C013",
+          "C018",
+          "C021",
+          "C022"
+        ],
+        "reviewer": "熊镇正",
+        "canonical_review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d"
+      },
+      "approved_edl_draft": {
+        "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-review-product-v1/approved.edl.draft.json",
+        "sha256": "3a9961d67759dac61238b8b319ed3bb221e9d86d1c0e57372b73899ecf6aa656",
+        "cut_count": 4,
+        "canonical_review_manifest_sha256": "8c61142b6b56ce67011f413b993b3c44201b9331a90aad6200dbee775f01c18d",
+        "notes": "四个接受的剪口同步作用于三轨兼容审核包；第三轨是兼容性 speech_mix，不是 EP03 第三条 raw。"
+      },
+      "review_session_metrics": {
+        "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-review-product-v1/review_session_metrics.json",
+        "sha256": "ab012163d17c084a74bcf7c815351094e17a169878d7c9045ace3405d70e79eb",
+        "notes": "只作历史审核事件留痕；不得直接解释为净审核工时。"
+      },
+      "render_fixture": {
+        "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-review-product-v1/three-track-render-e2e/render_manifest.json",
+        "sha256": "8eceda6de335173a6f15a10e89c8642eb51fb9ffb52f815ceaed44b3b901dc77",
+        "notes": "这是 20 秒三轨 render fixture，不是 EP03 整期渲染 QC，不能作为端到端成片评分。"
+      }
+    },
+    "historical_system_run_qc_not_human_gold": {
+      "run_dir": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730",
+      "status": "旧 freshrun 的 EDL 含自动全接受；它只提供真实媒体上的历史技术产物/QC 证据，不能与上述真人逐项审核拼成一个正式人审 run。",
+      "final_manifest": {
+        "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/14_final/final_manifest.json",
+        "sha256": "9f853b189bd042629b26d3f06a846b8b72165a8a5e89c463a9ae074c658191f8"
+      },
+      "qc_inspection": {
+        "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/14_final/qc/inspection.json",
+        "sha256": "8d69e7e15efcc0c3823d4c1cc1d77859bc23818a42b27f66707f8bfcbc42aecb"
+      },
+      "qc_loudness": {
+        "path": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/14_final/qc/loudness.json",
+        "sha256": "93a9661c2f0e41ac10d2e8e3d6177b8f7736ae1846b9222397995c1a0e100633"
+      }
+    }
+  },
+  "usage_guards": [
+    "development only：允许用来复现、调试候选与安排人工复听；禁止依据本期调参后自称 frozen benchmark 成绩。",
+    "non-gold：Mentor MP3 是参考音频，不是人工 edit-map；不得将自动反推的删剪区间写成 gold。",
+    "evidence separation：EP03-review-product-v1 的真人决定/EDL 与 EP03-freshrun 的全片 QC 不是同一完整交付 run，不能合并宣称已完成端到端人审验收。",
+    "media guard：任何需要证明移动后 raw SHA 仍一致的步骤，必须另获允许后单独重算音频 SHA；本 manifest 验证器绝不读取或哈希音频内容。"
+  ]
+}

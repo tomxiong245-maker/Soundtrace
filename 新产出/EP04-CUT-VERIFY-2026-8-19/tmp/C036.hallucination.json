@@ -1,0 +1,18 @@
+{
+  "schema_version": "check-hallucination-v1",
+  "prob_threshold": 0.6,
+  "transcript_source": "main/runs/EP04/EP04-v13-20260813-2002/analysis/track_01.transcript.json",
+  "candidate_count": 1,
+  "results": [
+    {
+      "verdict": "CLEAN_ASR",
+      "reason": "probability 0.9008 ≥ threshold 0.6 · 有真实语音支撑.",
+      "threshold": 0.6,
+      "asr_word_probability": 0.9008319973945618,
+      "matched_word_text": "什麼",
+      "matched_word_start_s": 1768.59,
+      "matched_word_end_s": 1768.75,
+      "candidate_id": "C036"
+    }
+  ]
+}

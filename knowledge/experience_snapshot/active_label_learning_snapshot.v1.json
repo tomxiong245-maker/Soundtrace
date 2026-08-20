@@ -1,0 +1,25 @@
+{
+  "schema_version": "active-label-learning-snapshot-pointer-v1",
+  "updated_at": "2026-08-17T04:53:21+00:00",
+  "active_refresh_run_relpath": "main/runs/LABEL-LEARNING-AUTO-HUMAN-BACKFILL-20260817-001",
+  "active_snapshot_manifest_relpath": "main/runs/LABEL-LEARNING-AUTO-HUMAN-BACKFILL-20260817-001/preference_snapshot/snapshot_manifest.json",
+  "active_snapshot_manifest_sha256": "c8d921d2821bfbb8330cdd577d42f8f5b86dcaa17ee6eb2d2cf0355664092f5c",
+  "active_snapshot_id": "preference_snapshot",
+  "refresh_manifest_relpath": "main/runs/LABEL-LEARNING-AUTO-HUMAN-BACKFILL-20260817-001/refresh_manifest.json",
+  "refresh_manifest_sha256": "86aacbfa74ba3eedad76ef42e2bdafb4ed4deecac2457b56a7a624e719c56b8f",
+  "source_review_run_relpath": "main/runs/EP04-review-product-v2",
+  "source_human_labels_relpath": "main/runs/EP04-review-product-v2/human_decisions.json",
+  "source_human_labels_file_sha256": "8c90d8262c8574004535d5872be4a7916cdf406ca53864ac7307bdf4b2c69cdf",
+  "source_decision_content_sha256": "30d3856c2708729e10d595821263df116dfb1afd4ecddbcead61faa53b613971",
+  "source_trigger_kind": "final_human_review_submit",
+  "source_effect": "label_save",
+  "label_source_trust": "USER_CONFIRMED_HUMAN_LABELS",
+  "scope": "future new runs: review priority, historical reference and preserve/review guards only",
+  "prohibited": [
+    "automatic semantic cut",
+    "human decision",
+    "EDL action",
+    "audio render",
+    "Champion promotion"
+  ]
+}

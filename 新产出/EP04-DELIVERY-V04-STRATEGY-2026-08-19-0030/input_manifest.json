@@ -1,0 +1,48 @@
+{
+  "schema_version": "delivery-input-manifest-v1",
+  "episode_id": "EP04",
+  "run_id": "EP04-v13-20260813-2002",
+  "run_identity_sha256": "d4ae64fc7834d64d06db6aa597afaf0844c52a3cb1b84bda4af1056f6ee0b6bf",
+  "track_count": 3,
+  "sample_rate_hz": 48000,
+  "frame_count": 157089600,
+  "tracks": [
+    {
+      "track_id": "track_01",
+      "label": "ZOOM0009_Tr1",
+      "input_relpath": "inputs/track_01_ZOOM0009_Tr1.wav",
+      "source_filename": "ZOOM0009_Tr1.WAV",
+      "audio_sha256": "b6fc1bcc8c1921dc20bfdaf5aadad6390567682b45ffbea9658ede21fe994b0f",
+      "sample_rate_hz": 48000,
+      "frame_count": 157089600,
+      "channels": 1,
+      "bits_per_sample": 24,
+      "duration_seconds": 3272.7
+    },
+    {
+      "track_id": "track_02",
+      "label": "ZOOM0009_Tr2",
+      "input_relpath": "inputs/track_02_ZOOM0009_Tr2.wav",
+      "source_filename": "ZOOM0009_Tr2.WAV",
+      "audio_sha256": "392ca43acdbec7a23fefc0c80a2a2a5bddc99539bc4545f0eb78564264f0bda2",
+      "sample_rate_hz": 48000,
+      "frame_count": 157089600,
+      "channels": 1,
+      "bits_per_sample": 24,
+      "duration_seconds": 3272.7
+    },
+    {
+      "track_id": "track_03",
+      "label": "ZOOM0009_Tr3",
+      "input_relpath": "inputs/track_03_ZOOM0009_Tr3.wav",
+      "source_filename": "ZOOM0009_Tr3.WAV",
+      "audio_sha256": "478397c40fc428d70eacfadedff5b86b7d4f0deb13527c8adac2db8bb6693047",
+      "sample_rate_hz": 48000,
+      "frame_count": 157089600,
+      "channels": 1,
+      "bits_per_sample": 24,
+      "duration_seconds": 3272.7
+    }
+  ],
+  "source_access": "relative symlinks within this run; raw sources are read only"
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": "speaker-map-v1",
+  "episode_id": "EP04",
+  "attested_by": "熊镇正",
+  "attested_at": "2026-08-18",
+  "map": {
+    "track_01": {
+      "role": "guest_A",
+      "note": "主嘉宾之一 (Zoom ZOOM0009_Tr1.WAV)"
+    },
+    "track_02": {
+      "role": "guest_B",
+      "note": "另一嘉宾 (Zoom ZOOM0009_Tr2.WAV)"
+    },
+    "track_03": {
+      "role": "host",
+      "note": "主持人 (Zoom ZOOM0009_Tr3.WAV) · 大量 backchannel 应答'嗯/啊/对'"
+    }
+  },
+  "role_rules": {
+    "host_backchannel_skip": {
+      "roles": ["host"],
+      "tokens_treated_as_backchannel": ["嗯", "啊", "对", "对对", "是", "是的", "好", "好的", "唉"],
+      "skip_candidate_condition": "if the token is in tokens_treated_as_backchannel AND context has other-track speech within ±3s (i.e. 嘉宾正在讲话), treat this token as backchannel and SKIP filler_hesitation / immediate_repetition candidate generation"
+    }
+  }
+}

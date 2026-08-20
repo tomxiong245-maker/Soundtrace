@@ -1,0 +1,17 @@
+{
+  "schema_version": "experience-index-v1",
+  "generated_at": "2026-08-12T16:22:51+0800",
+  "counts": {
+    "cases_total": 24,
+    "by_episode": {
+      "EP03": 11,
+      "EP04": 13
+    },
+    "exclusions": 26,
+    "quarantine": 3
+  },
+  "episode_files": {
+    "EP03": "cases/EP03.jsonl",
+    "EP04": "cases/EP04.jsonl"
+  }
+}

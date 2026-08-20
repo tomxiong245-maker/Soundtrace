@@ -1,0 +1,114 @@
+{
+  "schema_version": "rule-recommendations-v1",
+  "thresholds": {
+    "min_cases_per_reason": 20,
+    "min_episodes": 3,
+    "min_reviewers": 2
+  },
+  "recommendations": [
+    {
+      "reason_key": "filler_hesitation",
+      "data_points": 6,
+      "episodes": [
+        "EP03",
+        "EP04"
+      ],
+      "reviewers": [
+        "熊镇正"
+      ],
+      "distribution": {
+        "accept": 3,
+        "reject": 3,
+        "adjust": 0
+      },
+      "human_accept_rate": 0.5,
+      "suggestion": "filler_hesitation 存在少量误剪风险，建议未来在候选阶段保留末词/末字：当前样本不足，禁止直接改生产规则",
+      "evidence_case_ids": [
+        "EP03::EP03-review-00cc8692b46c::C001",
+        "EP03::EP03-review-00cc8692b46c::C011",
+        "EP03::EP03-review-00cc8692b46c::C014",
+        "EP03::EP03-review-00cc8692b46c::C024",
+        "EP04::EP04-review-3cadf0f352f2::C001",
+        "EP04::EP04-review-3cadf0f352f2::C010"
+      ],
+      "risks": [
+        "候选集合非随机样本，接受率不等于 precision",
+        "缺 adjust 与多期数据，规则边界调优证据不足"
+      ],
+      "meets_thresholds": false,
+      "status": "INSUFFICIENT_DATA",
+      "action": "NO_PRODUCTION_CHANGE",
+      "notes": "本 Challenger 只提供建议；生产规则一律不修改"
+    },
+    {
+      "reason_key": "immediate_repetition",
+      "data_points": 20,
+      "episodes": [
+        "EP03",
+        "EP04"
+      ],
+      "reviewers": [
+        "熊镇正"
+      ],
+      "distribution": {
+        "accept": 8,
+        "reject": 12,
+        "adjust": 0
+      },
+      "human_accept_rate": 0.4,
+      "suggestion": "对 immediate_repetition 保留细化子规则的可能性：接受与拒绝并存，建议未来把上下文（是否含数字/否定/结论/说话人切换）纳入规则；当前数据量不足以更改生产规则",
+      "evidence_case_ids": [
+        "EP03::EP03-review-00cc8692b46c::C006",
+        "EP03::EP03-review-00cc8692b46c::C007",
+        "EP03::EP03-review-00cc8692b46c::C009",
+        "EP03::EP03-review-00cc8692b46c::C013",
+        "EP03::EP03-review-00cc8692b46c::C018",
+        "EP03::EP03-review-00cc8692b46c::C021",
+        "EP03::EP03-review-00cc8692b46c::C022",
+        "EP04::EP04-review-294a5930b8a9::C001",
+        "EP04::EP04-review-294a5930b8a9::C005",
+        "EP04::EP04-review-294a5930b8a9::C014"
+      ],
+      "risks": [
+        "候选集合非随机样本，接受率不等于 precision",
+        "缺 adjust 与多期数据，规则边界调优证据不足"
+      ],
+      "meets_thresholds": false,
+      "status": "INSUFFICIENT_DATA",
+      "action": "NO_PRODUCTION_CHANGE",
+      "notes": "本 Challenger 只提供建议；生产规则一律不修改"
+    },
+    {
+      "reason_key": "global_long_pause",
+      "data_points": 1,
+      "episodes": [
+        "EP04"
+      ],
+      "reviewers": [
+        "熊镇正"
+      ],
+      "distribution": {
+        "accept": 1,
+        "reject": 0,
+        "adjust": 0
+      },
+      "human_accept_rate": 1.0,
+      "suggestion": "global_long_pause 需 must_listen_to 完整试听；当前样本数太少，禁止改压缩阈值",
+      "evidence_case_ids": [
+        "EP04::EP04-review-3cadf0f352f2::C032"
+      ],
+      "risks": [
+        "候选集合非随机样本，接受率不等于 precision",
+        "缺 adjust 与多期数据，规则边界调优证据不足"
+      ],
+      "meets_thresholds": false,
+      "status": "INSUFFICIENT_DATA",
+      "action": "NO_PRODUCTION_CHANGE",
+      "notes": "本 Challenger 只提供建议；生产规则一律不修改"
+    }
+  ],
+  "notes": [
+    "本文件仅供离线阅读；不修改 稳定生产/rules/**",
+    "所有建议 action=NO_PRODUCTION_CHANGE"
+  ]
+}

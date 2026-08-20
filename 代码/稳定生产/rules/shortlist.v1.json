@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "rules_version": "shortlist.v1-2026-08-11",
+  "purpose": "从 56 条候选中挑 P1/P2/P3 三层精审 shortlist。目标：P1=12 条即可算 F1 baseline",
+  "source_types": {
+    "甲": "AI 常识初值",
+    "乙": "外部学习证据",
+    "丙": "内部经验（当前为空）"
+  },
+  "target_p1_size": 12,
+  "type_quota": {
+    "long_pause": {"count": 6, "source": "甲", "notes_甲": "样本量最大类，给最多名额"},
+    "immediate_repetition": {"count": 4, "source": "甲", "notes_甲": "第二大类，够算 F1"},
+    "filler_hesitation": {"count": 2, "source": "甲", "notes_甲": "样本最少，只做定性观察"}
+  },
+  "layer_split": {
+    "long_pause": {"edge": 3, "anchor": 2, "control": 1, "source": "甲"},
+    "immediate_repetition": {"edge": 2, "anchor": 1, "control": 1, "source": "甲"},
+    "filler_hesitation": {"edge": 1, "anchor": 1, "control": 0, "source": "甲"}
+  },
+  "disagreement_formulas": {
+    "long_pause": {
+      "formula": "越接近阈值边界（1.5s or 8.0s）分歧分越高",
+      "source": "甲",
+      "reference_thresholds_from": "稳定生产/rules/candidate-generation.v1.json"
+    },
+    "immediate_repetition": {
+      "formula": "repeated_phrase 越短越难判（2 字重复可能是自然强调）；置信度反相关字符长度",
+      "source": "甲"
+    },
+    "filler_hesitation": {
+      "formula": "evidence_words 数量越接近 min_consecutive=2 阈值分歧越大",
+      "source": "甲"
+    }
+  },
+  "control_group_policy": {
+    "prefer_risk": "medium",
+    "fallback_risk": "low",
+    "source": "甲",
+    "notes_甲": "验证风险分层本身可信度；若 medium 数量不足以填 quota，从 low 补"
+  }
+}

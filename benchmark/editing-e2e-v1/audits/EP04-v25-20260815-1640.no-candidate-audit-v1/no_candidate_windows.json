@@ -1,0 +1,223 @@
+{
+  "audit_id": "EP04-v25-20260815-1640-no-candidate-audit-887785da6708",
+  "human_listening_instruction": "For every window, listen to the synchronized original local tracks and record whether a clear missed edit, a possible missed edit, or no clear issue is found. This plan creates no edit decision, EDL, or automatic deletion.",
+  "limits": [
+    "抽到的窗口均无问题，不证明节目其余区域没有漏剪。",
+    "这只是 all_candidates.json 中无候选区域的随机抽查，不能衡量候选 precision、语义正确性或最终音频质量。",
+    "在主张漏剪率下降或减少人工审核量前，仍必须有真人试听和明确的审核记录。"
+  ],
+  "parameters": {
+    "candidate_handle_samples": 240000,
+    "candidate_handle_seconds": "5",
+    "count": 8,
+    "frame_count": 157089600,
+    "sample_rate_hz": 48000,
+    "seed": "EP04-v25-20260815-1640-no-candidate-audit-v1",
+    "track_ids": [
+      "track_01",
+      "track_02",
+      "track_03"
+    ],
+    "window_samples": 1200000,
+    "window_seconds": "25"
+  },
+  "provenance": {
+    "all_candidates_schema_version": "delivery-all-candidates-v1",
+    "all_candidates_sha256": "3476eba04749d9d18163ad085885eeb173c53b6a474add9e1477859efd18d6b2",
+    "episode_id": "EP04",
+    "input_manifest_schema_version": "delivery-input-manifest-v1",
+    "input_manifest_sha256": "972b4f9b0d5ac4a365bf95ab5b15d598f2883314c11a55e9b36f3d2fd10993db",
+    "media_access": "none; no WAV/MP3/media path was opened, decoded, copied, or hashed",
+    "run_dir": "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP04/EP04-v25-20260815-1640",
+    "run_id": "EP04-v25-20260815-1640",
+    "run_identity_sha256": "ff61ee7ddc7ce3da943c5ed8fe713d0d331ad1b4568a7aa82c02a5ab90903b1d",
+    "source_files_read": [
+      "run_identity.json",
+      "input_manifest.json",
+      "all_candidates.json"
+    ]
+  },
+  "sampling": {
+    "free_samples": 152107200,
+    "free_segment_count": 11,
+    "non_overlapping_window_capacity": 120,
+    "protected_interval_count": 10,
+    "protected_intervals": [
+      {
+        "candidate_ids": [
+          "C006"
+        ],
+        "end_sample": 14529120,
+        "start_sample": 14038560
+      },
+      {
+        "candidate_ids": [
+          "C007"
+        ],
+        "end_sample": 17268480,
+        "start_sample": 16755840
+      },
+      {
+        "candidate_ids": [
+          "C009"
+        ],
+        "end_sample": 21454080,
+        "start_sample": 20968320
+      },
+      {
+        "candidate_ids": [
+          "C014"
+        ],
+        "end_sample": 31313760,
+        "start_sample": 30827040
+      },
+      {
+        "candidate_ids": [
+          "C023"
+        ],
+        "end_sample": 46296960,
+        "start_sample": 45808320
+      },
+      {
+        "candidate_ids": [
+          "C034"
+        ],
+        "end_sample": 83960160,
+        "start_sample": 83447520
+      },
+      {
+        "candidate_ids": [
+          "C035",
+          "C036",
+          "C037"
+        ],
+        "end_sample": 85146720,
+        "start_sample": 84649440
+      },
+      {
+        "candidate_ids": [
+          "C039"
+        ],
+        "end_sample": 101969760,
+        "start_sample": 101472480
+      },
+      {
+        "candidate_ids": [
+          "C042"
+        ],
+        "end_sample": 102869760,
+        "start_sample": 102373440
+      },
+      {
+        "candidate_ids": [
+          "C044"
+        ],
+        "end_sample": 109148640,
+        "start_sample": 108634080
+      }
+    ],
+    "selection_is_without_replacement": true,
+    "selection_strategy": "capacity_preserving_random_phase_and_slot_shuffle_v1",
+    "source_candidate_count": 12
+  },
+  "schema_version": "no-candidate-window-audit-v1",
+  "tool_version": "no-candidate-window-sampler-v1",
+  "windows": [
+    {
+      "duration_seconds": "25",
+      "end_sample": 23867962,
+      "end_seconds": "497.2492083333333333333333333",
+      "human_finding": null,
+      "human_notes": null,
+      "human_review_status": "PENDING_HUMAN_LISTENING",
+      "review_scope": "listen to all aligned input tracks over the same timeline window",
+      "start_sample": 22667962,
+      "start_seconds": "472.2492083333333333333333333",
+      "window_id": "NC001"
+    },
+    {
+      "duration_seconds": "25",
+      "end_sample": 48975907,
+      "end_seconds": "1020.331395833333333333333333",
+      "human_finding": null,
+      "human_notes": null,
+      "human_review_status": "PENDING_HUMAN_LISTENING",
+      "review_scope": "listen to all aligned input tracks over the same timeline window",
+      "start_sample": 47775907,
+      "start_seconds": "995.3313958333333333333333333",
+      "window_id": "NC002"
+    },
+    {
+      "duration_seconds": "25",
+      "end_sample": 52575907,
+      "end_seconds": "1095.331395833333333333333333",
+      "human_finding": null,
+      "human_notes": null,
+      "human_review_status": "PENDING_HUMAN_LISTENING",
+      "review_scope": "listen to all aligned input tracks over the same timeline window",
+      "start_sample": 51375907,
+      "start_seconds": "1070.331395833333333333333333",
+      "window_id": "NC003"
+    },
+    {
+      "duration_seconds": "25",
+      "end_sample": 56175907,
+      "end_seconds": "1170.331395833333333333333333",
+      "human_finding": null,
+      "human_notes": null,
+      "human_review_status": "PENDING_HUMAN_LISTENING",
+      "review_scope": "listen to all aligned input tracks over the same timeline window",
+      "start_sample": 54975907,
+      "start_seconds": "1145.331395833333333333333333",
+      "window_id": "NC004"
+    },
+    {
+      "duration_seconds": "25",
+      "end_sample": 62175907,
+      "end_seconds": "1295.331395833333333333333333",
+      "human_finding": null,
+      "human_notes": null,
+      "human_review_status": "PENDING_HUMAN_LISTENING",
+      "review_scope": "listen to all aligned input tracks over the same timeline window",
+      "start_sample": 60975907,
+      "start_seconds": "1270.331395833333333333333333",
+      "window_id": "NC005"
+    },
+    {
+      "duration_seconds": "25",
+      "end_sample": 64575907,
+      "end_seconds": "1345.331395833333333333333333",
+      "human_finding": null,
+      "human_notes": null,
+      "human_review_status": "PENDING_HUMAN_LISTENING",
+      "review_scope": "listen to all aligned input tracks over the same timeline window",
+      "start_sample": 63375907,
+      "start_seconds": "1320.331395833333333333333333",
+      "window_id": "NC006"
+    },
+    {
+      "duration_seconds": "25",
+      "end_sample": 130395433,
+      "end_seconds": "2716.571520833333333333333333",
+      "human_finding": null,
+      "human_notes": null,
+      "human_review_status": "PENDING_HUMAN_LISTENING",
+      "review_scope": "listen to all aligned input tracks over the same timeline window",
+      "start_sample": 129195433,
+      "start_seconds": "2691.571520833333333333333333",
+      "window_id": "NC007"
+    },
+    {
+      "duration_seconds": "25",
+      "end_sample": 150795433,
+      "end_seconds": "3141.571520833333333333333333",
+      "human_finding": null,
+      "human_notes": null,
+      "human_review_status": "PENDING_HUMAN_LISTENING",
+      "review_scope": "listen to all aligned input tracks over the same timeline window",
+      "start_sample": 149595433,
+      "start_seconds": "3116.571520833333333333333333",
+      "window_id": "NC008"
+    }
+  ]
+}

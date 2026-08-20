@@ -1,0 +1,35 @@
+{
+  "schema_version": "training-readiness-v1",
+  "status": "NOT_READY",
+  "model_trained": false,
+  "checks": {
+    "valid_episodes": 2,
+    "valid_cases": 27,
+    "adjust_count": 0,
+    "reject_plus_adjust_ratio": 0.5555555555555556,
+    "review_mode_present": false,
+    "reviewer_count": 1,
+    "reviewers": [
+      "熊镇正"
+    ],
+    "has_independent_benchmark": false,
+    "has_independent_review": false,
+    "has_rollback_drill": false
+  },
+  "reasons": [
+    "有效数据量不足：27 < 500",
+    "有效审核期数不足：2 < 10",
+    "adjust 样本为 0，缺少边界调整证据",
+    "review_mode 尚未标准化",
+    "独立审核人不足：1 < 2",
+    "没有冻结独立 benchmark",
+    "没有独立复核",
+    "没有回滚演练"
+  ],
+  "prohibited_actions": [
+    "train_model",
+    "write_model_weights",
+    "modify_production_rules",
+    "auto_approve_edl"
+  ]
+}

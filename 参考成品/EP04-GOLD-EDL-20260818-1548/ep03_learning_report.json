@@ -1,0 +1,258 @@
+{
+  "schema_version": "mentor-gold-learning-v1",
+  "episode_id": "EP03",
+  "gold_source": "EP03-freshrun-20260810-1730/11_approved/approved.all.edl.json",
+  "total_gold_cuts": 56,
+  "matched_existing_patterns": {
+    "P-04_long_pause": 25,
+    "P-07_mentor_boundary_reverse": 15,
+    "P-05_immediate_rep": 1
+  },
+  "new_patterns_proposed": {
+    "semantic_boundary_review_mentor": 15
+  },
+  "rules_appended": 4,
+  "next_step": "editing-experience-distiller 生成 preferences_for_agent v2 · 把 EP03 gold 提入 aggregated.json",
+  "unmatched_samples": [
+    {
+      "cid": "C010",
+      "dur_ms": 280,
+      "deleted": "female: 的动作动\nmale: 用了这么",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C011",
+      "dur_ms": 400,
+      "deleted": "female: 话搜索搜\nmale: 话搜索搜",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C012",
+      "dur_ms": 580,
+      "deleted": "female: 还是移动端啊\nmale: 还是移动端移",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C013",
+      "dur_ms": 700,
+      "deleted": "female: 一个产品管家\nmale: 一个产品管家",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C017",
+      "dur_ms": 300,
+      "deleted": "female: 西一条一\nmale: 西一条一",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C021",
+      "dur_ms": 540,
+      "deleted": "female: ent对这个产\nmale: gent对这个产",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C026",
+      "dur_ms": 500,
+      "deleted": "female: 时候人类人\nmale: 时候人类人",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C029",
+      "dur_ms": 360,
+      "deleted": "female: 来那种那\nmale: 那套规",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C033",
+      "dur_ms": 480,
+      "deleted": "female: 出设计\nmale: 出设计",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C034",
+      "dur_ms": 640,
+      "deleted": "female: 到底不过不\nmale: 到底符不符",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C040",
+      "dur_ms": 380,
+      "deleted": "female: 西特别特\nmale: 西特别特",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C041",
+      "dur_ms": 400,
+      "deleted": "female: 选特别特\nmale: ature特别特",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    },
+    {
+      "cid": "C042",
+      "dur_ms": 1710,
+      "deleted": "female: 所以您提到就是像流程\nmale: 不成",
+      "reason": "包含犹豫或填充表达，候选删除后再确认语义是否连贯。"
+    },
+    {
+      "cid": "C048",
+      "dur_ms": 1160,
+      "deleted": "female: 讲就是对于\nmale: 讲对于",
+      "reason": "包含犹豫或填充表达，候选删除后再确认语义是否连贯。"
+    },
+    {
+      "cid": "C054",
+      "dur_ms": 340,
+      "deleted": "female: 会发现发\nmale: 会发现你",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。"
+    }
+  ],
+  "accept_reject_analysis": {
+    "reviewer": "熊镇正",
+    "source": "main/runs/EP03-review-product-v1/human_decisions.json",
+    "accept_count": 4,
+    "reject_count": 7,
+    "by_reason_key": {
+      "immediate_repetition": {
+        "accept": 2,
+        "reject": 5
+      },
+      "filler_hesitation": {
+        "accept": 2,
+        "reject": 2
+      }
+    },
+    "discriminator_signals": {
+      "cross_track_speaking": {
+        "accept_rate": "2/4",
+        "reject_rate": "0/7"
+      },
+      "primary_text_len": {
+        "accept_avg": 52.5,
+        "reject_avg": 60.6
+      }
+    },
+    "sample_cases": [
+      {
+        "cid": "C001",
+        "dec": "reject",
+        "reason_key": "filler_hesitation",
+        "primary_text": "工具画一个原型,然后画半天然后再跟团队内部以及研发去对对完以后可能才会再形成一个PRD然后可能也会有一些打磨的事情所以总",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 660,
+        "source_track": "track_01"
+      },
+      {
+        "cid": "C006",
+        "dec": "reject",
+        "reason_key": "immediate_repetition",
+        "primary_text": "的确认细节然后问他说bug在什么时候复线是web端还是移动端移动端是安卓还是苹果之类的对于用户的另一个视角看就是他",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 580,
+        "source_track": "track_02"
+      },
+      {
+        "cid": "C007",
+        "dec": "accept",
+        "reason_key": "immediate_repetition",
+        "primary_text": "馈的处理的这么一整个链路首先大家接触得到的就是一个产品管家产品管家核心但是的作用是在群里面",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 700,
+        "source_track": "track_02"
+      },
+      {
+        "cid": "C009",
+        "dec": "accept",
+        "reason_key": "immediate_repetition",
+        "primary_text": "到我们的用户反馈的需求池里面去我们会有一个专门的GateHub把所有的这种类型的东西一条一条e-shoot全部都放进来但它在提之前它还会做一个check的工作它会检查",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 300,
+        "source_track": "track_02"
+      },
+      {
+        "cid": "C011",
+        "dec": "reject",
+        "reason_key": "filler_hesitation",
+        "primary_text": "说整个团队就共用这么几个Agent核心目的是让这几个Agent对这个产品项目本身非常的了解所以我们就讲到说如果说产",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 540,
+        "source_track": "track_02"
+      },
+      {
+        "cid": "C013",
+        "dec": "reject",
+        "reason_key": "immediate_repetition",
+        "primary_text": "里一般都会有一个职位叫UI设计或者UX设计很多时候人类人类做产品经理和设计师配合大家都会幻想不能叫幻想都债想过一个东西叫",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 500,
+        "source_track": "track_02"
+      },
+      {
+        "cid": "C014",
+        "dec": "accept",
+        "reason_key": "filler_hesitation",
+        "primary_text": "是我们现在其实就已经设计了一套UI规范然后这个花花是不是就是已经把这个每次在设计UI之前都会读一套这个东西",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": true,
+        "dur_ms": 540,
+        "source_track": "track_01"
+      },
+      {
+        "cid": "C018",
+        "dec": "reject",
+        "reason_key": "immediate_repetition",
+        "primary_text": "所以研发可能他发现这个模块跟我有关的于是研发的agent就会出设计设计机包括技术设计也会催着去让花花去划对应的前端的",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 480,
+        "source_track": "track_02"
+      },
+      {
+        "cid": "C021",
+        "dec": "reject",
+        "reason_key": "immediate_repetition",
+        "primary_text": "往小一点说到底要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些feature特别特别的火我们要不要超或者我看到其他别",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 380,
+        "source_track": "track_02"
+      },
+      {
+        "cid": "C022",
+        "dec": "reject",
+        "reason_key": "immediate_repetition",
+        "primary_text": "要不要增加某个大的模块对吧最近进品哪个东西特别特别的火有一些feature特别特别的火我们要不要超或者我看到其他别的赛道的产品推了一些性",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": false,
+        "dur_ms": 400,
+        "source_track": "track_02"
+      },
+      {
+        "cid": "C024",
+        "dec": "accept",
+        "reason_key": "filler_hesitation",
+        "primary_text": "这个产品的构想包括我应该去服务我怎么去商业化等等一些的问题",
+        "ctx_before": "",
+        "ctx_after": "",
+        "cross_track_speaking": true,
+        "dur_ms": 980,
+        "source_track": "track_02"
+      }
+    ]
+  },
+  "learning_flow_used": "label-learning-driver (accept/reject discrimination)"
+}

@@ -1,0 +1,569 @@
+{
+  "schema_version": "gold-edl-v1",
+  "episode_id": "EP03",
+  "source": "approved.all.edl.json",
+  "gold_cuts_from_human_approved_edl": [
+    {
+      "candidate_id": "C001",
+      "start_sample": 1328160,
+      "end_sample": 1618560,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 理好的,\nmale: 理我是花南,现在在研究A IN AT IVE组织转型的话题",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C002",
+      "start_sample": 5007360,
+      "end_sample": 5088960,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 久这\nmale: 久还有印象",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C003",
+      "start_sample": 5600640,
+      "end_sample": 5735040,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 度对\nmale: 对吧,因为咱们研发可能比例会高一点对吧,1比6,",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C004",
+      "start_sample": 5748480,
+      "end_sample": 5887680,
+      "crossfade_ms": 50,
+      "category": "filler_hesitation",
+      "reason": "包含犹豫或填充表达，候选删除后再确认语义是否连贯。",
+      "deleted_text": "female: 对因为\nmale: 6,1比8都有可能就是研发跟PM的比",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C005",
+      "start_sample": 6064320,
+      "end_sample": 6340800,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 具画一个原型,然后画半天然后再跟团队内部以及研发去对对完以后可能\nmale: 具对,",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C006",
+      "start_sample": 6354240,
+      "end_sample": 6475200,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 才会再形成一个PR D然后可能\nmale: 对,你",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C007",
+      "start_sample": 6571200,
+      "end_sample": 6688320,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 体来说,我们这个市场并不短对,然后如果\nmale: 对,然后如果",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C008",
+      "start_sample": 7069440,
+      "end_sample": 7166400,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 是这\nmale: 吧,这种一般时间会多久还有",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C009",
+      "start_sample": 8314560,
+      "end_sample": 8365440,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 上对,然后为什么\nmale: 上对,然后为什么",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C010",
+      "start_sample": 9027840,
+      "end_sample": 9041280,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 的动作动\nmale: 用了这么",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C011",
+      "start_sample": 10501440,
+      "end_sample": 10520640,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 话搜索搜\nmale: 话搜索搜",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C012",
+      "start_sample": 13300320,
+      "end_sample": 13328160,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 还是移动端啊\nmale: 还是移动端移",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C013",
+      "start_sample": 14633760,
+      "end_sample": 14667360,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 一个产品管家\nmale: 一个产品管家",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C014",
+      "start_sample": 16284000,
+      "end_sample": 16339680,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 对99然后\nmale: 对,然后还有",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C015",
+      "start_sample": 17942400,
+      "end_sample": 18039360,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 然后我\nmale: 然后我估",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C016",
+      "start_sample": 18652320,
+      "end_sample": 18936480,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 评审和上线的那套流程但是每一个环节都是用一个特定的岗位的ag ent去写或替代\nmale: 对但",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C017",
+      "start_sample": 23172000,
+      "end_sample": 23186400,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 西一条一\nmale: 西一条一",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C018",
+      "start_sample": 25731360,
+      "end_sample": 25812000,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 程了解那\nmale: 程那",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C019",
+      "start_sample": 26003040,
+      "end_sample": 26189760,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 刚刚提到99花花他们都是我们产品团队自己去训练的\nmale: 干的",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C020",
+      "start_sample": 26445120,
+      "end_sample": 26492160,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 色然后针对\nmale: 色然后对",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C021",
+      "start_sample": 26949120,
+      "end_sample": 26975040,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: ent对这个产\nmale: gent对这个产",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C022",
+      "start_sample": 29304000,
+      "end_sample": 29385600,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 这个做叫做\nmale: 做",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C023",
+      "start_sample": 32880960,
+      "end_sample": 33000000,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 的比较的产\nmale: 的产",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C024",
+      "start_sample": 37459200,
+      "end_sample": 37644480,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 背景还有cont ext包括一些团队间的沟通其实也都是现在AI\nmale: 进来",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C025",
+      "start_sample": 37673280,
+      "end_sample": 37857120,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 的那咱们为什么能达到这种很全流程自动的状态呢\nmale: 不到我觉得",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C026",
+      "start_sample": 38831520,
+      "end_sample": 38855520,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 时候人类人\nmale: 时候人类人",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C027",
+      "start_sample": 39255840,
+      "end_sample": 39538560,
+      "crossfade_ms": 50,
+      "category": "filler_hesitation",
+      "reason": "包含犹豫或填充表达，候选删除后再确认语义是否连贯。",
+      "deleted_text": "female: 我们现在其实就已经设计了一套UI规范然后这个花花是不是就是已经把这个每次在设\nmale: 吧对",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C028",
+      "start_sample": 40379520,
+      "end_sample": 40427520,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 能对然后这个时候\nmale: 能然后这个时候",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C029",
+      "start_sample": 40616640,
+      "end_sample": 40633920,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 来那种那\nmale: 那套规",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C030",
+      "start_sample": 45323520,
+      "end_sample": 45524160,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 他们产出的PR D和原型给到研发现在是直接可用的吗\nmale: 队我们",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C031",
+      "start_sample": 46096320,
+      "end_sample": 46180800,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 说奥\nmale: 说O",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C032",
+      "start_sample": 46559040,
+      "end_sample": 46600320,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 但人类P\nmale: 但人类PM人类",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C033",
+      "start_sample": 48805440,
+      "end_sample": 48828480,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 出设计\nmale: 出设计",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C034",
+      "start_sample": 50056320,
+      "end_sample": 50087040,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 到底不过不\nmale: 到底符不符",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C035",
+      "start_sample": 50293440,
+      "end_sample": 50374080,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 断然后研\nmale: 断然后",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C036",
+      "start_sample": 51842880,
+      "end_sample": 52076640,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 策然后以及审美方向的事情上其实就够了对\nmale: 策对",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C037",
+      "start_sample": 53565600,
+      "end_sample": 53698080,
+      "crossfade_ms": 50,
+      "category": "filler_hesitation",
+      "reason": "包含犹豫或填充表达，候选删除后再确认语义是否连贯。",
+      "deleted_text": "female: 事情就是\nmale: 事情我们",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C038",
+      "start_sample": 54047040,
+      "end_sample": 54087360,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 下面的用户的\nmale: 下面的用户的",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C039",
+      "start_sample": 55948800,
+      "end_sample": 56034240,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 这个里\nmale: 包括里面",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C040",
+      "start_sample": 63173280,
+      "end_sample": 63191520,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 西特别特\nmale: 西特别特",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C041",
+      "start_sample": 63255840,
+      "end_sample": 63275040,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 选特别特\nmale: ature特别特",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C042",
+      "start_sample": 64480800,
+      "end_sample": 64562880,
+      "crossfade_ms": 50,
+      "category": "filler_hesitation",
+      "reason": "包含犹豫或填充表达，候选删除后再确认语义是否连贯。",
+      "deleted_text": "female: 所以您提到就是像流程\nmale: 不成",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C043",
+      "start_sample": 64590720,
+      "end_sample": 64932480,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 工作其实更多的可以被A IT带但是比较开放性的这些问题或者工作更多的还是以人为主导的\nmale: 的对",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C044",
+      "start_sample": 67146240,
+      "end_sample": 67360320,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 就其实AI已经能干很多传统产品经理的一些这种封闭式的\nmale: 那是不是",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C045",
+      "start_sample": 67458240,
+      "end_sample": 67638720,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 人都是AI产品经理这个话题到底成不成立呢\nmale: 人对",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C046",
+      "start_sample": 67856640,
+      "end_sample": 67951680,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 很多产\nmale: 很多产",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C047",
+      "start_sample": 69150720,
+      "end_sample": 69229440,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 我觉得\nmale: 我觉得自",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C048",
+      "start_sample": 70122240,
+      "end_sample": 70177920,
+      "crossfade_ms": 50,
+      "category": "filler_hesitation",
+      "reason": "包含犹豫或填充表达，候选删除后再确认语义是否连贯。",
+      "deleted_text": "female: 讲就是对于\nmale: 讲对于",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C049",
+      "start_sample": 71542080,
+      "end_sample": 71663040,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 了所以\nmale: 了所以",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C050",
+      "start_sample": 72369600,
+      "end_sample": 72477120,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 的那\nmale: 货你看",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C051",
+      "start_sample": 73383360,
+      "end_sample": 73638720,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 展对我们感觉更多的会讨论一下我们自己的想法然后以及对未来的这个\nmale: 展对",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C052",
+      "start_sample": 75242880,
+      "end_sample": 75327360,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 的然后\nmale: 的然后",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C053",
+      "start_sample": 75880320,
+      "end_sample": 75976320,
+      "crossfade_ms": 50,
+      "category": "filler_hesitation",
+      "reason": "包含犹豫或填充表达，候选删除后再确认语义是否连贯。",
+      "deleted_text": "female: 难就是\nmale: 难",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C054",
+      "start_sample": 76145280,
+      "end_sample": 76161600,
+      "crossfade_ms": 50,
+      "category": "pause",
+      "reason": "短停顿或呼吸空白候选，不应删除完整语词。",
+      "deleted_text": "female: 会发现发\nmale: 会发现你",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C055",
+      "start_sample": 76549440,
+      "end_sample": 76632000,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 足现在\nmale: 足现在",
+      "bulk_review_decision": "accept"
+    },
+    {
+      "candidate_id": "C056",
+      "start_sample": 82852800,
+      "end_sample": 83170080,
+      "crossfade_ms": 50,
+      "category": "boundary_review",
+      "reason": "该区间来自 Mentor 成品反推，当前无法可靠确定其语义删减原因。",
+      "deleted_text": "female: 好的产品经理人的能力然后也加速了我们整体的构建流程但是其实更好的判断或者是\nmale: 好的决",
+      "bulk_review_decision": "accept"
+    }
+  ],
+  "human_decisions_reviewed": 11,
+  "learned_rules_count": 11
+}

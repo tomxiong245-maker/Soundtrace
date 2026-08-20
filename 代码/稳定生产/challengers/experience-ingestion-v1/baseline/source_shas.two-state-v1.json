@@ -1,0 +1,90 @@
+{
+  "frozen_at": "2026-08-12T16:27:00+08:00",
+  "supersedes": "source_shas.json",
+  "purpose": "为二态 accept/reject 经验快照重新冻结已复核来源；不修改原 baseline。",
+  "revalidation": {
+    "trigger": "旧 baseline 中 EP04 filler/long-pause 的 human_decisions.json 与 review_session_metrics.json 已在审核保存后发生 SHA 漂移，导入器已先 fail-closed。",
+    "checked_at": "2026-08-12T16:22:51+08:00",
+    "checked_by": "本地只读比较",
+    "semantic_check": "当前 C001/C010/C032 的 candidate_id、candidate_semantic_sha256、decision、reviewer、decided_at、review_basis 与旧 Challenger 已导入案例的投影完全一致；review_bundle-final/review_package.json SHA 未变。",
+    "limits": "这只证明既有三条人工决定的语义投影未变，不把旧报告当作当前来源的内容备份，也不构成生产规则或模型训练授权。"
+  },
+  "sources": {
+    "EP03-review-product-v1": {
+      "path": "main/runs/EP03-review-product-v1",
+      "files": {
+        "human_decisions.json": {
+          "sha256": "5168e5bf832995ce7a2936737dd1e67114e1a5a928717d2ab6f6ed3ebfbe5d57",
+          "size": 4179
+        },
+        "review_session_metrics.json": {
+          "sha256": "ab012163d17c084a74bcf7c815351094e17a169878d7c9045ace3405d70e79eb",
+          "size": 3005
+        },
+        "approved.edl.draft.json": {
+          "sha256": "3a9961d67759dac61238b8b319ed3bb221e9d86d1c0e57372b73899ecf6aa656",
+          "size": 2863
+        },
+        "review_bundle/review_package.json": {
+          "sha256": "114d8c6ca623c3925af99dd7bfc5104b0bfa820efcd3db9790ec2234db0306d8",
+          "size": 195832
+        }
+      }
+    },
+    "EP04-review-product-v2": {
+      "path": "main/runs/EP04-review-product-v2",
+      "files": {
+        "human_decisions.json": {
+          "sha256": "29d8a07a97177b3124c2c65212da268855990f3659333f379cc5094449e41fa6",
+          "size": 6310
+        },
+        "review_session_metrics.json": {
+          "sha256": "200488b097f69580332d8dd11cd97ddeda5019f347f4bec6178f7cff862eac67",
+          "size": 3392
+        },
+        "approved.edl.draft.json": {
+          "sha256": "87a1f4f51e2c2ef788d95581b848073a2122fdc5d324524fcede446148e5a148",
+          "size": 3591
+        },
+        "review_bundle/review_package.json": {
+          "sha256": "f9f95bb4e5c26fe8c998be4cb3877bb5cec6ebcf4aedacadfdbcd17bb8d5488c",
+          "size": 254663
+        }
+      }
+    },
+    "EP04-filler-global-pause-v1-r2-20260812": {
+      "path": "main/runs/EP04-filler-global-pause-v1-r2-20260812",
+      "files": {
+        "human_decisions.json": {
+          "sha256": "8f89a8b8563dbb4f98cd6f2a7709efd356d5f9dd65e35d2a49e6e77ffd4362a8",
+          "size": 2118
+        },
+        "review_session_metrics.json": {
+          "sha256": "4b060149c541ff5c46e5215167655a6a39644a1001185e6d8c2ca17b5c18547b",
+          "size": 1385
+        },
+        "bridge_report.json": {
+          "sha256": "543d9b505285206b23f0768bfa966b0c6f91a9684191282f87df9d5002543da3",
+          "size": 687
+        },
+        "review_bundle/review_package.json": {
+          "sha256": "825e28639946021da96609f76b4c9c9ebbf0bb285d75afdad9ded8a86d94d341",
+          "size": 56013
+        },
+        "review_bundle-final/review_package.json": {
+          "sha256": "cc4eb71b65035fd8548f5e924b5f8f109f55e0c9f4816043565f4493aa7cc57d",
+          "size": 56130
+        }
+      }
+    },
+    "EP03-bulk-accept": {
+      "path": "main/runs/EP03",
+      "files": {
+        "human_decisions.json": {
+          "sha256": "b138aedb7131901de4451423409f724b3182f5d298f1dbac07805ba82e300ae7",
+          "size": 3779
+        }
+      }
+    }
+  }
+}

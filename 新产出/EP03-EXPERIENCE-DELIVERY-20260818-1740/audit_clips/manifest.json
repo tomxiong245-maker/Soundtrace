@@ -1,0 +1,43 @@
+{
+  "schema_version": "audit-clips-v1",
+  "context_seconds": 3.0,
+  "intro_music_offset_s": 5.0,
+  "clips": [
+    {
+      "candidate_id": "C007",
+      "start_speech_seconds": 136.9,
+      "dur_ms": 2440,
+      "accum_prior_cut_s": 0,
+      "cut_start_in_master_s": 141.9,
+      "original_file": "01_C007_@136s_原.mp3",
+      "cut_file": "01_C007_@136s_剪后.mp3"
+    },
+    {
+      "candidate_id": "C009",
+      "start_speech_seconds": 173.22,
+      "dur_ms": 1060,
+      "accum_prior_cut_s": 2.44,
+      "cut_start_in_master_s": 175.78,
+      "original_file": "02_C009_@173s_原.mp3",
+      "cut_file": "02_C009_@173s_剪后.mp3"
+    },
+    {
+      "candidate_id": "C014",
+      "start_speech_seconds": 339.25,
+      "dur_ms": 1160,
+      "accum_prior_cut_s": 3.5,
+      "cut_start_in_master_s": 340.75,
+      "original_file": "03_C014_@339s_原.mp3",
+      "cut_file": "03_C014_@339s_剪后.mp3"
+    },
+    {
+      "candidate_id": "C024",
+      "start_speech_seconds": 780.4,
+      "dur_ms": 3860,
+      "accum_prior_cut_s": 4.66,
+      "cut_start_in_master_s": 780.74,
+      "original_file": "04_C024_@780s_原.mp3",
+      "cut_file": "04_C024_@780s_剪后.mp3"
+    }
+  ]
+}

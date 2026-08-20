@@ -1,0 +1,131 @@
+{
+  "schema_version": "integration-governance-v1",
+  "registry_id": "owner-attested-mainline-20260818-v1",
+  "updated_at": "2026-08-18",
+  "purpose": "Record owner-approved component adoption separately from semantic edit approval and independent quality verification.",
+  "policy": {
+    "component_adoption_gate": "OWNER_ATTESTED_INTEGRATE permits a capability to enter future mainline runs; it does not claim independent verification, human semantic approval, Champion promotion, or publish approval.",
+    "semantic_edit_gate": "human_accept or an explicitly promoted, bounded autocut policy remains the only authority for a semantic deletion action.",
+    "verification_order": "Independent audit, benchmark, and rollback verification may happen after mainline integration; a defect reopens only the affected capability scope and never rewrites historical run evidence.",
+    "evidence_labels": [
+      "OWNER_ATTESTED_INTEGRATE",
+      "EVIDENCE_VERIFIED_INTEGRATE",
+      "INTEGRATED_PENDING_REAL_RUN",
+      "REOPENED_ON_ISSUE",
+      "ISOLATED_NOT_MAINLINE",
+      "DEFERRED"
+    ],
+    "prohibited_conflations": [
+      "component adoption is not human_accept",
+      "owner attestation is not an independent benchmark result",
+      "machine output is not a human decision",
+      "a Challenger remains rollbackable after integration"
+    ]
+  },
+  "mainline": [
+    {
+      "capability_id": "self_correction_wordlevel",
+      "kind": "candidate_family",
+      "status": "OWNER_ATTESTED_INTEGRATE",
+      "mainline_scope": "candidate generation -> canonical candidate normalization -> high-risk human review -> EDL only after human_accept",
+      "source": "稳定生产/challengers/self-correction-v1/scripts/detect_self_correction_wordlevel.py",
+      "safety": "human_review_required; never auto-cut",
+      "reopen_trigger": "false positive, missing retry span, boundary mismatch, or cross-track conflict"
+    },
+    {
+      "capability_id": "transient_cough_detection",
+      "kind": "candidate_family",
+      "status": "OWNER_ATTESTED_INTEGRATE",
+      "mainline_scope": "candidate generation -> canonical transient candidate -> high-risk source-track review -> source_track_gate only after human_accept",
+      "source": "稳定生产/challengers/transient-events-v1/scripts/detect_transient_events.py",
+      "safety": "human_review_required; cough is never a global semantic cut and mic_bump/thump remain disabled unless separately enabled",
+      "reopen_trigger": "false positive, speech veto miss, wrong source track, or gate/render mismatch"
+    },
+    {
+      "capability_id": "main_mic_automix",
+      "kind": "mixing_capability",
+      "status": "OWNER_ATTESTED_INTEGRATE",
+      "mainline_scope": "post-EDL mix stage with run-local manifest, output SHA, loudness/QC and rollback to direct-mix",
+      "source": "稳定生产/challengers/automix-v1/scripts/automix_v1.py",
+      "safety": "mixing only; cannot create or alter semantic EDL actions",
+      "reopen_trigger": "pumping, speech suppression, primary-track error, loudness drift, or missing provenance"
+    },
+    {
+      "capability_id": "source_track_gate_rendering",
+      "kind": "rendering_capability",
+      "status": "OWNER_ATTESTED_INTEGRATE",
+      "mainline_scope": "apply source_track_gate actions before mix while preserving global timeline and action provenance",
+      "source": "main/orchestrator/delivery_orchestrator.py and legacy whole-episode EDL evidence",
+      "safety": "track-local only; never represented as a global semantic cut",
+      "reopen_trigger": "duration change, wrong-track mute, gate hash mismatch, or cross-track leakage"
+    },
+    {
+      "capability_id": "music_ducking",
+      "kind": "mixing_capability",
+      "status": "OWNER_ATTESTED_INTEGRATE",
+      "mainline_scope": "music sidechain/ducking parameters frozen in run manifest and independently reversible",
+      "source": "main/orchestrator/music_templates.json and owner-confirmed Claude Code implementation evidence",
+      "safety": "audio level automation only; never changes semantic content or EDL boundaries",
+      "reopen_trigger": "music masks speech, incorrect timing, gain/pumping artifact, or release-spec mismatch"
+    },
+    {
+      "capability_id": "deepfilternet_production_audit",
+      "kind": "upstream_audio_capability",
+      "status": "OWNER_ATTESTED_INTEGRATE",
+      "mainline_scope": "ordinary new runs use the audited local adapter; source SHA, output SHA and license/audit record stay in the run",
+      "source": "稳定生产/challengers/review-product-v1/audits/deepfilternet.md",
+      "safety": "raw audio remains read-only; changed binary/parameters reopen the audit"
+    },
+    {
+      "capability_id": "tool_skill_adapter_layer",
+      "kind": "orchestration_capability",
+      "status": "OWNER_ATTESTED_INTEGRATE",
+      "mainline_scope": "new capabilities are invoked through a registered Tool + Skill/adapter contract, with direct orchestrator fallback during parity rollout",
+      "source": "稳定生产/challengers/tool-orchestrator-v2/ and project skills registry",
+      "safety": "adapter output paths, writes policy, SHA and rollback must be validated before production use",
+      "reopen_trigger": "adapter drift, output escape, missing provenance, overwrite, or failed recovery"
+    },
+    {
+      "capability_id": "ep03_mentor_learning_line",
+      "kind": "independent_learning_line",
+      "status": "OWNER_ATTESTED_INTEGRATE",
+      "mainline_scope": "separate Mentor-raw alignment/edit-map/rule-mining line; outputs Challenger rules only until benchmark and promotion",
+      "source": "端到端学习剪辑/ and benchmark/editing-e2e-v1/",
+      "safety": "isolated from the production semantic gate; no direct Champion overwrite"
+    }
+  ],
+  "mainline_exclusions": [
+    {
+      "capability_id": "semantic_duplicate",
+      "status": "DEFERRED",
+      "reason": "user explicitly narrowed the near-term candidate scope"
+    },
+    {
+      "capability_id": "off_topic",
+      "status": "DEFERRED",
+      "reason": "user explicitly narrowed the near-term candidate scope"
+    },
+    {
+      "capability_id": "crosstalk_attribution",
+      "status": "DEFERRED",
+      "reason": "user explicitly narrowed the near-term candidate scope"
+    },
+    {
+      "capability_id": "supervised_learning_model",
+      "status": "ISOLATED_NOT_MAINLINE",
+      "reason": "user explicitly asked to separate this practice line from the main product"
+    },
+    {
+      "capability_id": "loop_runtime",
+      "status": "ISOLATED_NOT_MAINLINE",
+      "reason": "user explicitly asked to separate this practice line from the main product"
+    }
+  ],
+  "current_run_protection": "This registry affects future new runs only; EP04-label-loop-v1-20260815-1805 and other runs with review_draft.json or final decisions remain immutable.",
+  "owner_attestation": {
+    "authority": "project owner statement in current task",
+    "recorded_by": "Codex",
+    "recorded_at": "2026-08-18",
+    "independent_verification": "pending per capability; do not rewrite this field as verified without evidence"
+  }
+}

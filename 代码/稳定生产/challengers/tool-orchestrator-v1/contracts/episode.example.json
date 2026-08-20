@@ -1,0 +1,57 @@
+{
+  "episode_id": "TOOL-ORCH-FIXTURE-example",
+  "tracks": [
+    {
+      "track_id": "track_01",
+      "label": "physical_mic_01",
+      "input_path": "main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-<timestamp>/fixtures/track_01.wav",
+      "sample_rate": 48000,
+      "channel_count": 1,
+      "duration_seconds": 2.0,
+      "sha256": "<measured>"
+    },
+    {
+      "track_id": "track_02",
+      "label": "physical_mic_02",
+      "input_path": "main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-<timestamp>/fixtures/track_02.wav",
+      "sample_rate": 48000,
+      "channel_count": 1,
+      "duration_seconds": 2.0,
+      "sha256": "<measured>"
+    },
+    {
+      "track_id": "track_03",
+      "label": "physical_mic_03",
+      "input_path": "main/runs/TOOL-ORCH-FIXTURE-tool-orchestrator-v1-<timestamp>/fixtures/track_03.wav",
+      "sample_rate": 48000,
+      "channel_count": 1,
+      "duration_seconds": 2.0,
+      "sha256": "<measured>"
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "01_inspect_all",
+      "tool": "inspect_audio_adapter",
+      "phase": "pre_review",
+      "params": {
+        "input_wav": [
+          "@track:track_01.input_path",
+          "@track:track_02.input_path",
+          "@track:track_03.input_path"
+        ],
+        "output_json": "run:01_inspect/inspection.json"
+      }
+    },
+    {
+      "step_id": "02_summary",
+      "tool": "summarize_inspection_adapter",
+      "phase": "pre_review",
+      "params": {
+        "input_json": "run:01_inspect/inspection.json",
+        "output_json": "run:02_summary/summary.json"
+      }
+    }
+  ],
+  "human_review_after": "02_summary"
+}
