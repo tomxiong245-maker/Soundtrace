@@ -59,3 +59,22 @@ p05_evidence_screenshot.jpg
 
 # === 本地 push log ===
 .git_push_log*.txt
+
+# === M2 · 敏感转写 (2026-08-21 开源前清理) ===
+knowledge/learned_examples_*.md
+
+# === stale · 老 skill 备份 · 老里程碑 · superseded (2026-08-21 开源前清理) ===
+deprecated备份/
+交付前SHA基线-2026-08-19/
+*.v1-with-numbers-superseded
+verify/sync_delivery.sh.bak
+
+# === 老 run 产物 · 开源不需要 (2026-08-21 开源前清理) ===
+新产出/EP03-EXPERIENCE-DELIVERY-20260818-1740/
+新产出/EP04-C007-AB-COMPARE-2026-8-19/
+新产出/EP04-CUT-VERIFY-2026-8-19/
+新产出/EP04-DELIVERY-2026-8-19-GOLD/
+新产出/EP04-DELIVERY-V04-STRATEGY-2026-08-19-0030/
+参考成品/EP04-DELIVERY-20260817-1427/
+参考成品/EP04-GOLD-EDL-20260818-1548/
+benchmark/

@@ -1,5 +1,0 @@
-{
-  "engine": "funasr_paraformer",
-  "status": "WAITING_FOR_M3_RUN",
-  "note": "由 exact_commands.sh 的 [B2] 步骤在 Apple M3 上产出后，通过 build_hypotheses_layer.py 发布到本目录。"
-}

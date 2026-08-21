@@ -1,4 +1,0 @@
-interface:
-  display_name: "标签学习驱动器"
-  short_description: "将真人标签转成可解释、可回测的机器建议"
-  default_prompt: "Use $label-learning-driver to freeze the active human-label snapshot, create safe machine suggestions, and run a leakage-safe backtest without modifying human decisions."

@@ -1,47 +1,0 @@
-ffmpeg version 9.0.1 Copyright (c) 2000-2026 the FFmpeg developers
-  built with Apple clang version 17.0.0 (clang-1700.6.4.2)
-  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/9.0.1 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvmaf --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --enable-neon
-  libavutil      61.  1.101 / 61.  1.101
-  libavcodec     63.  1.101 / 63.  1.101
-  libavformat    63.  1.101 / 63.  1.101
-  libavdevice    63.  1.101 / 63.  1.101
-  libavfilter    12.  1.101 / 12.  1.101
-  libswscale     10.  1.101 / 10.  1.101
-  libswresample   7.  1.101 /  7.  1.101
-[aist#0:0/pcm_s16le @ 0x132e14ae0] Guessed Channel Layout: mono
-Input #0, wav, from '交付/2026-08-18-skill重构/新产出/EP03-EXPERIENCE-DELIVERY-20260818-1740/tmp/speech.mono.wav':
-  Duration: 00:29:38.46, bitrate: 768 kb/s
-  Stream #0:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 48000 Hz, mono, s16, 768 kb/s
-[in#1/mp3 @ 0x132e14e10] Estimating duration from bitrate, this may be inaccurate
-Input #1, mp3, from '音频参考库/raw material/第三集/片头片尾music.mp3':
-  Metadata:
-    encoder         : LAME3.101 (beta 2)
-  Duration: 00:00:59.98, start: 0.000000, bitrate: 192 kb/s
-  Stream #1:0: Audio: mp3 (mp3float), 48000 Hz, stereo, fltp, 192 kb/s
-Stream mapping:
-  Stream #0:0 (pcm_s16le) -> adelay:default
-  Stream #1:0 (mp3float) -> atrim:default
-  Stream #1:0 (mp3float) -> atrim:default
-  loudnorm:default -> Stream #0:0 (pcm_s16le)
-Press [q] to stop, [?] for help
-Output #0, null, to 'pipe:':
-  Metadata:
-    encoder         : Lavf63.1.101
-  Stream #0:0: Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s
-    Metadata:
-      encoder         : Lavc63.1.101 pcm_s16le
-size=N/A time=00:00:26.39 bitrate=N/A speed=52.3x elapsed=0:00:00.50    size=N/A time=00:00:54.09 bitrate=N/A speed=53.6x elapsed=0:00:01.01    size=N/A time=00:01:21.89 bitrate=N/A speed=54.1x elapsed=0:00:01.51    size=N/A time=00:01:49.39 bitrate=N/A speed=54.2x elapsed=0:00:02.02    size=N/A time=00:02:16.99 bitrate=N/A speed=54.3x elapsed=0:00:02.52    size=N/A time=00:02:44.49 bitrate=N/A speed=54.3x elapsed=0:00:03.03    size=N/A time=00:03:11.89 bitrate=N/A speed=54.3x elapsed=0:00:03.53    size=N/A time=00:03:39.39 bitrate=N/A speed=54.3x elapsed=0:00:04.04    size=N/A time=00:04:06.89 bitrate=N/A speed=54.4x elapsed=0:00:04.54    size=N/A time=00:04:34.29 bitrate=N/A speed=54.4x elapsed=0:00:05.04    size=N/A time=00:04:59.89 bitrate=N/A speed=  54x elapsed=0:00:05.55    size=N/A time=00:05:27.59 bitrate=N/A speed=54.1x elapsed=0:00:06.05    size=N/A time=00:05:54.69 bitrate=N/A speed=54.1x elapsed=0:00:06.56    size=N/A time=00:06:22.49 bitrate=N/A speed=54.1x elapsed=0:00:07.06    size=N/A time=00:06:50.19 bitrate=N/A speed=54.2x elapsed=0:00:07.57    size=N/A time=00:07:17.99 bitrate=N/A speed=54.2x elapsed=0:00:08.07    size=N/A time=00:07:45.79 bitrate=N/A speed=54.3x elapsed=0:00:08.58    size=N/A time=00:08:13.39 bitrate=N/A speed=54.3x elapsed=0:00:09.08    size=N/A time=00:08:41.19 bitrate=N/A speed=54.3x elapsed=0:00:09.59    size=N/A time=00:09:08.79 bitrate=N/A speed=54.4x elapsed=0:00:10.09    size=N/A time=00:09:36.29 bitrate=N/A speed=54.4x elapsed=0:00:10.59    size=N/A time=00:10:03.29 bitrate=N/A speed=54.3x elapsed=0:00:11.10    size=N/A time=00:10:30.89 bitrate=N/A speed=54.4x elapsed=0:00:11.60    size=N/A time=00:10:58.59 bitrate=N/A speed=54.4x elapsed=0:00:12.10    size=N/A time=00:11:26.39 bitrate=N/A speed=54.4x elapsed=0:00:12.61    size=N/A time=00:11:54.09 bitrate=N/A speed=54.4x elapsed=0:00:13.11    size=N/A time=00:12:21.89 bitrate=N/A speed=54.5x elapsed=0:00:13.62    size=N/A time=00:12:49.69 bitrate=N/A speed=54.5x elapsed=0:00:14.12    size=N/A time=00:13:17.29 bitrate=N/A speed=54.5x elapsed=0:00:14.63    size=N/A time=00:13:44.99 bitrate=N/A speed=54.5x elapsed=0:00:15.13    size=N/A time=00:14:12.79 bitrate=N/A speed=54.5x elapsed=0:00:15.64    size=N/A time=00:14:39.79 bitrate=N/A speed=54.5x elapsed=0:00:16.14    size=N/A time=00:15:07.39 bitrate=N/A speed=54.5x elapsed=0:00:16.65    size=N/A time=00:15:34.99 bitrate=N/A speed=54.5x elapsed=0:00:17.15    size=N/A time=00:16:02.59 bitrate=N/A speed=54.5x elapsed=0:00:17.66    size=N/A time=00:16:30.29 bitrate=N/A speed=54.5x elapsed=0:00:18.16    size=N/A time=00:16:57.89 bitrate=N/A speed=54.5x elapsed=0:00:18.67    size=N/A time=00:17:25.29 bitrate=N/A speed=54.5x elapsed=0:00:19.17    size=N/A time=00:17:52.79 bitrate=N/A speed=54.5x elapsed=0:00:19.67    size=N/A time=00:18:20.29 bitrate=N/A speed=54.5x elapsed=0:00:20.18    size=N/A time=00:18:47.89 bitrate=N/A speed=54.5x elapsed=0:00:20.68    size=N/A time=00:19:15.29 bitrate=N/A speed=54.5x elapsed=0:00:21.19    size=N/A time=00:19:42.89 bitrate=N/A speed=54.5x elapsed=0:00:21.69    size=N/A time=00:20:10.49 bitrate=N/A speed=54.5x elapsed=0:00:22.20    size=N/A time=00:20:38.09 bitrate=N/A speed=54.5x elapsed=0:00:22.70    size=N/A time=00:21:05.79 bitrate=N/A speed=54.5x elapsed=0:00:23.21    size=N/A time=00:21:33.49 bitrate=N/A speed=54.5x elapsed=0:00:23.71    size=N/A time=00:22:00.99 bitrate=N/A speed=54.5x elapsed=0:00:24.22    size=N/A time=00:22:28.79 bitrate=N/A speed=54.5x elapsed=0:00:24.72    size=N/A time=00:22:56.49 bitrate=N/A speed=54.6x elapsed=0:00:25.23    size=N/A time=00:23:24.19 bitrate=N/A speed=54.6x elapsed=0:00:25.73    size=N/A time=00:23:51.89 bitrate=N/A speed=54.6x elapsed=0:00:26.24    size=N/A time=00:24:19.29 bitrate=N/A speed=54.6x elapsed=0:00:26.74    size=N/A time=00:24:46.69 bitrate=N/A speed=54.6x elapsed=0:00:27.24    size=N/A time=00:25:14.19 bitrate=N/A speed=54.6x elapsed=0:00:27.74    size=N/A time=00:25:41.89 bitrate=N/A speed=54.6x elapsed=0:00:28.25    size=N/A time=00:26:09.39 bitrate=N/A speed=54.6x elapsed=0:00:28.75    size=N/A time=00:26:36.79 bitrate=N/A speed=54.6x elapsed=0:00:29.25    size=N/A time=00:27:04.39 bitrate=N/A speed=54.6x elapsed=0:00:29.76    size=N/A time=00:27:31.29 bitrate=N/A speed=54.6x elapsed=0:00:30.26    size=N/A time=00:27:58.89 bitrate=N/A speed=54.6x elapsed=0:00:30.77    size=N/A time=00:28:26.49 bitrate=N/A speed=54.6x elapsed=0:00:31.27    size=N/A time=00:28:54.19 bitrate=N/A speed=54.6x elapsed=0:00:31.78    size=N/A time=00:29:21.79 bitrate=N/A speed=54.6x elapsed=0:00:32.28    size=N/A time=00:29:49.29 bitrate=N/A speed=54.6x elapsed=0:00:32.79    size=N/A time=00:30:16.99 bitrate=N/A speed=54.6x elapsed=0:00:33.29    [Parsed_loudnorm_13 @ 0x132f08b80] 
-{
-	"input_i" : "-20.90",
-	"input_tp" : "5.31",
-	"input_lra" : "7.40",
-	"input_thresh" : "-31.46",
-	"output_i" : "-22.86",
-	"output_tp" : "-1.00",
-	"output_lra" : "6.30",
-	"output_thresh" : "-33.36",
-	"normalization_type" : "dynamic",
-	"target_offset" : "0.66"
-}
-[out#0/null @ 0x134804610] video:0KiB audio:341519KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
-size=N/A time=00:30:21.50 bitrate=N/A speed=54.6x elapsed=0:00:33.36    

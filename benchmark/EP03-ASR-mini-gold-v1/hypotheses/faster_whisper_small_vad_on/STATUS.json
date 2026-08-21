@@ -1,5 +1,0 @@
-{
-  "engine": "faster_whisper_small_vad_on",
-  "status": "AWAITING_SLICE",
-  "note": "尚未从 Champion freshrun 切段。执行 exact_commands.sh 的 [A5] + [A6] 后，本目录会出现 S01..S12/{female,male}.words.json。"
-}
