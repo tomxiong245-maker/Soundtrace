@@ -75,7 +75,7 @@ Champion（`稳定生产/scripts/*` · `端到端学习剪辑/代码/*` · 已�
 
 - 底层音频执行链路有较强工程证据；EP04 已跑到真人审核后的三轨技术试听版，但发布产品闭环未验收。
 - P1 三轨工程 E2E 已实际通过；EP03 11 项与 EP04 13 项真人双态审核均已保存，EP04 已渲染 3 stems 和 speech mix；主麦 automix、整片听审和发布验收未完成。
-- `tools.json` 56 项（2026-08-19 从 57 瘦身 · 2 项 LEGACY SHIM 已并入 feedback_engine 并删除 · +1 automix_2track challenger）；v2 orchestrator adapter 覆盖 44/56（Session 2 后续补齐余下 12 项 · Session 3 v2 顶替 v1）。
+- `tools.json` 58 项（2026-08-21 实测 · 从 57 瘦身 · 2 项 LEGACY SHIM 已并入 feedback_engine 并删除 · +1 automix_2track challenger · 后续增补至 58）；v2 orchestrator adapter 覆盖 52/58（未覆盖 6: `load_session_feedback / generate_ab_clip_learning_driven / iterate_until_clean / render_with_refinement / optuna_refine / run_versioning_guard`）。详见 `项目主文档/系统架构白皮书-2026-08-21.md § 6`。
 - v2 orchestrator 处于 Champion 并联 Challenger 状态 · 22 项契约测试通过 · Session 3 才晋升顶替 v1。
 - 当前 activity 是能量启发式，不是男/女声模型；EP0X 必须先建 `main/knowledge/speaker_maps/<episode>.speaker_map.json` 声明每轨角色。
 - 2026-08-19 剪口干净度 4 项 check 已落地（skills/cut-verify），是 cut 相关参数的最高优先级。
