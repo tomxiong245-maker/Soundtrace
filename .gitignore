@@ -46,3 +46,16 @@ run_manifest.json.bak
 
 # === 本地 IDE / preview 配置（含本机路径） ===
 .claude/
+
+# === PPTX · 通常嵌入媒体 (音频/内部截图) · M2 硬红线 ===
+*.pptx
+*.potx
+*.pdf
+
+# === 内部聊天/工作截图 · 含项目路径与私密工作过程 ===
+p05_evidence_screenshot.jpg
+**/*evidence_screenshot*.jpg
+**/*evidence_screenshot*.png
+
+# === 本地 push log ===
+.git_push_log*.txt
