@@ -14,7 +14,7 @@ if str(ORCHESTRATOR) not in sys.path:
 import integration_governance as governance  # noqa: E402
 
 
-REGISTRY = Path("/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/integration_governance/owner_attested_mainline.v1.json")
+REGISTRY = Path("<PROJECT_ROOT>/main/knowledge/integration_governance/owner_attested_mainline.v1.json")
 
 
 class IntegrationGovernanceTests(unittest.TestCase):

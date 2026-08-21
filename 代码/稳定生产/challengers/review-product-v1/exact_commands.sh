@@ -3,7 +3,7 @@
 # exact_commands.sh · P1 review-product-v1 一键复现（低风险，逐步执行）
 #
 # 使用方式：
-#   cd /Users/renting/Desktop/minglue/剪辑项目
+#   cd <HOME>/Desktop/minglue/剪辑项目
 #   bash 稳定生产/challengers/review-product-v1/exact_commands.sh
 #
 # 该脚本严格分步；每一步失败即停。绝不修改 Champion / P0 /
@@ -11,7 +11,7 @@
 # ==============================================================================
 set -euo pipefail
 
-PROJECT_ROOT="/Users/renting/Desktop/minglue/剪辑项目"
+PROJECT_ROOT="<HOME>/Desktop/minglue/剪辑项目"
 CHAL="$PROJECT_ROOT/稳定生产/challengers/review-product-v1"
 RUN="$PROJECT_ROOT/main/runs/EP03-review-product-v1"
 FRONTEND="$PROJECT_ROOT/审核前端/challenger-review-product-v1"
@@ -64,7 +64,7 @@ echo "wrote $CHAL/baseline/baseline_sha256.txt"
 # 与 cross-track-safety-v1 的 before_metrics.json 中记录的 baseline_sha256 对比
 python3 - <<'PY'
 import json, hashlib, os, sys
-root = "/Users/renting/Desktop/minglue/剪辑项目"
+root = "<HOME>/Desktop/minglue/剪辑项目"
 with open(os.path.join(root, "main/runs/EP03-cross-track-safety-v1/before_metrics.json")) as f:
     ref = json.load(f)["baseline_sha256"]
 mismatches = []
@@ -94,7 +94,7 @@ grep -q "12/12 PASSED\|12 tests, 12 passed\|PASS" "$CHAL/baseline/cross_track_sa
   || { echo "cross-track-safety-v1 tests fail baseline check"; exit 1; }
 python3 - <<'PY'
 import json
-root = "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-cross-track-safety-v1"
+root = "<PROJECT_ROOT>/main/runs/EP03-cross-track-safety-v1"
 with open(f"{root}/safe_candidates.json") as f: safe = json.load(f)
 with open(f"{root}/blocked_candidates.json") as f: blocked = json.load(f)
 n_safe = len(safe["candidates"])

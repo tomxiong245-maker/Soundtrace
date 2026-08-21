@@ -278,10 +278,10 @@ add_sec_chip(s, "§ 1 · Demo")
 add_h2(s, "先放两段音频 · 请对比")
 # 2 × 2 音频卡片
 audios = [
-    ("EXP019 · 原始",          "/Users/renting/Desktop/EXP019_original.mp3",       False),
-    ("EXP019 · Soundtrace 剪", "/Users/renting/Desktop/EXP019_cut.mp3",            True),
-    ("EXP002 · 原始",          "/Users/renting/Desktop/EXP002_original_wider.mp3", False),
-    ("EXP002 · Soundtrace 剪", "/Users/renting/Desktop/EXP002_cut_wider.mp3",      True),
+    ("EXP019 · 原始",          str(Path(__file__).parent / "EXP019_original.mp3"),       False),
+    ("EXP019 · Soundtrace 剪", str(Path(__file__).parent / "EXP019_cut.mp3"),            True),
+    ("EXP002 · 原始",          str(Path(__file__).parent / "EXP002_original_wider.mp3"), False),
+    ("EXP002 · Soundtrace 剪", str(Path(__file__).parent / "EXP002_cut_wider.mp3"),      True),
 ]
 _positions = [
     (Inches(0.75), Inches(2.2)), (Inches(6.9), Inches(2.2)),
@@ -358,10 +358,10 @@ _img_h = Inches(4.6)
 _img_w = Inches(4.6 * 832 / 1512)  # ~2.53"
 _img_x = (SW - _img_w) / 2  # 居中
 s.shapes.add_picture(
-    "/Users/renting/Desktop/minglue/剪辑项目/交付/最终交付文档/新产出/EP05-PRE-HTML-2026-8-21/p05_evidence_screenshot.jpg",
+    str(Path(__file__).parent / "p05_evidence_screenshot.jpg"),
     _img_x, Inches(1.85), width=_img_w, height=_img_h
 ) if False else add_picture_safe(s,
-    "/Users/renting/Desktop/minglue/剪辑项目/交付/最终交付文档/新产出/EP05-PRE-HTML-2026-8-21/p05_evidence_screenshot.jpg",
+    str(Path(__file__).parent / "p05_evidence_screenshot.jpg"),
     _img_x, Inches(1.85), width=_img_w, height=_img_h)
 # 右侧解说
 _text_x = _img_x + _img_w + Inches(0.4)
@@ -658,7 +658,7 @@ _ph = Inches(3.6)
 _pw = Inches(3.6 * 688 / 368)
 _px = (SW - _pw) / 2
 add_picture_safe(s,
-    "/Users/renting/Desktop/minglue/剪辑项目/交付/最终交付文档/新产出/EP05-PRE-HTML-2026-8-21/p16_token_burn.png",
+    str(Path(__file__).parent / "p16_token_burn.png"),
     _px, Inches(2.4), width=_pw, height=_ph
 )
 # 图注

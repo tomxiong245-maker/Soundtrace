@@ -11,7 +11,7 @@ from __future__ import annotations
 import json, pathlib, re, subprocess, sys
 from collections import defaultdict
 
-ROOT = pathlib.Path("/Users/renting/Desktop/minglue/剪辑项目")
+ROOT = pathlib.Path("<HOME>/Desktop/minglue/剪辑项目")
 
 # ---- 白名单：即使装了没用也不 warn（标准库、构建工具、编辑器需要的东西）
 WHITELIST_UNUSED = {

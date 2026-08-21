@@ -78,3 +78,8 @@ verify/sync_delivery.sh.bak
 参考成品/EP04-DELIVERY-20260817-1427/
 参考成品/EP04-GOLD-EDL-20260818-1548/
 benchmark/
+
+# === 内部工作日志 · 无价值 (2026-08-21 开源清理) ===
+统筹全局/mentor-briefing-*.md
+统筹全局/Preflight-checklist-*.md
+统筹全局/沙盒迁移-*.md

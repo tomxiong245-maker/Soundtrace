@@ -20,7 +20,7 @@ from typing import Any
 import numpy as np
 import librosa
 
-ROOT = Path("/Users/renting/Desktop/minglue/剪辑项目")
+ROOT = Path("<HOME>/Desktop/minglue/剪辑项目")
 SR = 48000
 
 

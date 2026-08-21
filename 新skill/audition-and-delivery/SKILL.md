@@ -149,37 +149,37 @@ pre_flight_check: scripts/preflight/check_audition-and-delivery.py
 
 ```bash
 # 1) release_specs 冻结存在
-test -f "/Users/renting/Desktop/minglue/剪辑项目/main/runs/RELEASE-SPEC-FROM-EP03-20260817-1204/release_specs.json"
+test -f "<PROJECT_ROOT>/main/runs/RELEASE-SPEC-FROM-EP03-20260817-1204/release_specs.json"
 
 # 2) 音乐 sha 未漂
-python -c "import hashlib,pathlib;print(hashlib.sha256(pathlib.Path('/Users/renting/Desktop/minglue/剪辑项目/音频参考库/raw material/第三集/片头片尾music.mp3').read_bytes()).hexdigest())" \
+python -c "import hashlib,pathlib;print(hashlib.sha256(pathlib.Path('<PROJECT_ROOT>/音频参考库/raw material/第三集/片头片尾music.mp3').read_bytes()).hexdigest())" \
   | grep -q '^3f3a7150c43c21fe5709a8a7b7152590a77579bd4ce87d3ad0e15ed1bb81ed83$'
 
 # 3) 单一 SOT feedback 文件存在（§20）
-test -f "/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/session_feedback/current.session_feedback.jsonl"
+test -f "<PROJECT_ROOT>/main/knowledge/session_feedback/current.session_feedback.jsonl"
 
 # 4) A/B clip 只保留一版：run 下无 v20X_* 累积目录
-! ls -d /Users/renting/Desktop/minglue/剪辑项目/main/runs/*/v20[0-9]_* 2>/dev/null | grep -q .
+! ls -d <PROJECT_ROOT>/main/runs/*/v20[0-9]_* 2>/dev/null | grep -q .
 
 # 5) current_audit_clips manifest.tools_used_all == true
-for f in /Users/renting/Desktop/minglue/剪辑项目/main/runs/*/current_audit_clips/*.manifest.json; do
+for f in <PROJECT_ROOT>/main/runs/*/current_audit_clips/*.manifest.json; do
   python -c "import json,sys;m=json.load(open('$f'));assert m.get('tools_used_all') is True, '$f'"
 done
 
 # 6) A/B clip automix wav sha == render_<variant>/speech.mono.wav sha
-python /Users/renting/Desktop/minglue/剪辑项目/scripts/preflight/check_audition-and-delivery.py --check ab_wav_sha_match
+python <PROJECT_ROOT>/scripts/preflight/check_audition-and-delivery.py --check ab_wav_sha_match
 
 # 7) machine_assisted_draft.edl.json 无 render_sync_cuts 引用 source_track_gate_only 候选（§13）
-grep -L 'source_track_gate_only' /Users/renting/Desktop/minglue/剪辑项目/main/runs/*/machine_assisted_draft.edl.json
+grep -L 'source_track_gate_only' <PROJECT_ROOT>/main/runs/*/machine_assisted_draft.edl.json
 
 # 8) DELIVERY_MANIFEST.approval_chain 必须含 mentor + project_owner
-python -c "import json,glob;[__import__('sys').exit(1) for m in map(json.load,map(open,glob.glob('/Users/renting/Desktop/minglue/剪辑项目/main/runs/*-DELIVERY-*/DELIVERY_MANIFEST.json'))) if {r['role'] for r in m.get('approval_chain',[])} < {'mentor','project_owner'}]"
+python -c "import json,glob;[__import__('sys').exit(1) for m in map(json.load,map(open,glob.glob('<PROJECT_ROOT>/main/runs/*-DELIVERY-*/DELIVERY_MANIFEST.json'))) if {r['role'] for r in m.get('approval_chain',[])} < {'mentor','project_owner'}]"
 
 # 9) 拼接方法白名单（§16）：manifest.tools_used 必含 pydub.crossfade + append 或 ffmpeg acrossfade
-grep -RE 'pydub\.crossfade \+ append|ffmpeg acrossfade' /Users/renting/Desktop/minglue/剪辑项目/main/runs/*/current_audit_clips/*.manifest.json
+grep -RE 'pydub\.crossfade \+ append|ffmpeg acrossfade' <PROJECT_ROOT>/main/runs/*/current_audit_clips/*.manifest.json
 
 # 10) 双 EDL 变体字段冲突自检
-python /Users/renting/Desktop/minglue/剪辑项目/scripts/preflight/check_audition-and-delivery.py --check edl_variant_fields
+python <PROJECT_ROOT>/scripts/preflight/check_audition-and-delivery.py --check edl_variant_fields
 ```
 
 pre_flight_check 脚本本体位于 `scripts/preflight/check_audition-and-delivery.py`（**待创建**，见 §9 待验证假设）。

@@ -6,7 +6,7 @@
 
 默认工作目录应是仓库根目录：
 
-`/Users/renting/Desktop/minglue/剪辑项目/`
+`<PROJECT_ROOT>/`
 
 它保留三种权限档案：
 
@@ -20,11 +20,11 @@
 
 ```bash
 python3 'main/orchestrator/claude_headless/scripts/claude_headless.py' \
-  --cwd '/Users/renting/Desktop/minglue/剪辑项目' \
+  --cwd '<HOME>/Desktop/minglue/剪辑项目' \
   status
 
 python3 'main/orchestrator/claude_headless/scripts/claude_headless.py' \
-  --cwd '/Users/renting/Desktop/minglue/剪辑项目' \
+  --cwd '<HOME>/Desktop/minglue/剪辑项目' \
   run --permission-profile readonly '只读检查当前项目进度，列出下一道完成门'
 ```
 

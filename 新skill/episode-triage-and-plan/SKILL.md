@@ -14,9 +14,9 @@ related_tools:
   - auto_speaker_role
 preconditions:
   - "已在磁盘上放好 N 轨 mono WAV，且每条轨 sample_rate_hz/channels/bits_per_sample 一致（可用 inspect_audio 事后校验，但拿到手时必须至少能被 ffprobe 打开）"
-  - "已读 /Users/renting/Desktop/minglue/剪辑项目/统筹全局/Agent交付流程-从音频到成片.md 的 §1 与 §1.1（输入不合格时 Agent 停下不猜）"
-  - "已读 /Users/renting/Desktop/minglue/剪辑项目/统筹全局/功能说明/F01-输入检查与同步.md 的验收标准段"
-  - "/Users/renting/Desktop/minglue/剪辑项目/main/tools/tools.json 中 inspect_audio / measure_loudness / analyze_reference_timeline / estimate_sync / correct_clock_drift / create_clock_drift_fixture / auto_speaker_role 七个 tool 全部登记且脚本存在"
+  - "已读 <PROJECT_ROOT>/统筹全局/Agent交付流程-从音频到成片.md 的 §1 与 §1.1（输入不合格时 Agent 停下不猜）"
+  - "已读 <PROJECT_ROOT>/统筹全局/功能说明/F01-输入检查与同步.md 的验收标准段"
+  - "<PROJECT_ROOT>/main/tools/tools.json 中 inspect_audio / measure_loudness / analyze_reference_timeline / estimate_sync / correct_clock_drift / create_clock_drift_fixture / auto_speaker_role 七个 tool 全部登记且脚本存在"
 postconditions:
   - "main/runs/<episode_id>/<run_id>/run_identity.json 存在且 schema_version==\"run-identity-v1\"，其 episode_id/run_id 与 plan.json 完全一致"
   - "main/runs/<episode_id>/<run_id>/plan.json 存在且 schema_version==\"delivery-plan-v1\"，contract_version 已冻结，run_identity_sha256 与 run_identity.json 内容 SHA 一致"
@@ -48,7 +48,7 @@ pre_flight_check: scripts/preflight/check_episode-triage-and-plan.py
 这一 skill 是一期音频从"文件躺在硬盘上"到"pipeline 可以开跑"之间的**唯一入口**。它做四件事：**判类型（episode_type）→ 建 run 目录 → 冻结 plan.json → 声明 speaker_map**。四件事任何一件没落地，下游 denoise / ASR / candidates / render 一律不启动。
 
 它替代并合并了三个旧顶层入口：
-- `audio-clips-orchestration`（原 /Users/renting/Desktop/minglue/剪辑项目/SKILL.md 的类型判别职责）
+- `audio-clips-orchestration`（原 <PROJECT_ROOT>/SKILL.md 的类型判别职责）
 - `input-triage`（输入 QC + sync 门禁）
 - `speaker-map-required`（说话人契约 · host 归属必须先声明）
 
@@ -60,34 +60,34 @@ pre_flight_check: scripts/preflight/check_episode-triage-and-plan.py
 - 存在 `plan.json` 但同 run 下 `main/knowledge/speaker_maps/<episode_id>.speaker_map*.json` 不存在。
 
 上游 postcondition（进入本 skill 前必须满足）：
-- 状态机为 `RECEIVED`（见 /Users/renting/Desktop/minglue/剪辑项目/统筹全局/Agent交付流程-从音频到成片.md 状态机段）。
+- 状态机为 `RECEIVED`（见 <PROJECT_ROOT>/统筹全局/Agent交付流程-从音频到成片.md 状态机段）。
 - 用户已在硬盘上放好原始 WAV，且承诺路径不再变。
 
 出口：状态机推进到 `INPUT_VALIDATED`（下一 skill 才能开始 denoise，进入 `TIMELINE_READY`）。
 
 ## 3. 读什么
 
-3.1 **/Users/renting/Desktop/minglue/剪辑项目/统筹全局/Agent交付流程-从音频到成片.md**
+3.1 **<PROJECT_ROOT>/统筹全局/Agent交付流程-从音频到成片.md**
 - §1 "只需提供的输入" + §1.1 "输入不合格时，Agent 只能停下，不得猜"
 - "第 3 节 · 输入检查阶段"表：Agent 自动完成 = SHA、格式、N 轨共同时间线、授权配置、漂移门禁；必须留下的证据 = `input_manifest.json`、`plan.json`。
 - 状态机段（`RECEIVED → INPUT_VALIDATED → TIMELINE_READY → ...`）。
 
-3.2 **/Users/renting/Desktop/minglue/剪辑项目/统筹全局/功能说明/F01-输入检查与同步.md**
+3.2 **<PROJECT_ROOT>/统筹全局/功能说明/F01-输入检查与同步.md**
 - "验收标准"段（第 42-48 行）：格式异常/长度不一致/缺失元数据必须明确报告；已知 offset/drift fixture 的估计误差在门限内；低置信度样本 fail closed；下游使用的每条音轨有明确时间线版本与 SHA。
 - "输入与输出"段声明的三种同步决定（`accept_zero / correct / manual_review`）实际编码在 `sync_report.json` 的 `estimation_status` + `automatic_correction_allowed` 两字段组合上，不是单独字段。
 
-3.3 **/Users/renting/Desktop/minglue/剪辑项目/main/tools/tools.json**
+3.3 **<PROJECT_ROOT>/main/tools/tools.json**
 - 顶层 `scripts_root="端到端学习剪辑/代码"`；前 6 个 tool 相对该 root 解析，`auto_speaker_role` 用 `full_path=main/orchestrator/auto_speaker_role.py`。
 - 全局 `runtime_dependencies` 声明 ffmpeg 9.0.1 @ `/opt/homebrew/bin/ffmpeg`，SHA `11012f10d9d2eff4df94d760eec5964980880ced20bd4cdbd9f82ec399867e9d`。
 
 3.4 **既有 run 范例**（读 schema，不读内容）：
-- `/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/01_inspect/inspection.json` —— `inspection.json` schema 唯一实例：`schema_version=1`；`inputs[].audio.channel_stats[].rms_dbfs` 和 `sample_silence_ratio_below_minus_60_dbfs` 是**噪声底判定的实际字段**。
-- `/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/02_loudness/loudness_raw.json` —— `schema_version=2`；含 `integrated_lufs / loudness_range_lu / true_peak_dbtp`，**不含** `noise_floor_dbfs`。
-- `/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/03_sync/sync_report.json` —— 文件名是 `sync_report.json`（不是 `sync.json`）；含 `estimated_drift_ppm`、`estimation_status`、`automatic_correction_allowed`、`trusted_window_count` vs `minimum_trusted_window_count`。
-- `/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP04/EP04-v26-20260815-1650/plan.json` —— `delivery-plan-v1` schema 参照；注意 **该 schema 实际未写入 `episode_type` 字段**（见 §9 待验证假设）。
-- `/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP04/EP04-v26-20260815-1650/run_identity.json` —— `run-identity-v1` schema 参照。
-- `/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP04/EP04-v26-20260815-1650/input_manifest.json` —— `delivery-input-manifest-v1` schema 参照。
-- `/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/speaker_maps/EP04.speaker_map.json` —— `speaker-map-v1` 人工 attested 版参照；host 归属通过 `map.<track_id>.role=="host"` 声明，**不用 `host_track_index`**。
+- `<PROJECT_ROOT>/main/runs/EP03-freshrun-20260810-1730/01_inspect/inspection.json` —— `inspection.json` schema 唯一实例：`schema_version=1`；`inputs[].audio.channel_stats[].rms_dbfs` 和 `sample_silence_ratio_below_minus_60_dbfs` 是**噪声底判定的实际字段**。
+- `<PROJECT_ROOT>/main/runs/EP03-freshrun-20260810-1730/02_loudness/loudness_raw.json` —— `schema_version=2`；含 `integrated_lufs / loudness_range_lu / true_peak_dbtp`，**不含** `noise_floor_dbfs`。
+- `<PROJECT_ROOT>/main/runs/EP03-freshrun-20260810-1730/03_sync/sync_report.json` —— 文件名是 `sync_report.json`（不是 `sync.json`）；含 `estimated_drift_ppm`、`estimation_status`、`automatic_correction_allowed`、`trusted_window_count` vs `minimum_trusted_window_count`。
+- `<PROJECT_ROOT>/main/runs/EP04/EP04-v26-20260815-1650/plan.json` —— `delivery-plan-v1` schema 参照；注意 **该 schema 实际未写入 `episode_type` 字段**（见 §9 待验证假设）。
+- `<PROJECT_ROOT>/main/runs/EP04/EP04-v26-20260815-1650/run_identity.json` —— `run-identity-v1` schema 参照。
+- `<PROJECT_ROOT>/main/runs/EP04/EP04-v26-20260815-1650/input_manifest.json` —— `delivery-input-manifest-v1` schema 参照。
+- `<PROJECT_ROOT>/main/knowledge/speaker_maps/EP04.speaker_map.json` —— `speaker-map-v1` 人工 attested 版参照；host 归属通过 `map.<track_id>.role=="host"` 声明，**不用 `host_track_index`**。
 
 ## 4. 写什么
 
@@ -132,7 +132,7 @@ pre_flight_check: scripts/preflight/check_episode-triage-and-plan.py
 
 ## 5. 覆盖 tool
 
-（全部来自 /Users/renting/Desktop/minglue/剪辑项目/main/tools/tools.json，脚本文件已确认存在）
+（全部来自 <PROJECT_ROOT>/main/tools/tools.json，脚本文件已确认存在）
 
 - **inspect_audio**（entry_tool）—— 读容器/编码/采样率/声道/时长/channel_stats，输出 `01_inspect/inspection.json`。轨道数与时长信号从这里来。
 - **measure_loudness** —— FFmpeg ebur128，输出 `02_loudness/loudness_raw.json`。整体响度参考；**不承担噪声底判定**（该数据在 `inspection.json.channel_stats`）。
@@ -156,45 +156,45 @@ pre_flight_check: scripts/preflight/check_episode-triage-and-plan.py
 
 ```bash
 # 7.1 三个基石文件齐全（替换 EP0X 与 <run_id>）
-test -f "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP0X/<run_id>/run_identity.json" \
- && test -f "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP0X/<run_id>/input_manifest.json" \
- && test -f "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP0X/<run_id>/plan.json"
+test -f "<PROJECT_ROOT>/main/runs/EP0X/<run_id>/run_identity.json" \
+ && test -f "<PROJECT_ROOT>/main/runs/EP0X/<run_id>/input_manifest.json" \
+ && test -f "<PROJECT_ROOT>/main/runs/EP0X/<run_id>/plan.json"
 
 # 7.2 schema_version 全对
-python3 -c "import json,sys;p='/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP0X/<run_id>';\
+python3 -c "import json,sys;p='<PROJECT_ROOT>/main/runs/EP0X/<run_id>';\
  assert json.load(open(f'{p}/run_identity.json'))['schema_version']=='run-identity-v1';\
  assert json.load(open(f'{p}/input_manifest.json'))['schema_version']=='delivery-input-manifest-v1';\
  assert json.load(open(f'{p}/plan.json'))['schema_version']=='delivery-plan-v1';print('ok')"
 
 # 7.3 run_identity_sha256 三处一致
-python3 -c "import json,hashlib;p='/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP0X/<run_id>';\
+python3 -c "import json,hashlib;p='<PROJECT_ROOT>/main/runs/EP0X/<run_id>';\
  ri=open(f'{p}/run_identity.json','rb').read();sha=hashlib.sha256(ri).hexdigest();\
  pl=json.load(open(f'{p}/plan.json'));im=json.load(open(f'{p}/input_manifest.json'));\
  assert pl['run_identity_sha256']==im['run_identity_sha256']==sha,'run_identity_sha256 mismatch';print('ok')"
 
 # 7.4 FR-01 源只读契约字面串
 grep -F "relative symlinks within this run; raw sources are read only" \
- "/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP0X/<run_id>/input_manifest.json"
+ "<PROJECT_ROOT>/main/runs/EP0X/<run_id>/input_manifest.json"
 
 # 7.5 §12 speaker_map 至少一个 host
 python3 -c "import json,glob;\
- fs=glob.glob('/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/speaker_maps/EP0X.speaker_map*.json');\
+ fs=glob.glob('<PROJECT_ROOT>/main/knowledge/speaker_maps/EP0X.speaker_map*.json');\
  assert fs,'no speaker_map';m=json.load(open(fs[0]));\
  assert m['schema_version']=='speaker-map-v1';\
  assert any(v.get('role')=='host' for v in m['map'].values()),'no host declared';print('ok')"
 
 # 7.6 FR-02 sync 门禁自洽
-python3 -c "import json;s=json.load(open('/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP0X/<run_id>/03_sync/sync_report.json'));\
+python3 -c "import json;s=json.load(open('<PROJECT_ROOT>/main/runs/EP0X/<run_id>/03_sync/sync_report.json'));\
  assert (s['automatic_correction_allowed'] is True) == (s['trusted_window_count']>=s['minimum_trusted_window_count']),\
  'auto_correct flag inconsistent with trusted windows';print('ok')"
 
 # 7.7 episode_type 白名单
-python3 -c "import json;p=json.load(open('/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP0X/<run_id>/plan.json'));\
+python3 -c "import json;p=json.load(open('<PROJECT_ROOT>/main/runs/EP0X/<run_id>/plan.json'));\
  et=p.get('episode_type');\
  assert et=='mandarin-dual-speaker-podcast',f'unsupported or missing episode_type: {et}';print('ok')"
 
 # 7.8 tools.json 七个 tool 都在
-python3 -c "import json;t=json.load(open('/Users/renting/Desktop/minglue/剪辑项目/main/tools/tools.json'));\
+python3 -c "import json;t=json.load(open('<PROJECT_ROOT>/main/tools/tools.json'));\
  names={x['name'] for x in t['tools']};need={'inspect_audio','measure_loudness','analyze_reference_timeline',\
  'estimate_sync','correct_clock_drift','create_clock_drift_fixture','auto_speaker_role'};\
  assert need<=names,need-names;print('ok')"
@@ -204,9 +204,9 @@ python3 -c "import json;t=json.load(open('/Users/renting/Desktop/minglue/剪辑�
 
 本 skill 覆盖的历史事件（引用 run 目录与文件；未在此清单外发明 jsonl 行号或 verdict 枚举）：
 
-- **EP04 auto vs 人工 speaker_map 对齐** —— `/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/speaker_maps/EP04.speaker_map.json`（人工，`track_03.role="host"`）与 `auto_speaker_role.py` 的 v20.6 Q2 判决（tools.json 描述："EP04 track_03 判 host 与人工 map 一致"）一致 → 佐证 §4.7 的双源优先级策略可行。
-- **EP03 sync fail closed** —— `/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/03_sync/sync_report.json`：`trusted_window_count=2 < minimum_trusted_window_count=3`、`estimation_status="candidate_fit_manual_confirmation_required"`、`automatic_correction_allowed=false` → 佐证 FR-02 门禁字段组合的实际效果。
-- **EP03 输入检查基线** —— `/Users/renting/Desktop/minglue/剪辑项目/main/runs/EP03-freshrun-20260810-1730/01_inspect/inspection.json`：female 轨 `channel_stats[0].rms_dbfs=-25.974` + `sample_silence_ratio_below_minus_60_dbfs=0.0902` → 佐证 §4.3 噪声底信号的实际来源。
+- **EP04 auto vs 人工 speaker_map 对齐** —— `<PROJECT_ROOT>/main/knowledge/speaker_maps/EP04.speaker_map.json`（人工，`track_03.role="host"`）与 `auto_speaker_role.py` 的 v20.6 Q2 判决（tools.json 描述："EP04 track_03 判 host 与人工 map 一致"）一致 → 佐证 §4.7 的双源优先级策略可行。
+- **EP03 sync fail closed** —— `<PROJECT_ROOT>/main/runs/EP03-freshrun-20260810-1730/03_sync/sync_report.json`：`trusted_window_count=2 < minimum_trusted_window_count=3`、`estimation_status="candidate_fit_manual_confirmation_required"`、`automatic_correction_allowed=false` → 佐证 FR-02 门禁字段组合的实际效果。
+- **EP03 输入检查基线** —— `<PROJECT_ROOT>/main/runs/EP03-freshrun-20260810-1730/01_inspect/inspection.json`：female 轨 `channel_stats[0].rms_dbfs=-25.974` + `sample_silence_ratio_below_minus_60_dbfs=0.0902` → 佐证 §4.3 噪声底信号的实际来源。
 - **EP04-AUTO-VERIFY-20260817-2200** —— run 目录存在 `input_manifest.json / run_identity.json`，但 **`plan.json / inspection.json / loudness.json / sync.json` 均不存在** → 佐证并非所有 run 都完整跑完输入检查阶段，本 skill 的 pre_flight_check §7.1 就是防这种半成品状态。
 
 （本仓库未在本次事实清单中提供 `session_feedback*.jsonl` 的 kind/verdict 枚举，因此本节不引用任何具体行号 —— 见 §9 待验证假设。）
@@ -214,7 +214,7 @@ python3 -c "import json;t=json.load(open('/Users/renting/Desktop/minglue/剪辑�
 ## 9. 三档诚实标注
 
 ### 已验证事实（事实清单直接抓取）
-- `/Users/renting/Desktop/minglue/剪辑项目/main/tools/tools.json` 中 `inspect_audio / measure_loudness / analyze_reference_timeline / estimate_sync / correct_clock_drift / create_clock_drift_fixture / auto_speaker_role` 七个 tool 均已登记，脚本文件均实际存在。
+- `<PROJECT_ROOT>/main/tools/tools.json` 中 `inspect_audio / measure_loudness / analyze_reference_timeline / estimate_sync / correct_clock_drift / create_clock_drift_fixture / auto_speaker_role` 七个 tool 均已登记，脚本文件均实际存在。
 - `run-identity-v1 / delivery-input-manifest-v1 / delivery-plan-v1 / speaker-map-v1` 四个 schema 均可在 EP04-v26-20260815-1650 与 EP04 speaker_map 里直接查到。
 - `sync_report.json` 文件名与含 `estimated_drift_ppm / estimation_status / automatic_correction_allowed / trusted_window_count / minimum_trusted_window_count` 字段的 schema 已在 EP03-freshrun-20260810-1730 落地。
 - `inspection.json.inputs[].audio.channel_stats[]` 含 `rms_dbfs` 与 `sample_silence_ratio_below_minus_60_dbfs`；`loudness_raw.json` 只含 `integrated_lufs / loudness_range_lu / true_peak_dbtp`，**不含**独立 `noise_floor_dbfs` 字段。

@@ -86,11 +86,11 @@ N 条 mono 语音轨 → 1 条 stereo mp3 主麦成片。用户 2026-08-17 明�
 
 ```bash
 python3 scripts/automix_v1.py \
-  --tracks /Users/renting/Desktop/minglue/剪辑项目/音频参考库/raw\ material/第三集/ZOOM0008_Tr1.WAV \
-           /Users/renting/Desktop/minglue/剪辑项目/音频参考库/raw\ material/第三集/ZOOM0008_Tr3.WAV \
-  --music /Users/renting/Desktop/minglue/剪辑项目/音频参考库/raw\ material/第三集/片头片尾music.mp3 \
-  --release-spec /Users/renting/Desktop/minglue/剪辑项目/main/orchestrator/release_specs.json \
-  --music-template /Users/renting/Desktop/minglue/剪辑项目/main/orchestrator/music_templates.json \
+  --tracks <PROJECT_ROOT>/音频参考库/raw\ material/第三集/ZOOM0008_Tr1.WAV \
+           <PROJECT_ROOT>/音频参考库/raw\ material/第三集/ZOOM0008_Tr3.WAV \
+  --music <PROJECT_ROOT>/音频参考库/raw\ material/第三集/片头片尾music.mp3 \
+  --release-spec <PROJECT_ROOT>/main/orchestrator/release_specs.json \
+  --music-template <PROJECT_ROOT>/main/orchestrator/music_templates.json \
   --template-id reference-linear-v1 \
   --output /path/to/output/EP03.automix.mp3 \
   --tmp-dir /path/to/tmp

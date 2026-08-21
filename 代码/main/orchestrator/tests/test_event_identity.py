@@ -21,7 +21,7 @@ if str(ORCHESTRATOR) not in sys.path:
 import event_identity as ei  # noqa: E402
 
 
-PROJECT = Path("/Users/renting/Desktop/minglue/剪辑项目")
+PROJECT = Path("<HOME>/Desktop/minglue/剪辑项目")
 EP04 = PROJECT / "main" / "runs" / "EP04"
 V20 = EP04 / "EP04-v20-20260814-1617"
 LABEL_LOOP = EP04 / "EP04-label-loop-v1-20260815-1805"

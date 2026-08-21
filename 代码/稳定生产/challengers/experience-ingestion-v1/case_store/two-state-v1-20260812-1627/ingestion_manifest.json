@@ -1,8 +1,8 @@
 {
   "schema_version": "experience-ingestion-manifest-v1",
   "generated_at": "2026-08-12T16:32:26+0800",
-  "repo_root": "/Users/renting/Desktop/minglue/剪辑项目",
-  "baseline_path": "/Users/renting/Desktop/minglue/剪辑项目/稳定生产/challengers/experience-ingestion-v1/baseline/source_shas.two-state-v1.json",
+  "repo_root": "<HOME>/Desktop/minglue/剪辑项目",
+  "baseline_path": "<PROJECT_ROOT>/稳定生产/challengers/experience-ingestion-v1/baseline/source_shas.two-state-v1.json",
   "source_inventory": {
     "generated_at": "2026-08-12T16:32:26+0800",
     "sources": {

@@ -51,7 +51,7 @@ main/runs/DENOISE-AUDIT-v1-20260813-1620/
 ## 复现
 
 ```bash
-cd /Users/renting/Desktop/minglue/剪辑项目
+cd <HOME>/Desktop/minglue/剪辑项目
 RUN="main/runs/DENOISE-AUDIT-v1-$(date +%Y%m%d-%H%M)"
 mkdir -p "$RUN"/{previews,metrics,logs}
 python3 稳定生产/challengers/denoise-audit-v1/scripts/gen_ab_c.py --run-dir "$RUN"

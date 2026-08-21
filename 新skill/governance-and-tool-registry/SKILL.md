@@ -39,42 +39,42 @@ trigger（任一命中即激活）：
 
 ## 3. 读什么
 
-- `/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/integration_governance/owner_attested_mainline.v1.json`
+- `<PROJECT_ROOT>/main/knowledge/integration_governance/owner_attested_mainline.v1.json`
   - 顶层：`schema_version` / `registry_id` / `updated_at` / `purpose` / `policy` / `mainline` / `mainline_exclusions` / `current_run_protection` / `owner_attestation`
   - `policy` 子字段：`component_adoption_gate` / `semantic_edit_gate` / `verification_order` / `evidence_labels` (string[]) / `prohibited_conflations` (string[])
   - `mainline[]` 每条：`capability_id` (`^[a-z0-9][a-z0-9_\-]+$`) / `kind` / `status` / `mainline_scope` / `source` / `safety` / `reopen_trigger`
   - `owner_attestation` 子字段：`authority` / `recorded_by` / `recorded_at` / `independent_verification`
-- `/Users/renting/Desktop/minglue/剪辑项目/main/tools/tools.json`
+- `<PROJECT_ROOT>/main/tools/tools.json`
   - 顶层：`schema_version` (int, 1) / `description` / `scripts_root_base` / `scripts_root` / `runtime_dependencies` (顶层数组，当前仅 1 条 ffmpeg) / `tools` (array)
   - 顶层 `runtime_dependencies[]` 每条：`name / role / path / version / sha256 / paired_ffprobe_path / paired_ffprobe_sha256 / audit / data_flow`
   - `tools[]` 单条字段全集：`name` / `description` / `params` (string[]) / `script` (相对 scripts_root) 或 `full_path` (相对 project_root) / `reads_only` (bool) / `runtime_dependencies` (string[]，可选) / `audit_reference` (string，可选)
-- `/Users/renting/Desktop/minglue/剪辑项目/main/tools/audits/ffmpeg-homebrew-9.0.1.md`
+- `<PROJECT_ROOT>/main/tools/audits/ffmpeg-homebrew-9.0.1.md`
   - 四段结构：状态引语 → ## 固定信息（绝对路径 / 配套工具路径 / 安装方式 / 版本 / 许可证 / 上游 URL / bottle SHA-256 / 本机可执行 SHA-256 / 配套工具 SHA-256） → ## 本项目使用范围 → ## 已知限制
-- `/Users/renting/Desktop/minglue/剪辑项目/main/tools/tool_lookup.py`
+- `<PROJECT_ROOT>/main/tools/tool_lookup.py`
   - API：`all_tools()` / `tool(name)` / `script_for(name)` / `tool_name_for_script(relpath)` / `verify_manifest()` / `clear_cache()`
   - `PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent`；`TOOLS_JSON = PROJECT_ROOT / "main/tools/tools.json"`；manifest 走 `@lru_cache(maxsize=1)`
   - 标准调用范式：`subprocess.run([sys.executable, str(script_for("label_learning_driver")), ...])`
-- `/Users/renting/Desktop/minglue/剪辑项目/main/orchestrator/integration_governance.py`
+- `<PROJECT_ROOT>/main/orchestrator/integration_governance.py`
   - `SCHEMA_VERSION = "integration-governance-v1"`
   - `ALLOWED_STATUS` 六值同 `policy.evidence_labels`
   - 校验规则：`status == "OWNER_ATTESTED_INTEGRATE"` 且 `independent_verification == "PASS"` → 报错 `owner attestation cannot claim independent PASS`
   - `freeze_registry()` 拒绝覆盖已存在目标文件；返回 `source_sha256 / frozen_sha256 / mainline_capabilities / owner_attested_count / independent_verification_required=True / semantic_edit_gate_unchanged=True`
   - `mainline_capabilities()` 只挑 status ∈ {OWNER_ATTESTED_INTEGRATE, EVIDENCE_VERIFIED_INTEGRATE, INTEGRATED_PENDING_REAL_RUN}
-- `/Users/renting/Desktop/minglue/剪辑项目/统筹全局/功能说明/F07-统筹Agent与Tool注册表.md`
+- `<PROJECT_ROOT>/统筹全局/功能说明/F07-统筹Agent与Tool注册表.md`
   - 新能力上线契约（原文 line 18）："新加一个 tool（如 automix / speaker_diarize）不需要改主流程——写一个 adapter contract JSON + tool 脚本，注册进 registry.json 即可。"
   - AdapterBase 四段能力：`validate_inputs / dry_run_plan / invoke / verify_outputs` + `Provenance` + `wraps_script` SHA drift + writes-policy 门禁
-- `/Users/renting/Desktop/minglue/剪辑项目/CLAUDE.md` §11 / §15 / §6.6 / §18
+- `<PROJECT_ROOT>/CLAUDE.md` §11 / §15 / §6.6 / §18
 
 ## 4. 写什么
 
 - 冻结 run 内 integration_governance.json —— 调 `main/orchestrator/integration_governance.py::freeze_registry()`，产物字段：`source_sha256 / frozen_sha256 / mainline_capabilities / owner_attested_count / independent_verification_required=true / semantic_edit_gate_unchanged=true`；目标为 run_root 下 `run_identity/integration_governance.json`（拒绝覆盖）
-- 更新 `/Users/renting/Desktop/minglue/剪辑项目/main/knowledge/integration_governance/owner_attested_mainline.v1.json`
+- 更新 `<PROJECT_ROOT>/main/knowledge/integration_governance/owner_attested_mainline.v1.json`
   - 新增 `mainline[]` 一条：`capability_id` / `kind` / `status="OWNER_ATTESTED_INTEGRATE"` / `mainline_scope` / `source` / `safety` / `reopen_trigger`
   - 若组件被暂停，只能改 `status` 到 `DEFERRED` 或 `REOPENED_ON_ISSUE` —— 绝不删除条目（flow_boundary.md 明文）
   - 同步刷新 `updated_at` 与 `registry_id`
-- 更新 `/Users/renting/Desktop/minglue/剪辑项目/main/tools/tools.json`
+- 更新 `<PROJECT_ROOT>/main/tools/tools.json`
   - 新增 `tools[]` 一条：`name` + (`script` 或 `full_path`) + `description` + `params` + `reads_only` + **必填** `runtime_dependencies` (string[]) + **必填** `audit_reference` (指向 `main/tools/audits/<name>-<版本>.md`)
-- 新建 `/Users/renting/Desktop/minglue/剪辑项目/main/tools/audits/<name>-<版本>.md`
+- 新建 `<PROJECT_ROOT>/main/tools/audits/<name>-<版本>.md`
   - 四段结构与 `ffmpeg-homebrew-9.0.1.md` 一致：标题 + 状态引语 → ## 固定信息（绝对路径 / 配套工具路径 / 安装方式 / 版本 / 许可证 / 上游主页 URL / 分发 SHA-256 / 本机 SHA-256 / 配套工具 SHA-256）→ ## 本项目使用范围（输入/输出类型 · Python 显式调用 · 落 run 日志 · 不上传 · 不覆盖原始 WAV / 历史 run / Champion / Mentor）→ ## 已知限制（升级需重录版本 SHA · 许可证发布层审查 · 本轮仅验证可执行性 · 最终发布规格待 Mentor 与整片听审）
 - 新 .py 里禁止写 `PROJECT_ROOT / "xxx/yyy.py"` 字符串常量，只允许写 `script_for("<tool_name>")`；若不在 tools.json 就先补登记，再回来写代码
 

@@ -157,7 +157,7 @@ def main(argv: list[str] | None = None) -> int:
     cut_params_path = args.cut_params_json.resolve()
     if not cut_params_path.exists():
         # try common location
-        alt = Path("/Users/renting/Desktop/minglue/剪辑项目") / DEFAULT_CUT_PARAMS_PATH
+        alt = Path("<HOME>/Desktop/minglue/剪辑项目") / DEFAULT_CUT_PARAMS_PATH
         cut_params_path = alt if alt.exists() else cut_params_path
     thresholds = load_thresholds(cut_params_path)
 

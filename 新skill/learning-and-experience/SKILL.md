@@ -127,7 +127,7 @@ pre_flight_check: scripts/preflight/check_learning-and-experience.py
 
 ## 7. pre_flight_check
 
-参考实现：`scripts/preflight/check_learning-and-experience.py`。以下命令必须都能真跑（cwd = 项目根 `/Users/renting/Desktop/minglue/剪辑项目/`）：
+参考实现：`scripts/preflight/check_learning-and-experience.py`。以下命令必须都能真跑（cwd = 项目根 `<PROJECT_ROOT>/`）：
 
 ```
 # 1) 活跃指针 schema 与关键字段可解析

@@ -1,7 +1,7 @@
 # Plan 防丢失审计报告
 
 **审计时间**：2026-08-18
-**审计范围**：`/Users/renting/Desktop/minglue/剪辑项目/`
+**审计范围**：`<PROJECT_ROOT>/`
 **审计目标**：为 6→6 skill 合并盘出**所有**可能被漏掉的历史资产
 **审计执行**：Plan agent（Read-only · Explore 广度 max thorough）
 

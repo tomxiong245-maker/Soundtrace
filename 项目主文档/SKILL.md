@@ -6,7 +6,7 @@ owner: champion
 entry_tool: null
 related_tools: []
 preconditions:
-  - "剪辑项目根 /Users/renting/Desktop/minglue/剪辑项目/ 已挂载"
+  - "剪辑项目根 <PROJECT_ROOT>/ 已挂载"
   - "已读 CLAUDE.md 与 统筹全局/当前项目上下文.md"
 postconditions:
   - "任务已被路由到具体的下游 skill，或明标'不激活 · 停下问人'"

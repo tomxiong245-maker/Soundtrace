@@ -155,10 +155,10 @@ _HARDCODED_WARM_START_BY_KIND: Dict[str, List[Dict[str, Any]]] = {
 # ---------------------------------------------------------------------------
 
 DEFAULT_MENTOR_GOLD_PATH = Path(
-    "/Users/renting/Desktop/minglue/剪辑项目/交付/最终交付文档/knowledge/cut_parameters.json"
+    "<PROJECT_ROOT>/交付/最终交付文档/knowledge/cut_parameters.json"
 )
 DEFAULT_YOUTUBE_FEEDBACK_PATH = Path(
-    "/Users/renting/Desktop/minglue/剪辑项目/交付/最终交付文档/knowledge/session_feedback/current.session_feedback.jsonl"
+    "<PROJECT_ROOT>/交付/最终交付文档/knowledge/session_feedback/current.session_feedback.jsonl"
 )
 
 # optuna kind → mentor gold 字段 key · alias 表 · 见 design_md · Excavate D3

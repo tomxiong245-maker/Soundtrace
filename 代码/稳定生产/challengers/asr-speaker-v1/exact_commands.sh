@@ -8,11 +8,11 @@
 #   [B] 必须在 Apple M3 本机跑：真实 FunASR / MLX 推理、SHA 校验、真人 gold 后的
 #       正式评分。
 #
-# 使用方式：在项目根 (/Users/renting/Desktop/minglue/剪辑项目) 打开终端，一段一段执行。
+# 使用方式：在项目根 (<HOME>/Desktop/minglue/剪辑项目) 打开终端，一段一段执行。
 # 别一键 bash 整个脚本 —— 每步之间都要看输出、确认没有报错再走下一步。
 # ============================================================================
 set -euo pipefail
-REPO="/Users/renting/Desktop/minglue/剪辑项目"
+REPO="<HOME>/Desktop/minglue/剪辑项目"
 CHAL="$REPO/稳定生产/challengers/asr-speaker-v1"
 RUN="$REPO/main/runs/EP03-asr-speaker-v1"
 BENCH="$REPO/benchmark/EP03-ASR-mini-gold-v1"

@@ -16,7 +16,7 @@ FunASR/Paraformer、MLX Whisper、SenseVoice 和 language A/B shootout 没有完
 
 未采用分支已移至项目外：
 
-`/Users/renting/Desktop/minglue/未采用ASR归档-20260815/ARCHIVE_MANIFEST.md`
+`<HOME>/Desktop/minglue/未采用ASR归档-20260815/ARCHIVE_MANIFEST.md`
 
 恢复任何分支前必须重新审计许可证、模型 SHA、运行设备、时间戳资格和 mini-gold；不能只凭旧实验报告恢复。
 

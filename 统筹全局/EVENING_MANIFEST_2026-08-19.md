@@ -20,9 +20,9 @@
 - **prompt**: 前 5s + 剪的词 + 后 5s + kind · 输出 JSON {verdict, reason, confidence}
 - **中文特殊判决原则**: "就是"/"这个"/"那个" 语境敏感 · 句号后新句 REJECT · 跨说话人 REJECT · 长停顿话轮转换 REJECT
 - **证据文件**:
-  - `/Users/renting/Desktop/minglue/剪辑项目/skills/candidate-semantic-veto/scripts/llm_semantic_filter.py`
-  - `/Users/renting/Desktop/minglue/剪辑项目/skills/candidate-semantic-veto/SKILL.md`
-  - `/Users/renting/Desktop/minglue/剪辑项目/交付/最终交付文档/新skill/candidate-semantic-veto/`
+  - `<PROJECT_ROOT>/skills/candidate-semantic-veto/scripts/llm_semantic_filter.py`
+  - `<PROJECT_ROOT>/skills/candidate-semantic-veto/SKILL.md`
+  - `<PROJECT_ROOT>/交付/最终交付文档/新skill/candidate-semantic-veto/`
 
 ### 2. Pipeline Stage 改动
 | Stage | 改动 | 证据 |
@@ -57,22 +57,22 @@
 - EP05 检索 24 windows · top-1 similarity 0.87-0.92 · 全 accept 命中
 - 状态: sidecar (未接 G8 gate · 未来集成)
 - **证据文件**:
-  - `/Users/renting/Desktop/minglue/剪辑项目/scripts/build_case_embeddings.py`
-  - `/Users/renting/Desktop/minglue/剪辑项目/稳定生产/case_bank/mentor_cases_v1.faiss`
-  - `/Users/renting/Desktop/minglue/剪辑项目/稳定生产/case_bank/mentor_cases_v1.meta.json`
+  - `<PROJECT_ROOT>/scripts/build_case_embeddings.py`
+  - `<PROJECT_ROOT>/稳定生产/case_bank/mentor_cases_v1.faiss`
+  - `<PROJECT_ROOT>/稳定生产/case_bank/mentor_cases_v1.meta.json`
 
 ### 6. 新脚本 · 落地
 | 脚本 | 位置 |
 |---|---|
-| llm_semantic_filter.py | `/Users/renting/Desktop/minglue/剪辑项目/skills/candidate-semantic-veto/scripts/llm_semantic_filter.py` |
-| content_verify_cut.py | `/Users/renting/Desktop/minglue/剪辑项目/稳定生产/challengers/iterative-cut-refinement-v1/scripts/content_verify_cut.py` |
-| re_iterate_from_audit.py | `/Users/renting/Desktop/minglue/剪辑项目/稳定生产/challengers/iterative-cut-refinement-v1/scripts/re_iterate_from_audit.py` (今晚早前) |
-| build_case_embeddings.py | `/Users/renting/Desktop/minglue/剪辑项目/scripts/build_case_embeddings.py` (已存在 · 今晚首次跑 build) |
+| llm_semantic_filter.py | `<PROJECT_ROOT>/skills/candidate-semantic-veto/scripts/llm_semantic_filter.py` |
+| content_verify_cut.py | `<PROJECT_ROOT>/稳定生产/challengers/iterative-cut-refinement-v1/scripts/content_verify_cut.py` |
+| re_iterate_from_audit.py | `<PROJECT_ROOT>/稳定生产/challengers/iterative-cut-refinement-v1/scripts/re_iterate_from_audit.py` (今晚早前) |
+| build_case_embeddings.py | `<PROJECT_ROOT>/scripts/build_case_embeddings.py` (已存在 · 今晚首次跑 build) |
 
 ### 7. 新 skill · 落地
 | Skill | 位置 |
 |---|---|
-| candidate-semantic-veto | `/Users/renting/Desktop/minglue/剪辑项目/skills/candidate-semantic-veto/` + `/Users/renting/Desktop/minglue/剪辑项目/交付/最终交付文档/新skill/candidate-semantic-veto/` |
+| candidate-semantic-veto | `<PROJECT_ROOT>/skills/candidate-semantic-veto/` + `<PROJECT_ROOT>/交付/最终交付文档/新skill/candidate-semantic-veto/` |
 
 ### 8. LLM Demo 数字 (EP05 前 5min)
 - 候选生成 · rules 出 36 (33 cough 误报 + 3 语义)
@@ -81,9 +81,9 @@
 - 扩展候选池 · rules-free 扫 28 位置 · LLM 判 14 KEEP + 7 REJECT + 7 REVIEW
 - **rules pipeline 不可达的精度**: 7 REJECT 全是语义连词/过渡/话轮转换
 - **证据文件**:
-  - `/Users/renting/Desktop/minglue/剪辑项目/audio/podcast_final/EP05/llm_verdicts.json`
-  - `/Users/renting/Desktop/minglue/剪辑项目/audio/podcast_final/EP05/candidates_with_context.json`
-  - `/Users/renting/Desktop/minglue/剪辑项目/audio/podcast_final/EP05/llm_demo_ab.md`
+  - `<PROJECT_ROOT>/audio/podcast_final/EP05/llm_verdicts.json`
+  - `<PROJECT_ROOT>/audio/podcast_final/EP05/candidates_with_context.json`
+  - `<PROJECT_ROOT>/audio/podcast_final/EP05/llm_demo_ab.md`
 
 ## 上台可讲的一句话
 "以前 rules 出候选 · 规则堆到 20+ 层 · 越堆越弱智。今天 · LLM 唯一决定 · 语义级判断 · 结构性门保留物理约束 · 每一层各司其职。规则不死 · 只做召回和物理约束 · 语义判决全归 LLM。"

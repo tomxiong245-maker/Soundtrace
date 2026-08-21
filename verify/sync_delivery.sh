@@ -5,8 +5,8 @@
 # 用法: bash sync_delivery.sh
 # 每次改代码/规则/tool/skill 后必跑
 set -e
-PROJ="/Users/renting/Desktop/minglue/剪辑项目"
-DELIV="/Users/renting/Desktop/minglue/交付-2026-8-17"
+PROJ="<HOME>/Desktop/minglue/剪辑项目"
+DELIV="<HOME>/Desktop/minglue/交付-2026-8-17"
 
 echo "=== 同步 剪辑项目 → 交付-2026-8-17"
 

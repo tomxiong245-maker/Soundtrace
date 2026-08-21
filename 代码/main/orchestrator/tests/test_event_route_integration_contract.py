@@ -10,7 +10,7 @@ import unittest
 from pathlib import Path
 
 
-PROJECT = Path("/Users/renting/Desktop/minglue/剪辑项目")
+PROJECT = Path("<HOME>/Desktop/minglue/剪辑项目")
 ORCHESTRATOR = PROJECT / "main/orchestrator"
 DELIVERY = ORCHESTRATOR / "delivery_orchestrator.py"
 FRONTEND = PROJECT / "审核前端/challenger-review-product-v1/mvp.html"
